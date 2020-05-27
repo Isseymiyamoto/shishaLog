@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0288C89FE2FA812F121CAC9F /* Pods_shishaLog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCACC46B811F6668310475C2 /* Pods_shishaLog.framework */; };
 		851AAA60247E92AC006030D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851AAA5F247E92AC006030D1 /* AppDelegate.swift */; };
 		851AAA62247E92AC006030D1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851AAA61247E92AC006030D1 /* SceneDelegate.swift */; };
 		851AAA64247E92AC006030D1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851AAA63247E92AC006030D1 /* ViewController.swift */; };
@@ -16,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		100583CB114F7ACA28C2044A /* Pods-shishaLog.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-shishaLog.debug.xcconfig"; path = "Target Support Files/Pods-shishaLog/Pods-shishaLog.debug.xcconfig"; sourceTree = "<group>"; };
+		374390EDFDC908B161FEA36E /* Pods-shishaLog.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-shishaLog.release.xcconfig"; path = "Target Support Files/Pods-shishaLog/Pods-shishaLog.release.xcconfig"; sourceTree = "<group>"; };
 		851AAA5C247E92AC006030D1 /* shishaLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = shishaLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		851AAA5F247E92AC006030D1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		851AAA61247E92AC006030D1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +27,7 @@
 		851AAA68247E92AD006030D1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		851AAA6B247E92AD006030D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		851AAA6D247E92AD006030D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FCACC46B811F6668310475C2 /* Pods_shishaLog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_shishaLog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +35,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0288C89FE2FA812F121CAC9F /* Pods_shishaLog.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3D746501DBC5AFFC023121CC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				100583CB114F7ACA28C2044A /* Pods-shishaLog.debug.xcconfig */,
+				374390EDFDC908B161FEA36E /* Pods-shishaLog.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		851AAA53247E92AC006030D1 = {
 			isa = PBXGroup;
 			children = (
 				851AAA5E247E92AC006030D1 /* shishaLog */,
 				851AAA5D247E92AC006030D1 /* Products */,
+				3D746501DBC5AFFC023121CC /* Pods */,
+				9376A70418DD8EE762A34584 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +84,14 @@
 			path = shishaLog;
 			sourceTree = "<group>";
 		};
+		9376A70418DD8EE762A34584 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FCACC46B811F6668310475C2 /* Pods_shishaLog.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +99,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 851AAA70247E92AD006030D1 /* Build configuration list for PBXNativeTarget "shishaLog" */;
 			buildPhases = (
+				3A14FB81F2925822B7349C8B /* [CP] Check Pods Manifest.lock */,
 				851AAA58247E92AC006030D1 /* Sources */,
 				851AAA59247E92AC006030D1 /* Frameworks */,
 				851AAA5A247E92AC006030D1 /* Resources */,
+				FFF43C864F49B90EB2B0D592 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -132,6 +159,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3A14FB81F2925822B7349C8B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-shishaLog-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FFF43C864F49B90EB2B0D592 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-shishaLog/Pods-shishaLog-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-shishaLog/Pods-shishaLog-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-shishaLog/Pods-shishaLog-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		851AAA58247E92AC006030D1 /* Sources */ = {
@@ -282,6 +351,7 @@
 		};
 		851AAA71247E92AD006030D1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 100583CB114F7ACA28C2044A /* Pods-shishaLog.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -294,12 +364,13 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.issey.shishaLog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		851AAA72247E92AD006030D1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 374390EDFDC908B161FEA36E /* Pods-shishaLog.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -312,7 +383,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.issey.shishaLog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

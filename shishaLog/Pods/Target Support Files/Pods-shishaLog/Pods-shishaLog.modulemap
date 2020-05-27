@@ -1,0 +1,6 @@
+framework module Pods_shishaLog {
+  umbrella header "Pods-shishaLog-umbrella.h"
+
+  export *
+  module * { export * }
+}
