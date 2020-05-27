@@ -16,6 +16,7 @@
 		851AAA7A247E965E006030D1 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851AAA79247E965E006030D1 /* Utilities.swift */; };
 		851AAA7C247E9685006030D1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851AAA7B247E9685006030D1 /* Extensions.swift */; };
 		851AAA7E247E96E2006030D1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851AAA7D247E96E2006030D1 /* Constants.swift */; };
+		851AAA80247E98DC006030D1 /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851AAA7F247E98DC006030D1 /* MainTabController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		851AAA79247E965E006030D1 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		851AAA7B247E9685006030D1 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		851AAA7D247E96E2006030D1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		851AAA7F247E98DC006030D1 /* MainTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
 		FCACC46B811F6668310475C2 /* Pods_shishaLog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_shishaLog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -116,6 +118,7 @@
 		851AAA76247E9609006030D1 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				851AAA7F247E98DC006030D1 /* MainTabController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 			files = (
 				851AAA7E247E96E2006030D1 /* Constants.swift in Sources */,
 				851AAA7A247E965E006030D1 /* Utilities.swift in Sources */,
+				851AAA80247E98DC006030D1 /* MainTabController.swift in Sources */,
 				851AAA60247E92AC006030D1 /* AppDelegate.swift in Sources */,
 				851AAA62247E92AC006030D1 /* SceneDelegate.swift in Sources */,
 				851AAA7C247E9685006030D1 /* Extensions.swift in Sources */,
