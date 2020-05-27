@@ -31,7 +31,7 @@ class MainTabController: UITabBarController{
     func authenticateUserAndConfigureUI(){
         if Auth.auth().currentUser == nil {
             DispatchQueue.main.async {
-                let nav = UINavigationController(rootViewController: RegistrationController())
+                let nav = UINavigationController(rootViewController: LoginController())
                 nav.modalPresentationStyle = .fullScreen
                 self.present(nav, animated: true, completion: nil)
             }

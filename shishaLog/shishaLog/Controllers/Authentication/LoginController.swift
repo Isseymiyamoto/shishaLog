@@ -21,11 +21,28 @@ class LoginController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.navigationBar.isHidden = true
+        
+        
+    }
+    
 
     
     // MARK: - API
     
+    
     // MARK: - Helpers
+    
+    func configureUI(){
+        // logoImageを画面中心に配置(w150h150)
+        
+        // stackViewでmail & passwordのtextFieldを配置
+        
+        // registrationに遷移するぶbuttonを配置
+    }
     
     
 
