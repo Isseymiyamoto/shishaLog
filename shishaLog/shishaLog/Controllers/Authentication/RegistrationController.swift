@@ -12,14 +12,38 @@ import Firebase
 class RegistrationController: UIViewController{
     
     // MARK: - Properties
-    
-    private let actionButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("test title", for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        button.backgroundColor = .twitterBlue
-        return button
+    private let logoImageView: UIImageView = {
+        let iv = UIImageView()
+        iv.contentMode = .scaleAspectFit
+        iv.clipsToBounds = true
+        iv.image = UIImage(systemName: "house")
+        return iv
     }()
+    
+    private lazy var emailContainerView: UIView = {
+        let image = UIImage(systemName: "house")
+        let view = Utilities().inputContainerView(withImage: image!, textField: emailTextField)
+        return view
+    }()
+    
+    private lazy var passwordContainerView: UIView = {
+        let image = UIImage(systemName: "house")
+        let view = Utilities().inputContainerView(withImage: image!, textField: passwordTextField)
+        return view
+    }()
+    
+    private let emailTextField: UITextField = {
+        let tf = Utilities().textField(withPlaceholder: "Email")
+        return tf
+    }()
+    
+    private let passwordTextField: UITextField = {
+        let tf = Utilities().textField(withPlaceholder: "Password")
+        tf.isSecureTextEntry = true
+        return tf
+    }()
+    
+    
     
     
     // MARK: - Lifecycle
@@ -35,6 +59,8 @@ class RegistrationController: UIViewController{
     
     
     // MARK: - API
+    
+    
     
     // MARK: - Selectors
     
