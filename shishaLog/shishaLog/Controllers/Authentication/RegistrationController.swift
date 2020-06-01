@@ -66,12 +66,15 @@ class RegistrationController: UIViewController{
     
     // MARK: - Helpers
     func configureUI(){
-        view.backgroundColor = .white
+        view.backgroundColor = .twitterBlue
         
-        view.addSubview(actionButton)
-        actionButton.center(inView: view)
-        actionButton.setDimensions(width: 320, height: 48)
-        actionButton.layer.cornerRadius = 48 / 2
+        
+        
+        
+        
+        
+        
+        
     }
     
 }
