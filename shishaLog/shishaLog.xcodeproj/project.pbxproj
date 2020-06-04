@@ -17,6 +17,15 @@
 		851AAA7C247E9685006030D1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851AAA7B247E9685006030D1 /* Extensions.swift */; };
 		851AAA7E247E96E2006030D1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851AAA7D247E96E2006030D1 /* Constants.swift */; };
 		851AAA80247E98DC006030D1 /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851AAA7F247E98DC006030D1 /* MainTabController.swift */; };
+		851AAA83247E9CC6006030D1 /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851AAA82247E9CC6006030D1 /* RegistrationController.swift */; };
+		851AAA85247E9DD0006030D1 /* FeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851AAA84247E9DD0006030D1 /* FeedController.swift */; };
+		851AAA87247E9E29006030D1 /* ExploreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851AAA86247E9E29006030D1 /* ExploreController.swift */; };
+		851AAA89247E9E80006030D1 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851AAA88247E9E80006030D1 /* ProfileController.swift */; };
+		851AAA8B247E9EC5006030D1 /* NotificationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851AAA8A247E9EC5006030D1 /* NotificationsController.swift */; };
+		851AAA8D247EB854006030D1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 851AAA8C247EB854006030D1 /* GoogleService-Info.plist */; };
+		851AAA8F247ED260006030D1 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851AAA8E247ED260006030D1 /* LoginController.swift */; };
+		851AAA91247ED5AE006030D1 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851AAA90247ED5AE006030D1 /* UserService.swift */; };
+		851AAA93247ED61D006030D1 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851AAA92247ED61D006030D1 /* AuthService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +42,15 @@
 		851AAA7B247E9685006030D1 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		851AAA7D247E96E2006030D1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		851AAA7F247E98DC006030D1 /* MainTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
+		851AAA82247E9CC6006030D1 /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
+		851AAA84247E9DD0006030D1 /* FeedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedController.swift; sourceTree = "<group>"; };
+		851AAA86247E9E29006030D1 /* ExploreController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreController.swift; sourceTree = "<group>"; };
+		851AAA88247E9E80006030D1 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
+		851AAA8A247E9EC5006030D1 /* NotificationsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsController.swift; sourceTree = "<group>"; };
+		851AAA8C247EB854006030D1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		851AAA8E247ED260006030D1 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		851AAA90247ED5AE006030D1 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		851AAA92247ED61D006030D1 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		FCACC46B811F6668310475C2 /* Pods_shishaLog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_shishaLog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -90,6 +108,7 @@
 				851AAA68247E92AD006030D1 /* Assets.xcassets */,
 				851AAA6A247E92AD006030D1 /* LaunchScreen.storyboard */,
 				851AAA6D247E92AD006030D1 /* Info.plist */,
+				851AAA8C247EB854006030D1 /* GoogleService-Info.plist */,
 			);
 			path = shishaLog;
 			sourceTree = "<group>";
@@ -118,7 +137,12 @@
 		851AAA76247E9609006030D1 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				851AAA81247E9B0A006030D1 /* Authentication */,
 				851AAA7F247E98DC006030D1 /* MainTabController.swift */,
+				851AAA84247E9DD0006030D1 /* FeedController.swift */,
+				851AAA86247E9E29006030D1 /* ExploreController.swift */,
+				851AAA88247E9E80006030D1 /* ProfileController.swift */,
+				851AAA8A247E9EC5006030D1 /* NotificationsController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -126,6 +150,8 @@
 		851AAA77247E9617006030D1 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				851AAA90247ED5AE006030D1 /* UserService.swift */,
+				851AAA92247ED61D006030D1 /* AuthService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -138,6 +164,15 @@
 				851AAA7D247E96E2006030D1 /* Constants.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		851AAA81247E9B0A006030D1 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				851AAA82247E9CC6006030D1 /* RegistrationController.swift */,
+				851AAA8E247ED260006030D1 /* LoginController.swift */,
+			);
+			path = Authentication;
 			sourceTree = "<group>";
 		};
 		9376A70418DD8EE762A34584 /* Frameworks */ = {
@@ -209,6 +244,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				851AAA6C247E92AD006030D1 /* LaunchScreen.storyboard in Resources */,
+				851AAA8D247EB854006030D1 /* GoogleService-Info.plist in Resources */,
 				851AAA69247E92AD006030D1 /* Assets.xcassets in Resources */,
 				851AAA67247E92AC006030D1 /* Main.storyboard in Resources */,
 			);
@@ -263,12 +299,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				851AAA83247E9CC6006030D1 /* RegistrationController.swift in Sources */,
+				851AAA8F247ED260006030D1 /* LoginController.swift in Sources */,
 				851AAA7E247E96E2006030D1 /* Constants.swift in Sources */,
+				851AAA87247E9E29006030D1 /* ExploreController.swift in Sources */,
 				851AAA7A247E965E006030D1 /* Utilities.swift in Sources */,
 				851AAA80247E98DC006030D1 /* MainTabController.swift in Sources */,
+				851AAA91247ED5AE006030D1 /* UserService.swift in Sources */,
+				851AAA89247E9E80006030D1 /* ProfileController.swift in Sources */,
 				851AAA60247E92AC006030D1 /* AppDelegate.swift in Sources */,
 				851AAA62247E92AC006030D1 /* SceneDelegate.swift in Sources */,
+				851AAA8B247E9EC5006030D1 /* NotificationsController.swift in Sources */,
 				851AAA7C247E9685006030D1 /* Extensions.swift in Sources */,
+				851AAA85247E9DD0006030D1 /* FeedController.swift in Sources */,
+				851AAA93247ED61D006030D1 /* AuthService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
