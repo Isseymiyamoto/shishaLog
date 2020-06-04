@@ -13,6 +13,7 @@ pod 'Firebase/Storage'
 pod 'Firebase/Auth'
 pod 'SDWebImage', '~> 5.0'
 pod 'ActiveLabel'
-pod 'IQKeyboardManager'
+pod 'IQKeyboardManagerSwift'
+
 
 end
