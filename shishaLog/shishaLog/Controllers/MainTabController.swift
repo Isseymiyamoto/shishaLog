@@ -45,7 +45,7 @@ class MainTabController: UITabBarController{
     // MARK: - Helpers
     
     func configureUI(){
-        view.backgroundColor = .twitterBlue
+        view.backgroundColor = .shishaColor
     }
     
     func configureViewControllers(){

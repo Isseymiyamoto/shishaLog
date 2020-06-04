@@ -34,12 +34,12 @@ class LoginController: UIViewController {
     }()
     
     private let emailTextField: UITextField = {
-        let tf = Utilities().textField(withPlaceholder: "Email")
+        let tf = Utilities().textField(withPlaceholder: "Eメール")
         return tf
     }()
     
     private let passwordTextField: UITextField = {
-        let tf = Utilities().textField(withPlaceholder: "Password")
+        let tf = Utilities().textField(withPlaceholder: "パスワード")
         tf.isSecureTextEntry = true
         return tf
     }()
@@ -47,7 +47,7 @@ class LoginController: UIViewController {
     private let loginButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("ログイン", for: .normal)
-        button.setTitleColor(.twitterBlue, for: .normal)
+        button.setTitleColor(.shishaColor, for: .normal)
         button.backgroundColor = .white
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         button.layer.cornerRadius = 5
@@ -57,7 +57,7 @@ class LoginController: UIViewController {
     }()
     
     private let dontHaveAccountButton: UIButton = {
-        let button = Utilities().attributedButton("まだアカウントを持っていませんか?", "  サインアップ")
+        let button = Utilities().attributedButton("まだアカウントを持っていませんか?", "  登録する")
         button.addTarget(self, action: #selector(handleShowSignUp), for: .touchUpInside)
         return button
     }()
@@ -103,7 +103,7 @@ class LoginController: UIViewController {
     // MARK: - Helpers
     
     func configureUI(){
-        view.backgroundColor = .themeColor
+        view.backgroundColor = .shishaColor
         navigationController?.navigationBar.barStyle = .black
         navigationController?.navigationBar.isHidden = true
         
