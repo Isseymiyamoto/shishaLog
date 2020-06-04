@@ -85,6 +85,7 @@ PODS:
   - GoogleUtilities/UserDefaults (6.6.0):
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (1.3.1)
+  - IQKeyboardManager (6.5.5)
   - leveldb-library (1.22)
   - nanopb (0.3.9011):
     - nanopb/decode (= 0.3.9011)
@@ -102,6 +103,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Database
   - Firebase/Storage
+  - IQKeyboardManager
   - SDWebImage (~> 5.0)
 
 SPEC REPOS:
@@ -122,6 +124,7 @@ SPEC REPOS:
     - GoogleDataTransportCCTSupport
     - GoogleUtilities
     - GTMSessionFetcher
+    - IQKeyboardManager
     - leveldb-library
     - nanopb
     - PromisesObjC
@@ -144,11 +147,12 @@ SPEC CHECKSUMS:
   GoogleDataTransportCCTSupport: 0f39025e8cf51f168711bd3fb773938d7e62ddb5
   GoogleUtilities: 39530bc0ad980530298e9c4af8549e991fd033b1
   GTMSessionFetcher: cea130bbfe5a7edc8d06d3f0d17288c32ffe9925
+  IQKeyboardManager: 3a8b9e603f8b0eeaf5f096a1f2b2cfcf121992ef
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   SDWebImage: 97351f6582ceca541ea294ba66a1fcb342a331c2
 
-PODFILE CHECKSUM: f386003daa8bc47ecebb4efe6d925eca69d37adf
+PODFILE CHECKSUM: b0a64b101965912ccaf3eefab36c00106f4e4611
 
 COCOAPODS: 1.8.4
