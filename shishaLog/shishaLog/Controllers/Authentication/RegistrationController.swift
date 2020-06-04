@@ -117,19 +117,26 @@ class RegistrationController: UIViewController{
     }
     
     @objc func handleRegistration(){
+        guard let profileImage = profileImage else { return }
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
         guard let fullname = fullnameTextField.text else { return }
         guard let username = usernameTextField.text else { return }
         
-        // firebase authentication にて email passwordを登録　→ uidを取得できるようになる
+        let credentials = AuthCredentials(email: email, password: password, fullname: fullname, username: username, profileImage: profileImage)
         
-        
-        // uidを元にprofile写真を登録する
-        
-        
-        // uidを元にfullnameとusernameも登録する
-        
+        AuthService.shared.registerUser(credentials: credentials) { (error, ref) in
+            if let error = error{
+                print("DEBUG: error is \(error.localizedDescription)")
+                return
+            }
+            
+            guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else { return }
+            guard let tab = window.rootViewController as? MainTabController else { return }
+            tab.authenticateUserAndConfigureUI()
+            
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     // MARK: - Helpers
