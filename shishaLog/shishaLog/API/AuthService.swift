@@ -40,6 +40,9 @@ struct AuthService {
         
         storageRef.putData(imageData, metadata: nil) { (mata, error) in
             storageRef.downloadURL { (url, error) in
+                if let error = error{
+                    print("DEBUG: error is \(error.localizedDescription)")
+                }
                 guard let profileImageUrl = url?.absoluteString else { return }
                 
                 Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
