@@ -26,6 +26,7 @@
 		851AAA8F247ED260006030D1 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851AAA8E247ED260006030D1 /* LoginController.swift */; };
 		851AAA91247ED5AE006030D1 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851AAA90247ED5AE006030D1 /* UserService.swift */; };
 		851AAA93247ED61D006030D1 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851AAA92247ED61D006030D1 /* AuthService.swift */; };
+		85EA486E248A7EC10086A140 /* LogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EA486D248A7EC10086A140 /* LogCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 		851AAA8E247ED260006030D1 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		851AAA90247ED5AE006030D1 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		851AAA92247ED61D006030D1 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		85EA486D248A7EC10086A140 /* LogCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogCell.swift; sourceTree = "<group>"; };
 		FCACC46B811F6668310475C2 /* Pods_shishaLog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_shishaLog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -116,6 +118,7 @@
 		851AAA73247E95CA006030D1 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				85EA486D248A7EC10086A140 /* LogCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 				851AAA7E247E96E2006030D1 /* Constants.swift in Sources */,
 				851AAA87247E9E29006030D1 /* ExploreController.swift in Sources */,
 				851AAA7A247E965E006030D1 /* Utilities.swift in Sources */,
+				85EA486E248A7EC10086A140 /* LogCell.swift in Sources */,
 				851AAA80247E98DC006030D1 /* MainTabController.swift in Sources */,
 				851AAA91247ED5AE006030D1 /* UserService.swift in Sources */,
 				851AAA89247E9E80006030D1 /* ProfileController.swift in Sources */,

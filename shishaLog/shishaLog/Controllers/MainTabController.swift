@@ -51,16 +51,16 @@ class MainTabController: UITabBarController{
     func configureViewControllers(){
         
         let feed = FeedController(collectionViewLayout: UICollectionViewFlowLayout())
-        let nav1 = templateNavigationController(image: UIImage(systemName: "house.fill"), rootViewController: feed)
+        let nav1 = templateNavigationController(image: UIImage(systemName: "house"), rootViewController: feed)
         
         let explore = ExploreController()
-        let nav2 = templateNavigationController(image: UIImage(systemName: "house"), rootViewController: explore)
+        let nav2 = templateNavigationController(image: UIImage(systemName: "magnifyingglass"), rootViewController: explore)
         
         let notifications = NotificationsController()
-        let nav3 = templateNavigationController(image: UIImage(systemName: "house"), rootViewController: notifications)
+        let nav3 = templateNavigationController(image: UIImage(systemName: "bell"), rootViewController: notifications)
         
         let profile = ProfileController(collectionViewLayout: UICollectionViewFlowLayout())
-        let nav4 = templateNavigationController(image: UIImage(systemName: "house"), rootViewController: profile)
+        let nav4 = templateNavigationController(image: UIImage(systemName: "person"), rootViewController: profile)
         
         viewControllers = [nav1, nav2, nav3, nav4]
     }
