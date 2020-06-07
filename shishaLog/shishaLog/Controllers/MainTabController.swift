@@ -13,6 +13,14 @@ class MainTabController: UITabBarController{
     
     // MARK: - Properties
     
+    let actionButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.tintColor = .white
+        button.backgroundColor = .shishaColor
+        button.setImage(UIImage(systemName: "square.and.pencil"), for: .normal)
+        button.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
+        return button
+    }()
     
     
     
@@ -41,11 +49,21 @@ class MainTabController: UITabBarController{
         }
     }
     
+    // MARK: - Selectors
+    
+    @objc func actionButtonTapped(){
+        
+    }
+    
     
     // MARK: - Helpers
     
     func configureUI(){
         view.backgroundColor = .shishaColor
+        
+        view.addSubview(actionButton)
+        actionButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingBottom: 64, paddingRight: 16, width: 56, height: 56)
+        actionButton.layer.cornerRadius = 56 / 2
     }
     
     func configureViewControllers(){
