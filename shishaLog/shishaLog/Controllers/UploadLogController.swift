@@ -28,6 +28,7 @@ class UploadLogController: UIViewController {
         button.frame = CGRect(x: 0, y: 0, width: 64, height: 32)
         button.layer.cornerRadius = 32 / 2
         button.backgroundColor = .shishaColor
+        button.addTarget(self, action: #selector(handleUploadLog), for: .touchUpInside)
         return button
     }()
     
@@ -37,13 +38,27 @@ class UploadLogController: UIViewController {
         super.viewDidLoad()
 
         configureUI()
-        configureNavigationBar()
+        
     }
     
     // MARK: - API
     
     
+    
+    
     // MARK: - Selectors
+    
+    @objc func handleUploadLog(){
+        LogService.shared.uploadLog(location: "Soi 61", mix: "ラズベリー2g", feeling: "これがほんまにええんよな") { (error, ref) in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            
+            print("DEBUG: successfullu uploaded your log")
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
     
     @objc func handleCancel(){
         self.dismiss(animated: true, completion: nil)
@@ -54,6 +69,7 @@ class UploadLogController: UIViewController {
     
     func configureUI(){
         view.backgroundColor = .systemGroupedBackground
+        configureNavigationBar()
         
         view.addSubview(somethingLabel)
         somethingLabel.center(inView: view)
