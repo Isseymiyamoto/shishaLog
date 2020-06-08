@@ -52,7 +52,10 @@ class MainTabController: UITabBarController{
     // MARK: - Selectors
     
     @objc func actionButtonTapped(){
-        
+        let controller = UploadLogController()
+        let nav = UINavigationController(rootViewController: controller)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true)
     }
     
     
