@@ -15,6 +15,7 @@ class LogCell: UICollectionViewCell {
     private lazy var profileImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFit
+        iv.image = UIImage(named: "issey_job")
         iv.clipsToBounds = true
         iv.setDimensions(width: 48, height: 48)
         iv.layer.cornerRadius = 48 / 2
@@ -41,6 +42,7 @@ class LogCell: UICollectionViewCell {
     private lazy var locationLabel: UILabel = {
         let label = UILabel()
         label.text = "Soi 61"
+        label.textColor = .systemBlue
         label.font = UIFont.boldSystemFont(ofSize: 16)
         return label
     }()
