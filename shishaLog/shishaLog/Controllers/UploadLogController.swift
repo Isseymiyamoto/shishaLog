@@ -19,7 +19,7 @@ class UploadLogController: UIViewController {
         return label
     }()
 
-    private let actionButton: UIButton = {
+    private lazy var actionButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Log", for: .normal)
         button.titleLabel?.textAlignment = .center
@@ -49,6 +49,9 @@ class UploadLogController: UIViewController {
     // MARK: - Selectors
     
     @objc func handleUploadLog(){
+        
+        print("DEBUG: これでokやな")
+        
         LogService.shared.uploadLog(location: "Soi 61", mix: "ラズベリー2g", feeling: "これがほんまにええんよな") { (error, ref) in
             if let error = error {
                 print(error.localizedDescription)
@@ -73,6 +76,7 @@ class UploadLogController: UIViewController {
         
         view.addSubview(somethingLabel)
         somethingLabel.center(inView: view)
+        
     }
     
     
