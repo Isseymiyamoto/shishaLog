@@ -13,6 +13,11 @@ private let reuseIdentifier = "LogCell"
 class FeedController: UICollectionViewController {
     
     // MARK: - Properties
+    var user: User? {
+        didSet{
+            print("DEBUG: user is \(user!.username)")
+        }
+    }
     
     
     // MARK: - Lifecycle
@@ -49,7 +54,6 @@ class FeedController: UICollectionViewController {
         imageView.contentMode = .scaleAspectFit
         imageView.setDimensions(width: 32, height: 32)
         navigationItem.titleView = imageView
-        
         
     }
 

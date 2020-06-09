@@ -13,6 +13,15 @@ class MainTabController: UITabBarController{
     
     // MARK: - Properties
     
+    var user: User? {
+        didSet{
+            // MainTabのuserに情報がセットされた時点でfeedControllerにもセットする
+            guard let nav = viewControllers![0] as? UINavigationController else { return }
+            guard let feed = nav.viewControllers.first as? FeedController else { return }
+            feed.user = user
+        }
+    }
+    
     let actionButton: UIButton = {
         let button = UIButton(type: .system)
         button.tintColor = .white
@@ -36,6 +45,13 @@ class MainTabController: UITabBarController{
     
     // MARK: - API
     
+    func fetchUser(){
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        UserService.shared.fetchUser(uid: uid) { (user) in
+            self.user = user
+        }
+    }
+    
     func authenticateUserAndConfigureUI(){
         if Auth.auth().currentUser == nil {
             DispatchQueue.main.async {
@@ -46,6 +62,7 @@ class MainTabController: UITabBarController{
         }else{
             configureViewControllers()
             configureUI()
+            fetchUser()
         }
     }
     
