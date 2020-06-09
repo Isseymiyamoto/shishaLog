@@ -28,6 +28,7 @@
 		851AAA93247ED61D006030D1 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851AAA92247ED61D006030D1 /* AuthService.swift */; };
 		85D8EA1A248E74CE002AFEC1 /* UploadLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D8EA19248E74CE002AFEC1 /* UploadLogController.swift */; };
 		85D8EA1C248E81D5002AFEC1 /* LogService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D8EA1B248E81D5002AFEC1 /* LogService.swift */; };
+		85D8EA1E248F363E002AFEC1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D8EA1D248F363E002AFEC1 /* User.swift */; };
 		85EA486E248A7EC10086A140 /* LogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EA486D248A7EC10086A140 /* LogCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +57,7 @@
 		851AAA92247ED61D006030D1 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		85D8EA19248E74CE002AFEC1 /* UploadLogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadLogController.swift; sourceTree = "<group>"; };
 		85D8EA1B248E81D5002AFEC1 /* LogService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogService.swift; sourceTree = "<group>"; };
+		85D8EA1D248F363E002AFEC1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		85EA486D248A7EC10086A140 /* LogCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogCell.swift; sourceTree = "<group>"; };
 		FCACC46B811F6668310475C2 /* Pods_shishaLog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_shishaLog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -137,6 +139,7 @@
 		851AAA75247E95DB006030D1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				85D8EA1D248F363E002AFEC1 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 				851AAA62247E92AC006030D1 /* SceneDelegate.swift in Sources */,
 				851AAA8B247E9EC5006030D1 /* NotificationsController.swift in Sources */,
 				851AAA7C247E9685006030D1 /* Extensions.swift in Sources */,
+				85D8EA1E248F363E002AFEC1 /* User.swift in Sources */,
 				851AAA85247E9DD0006030D1 /* FeedController.swift in Sources */,
 				851AAA93247ED61D006030D1 /* AuthService.swift in Sources */,
 				85D8EA1A248E74CE002AFEC1 /* UploadLogController.swift in Sources */,

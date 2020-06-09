@@ -21,18 +21,28 @@ class UploadLogController: UIViewController {
 
     private lazy var actionButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Log", for: .normal)
+        button.setTitle("Logする", for: .normal)
         button.titleLabel?.textAlignment = .center
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         button.setTitleColor(.white, for: .normal)
-        button.frame = CGRect(x: 0, y: 0, width: 64, height: 32)
+        button.frame = CGRect(x: 0, y: 0, width: 96, height: 32)
         button.layer.cornerRadius = 32 / 2
         button.backgroundColor = .shishaColor
         button.addTarget(self, action: #selector(handleUploadLog), for: .touchUpInside)
         return button
     }()
     
+    private let profileImageView: UIImageView = {
+        let iv = UIImageView()
+        
+        return iv
+    }()
+    
     // MARK: - Lifecycle
+    
+//    init(user: User){
+//        self.user = user
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
