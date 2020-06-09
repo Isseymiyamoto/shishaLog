@@ -55,6 +55,7 @@ class FeedController: UICollectionViewController {
         imageView.setDimensions(width: 32, height: 32)
         navigationItem.titleView = imageView
         
+        
     }
 
     
@@ -73,6 +74,8 @@ extension FeedController{
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! LogCell
+        // test的に
+        cell.user = user
         return cell
     }
     
