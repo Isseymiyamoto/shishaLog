@@ -16,7 +16,6 @@ class LogCell: UICollectionViewCell {
     var user: User?{
         didSet{
 //            configureUI()
-            print("DEBUG: testやで")
         }
     }
     

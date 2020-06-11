@@ -125,9 +125,6 @@ class RegistrationController: UIViewController{
         
         let credentials = AuthCredentials(email: email, password: password, fullname: fullname, username: username, profileImage: profileImage)
         
-        
-        print("DEBUG: 通ってるよ")
-        
         AuthService.shared.registerUser(credentials: credentials) { (error, ref) in
             if let error = error{
                 print("DEBUG: error is \(error.localizedDescription)")

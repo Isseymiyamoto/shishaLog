@@ -12,6 +12,8 @@ class UploadLogController: UIViewController {
     
     // MARK: - Properties
     
+    private let user: User
+    
     private let somethingLabel: UILabel = {
         let label = UILabel()
         label.text = "something new"
@@ -34,15 +36,24 @@ class UploadLogController: UIViewController {
     
     private let profileImageView: UIImageView = {
         let iv = UIImageView()
-        
+        iv.contentMode = .scaleAspectFit
+        iv.clipsToBounds = true
+        iv.setDimensions(width: 64, height: 64)
+        iv.layer.cornerRadius = 32
+        iv.backgroundColor = .shishaColor
         return iv
     }()
     
     // MARK: - Lifecycle
     
-//    init(user: User){
-//        self.user = user
-//    }
+    init(user: User){
+        self.user = user
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,9 +70,6 @@ class UploadLogController: UIViewController {
     // MARK: - Selectors
     
     @objc func handleUploadLog(){
-        
-        print("DEBUG: これでokやな")
-        
         LogService.shared.uploadLog(location: "Soi 61", mix: "ラズベリー2g", feeling: "これがほんまにええんよな") { (error, ref) in
             if let error = error {
                 print(error.localizedDescription)
@@ -86,6 +94,12 @@ class UploadLogController: UIViewController {
         
         view.addSubview(somethingLabel)
         somethingLabel.center(inView: view)
+        
+        view.addSubview(profileImageView)
+        profileImageView.anchor(top: somethingLabel.bottomAnchor, paddingTop: 64)
+        profileImageView.centerX(inView: view)
+        profileImageView.sd_setImage(with: user.profileImageUrl, completed: nil)
+        
         
     }
     

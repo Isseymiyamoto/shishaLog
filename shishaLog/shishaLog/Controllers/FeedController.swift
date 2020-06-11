@@ -15,7 +15,7 @@ class FeedController: UICollectionViewController {
     // MARK: - Properties
     var user: User? {
         didSet{
-            print("DEBUG: user is \(user!.username)")
+            print("DEBUG: test")
         }
     }
     

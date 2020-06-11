@@ -15,8 +15,6 @@ struct LogService {
     func uploadLog(location: String, mix: String, feeling: String, completion: @escaping(Error?, DatabaseReference) -> Void){
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
-        print("DEBUG: uid is \(uid)")
-        
         let values = [
             "uid": uid,
             "timestamp": Int(NSDate().timeIntervalSince1970),
