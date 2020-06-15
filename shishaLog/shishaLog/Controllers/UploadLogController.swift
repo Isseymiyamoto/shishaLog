@@ -58,21 +58,18 @@ class UploadLogController: UIViewController {
 //    }()
     
     private let spotTextView: UITextView = {
-        let tv = UITextView()
+        let tv = CaptionTextView(withPlaceholder: "spotを書き留める")
+        return tv
     }()
     
-    private let mixTextField: UITextField = {
-        let tf = Utilities().textField(withPlaceholder: "フレーバーを書き留める")
-        tf.textColor = .black
-        tf.font = UIFont.systemFont(ofSize: 16)
-        return tf
+    private let mixTextView: UITextView = {
+        let tv = CaptionTextView(withPlaceholder: "フレーバーを書き留める")
+        return tv
     }()
     
-    private let feelTextField: UITextField = {
-        let tf = Utilities().textField(withPlaceholder: "感動を表現する")
-        tf.textColor = .black
-        tf.font = UIFont.systemFont(ofSize: 16)
-        return tf
+    private let feelTextView: UITextView = {
+        let tv = CaptionTextView(withPlaceholder: "感動を表現する")
+        return tv
     }()
     
     // MARK: - Lifecycle
@@ -123,7 +120,7 @@ class UploadLogController: UIViewController {
         view.backgroundColor = .white
         configureNavigationBar()
         
-        let stack = UIStackView(arrangedSubviews: [spotLabel, spotTextField, mixLabel, mixTextField, feelLabel, feelTextField])
+        let stack = UIStackView(arrangedSubviews: [spotLabel, spotTextView, mixLabel, mixTextView, feelLabel, feelTextView])
         stack.spacing = 12
         stack.axis = .vertical
         stack.distribution = .fillProportionally
