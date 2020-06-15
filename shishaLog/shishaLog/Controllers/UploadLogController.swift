@@ -14,12 +14,7 @@ class UploadLogController: UIViewController {
     
     private let user: User
     
-    private let somethingLabel: UILabel = {
-        let label = UILabel()
-        label.text = "something new"
-        label.font = UIFont.boldSystemFont(ofSize: 16)
-        return label
-    }()
+
 
     private lazy var actionButton: UIButton = {
         let button = UIButton(type: .system)
@@ -34,14 +29,50 @@ class UploadLogController: UIViewController {
         return button
     }()
     
-    private let profileImageView: UIImageView = {
-        let iv = UIImageView()
-        iv.contentMode = .scaleAspectFit
-        iv.clipsToBounds = true
-        iv.setDimensions(width: 64, height: 64)
-        iv.layer.cornerRadius = 32
-        iv.backgroundColor = .shishaColor
-        return iv
+    private let spotLabel: UILabel = {
+        let label = UILabel()
+        label.text = "SPOT"
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        return label
+    }()
+    
+    private let mixLabel: UILabel = {
+        let label = UILabel()
+        label.text = "MIX"
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        return label
+    }()
+    
+    private let feelLabel: UILabel = {
+        let label = UILabel()
+        label.text = "FEEL"
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        return label
+    }()
+    
+//    private let spotTextField: UITextField = {
+//        let tf = Utilities().textField(withPlaceholder: "spotを教えてください")
+//        tf.textColor = .black
+//        tf.font = UIFont.systemFont(ofSize: 16)
+//        return tf
+//    }()
+    
+    private let spotTextView: UITextView = {
+        let tv = UITextView()
+    }()
+    
+    private let mixTextField: UITextField = {
+        let tf = Utilities().textField(withPlaceholder: "フレーバーを書き留める")
+        tf.textColor = .black
+        tf.font = UIFont.systemFont(ofSize: 16)
+        return tf
+    }()
+    
+    private let feelTextField: UITextField = {
+        let tf = Utilities().textField(withPlaceholder: "感動を表現する")
+        tf.textColor = .black
+        tf.font = UIFont.systemFont(ofSize: 16)
+        return tf
     }()
     
     // MARK: - Lifecycle
@@ -89,18 +120,16 @@ class UploadLogController: UIViewController {
     // MARK: - Helpers
     
     func configureUI(){
-        view.backgroundColor = .systemGroupedBackground
+        view.backgroundColor = .white
         configureNavigationBar()
         
-        view.addSubview(somethingLabel)
-        somethingLabel.center(inView: view)
+        let stack = UIStackView(arrangedSubviews: [spotLabel, spotTextField, mixLabel, mixTextField, feelLabel, feelTextField])
+        stack.spacing = 12
+        stack.axis = .vertical
+        stack.distribution = .fillProportionally
         
-        view.addSubview(profileImageView)
-        profileImageView.anchor(top: somethingLabel.bottomAnchor, paddingTop: 64)
-        profileImageView.centerX(inView: view)
-        profileImageView.sd_setImage(with: user.profileImageUrl, completed: nil)
-        
-        
+        view.addSubview(stack)
+        stack.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 32, paddingLeft: 16, paddingRight: 16)
     }
     
     
