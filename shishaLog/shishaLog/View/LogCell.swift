@@ -13,10 +13,8 @@ class LogCell: UICollectionViewCell {
     
     // MARK: - Properties
     
-    var user: User?{
-        didSet{
-//            configureUI()
-        }
+    var log: Log? {
+        didSet { configureUI() }
     }
     
     private lazy var profileImageView: UIImageView = {
@@ -84,23 +82,6 @@ class LogCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        configureUI()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    // MARK: - Selectors
-    
-    @objc func handleProfileImageTapped(){
-        
-    }
-    
-    // MARK: - Helpers
-    
-    func configureUI(){
-
         let rightSideStack = UIStackView(arrangedSubviews: [infoLabel, locationLabel, mixLabel, feelingLabel])
         rightSideStack.axis = .vertical
         rightSideStack.spacing = 12
@@ -121,5 +102,48 @@ class LogCell: UICollectionViewCell {
         underlineView.anchor(left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, height: 1)
         
         infoLabel.attributedText = userInfoText
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Selectors
+    
+    @objc func handleProfileImageTapped(){
+        
+    }
+    
+    // MARK: - Helpers
+    
+    func configureUI(){
+        guard let log = log else { return }
+        
+        // set image
+        profileImageView.sd_setImage(with: log.user.profileImageUrl, completed: nil)
+        // infoLabel text
+        infoLabel.attributedText = configureAttributedText(fullname: log.user.fullname, username: log.user.username, timestamp: log.timestamp)
+        // location text
+        locationLabel.text = log.location
+        // mix text
+        mixLabel.text = log.mix
+        // feeling text
+        feelingLabel.text = log.feeling
+    }
+    
+    private func configureAttributedText(fullname: String, username: String, timestamp: Date) -> NSAttributedString{
+        // dateを整形
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.second, .minute, .hour, .day, .weekOfMonth]
+        formatter.maximumUnitCount = 1
+        formatter.unitsStyle = .abbreviated
+        let now = Date()
+        
+        let after_timestamp = formatter.string(from: timestamp, to: now) ?? "?"
+        
+        let title = NSMutableAttributedString(string: fullname, attributes: [.font: UIFont.boldSystemFont(ofSize: 14)])
+        title.append(NSAttributedString(string: " @\(username)", attributes: [.font: UIFont.systemFont(ofSize: 14), .foregroundColor: UIColor.lightGray]))
+        title.append(NSAttributedString(string: " \(after_timestamp)", attributes: [.font: UIFont.systemFont(ofSize: 14), .foregroundColor: UIColor.lightGray]))
+        return title
     }
 }

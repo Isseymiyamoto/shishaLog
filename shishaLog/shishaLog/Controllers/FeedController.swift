@@ -19,6 +19,10 @@ class FeedController: UICollectionViewController {
         }
     }
     
+    private var logs = [Log]() {
+        didSet { collectionView.reloadData() }
+    }
+    
     
     // MARK: - Lifecycle
 
@@ -26,12 +30,24 @@ class FeedController: UICollectionViewController {
         super.viewDidLoad()
 
         configureUI()
-
+        fetchLogs()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.barStyle = .default
+        navigationController?.navigationBar.isHidden = false
     }
     
     
     // MARK: - API
+    
+    func fetchLogs(){
+        LogService.shared.fetchLog { (logs) in
+            self.logs = logs.sorted(by: { $0.timestamp  > $1.timestamp })
+        }
+    }
     
     
     
@@ -69,13 +85,12 @@ class FeedController: UICollectionViewController {
 extension FeedController{
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return logs.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! LogCell
-        // test的に
-        cell.user = user
+        cell.log = logs[indexPath.row]
         return cell
     }
     

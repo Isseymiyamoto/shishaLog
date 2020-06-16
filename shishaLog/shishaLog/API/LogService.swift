@@ -33,4 +33,22 @@ struct LogService {
             REF_USER_LOGS.child(uid).updateChildValues([logID: 1], withCompletionBlock: completion)
         }
     }
+    
+    // logを全件取得
+    func fetchLog(completion: @escaping(([Log]) -> Void)){
+        var logs = [Log]()
+        
+        REF_LOGS.observe(.childAdded) { (snapshot) in
+            guard let dictionary = snapshot.value as? [String: Any] else { return }
+            guard let uid = dictionary["uid"] as? String else { return }
+            
+            UserService.shared.fetchUser(uid: uid) { (user) in
+                let log = Log(user: user, logID: snapshot.key, dictionary: dictionary)
+                logs.append(log)
+                completion(logs)
+            }
+        }
+    }
+        
+    
 }
