@@ -7,10 +7,17 @@
 //
 
 import UIKit
+import SDWebImage
 
 class LogCell: UICollectionViewCell {
     
     // MARK: - Properties
+    
+    var user: User?{
+        didSet{
+//            configureUI()
+        }
+    }
     
     private lazy var profileImageView: UIImageView = {
         let iv = UIImageView()

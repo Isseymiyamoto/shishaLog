@@ -13,6 +13,11 @@ private let reuseIdentifier = "LogCell"
 class FeedController: UICollectionViewController {
     
     // MARK: - Properties
+    var user: User? {
+        didSet{
+            print("DEBUG: test")
+        }
+    }
     
     
     // MARK: - Lifecycle
@@ -69,6 +74,8 @@ extension FeedController{
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! LogCell
+        // test的に
+        cell.user = user
         return cell
     }
     

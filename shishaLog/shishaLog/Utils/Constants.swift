@@ -14,3 +14,5 @@ let STORAGE_PROFILE_IMAGE = STORAGE_REF.child("profile_images")
 
 let DB_REF = Database.database().reference()
 let REF_USERS = DB_REF.child("users")
+let REF_LOGS = DB_REF.child("logs")
+let REF_USER_LOGS = DB_REF.child("user-logs")
