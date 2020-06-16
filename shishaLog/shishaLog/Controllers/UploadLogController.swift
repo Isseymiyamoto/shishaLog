@@ -98,7 +98,11 @@ class UploadLogController: UIViewController {
     // MARK: - Selectors
     
     @objc func handleUploadLog(){
-        LogService.shared.uploadLog(location: "Soi 61", mix: "ラズベリー2g", feeling: "これがほんまにええんよな") { (error, ref) in
+        guard let location = spotTextView.text else { return }
+        guard let mix = mixTextView.text else { return }
+        guard let feeling = feelTextView.text else { return }
+        
+        LogService.shared.uploadLog(location: location, mix: mix, feeling: feeling) { (error, ref) in
             if let error = error {
                 print(error.localizedDescription)
                 return
