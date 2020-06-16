@@ -13,8 +13,6 @@ class UploadLogController: UIViewController {
     // MARK: - Properties
     
     private let user: User
-    
-
 
     private lazy var actionButton: UIButton = {
         let button = UIButton(type: .system)

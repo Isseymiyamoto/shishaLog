@@ -33,4 +33,11 @@ struct LogService {
             REF_USER_LOGS.child(uid).updateChildValues([logID: 1], withCompletionBlock: completion)
         }
     }
+    
+    // logを全権取得
+    func fetchLog(){
+        
+    }
+        
+    
 }
