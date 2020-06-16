@@ -85,13 +85,12 @@ class FeedController: UICollectionViewController {
 extension FeedController{
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return logs.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! LogCell
-        // test的に
-        cell.user = user
+        cell.log = logs[indexPath.row]
         return cell
     }
     
