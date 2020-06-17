@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 private let reuseIdentifier = "LogCell"
 
@@ -48,6 +49,17 @@ class FeedController: UICollectionViewController {
             self.logs = logs.sorted(by: { $0.timestamp  > $1.timestamp })
         }
     }
+    
+//    func handleLogout() {
+//        do {
+//            try Auth.auth().signOut()
+//            let nav = UINavigationController(rootViewController: LoginController())
+//            nav.modalPresentationStyle = .fullScreen
+//            self.present(nav, animated: true, completion: nil)
+//        }catch let error{
+//            print("DEBUG: Failed to sign out with error \(error.localizedDescription)")
+//        }
+//    }
     
     
     
@@ -105,7 +117,7 @@ extension FeedController{
 extension FeedController: UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 240)
+        return CGSize(width: view.frame.width, height: 160)
     }
  
     
