@@ -18,6 +18,9 @@ class ExploreController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        navigationItem.title = "友達を探す"
+        
     }
 
     // MARK: - Table view data source

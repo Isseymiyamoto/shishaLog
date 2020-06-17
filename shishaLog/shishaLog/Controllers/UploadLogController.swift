@@ -48,6 +48,16 @@ class UploadLogController: UIViewController {
         return label
     }()
     
+    private let logButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Logする", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .shishaColor
+        button.addTarget(self, action: #selector(handleUploadLog), for: .touchUpInside)
+        return button
+    }()
+    
 //    private let spotTextField: UITextField = {
 //        let tf = Utilities().textField(withPlaceholder: "spotを教えてください")
 //        tf.textColor = .black
@@ -129,6 +139,11 @@ class UploadLogController: UIViewController {
         
         view.addSubview(stack)
         stack.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 32, paddingLeft: 16, paddingRight: 16)
+        
+        view.addSubview(logButton)
+        logButton.heightAnchor.constraint(equalToConstant: 48).isActive = true
+        logButton.anchor(top: stack.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 32, paddingLeft: 16, paddingRight: 16)
+        logButton.layer.cornerRadius = 48 / 2
     }
     
     
