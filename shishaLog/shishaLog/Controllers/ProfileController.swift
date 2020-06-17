@@ -21,7 +21,16 @@ class ProfileController: UICollectionViewController {
     
     // MARK: - Lifecycle
     
-    init(user: User){
+//    init(user: User){
+//        self.user = user
+//        super.init(collectionViewLayout: UICollectionViewFlowLayout())
+//    }
+//
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+    
+    init(user: User) {
         self.user = user
         super.init(collectionViewLayout: UICollectionViewFlowLayout())
     }
@@ -34,19 +43,26 @@ class ProfileController: UICollectionViewController {
         super.viewDidLoad()
         
         configureCollectionView()
-        
+        configureNavigationBar()
 
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationItem.title = "プロフィール"
         navigationController?.navigationBar.barStyle = .default
-        navigationController?.navigationBar.isHidden = true
+        navigationController?.navigationBar.isHidden = false
     }
     
     
     // MARK: - API
+    
+    func fetchLogs(){
+        
+    }
+    
+    func fetchLikeLogs(){
+        
+    }
     
     
     // MARK: - Helpers
@@ -61,6 +77,10 @@ class ProfileController: UICollectionViewController {
         guard let tabHeight = tabBarController?.tabBar.frame.height else { return }
         collectionView.contentInset.bottom = tabHeight
         
+    }
+    
+    func configureNavigationBar(){
+        navigationItem.title = user.username
     }
     
 
