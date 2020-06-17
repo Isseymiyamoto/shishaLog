@@ -8,6 +8,8 @@
 
 import UIKit
 
+private let reuseIdentifier = "UserCell"
+
 class ExploreController: UITableViewController {
     
     // MARK: - Properties
@@ -21,9 +23,7 @@ class ExploreController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        navigationItem.title = "友達を探す"
-        
+        configureUI()
     }
     
     // MARK: - API
@@ -36,6 +36,14 @@ class ExploreController: UITableViewController {
     
     // MARK: - Helpers
     
+    func configureUI(){
+        view.backgroundColor = .white
+        navigationItem.title = "友達を探す"
+        tableView.register(UserCell.self, forCellReuseIdentifier: reuseIdentifier)
+        tableView.rowHeight = 60
+        tableView.separatorStyle = .none
+    }
+    
 
 
 }
@@ -43,15 +51,14 @@ class ExploreController: UITableViewController {
 // MARK: - UITableViewDataSource & UITableViewDelegate
 
 extension ExploreController{
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return 5
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! UserCell
+        return cell
     }
     
 }

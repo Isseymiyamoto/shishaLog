@@ -41,6 +41,8 @@ class UserCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        configureUI()
     }
     
     required init?(coder: NSCoder) {
@@ -65,7 +67,7 @@ class UserCell: UITableViewCell {
         stack.distribution = .fillProportionally
         
         addSubview(stack)
-        stack.anchor(top: topAnchor, left: leftAnchor, right: rightAnchor, paddingLeft: 12)
+        stack.anchor(top: topAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 8, paddingLeft: 12, paddingRight: 12)
         
         
     }
