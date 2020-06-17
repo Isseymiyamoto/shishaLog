@@ -12,6 +12,12 @@ class UserCell: UITableViewCell {
 
     // MARK: - Properties
     
+    var user: User? {
+        didSet{
+            configureUI()
+        }
+    }
+    
     private lazy var profileImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFit
@@ -42,18 +48,6 @@ class UserCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        configureUI()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    
-    // MARK: - Helpers
-    
-    func configureUI(){
-        
         let nameStack = UIStackView(arrangedSubviews: [usernameLabel, fullnameLabel])
         nameStack.axis = .vertical
         nameStack.alignment = .leading
@@ -69,7 +63,21 @@ class UserCell: UITableViewCell {
         addSubview(stack)
         stack.anchor(top: topAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 8, paddingLeft: 12, paddingRight: 12)
         
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    // MARK: - Helpers
+    
+    func configureUI(){
+        guard let user = user else { return }
         
+        profileImageView.sd_setImage(with: user.profileImageUrl, completed: nil)
+        fullnameLabel.text = user.fullname
+        usernameLabel.text = user.username
     }
     
 
