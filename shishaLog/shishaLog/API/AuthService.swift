@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 import Firebase
 
 struct AuthCredentials {
@@ -60,6 +61,9 @@ struct AuthService {
                 
             }
         }
+        
+        
+        
         
         
         
