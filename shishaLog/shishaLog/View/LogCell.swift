@@ -124,7 +124,7 @@ class LogCell: UICollectionViewCell {
         // infoLabel text
         infoLabel.attributedText = configureAttributedText(fullname: log.user.fullname, username: log.user.username, timestamp: log.timestamp)
         // location text
-        locationLabel.text = log.location
+        locationLabel.text = "@" + log.location
         // mix text
         mixLabel.text = log.mix
         // feeling text
