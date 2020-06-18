@@ -21,8 +21,10 @@ class ProfileHeader: UICollectionReusableView{
         iv.contentMode = .scaleAspectFit
         iv.clipsToBounds = true
         iv.backgroundColor = .lightGray
-        iv.layer.borderColor = UIColor.white.cgColor
+        iv.layer.borderColor = UIColor.shishaColor.cgColor
         iv.layer.borderWidth = 4
+        iv.setDimensions(width: 80, height: 80)
+        iv.layer.cornerRadius = 80 / 2
         return iv
     }()
     
@@ -30,7 +32,7 @@ class ProfileHeader: UICollectionReusableView{
         let button = UIButton(type: .system)
         button.setTitle("30", for: .normal)
         button.setTitleColor(.black, for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         return button
     }()
     
@@ -38,7 +40,7 @@ class ProfileHeader: UICollectionReusableView{
         let button = UIButton(type: .system)
         button.setTitle("290", for: .normal)
         button.setTitleColor(.black, for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         return button
     }()
     
@@ -46,7 +48,7 @@ class ProfileHeader: UICollectionReusableView{
         let button = UIButton(type: .system)
         button.setTitle("3000", for: .normal)
         button.setTitleColor(.black, for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         return button
     }()
     
@@ -59,14 +61,14 @@ class ProfileHeader: UICollectionReusableView{
     
     private let followingCountLabel: UILabel = {
         let label = UILabel()
-        label.text = "フォロワー"
+        label.text = "フォロー"
         label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
     
     private let followedCountLabel: UILabel = {
         let label = UILabel()
-        label.text = "フォロー中"
+        label.text = "フォロワー"
         label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
@@ -106,17 +108,23 @@ class ProfileHeader: UICollectionReusableView{
         
         // info系のstack
         let logCountStack = makeStackView(button: logCountButton, label: logCountLabel)
-        let followingCountStack = makeStackView(button: followedCountButton, label: followedCountLabel)
+        let followingCountStack = makeStackView(button: followingCountButton, label: followingCountLabel)
         let followedCountStack = makeStackView(button: followedCountButton, label: followedCountLabel)
+        logCountStack.backgroundColor = .red
+        followingCountStack.backgroundColor = .blue
+        followedCountStack.backgroundColor = .cyan
         
-        let infoStack = UIStackView(arrangedSubviews: [profileImageView, logCountStack, followingCountStack, followedCountStack])
+        let infoStack = UIStackView(arrangedSubviews: [logCountStack, followingCountStack, followedCountStack])
         infoStack.axis = .horizontal
-        infoStack.spacing = 12
         infoStack.alignment = .center
-        infoStack.distribution = .fillProportionally
+        infoStack.distribution = .fillEqually
+        
+        addSubview(profileImageView)
+        profileImageView.anchor(top: safeAreaLayoutGuide.topAnchor, left: leftAnchor, paddingTop: 32, paddingLeft: 32)
         
         addSubview(infoStack)
-        infoStack.anchor(top: safeAreaLayoutGuide.topAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 24, paddingLeft: 16, paddingRight: 16)
+        infoStack.centerY(inView: profileImageView)
+        infoStack.anchor(left: profileImageView.rightAnchor, right: rightAnchor, paddingLeft: 16, paddingRight: 32)
         
     }
     
@@ -142,7 +150,8 @@ class ProfileHeader: UICollectionReusableView{
         let stack = UIStackView(arrangedSubviews: [button, label])
         stack.axis = .vertical
         stack.alignment = .center
-        stack.spacing = 4
+        stack.spacing = 2
+        stack.setDimensions(width: 160, height: 48)
         return stack
     }
     
