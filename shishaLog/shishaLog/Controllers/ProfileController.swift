@@ -63,7 +63,8 @@ class ProfileController: UICollectionViewController {
         collectionView.contentInsetAdjustmentBehavior = .never
         
         // cell等を登録
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView!.register(LogCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView!.register(ProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerIdentifier)
         
         guard let tabHeight = tabBarController?.tabBar.frame.height else { return }
         collectionView.contentInset.bottom = tabHeight
@@ -105,10 +106,18 @@ extension ProfileController{
 
 extension ProfileController{
     
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerIdentifier, for: indexPath) as! ProfileHeader
+        header.user = user
+        return header
+    }
+    
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
 
 extension ProfileController: UICollectionViewDelegateFlowLayout{
+    
+    
     
 }
