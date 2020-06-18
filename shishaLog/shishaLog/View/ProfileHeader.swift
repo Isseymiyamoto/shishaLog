@@ -76,13 +76,13 @@ class ProfileHeader: UICollectionReusableView{
     
     private let fullnameLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.font = UIFont.boldSystemFont(ofSize: 14)
         return label
     }()
     
     private let bioLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.font = UIFont.systemFont(ofSize: 14)
         label.numberOfLines = 3
         label.text = "This is a user bio that will span more than one line for test purposes"
         return label
@@ -93,13 +93,13 @@ class ProfileHeader: UICollectionReusableView{
         button.setTitle("Loading", for: .normal)
         button.layer.borderColor = UIColor.shishaColor.cgColor
         button.layer.borderWidth = 1.25
-        button.setTitleColor(.shishaColor, for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.titleLabel?.textAlignment = .center
+        button.backgroundColor = .shishaColor
         button.addTarget(self, action: #selector(handleEdidFollowProfile), for: .touchUpInside)
         return button
     }()
-    
-    
     
     // MARK: - Lifecycle
     
@@ -120,11 +120,22 @@ class ProfileHeader: UICollectionReusableView{
         infoStack.distribution = .fillEqually
         
         addSubview(profileImageView)
-        profileImageView.anchor(top: safeAreaLayoutGuide.topAnchor, left: leftAnchor, paddingTop: 32, paddingLeft: 32)
+        profileImageView.anchor(top: safeAreaLayoutGuide.topAnchor, left: leftAnchor, paddingTop: 32, paddingLeft: 16)
         
         addSubview(infoStack)
         infoStack.centerY(inView: profileImageView)
         infoStack.anchor(left: profileImageView.rightAnchor, right: rightAnchor, paddingLeft: 16, paddingRight: 32)
+        
+        addSubview(fullnameLabel)
+        fullnameLabel.anchor(top: profileImageView.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 16, paddingLeft: 16, paddingRight: 16)
+        
+        addSubview(bioLabel)
+        bioLabel.anchor(top: fullnameLabel.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 4, paddingLeft: 16, paddingRight: 16)
+        
+        addSubview(editProfileFollowButton)
+        editProfileFollowButton.anchor(top: bioLabel.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 32, paddingLeft: 16, paddingRight: 16)
+        editProfileFollowButton.setDimensions(width: self.frame.width - 32, height: 36)
+        editProfileFollowButton.layer.cornerRadius = 6
         
     }
     
@@ -150,8 +161,7 @@ class ProfileHeader: UICollectionReusableView{
         let stack = UIStackView(arrangedSubviews: [button, label])
         stack.axis = .vertical
         stack.alignment = .center
-        stack.spacing = 2
-        stack.setDimensions(width: 160, height: 48)
+        stack.setDimensions(width: 160, height: 40)
         return stack
     }
     
