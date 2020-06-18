@@ -106,6 +106,8 @@ class ProfileHeader: UICollectionReusableView{
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        self.backgroundColor = .systemGroupedBackground
+        
         // info系のstack
         let logCountStack = makeStackView(button: logCountButton, label: logCountLabel)
         let followingCountStack = makeStackView(button: followingCountButton, label: followingCountLabel)
