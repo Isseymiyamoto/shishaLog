@@ -20,6 +20,7 @@ class ProfileFilterView: UIView {
     
     weak var delegate: ProfileFilterViewDelegate?
     
+    // self.viewにcollectionViewを同サイズで載せる
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -43,6 +44,8 @@ class ProfileFilterView: UIView {
         collectionView.register(ProfileFilterCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
         
+        addSubview(collectionView)
+        collectionView.addConstraintsToFillView(self)
     }
     
     required init?(coder: NSCoder) {
