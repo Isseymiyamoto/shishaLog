@@ -112,7 +112,7 @@ extension ProfileController: UICollectionViewDelegateFlowLayout{
     
     // headerのsizeを決める
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        let height: CGFloat = 340
+        let height: CGFloat = 420
         return CGSize(width: view.frame.width, height: height)
     }
     

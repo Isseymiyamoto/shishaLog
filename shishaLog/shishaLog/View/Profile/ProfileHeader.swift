@@ -16,6 +16,8 @@ class ProfileHeader: UICollectionReusableView{
         didSet{ configure() }
     }
     
+    private let filterBar = ProfileFilterView()
+    
     private let profileImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFit
@@ -108,6 +110,8 @@ class ProfileHeader: UICollectionReusableView{
         
         self.backgroundColor = .systemGroupedBackground
         
+        filterBar.delegate = self
+        
         // info系のstack
         let logCountStack = makeStackView(button: logCountButton, label: logCountLabel)
         let followingCountStack = makeStackView(button: followingCountButton, label: followingCountLabel)
@@ -139,6 +143,8 @@ class ProfileHeader: UICollectionReusableView{
         editProfileFollowButton.setDimensions(width: self.frame.width - 32, height: 36)
         editProfileFollowButton.layer.cornerRadius = 6
         
+        addSubview(filterBar)
+        filterBar.anchor(left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, height: 50)
     }
     
     required init?(coder: NSCoder) {
@@ -171,7 +177,11 @@ class ProfileHeader: UICollectionReusableView{
         profileImageView.sd_setImage(with: user?.profileImageUrl, completed: nil)
         fullnameLabel.text = user?.fullname
     }
-    
-    
-    
+}
+
+extension ProfileHeader: ProfileFilterViewDelegate {
+    func filterView(_ view: ProfileFilterView, didSelect index: Int) {
+        guard let filter = ProfileFilterOptions(rawValue: index) else { return }
+        print(filter)
+    }
 }

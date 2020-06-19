@@ -50,6 +50,11 @@ class ProfileFilterView: UIView {
         collectionView.addConstraintsToFillView(self)
     }
     
+    override func layoutSubviews() {
+        addSubview(underlineView)
+        underlineView.anchor(left: leftAnchor, bottom: bottomAnchor, width: frame.width / 3, height: 2)
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
