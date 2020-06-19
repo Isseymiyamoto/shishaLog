@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol ProfileHeaderDelegate: class {
+    func handleEditProfile(_ header: ProfileHeader)
+    func didSelect(filter: ProfileFilterOptions)
+}
+
 class ProfileHeader: UICollectionReusableView{
     
     // MARK: - Properties
@@ -15,6 +20,8 @@ class ProfileHeader: UICollectionReusableView{
     var user: User? {
         didSet{ configure() }
     }
+    
+    weak var delegate: ProfileHeaderDelegate?
     
     private let filterBar = ProfileFilterView()
     
@@ -153,13 +160,9 @@ class ProfileHeader: UICollectionReusableView{
     
     // MARK: - Selectors
     
-    @objc func handleDismissal(){
-        
-    }
-    
     // 自分のprofileか他者かによって挙動を変える
     @objc func handleEdidFollowProfile(){
-        
+        delegate?.handleEditProfile(self)
     }
     
     
@@ -182,6 +185,6 @@ class ProfileHeader: UICollectionReusableView{
 extension ProfileHeader: ProfileFilterViewDelegate {
     func filterView(_ view: ProfileFilterView, didSelect index: Int) {
         guard let filter = ProfileFilterOptions(rawValue: index) else { return }
-        print(filter)
+        delegate?.didSelect(filter: filter)
     }
 }
