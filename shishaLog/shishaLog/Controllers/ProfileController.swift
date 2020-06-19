@@ -24,7 +24,8 @@ class ProfileController: UICollectionViewController {
     
     // ログに入るデータを格納
     private var logs = [Log]()
-    // スポットに入るデータを格納予定(後で)
+    // スポットに入るデータを格納予定(後で)(暫定的に適当にLogを入れている)
+    private var spots = [Log]()
     // お気に入りのログに関するデータを格納
     private var likeLogs = [Log]()
     
@@ -32,7 +33,7 @@ class ProfileController: UICollectionViewController {
         switch selectedFilter {
         case .logs: return logs
         case .likeLogs: return likeLogs
-        case .locations: return logs
+        case .locations: return spots
         }
     }
     
@@ -66,8 +67,8 @@ class ProfileController: UICollectionViewController {
     // MARK: - API
     
     func fetchLogs(){
-        LogService.shared.fetchLogs { (logs) in
-            self.logs = logs.sorted(by: { $0.timestamp  > $1.timestamp })
+        LogService.shared.fetchMyLogs(forUser: user) { (logs) in
+            self.logs = logs.sorted(by: { $0.timestamp > $1.timestamp })
             self.collectionView.reloadData()
         }
     }
@@ -77,7 +78,12 @@ class ProfileController: UICollectionViewController {
     }
     
     // spotに関するものも追加予定
-    
+    func fetchSpots(){
+        LogService.shared.fetchLogs { (logs) in
+            self.spots = logs.sorted(by: { $0.timestamp > $1.timestamp })
+            self.collectionView.reloadData()
+        }
+    }
     
     // MARK: - Helpers
     
