@@ -15,6 +15,7 @@ class MainTabController: UITabBarController{
     
     var user: User? {
         didSet{
+            configureViewControllers()
             // MainTabのuserに情報がセットされた時点でfeedControllerにもセットする
             guard let nav = viewControllers![0] as? UINavigationController else { return }
             guard let feed = nav.viewControllers.first as? FeedController else { return }
@@ -60,9 +61,10 @@ class MainTabController: UITabBarController{
                 self.present(nav, animated: true, completion: nil)
             }
         }else{
-            configureViewControllers()
-            configureUI()
+//            configureViewControllers()
             fetchUser()
+            configureUI()
+            
         }
     }
     
@@ -80,7 +82,7 @@ class MainTabController: UITabBarController{
     // MARK: - Helpers
     
     func configureUI(){
-        view.backgroundColor = .shishaColor
+        view.backgroundColor = .white
         
         view.addSubview(actionButton)
         actionButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingBottom: 64, paddingRight: 16, width: 56, height: 56)
@@ -98,7 +100,7 @@ class MainTabController: UITabBarController{
         let notifications = NotificationsController()
         let nav3 = templateNavigationController(image: UIImage(systemName: "bell"), rootViewController: notifications)
         
-        let profile = ProfileController(collectionViewLayout: UICollectionViewFlowLayout())
+        let profile = ProfileController(user: user!)
         let nav4 = templateNavigationController(image: UIImage(systemName: "person"), rootViewController: profile)
         
         viewControllers = [nav1, nav2, nav3, nav4]
@@ -110,9 +112,5 @@ class MainTabController: UITabBarController{
         nav.navigationBar.tintColor = .white
         return nav
     }
-    
-    
-    
-    
-    
+
 }
