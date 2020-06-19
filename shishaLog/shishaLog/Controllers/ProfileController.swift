@@ -18,6 +18,24 @@ class ProfileController: UICollectionViewController {
     
     private var user: User
     
+    private var selectedFilter: ProfileFilterOptions = .logs{
+        didSet{ collectionView.reloadData() }
+    }
+    
+    // ログに入るデータを格納
+    private var logs = [Log]()
+    // スポットに入るデータを格納予定(後で)
+    // お気に入りのログに関するデータを格納
+    private var likeLogs = [Log]()
+    
+    private var currentDataSource: [Log]{
+        switch selectedFilter {
+        case .logs: return logs
+        case .likeLogs: return likeLogs
+        case .locations: return logs
+        }
+    }
+    
     
     // MARK: - Lifecycle
     
@@ -35,7 +53,7 @@ class ProfileController: UICollectionViewController {
         
         configureCollectionView()
         configureNavigationBar()
-
+        fetchLogs()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,12 +66,17 @@ class ProfileController: UICollectionViewController {
     // MARK: - API
     
     func fetchLogs(){
-        
+        LogService.shared.fetchLogs { (logs) in
+            self.logs = logs.sorted(by: { $0.timestamp  > $1.timestamp })
+            self.collectionView.reloadData()
+        }
     }
     
     func fetchLikeLogs(){
         
     }
+    
+    // spotに関するものも追加予定
     
     
     // MARK: - Helpers
@@ -83,11 +106,12 @@ class ProfileController: UICollectionViewController {
 extension ProfileController{
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
+        return logs.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! LogCell
+        cell.log = logs[indexPath.row]
         return cell
     }
     
@@ -114,6 +138,10 @@ extension ProfileController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         let height: CGFloat = 420
         return CGSize(width: view.frame.width, height: height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width, height: 160)
     }
     
 }

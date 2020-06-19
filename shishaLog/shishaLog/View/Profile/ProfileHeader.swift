@@ -99,7 +99,7 @@ class ProfileHeader: UICollectionReusableView{
     
     lazy var editProfileFollowButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Loading", for: .normal)
+        button.setTitle("プロフィールを編集する", for: .normal)
         button.layer.borderColor = UIColor.shishaColor.cgColor
         button.layer.borderWidth = 1.25
         button.setTitleColor(.white, for: .normal)
@@ -119,7 +119,7 @@ class ProfileHeader: UICollectionReusableView{
         
         filterBar.delegate = self
         
-        // info系のstack
+        // 数的情報系のstack
         let logCountStack = makeStackView(button: logCountButton, label: logCountLabel)
         let followingCountStack = makeStackView(button: followingCountButton, label: followingCountLabel)
         let followedCountStack = makeStackView(button: followedCountButton, label: followedCountLabel)

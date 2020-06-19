@@ -35,7 +35,7 @@ struct LogService {
     }
     
     // logを全件取得
-    func fetchLog(completion: @escaping(([Log]) -> Void)){
+    func fetchLogs(completion: @escaping(([Log]) -> Void)){
         var logs = [Log]()
         
         REF_LOGS.observe(.childAdded) { (snapshot) in
@@ -49,6 +49,30 @@ struct LogService {
             }
         }
     }
-        
+    
+    // 自分のLogのみfetchする ProfileControllerのログで使用想定
+    func fetchMyLogs(forUser user: User, completion: @escaping([Log]) -> Void){
+        var logs = [Log]()
+        REF_USER_LOGS.child(user.uid).observe(.childAdded) { (snapshot) in
+            let logID = snapshot.key
+            
+            self.fetchLog(withLogID: logID) { (log) in
+                logs.append(log)
+                completion(logs)
+            }
+        }
+    }
+    
+    func fetchLog(withLogID logID: String, completion: @escaping(Log) -> Void){
+        REF_LOGS.child(logID).observeSingleEvent(of: .value) { (snapshot) in
+            guard let dictionary = snapshot.value as? [String: Any] else { return }
+            guard let uid = dictionary["uid"] as? String else { return }
+            
+            UserService.shared.fetchUser(uid: uid) { (user) in
+                let log = Log(user: user, logID: logID, dictionary: dictionary)
+                completion(log)
+            }
+        }
+    }
     
 }

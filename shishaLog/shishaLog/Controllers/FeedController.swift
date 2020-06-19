@@ -45,7 +45,7 @@ class FeedController: UICollectionViewController {
     // MARK: - API
     
     func fetchLogs(){
-        LogService.shared.fetchLog { (logs) in
+        LogService.shared.fetchLogs { (logs) in
             self.logs = logs.sorted(by: { $0.timestamp  > $1.timestamp })
         }
     }
