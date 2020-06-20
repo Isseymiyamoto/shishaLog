@@ -22,4 +22,25 @@ enum ProfileFilterOptions: Int, CaseIterable {
     }
 }
 
+struct ProfileHeaderViewModel {
+    
+    private let user: User
+    
+    var actionButtonTitle: String {
+        if user.isCurrentUser {
+            return "プロフィールを編集する"
+        }
+        
+        if !user.isCurrentUser {
+            return "シーシャ友達になる"
+        }
+        
+        return "Loading now"
+    }
+    
+    init(user: User) {
+        self.user = user
+    }
+}
+
 

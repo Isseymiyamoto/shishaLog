@@ -99,7 +99,7 @@ class ProfileHeader: UICollectionReusableView{
     
     lazy var editProfileFollowButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("プロフィールを編集する", for: .normal)
+        button.setTitle("Loading", for: .normal)
         button.layer.borderColor = UIColor.shishaColor.cgColor
         button.layer.borderWidth = 1.25
         button.setTitleColor(.white, for: .normal)
@@ -177,8 +177,15 @@ class ProfileHeader: UICollectionReusableView{
     }
     
     func configure(){
-        profileImageView.sd_setImage(with: user?.profileImageUrl, completed: nil)
-        fullnameLabel.text = user?.fullname
+        // userに値が渡って来ていることを確認して諸データを代入する
+        guard let user = user else { return }
+        
+        let viewModel = ProfileHeaderViewModel(user: user)
+        
+        editProfileFollowButton.setTitle(viewModel.actionButtonTitle, for: .normal)
+        profileImageView.sd_setImage(with: user.profileImageUrl, completed: nil)
+        fullnameLabel.text = user.fullname
+        
     }
 }
 
