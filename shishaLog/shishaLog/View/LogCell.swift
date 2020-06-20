@@ -9,6 +9,10 @@
 import UIKit
 import SDWebImage
 
+protocol LogCellDelegate: class {
+    func handleProfileImageTapped(_ cell: LogCell)
+}
+
 class LogCell: UICollectionViewCell {
     
     // MARK: - Properties
@@ -16,6 +20,8 @@ class LogCell: UICollectionViewCell {
     var log: Log? {
         didSet { configureUI() }
     }
+    
+    weak var delegate: LogCellDelegate?
     
     private lazy var profileImageView: UIImageView = {
         let iv = UIImageView()
@@ -111,7 +117,7 @@ class LogCell: UICollectionViewCell {
     // MARK: - Selectors
     
     @objc func handleProfileImageTapped(){
-        
+        delegate?.handleProfileImageTapped(self)
     }
     
     // MARK: - Helpers
