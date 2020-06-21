@@ -126,6 +126,10 @@ extension FeedController: UICollectionViewDelegateFlowLayout{
 
 // MARK: - LogCellDelegate
 extension FeedController: LogCellDelegate{
+    func handleLikeButtonTapped(_ cell: LogCell) {
+        print("DEBUG: push the like button successfully")
+    }
+    
     func handleProfileImageTapped(_ cell: LogCell) {
         guard let user = cell.log?.user else { return }
         let controller = ProfileController(user: user)

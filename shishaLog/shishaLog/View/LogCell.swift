@@ -11,6 +11,7 @@ import SDWebImage
 
 protocol LogCellDelegate: class {
     func handleProfileImageTapped(_ cell: LogCell)
+    func handleLikeButtonTapped(_ cell: LogCell)
 }
 
 class LogCell: UICollectionViewCell {
@@ -82,13 +83,29 @@ class LogCell: UICollectionViewCell {
     }()
     
     
+    private lazy var likeButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "star"), for: .normal)
+        button.addTarget(self, action: #selector(handleLikeButtonTapped), for: .touchUpInside)
+        button.setDimensions(width: 24, height: 24)
+        button.imageView?.contentMode = .scaleAspectFit
+        return button
+    }()
+    
+    
     
     // MARK: - Lifecycle
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        let rightSideStack = UIStackView(arrangedSubviews: [infoLabel, locationLabel, mixLabel, feelingLabel])
+        let topInfoStack = UIStackView(arrangedSubviews: [infoLabel, likeButton])
+        topInfoStack.axis = .horizontal
+        topInfoStack.distribution = .equalSpacing
+        topInfoStack.alignment = .center
+        
+        
+        let rightSideStack = UIStackView(arrangedSubviews: [topInfoStack, locationLabel, mixLabel, feelingLabel])
         rightSideStack.axis = .vertical
         rightSideStack.spacing = 12
         rightSideStack.distribution = .fillProportionally
@@ -118,6 +135,10 @@ class LogCell: UICollectionViewCell {
     
     @objc func handleProfileImageTapped(){
         delegate?.handleProfileImageTapped(self)
+    }
+    
+    @objc func handleLikeButtonTapped(){
+        delegate?.handleLikeButtonTapped(self)
     }
     
     // MARK: - Helpers
