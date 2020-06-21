@@ -87,7 +87,8 @@ class LogCell: UICollectionViewCell {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "star"), for: .normal)
         button.addTarget(self, action: #selector(handleLikeButtonTapped), for: .touchUpInside)
-        button.setDimensions(width: 24, height: 24)
+        button.setDimensions(width: 20, height: 20)
+        button.tintColor = .shishaColor
         button.imageView?.contentMode = .scaleAspectFit
         return button
     }()
