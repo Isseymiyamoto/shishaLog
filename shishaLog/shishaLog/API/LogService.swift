@@ -75,4 +75,21 @@ struct LogService {
         }
     }
     
+    func likeLog(log: Log, completion: @escaping(Error?, DatabaseReference) -> Void){
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        let likes = log.didLike ? log.likes - 1 : log.likes + 1
+        REF_LOGS.child(log.logID).child("likes").setValue(likes)
+        
+        if log.didLike {
+            REF_USER_LIKES.child(uid).child(log.logID).removeValue { (err, ref) in
+                REF_LOG_LIKES.child(log.logID).removeValue(completionBlock: completion)
+            }
+        }else{
+            REF_USER_LIKES.child(uid).updateChildValues([log.logID: 1]) { (err, ref) in
+                REF_LOG_LIKES.child(log.logID).updateChildValues([uid: 1], withCompletionBlock: completion)
+            }
+        }
+    }
+    
 }

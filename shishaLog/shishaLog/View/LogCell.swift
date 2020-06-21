@@ -83,7 +83,7 @@ class LogCell: UICollectionViewCell {
     }()
     
     
-    private lazy var likeButton: UIButton = {
+    lazy var likeButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "star"), for: .normal)
         button.addTarget(self, action: #selector(handleLikeButtonTapped), for: .touchUpInside)

@@ -127,6 +127,7 @@ extension FeedController: UICollectionViewDelegateFlowLayout{
 // MARK: - LogCellDelegate
 extension FeedController: LogCellDelegate{
     func handleLikeButtonTapped(_ cell: LogCell) {
+        cell.likeButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
         print("DEBUG: push the like button successfully")
     }
     
