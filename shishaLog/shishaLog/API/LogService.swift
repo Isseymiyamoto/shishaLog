@@ -92,4 +92,13 @@ struct LogService {
         }
     }
     
+    func checkIfUserLikedLog(_ log: Log, completion: @escaping(Bool) -> Void){
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        REF_USER_LIKES.child(uid).child(log.logID).observeSingleEvent(of: .value) { (snapshot) in
+            completion(snapshot.exists())
+        }
+        
+    }
+    
 }
