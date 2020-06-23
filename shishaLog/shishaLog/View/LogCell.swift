@@ -83,11 +83,12 @@ class LogCell: UICollectionViewCell {
     }()
     
     
-    private lazy var likeButton: UIButton = {
+    lazy var likeButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "star"), for: .normal)
         button.addTarget(self, action: #selector(handleLikeButtonTapped), for: .touchUpInside)
-        button.setDimensions(width: 24, height: 24)
+        button.setDimensions(width: 20, height: 20)
+        button.tintColor = .shishaColor
         button.imageView?.contentMode = .scaleAspectFit
         return button
     }()
@@ -156,6 +157,10 @@ class LogCell: UICollectionViewCell {
         mixLabel.text = log.mix
         // feeling text
         feelingLabel.text = log.feeling
+        
+        if(log.didLike){
+            likeButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
+        }
     }
     
     private func configureAttributedText(fullname: String, username: String, timestamp: Date) -> NSAttributedString{

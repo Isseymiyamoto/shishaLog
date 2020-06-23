@@ -133,7 +133,6 @@ extension ProfileController{
         header.user = user
         return header
     }
-    
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
