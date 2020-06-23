@@ -157,6 +157,10 @@ class LogCell: UICollectionViewCell {
         mixLabel.text = log.mix
         // feeling text
         feelingLabel.text = log.feeling
+        
+        if(log.didLike){
+            likeButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
+        }
     }
     
     private func configureAttributedText(fullname: String, username: String, timestamp: Date) -> NSAttributedString{

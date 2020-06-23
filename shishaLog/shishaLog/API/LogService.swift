@@ -92,6 +92,20 @@ struct LogService {
         }
     }
     
+    func fetchLikes(forUser user: User, completion: @escaping([Log]) -> Void){
+        var logs = [Log]()
+        
+        REF_USER_LIKES.child(user.uid).observe(.childAdded) { (snapshot) in
+            let logID = snapshot.key
+            self.fetchLog(withLogID: logID) { (log) in
+                var log = log
+                log.didLike = true
+                logs.append(log)
+                completion(logs)
+            }
+        }
+    }
+    
     func checkIfUserLikedLog(_ log: Log, completion: @escaping(Bool) -> Void){
         guard let uid = Auth.auth().currentUser?.uid else { return }
         

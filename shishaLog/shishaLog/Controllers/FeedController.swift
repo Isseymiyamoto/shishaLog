@@ -47,6 +47,19 @@ class FeedController: UICollectionViewController {
     func fetchLogs(){
         LogService.shared.fetchLogs { (logs) in
             self.logs = logs.sorted(by: { $0.timestamp  > $1.timestamp })
+            self.checkIfUserLikedLogs()
+        }
+    }
+    
+    func checkIfUserLikedLogs(){
+        self.logs.forEach { (log) in
+            LogService.shared.checkIfUserLikedLog(log) { (didLike) in
+                guard didLike == true else { return }
+                
+                if let index = self.logs.firstIndex(where: { $0.logID == log.logID }) {
+                    self.logs[index].didLike = true
+                }
+            }
         }
     }
     
@@ -127,8 +140,14 @@ extension FeedController: UICollectionViewDelegateFlowLayout{
 // MARK: - LogCellDelegate
 extension FeedController: LogCellDelegate{
     func handleLikeButtonTapped(_ cell: LogCell) {
-        cell.likeButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
-        print("DEBUG: push the like button successfully")
+        guard let log = cell.log else { return }
+        
+        LogService.shared.likeLog(log: log) { (err, ref) in
+            cell.log?.didLike.toggle()
+            
+            let likes = log.didLike ? log.likes - 1 : log.likes + 1
+            cell.log?.likes = likes
+        }
     }
     
     func handleProfileImageTapped(_ cell: LogCell) {
