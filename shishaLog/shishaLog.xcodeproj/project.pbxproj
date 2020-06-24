@@ -31,6 +31,7 @@
 		8563E28E2498FD1F008F9103 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8563E28D2498FD1F008F9103 /* Log.swift */; };
 		8563E2902499DCC9008F9103 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8563E28F2499DCC9008F9103 /* UserCell.swift */; };
 		8563E2922499FFC4008F9103 /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8563E2912499FFC4008F9103 /* ProfileHeader.swift */; };
+		85C1697E24A3277700BD2EE1 /* EditProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C1697D24A3277700BD2EE1 /* EditProfileController.swift */; };
 		85D8EA1A248E74CE002AFEC1 /* UploadLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D8EA19248E74CE002AFEC1 /* UploadLogController.swift */; };
 		85D8EA1C248E81D5002AFEC1 /* LogService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D8EA1B248E81D5002AFEC1 /* LogService.swift */; };
 		85D8EA1E248F363E002AFEC1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D8EA1D248F363E002AFEC1 /* User.swift */; };
@@ -67,6 +68,7 @@
 		8563E28D2498FD1F008F9103 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		8563E28F2499DCC9008F9103 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		8563E2912499FFC4008F9103 /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
+		85C1697D24A3277700BD2EE1 /* EditProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileController.swift; sourceTree = "<group>"; };
 		85D8EA19248E74CE002AFEC1 /* UploadLogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadLogController.swift; sourceTree = "<group>"; };
 		85D8EA1B248E81D5002AFEC1 /* LogService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogService.swift; sourceTree = "<group>"; };
 		85D8EA1D248F363E002AFEC1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 				851AAA88247E9E80006030D1 /* ProfileController.swift */,
 				851AAA8A247E9EC5006030D1 /* NotificationsController.swift */,
 				85D8EA19248E74CE002AFEC1 /* UploadLogController.swift */,
+				85C1697D24A3277700BD2EE1 /* EditProfileController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -361,6 +364,7 @@
 				85EB9A54249BBCBF00C03E49 /* ProfileFilterCell.swift in Sources */,
 				851AAA7C247E9685006030D1 /* Extensions.swift in Sources */,
 				85D8EA1E248F363E002AFEC1 /* User.swift in Sources */,
+				85C1697E24A3277700BD2EE1 /* EditProfileController.swift in Sources */,
 				851AAA85247E9DD0006030D1 /* FeedController.swift in Sources */,
 				851AAA93247ED61D006030D1 /* AuthService.swift in Sources */,
 				85D8EA1A248E74CE002AFEC1 /* UploadLogController.swift in Sources */,
