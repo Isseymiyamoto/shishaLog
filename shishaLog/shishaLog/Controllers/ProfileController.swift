@@ -120,7 +120,6 @@ extension ProfileController{
         cell.log = logs[indexPath.row]
         return cell
     }
-    
 }
 
 // MARK: UICollectionViewDelegate
@@ -131,6 +130,7 @@ extension ProfileController{
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerIdentifier, for: indexPath) as! ProfileHeader
         header.user = user
+        header.delegate = self
         return header
     }
 }
@@ -148,5 +148,30 @@ extension ProfileController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width, height: 160)
     }
+    
+}
+
+// MARK: - ProfileHeaderDelegate
+
+extension ProfileController: ProfileHeaderDelegate{
+    func handleEditProfile(_ header: ProfileHeader) {
+        
+        if user.isCurrentUser {
+            let controller = EditProfileController(user: user)
+            let nav = UINavigationController(rootViewController: controller)
+            nav.modalPresentationStyle = .fullScreen
+            present(nav, animated: true, completion: nil)
+        }
+        
+        else{
+            print("DEBUG: this user is not you")
+        }
+        // ユーザーがFollowing or notで分岐させる
+    }
+    
+    func didSelect(filter: ProfileFilterOptions) {
+        print(" DEBUG: didSelect FilterView on \(filter.description)")
+    }
+    
     
 }
