@@ -32,8 +32,18 @@ class EditProfileController: UITableViewController {
         super.viewDidLoad()
 
         configureTableView()
-
+        configureNavigationBar()
        
+    }
+    
+    // MARK: - Selectors
+    
+    @objc func handleCancel(){
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func handleUploadProfileInfo(){
+        print("DEBUG: not finished")
     }
     
     // MARK: - Helpers
@@ -44,6 +54,14 @@ class EditProfileController: UITableViewController {
         tableView.tableHeaderView = headerView
         headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 180)
         headerView.delegate = self
+    }
+    
+    func configureNavigationBar(){
+        
+        navigationItem.title = "プロフィールを編集"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "キャンセル", style: .plain, target: self, action: #selector(handleCancel))
+        navigationItem.leftBarButtonItem?.tintColor = .black
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "完了", style: .done, target: self, action: #selector(handleUploadProfileInfo))
     }
 
 }

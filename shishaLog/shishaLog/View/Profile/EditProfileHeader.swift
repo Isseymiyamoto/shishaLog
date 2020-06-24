@@ -26,14 +26,14 @@ class EditProfileHeader: UIView{
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         iv.backgroundColor = .lightGray
-        iv.layer.borderColor = UIColor.white.cgColor
+        iv.layer.borderColor = UIColor.shishaColor.cgColor
         iv.layer.borderWidth = 3.0
         return iv
     }()
     
     private let changePhotoButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("プロフィール写真を変更しますか？", for: .normal)
+        button.setTitle("プロフィール写真を変更", for: .normal)
         button.addTarget(self, action: #selector(handleChangeProfileImage), for: .touchUpInside)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         return button
@@ -45,7 +45,7 @@ class EditProfileHeader: UIView{
         self.user = user
         super.init(frame: .zero)
         
-        backgroundColor = .shishaColor
+        backgroundColor = .systemGroupedBackground
         
         addSubview(profileImageView)
         profileImageView.center(inView: self, yConstant: -16)
