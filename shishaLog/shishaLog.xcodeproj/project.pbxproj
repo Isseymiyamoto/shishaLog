@@ -32,6 +32,8 @@
 		8563E2902499DCC9008F9103 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8563E28F2499DCC9008F9103 /* UserCell.swift */; };
 		8563E2922499FFC4008F9103 /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8563E2912499FFC4008F9103 /* ProfileHeader.swift */; };
 		85C1697E24A3277700BD2EE1 /* EditProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C1697D24A3277700BD2EE1 /* EditProfileController.swift */; };
+		85C1698024A33BC500BD2EE1 /* EditProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C1697F24A33BC500BD2EE1 /* EditProfileHeader.swift */; };
+		85C1698224A33BD400BD2EE1 /* EditProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C1698124A33BD400BD2EE1 /* EditProfileCell.swift */; };
 		85D8EA1A248E74CE002AFEC1 /* UploadLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D8EA19248E74CE002AFEC1 /* UploadLogController.swift */; };
 		85D8EA1C248E81D5002AFEC1 /* LogService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D8EA1B248E81D5002AFEC1 /* LogService.swift */; };
 		85D8EA1E248F363E002AFEC1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D8EA1D248F363E002AFEC1 /* User.swift */; };
@@ -69,6 +71,8 @@
 		8563E28F2499DCC9008F9103 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		8563E2912499FFC4008F9103 /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
 		85C1697D24A3277700BD2EE1 /* EditProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileController.swift; sourceTree = "<group>"; };
+		85C1697F24A33BC500BD2EE1 /* EditProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileHeader.swift; sourceTree = "<group>"; };
+		85C1698124A33BD400BD2EE1 /* EditProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileCell.swift; sourceTree = "<group>"; };
 		85D8EA19248E74CE002AFEC1 /* UploadLogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadLogController.swift; sourceTree = "<group>"; };
 		85D8EA1B248E81D5002AFEC1 /* LogService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogService.swift; sourceTree = "<group>"; };
 		85D8EA1D248F363E002AFEC1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -215,6 +219,8 @@
 				8563E2912499FFC4008F9103 /* ProfileHeader.swift */,
 				85EB9A50249BBADA00C03E49 /* ProfileFilterView.swift */,
 				85EB9A53249BBCBF00C03E49 /* ProfileFilterCell.swift */,
+				85C1697F24A33BC500BD2EE1 /* EditProfileHeader.swift */,
+				85C1698124A33BD400BD2EE1 /* EditProfileCell.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -351,6 +357,7 @@
 				851AAA7A247E965E006030D1 /* Utilities.swift in Sources */,
 				85D8EA1C248E81D5002AFEC1 /* LogService.swift in Sources */,
 				85EA486E248A7EC10086A140 /* LogCell.swift in Sources */,
+				85C1698024A33BC500BD2EE1 /* EditProfileHeader.swift in Sources */,
 				851AAA80247E98DC006030D1 /* MainTabController.swift in Sources */,
 				851AAA91247ED5AE006030D1 /* UserService.swift in Sources */,
 				85417CA7249CBD0400FDFDC8 /* ProfileHeaderViewModel.swift in Sources */,
@@ -365,6 +372,7 @@
 				851AAA7C247E9685006030D1 /* Extensions.swift in Sources */,
 				85D8EA1E248F363E002AFEC1 /* User.swift in Sources */,
 				85C1697E24A3277700BD2EE1 /* EditProfileController.swift in Sources */,
+				85C1698224A33BD400BD2EE1 /* EditProfileCell.swift in Sources */,
 				851AAA85247E9DD0006030D1 /* FeedController.swift in Sources */,
 				851AAA93247ED61D006030D1 /* AuthService.swift in Sources */,
 				85D8EA1A248E74CE002AFEC1 /* UploadLogController.swift in Sources */,
