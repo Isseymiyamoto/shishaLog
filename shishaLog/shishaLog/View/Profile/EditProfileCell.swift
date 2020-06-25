@@ -16,8 +16,10 @@ class EditProfileCell: UITableViewCell {
     
     // MARK: - Properties
     
-    var user: User? {
-        didSet{ configure() }
+    var viewModel: EditProfileViewModel? {
+        didSet{
+            configure()
+        }
     }
     
     weak var delegate: EditProfileCellDelegate?
@@ -40,9 +42,10 @@ class EditProfileCell: UITableViewCell {
     }()
     
     let bioTextView: CaptionTextView = {
-        let tv = CaptionTextView(withPlaceholder: "bio")
+        let tv = CaptionTextView(withPlaceholder: "自己紹介を書きましょう")
         tv.font = UIFont.systemFont(ofSize: 14)
         tv.textColor = .black
+        tv.layer.borderWidth = 0
         return tv
     }()
     
@@ -83,8 +86,16 @@ class EditProfileCell: UITableViewCell {
     // MARK: - Helpers
     
     func configure(){
+        guard let viewModel = viewModel else { return }
         
+        infoTextField.isHidden = viewModel.shouldHideTextField
+        bioTextView.isHidden = viewModel.shouldHideTextView
         
+        titleLabel.text = viewModel.titleText
+        
+        infoTextField.text = viewModel.optionValue
+        
+        bioTextView.placeholderLabel.isHidden = viewModel.shouldHidePlaceholderLabel
+        bioTextView.text = viewModel.optionValue
     }
-    
 }

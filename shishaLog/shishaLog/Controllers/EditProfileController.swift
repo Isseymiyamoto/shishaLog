@@ -71,18 +71,39 @@ class EditProfileController: UITableViewController {
 extension EditProfileController{
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return EditProfileOptions.allCases.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! EditProfileCell
+        
+        cell.delegate = self
+        
+        guard let option = EditProfileOptions(rawValue: indexPath.row) else { return cell }
+        cell.viewModel = EditProfileViewModel(user: user, option: option)
+        
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard let option = EditProfileOptions(rawValue: indexPath.row) else { return 0 }
+        return option == .bio ? 100 : 40
+    }
 }
+
+// MARK: - EditProfileHeaderDelegate
 
 extension EditProfileController: EditProfileHeaderDelegate{
     func didTapChengeProfilePhoto() {
         print("DEBUG: user is tapping didTapChangePhoto button")
+    }
+}
+
+// MARK: - EditProfileCellDelegate
+
+extension EditProfileController: EditProfileCellDelegate{
+    func updateUserInfo(_ cell: EditProfileCell) {
+        print("DEBUG: here is nothing")
     }
 }
 
