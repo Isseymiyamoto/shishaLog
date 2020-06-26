@@ -9,7 +9,7 @@
 import UIKit
 
 protocol EditProfileHeaderDelegate: class {
-    func didTapChengeProfilePhoto()
+    func didTapChangeProfilePhoto()
 }
 
 class EditProfileHeader: UIView{
@@ -65,7 +65,7 @@ class EditProfileHeader: UIView{
     // MARK: - Selectors
     
     @objc func handleChangeProfileImage(){
-        delegate?.didTapChengeProfilePhoto()
+        delegate?.didTapChangeProfilePhoto()
     }
     
     // MARK: - Helpers

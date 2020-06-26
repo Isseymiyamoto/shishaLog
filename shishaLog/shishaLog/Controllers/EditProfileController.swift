@@ -21,7 +21,18 @@ class EditProfileController: UITableViewController {
     private var user: User
     private lazy var headerView = EditProfileHeader(user: user)
     private let footerView = EditProfileFooter()
+    private let imagePicker = UIImagePickerController()
     weak var delegate: EditProfileControllerDelegate?
+    
+    private var userInfoChanged = false
+    
+    private var imageChanged: Bool {
+        return selectedImage != nil
+    }
+    
+    private var selectedImage: UIImage? {
+        didSet { headerView.profileImageView.image = selectedImage }
+    }
 
     // MARK: - Lifecycle
     
@@ -39,6 +50,7 @@ class EditProfileController: UITableViewController {
 
         configureTableView()
         configureNavigationBar()
+        configureImagePicker()
        
     }
     
@@ -49,7 +61,29 @@ class EditProfileController: UITableViewController {
     }
     
     @objc func handleUploadProfileInfo(){
-        print("DEBUG: not finished")
+        
+    }
+    
+    // MARK: - API
+    
+    func updateUserInfo(){
+        
+        if imageChanged && userInfoChanged{
+            
+        }
+        
+        if imageChanged && !userInfoChanged{
+            
+        }
+        
+        if !imageChanged && userInfoChanged{
+            
+        }
+    }
+    
+    func updateProfileImage(){
+        guard let image = selectedImage else { return }
+        UserService.shared.
     }
     
     // MARK: - Helpers
@@ -72,6 +106,11 @@ class EditProfileController: UITableViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "キャンセル", style: .plain, target: self, action: #selector(handleCancel))
         navigationItem.leftBarButtonItem?.tintColor = .black
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "完了", style: .done, target: self, action: #selector(handleUploadProfileInfo))
+    }
+    
+    func configureImagePicker(){
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = true
     }
 
 }
@@ -104,8 +143,8 @@ extension EditProfileController{
 // MARK: - EditProfileHeaderDelegate
 
 extension EditProfileController: EditProfileHeaderDelegate{
-    func didTapChengeProfilePhoto() {
-        print("DEBUG: user is tapping didTapChangePhoto button")
+    func didTapChangeProfilePhoto() {
+        present(imagePicker, animated: true, completion: nil)
     }
 }
 
@@ -113,7 +152,31 @@ extension EditProfileController: EditProfileHeaderDelegate{
 
 extension EditProfileController: EditProfileCellDelegate{
     func updateUserInfo(_ cell: EditProfileCell) {
-        print("DEBUG: here is nothing")
+        
+        guard let viewModel = cell.viewModel else { return }
+        userInfoChanged = true
+        
+        switch viewModel.option {
+        case .fullname:
+            guard let fullname = cell.infoTextField.text else { return }
+            user.fullname = fullname
+        case .username:
+            guard let username = cell.infoTextField.text else { return }
+            user.username = username
+        case .bio:
+            user.bio = cell.bioTextView.text
+        }
+    }
+}
+
+// MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate
+
+extension EditProfileController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let image = info[.editedImage] as? UIImage else { return }
+        self.selectedImage = image
+        
+        dismiss(animated: true, completion: nil)
     }
 }
 
