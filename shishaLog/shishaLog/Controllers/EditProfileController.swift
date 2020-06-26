@@ -10,12 +10,18 @@ import UIKit
 
 private let reuseIdentifier = "EditProfileCell"
 
+protocol EditProfileControllerDelegate: class {
+    func handleLogout()
+}
+
 class EditProfileController: UITableViewController {
     
     // MARK: - Properties
     
     private var user: User
     private lazy var headerView = EditProfileHeader(user: user)
+    private let footerView = EditProfileFooter()
+    weak var delegate: EditProfileControllerDelegate?
 
     // MARK: - Lifecycle
     
@@ -54,6 +60,10 @@ class EditProfileController: UITableViewController {
         tableView.tableHeaderView = headerView
         headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 180)
         headerView.delegate = self
+        
+        footerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 100)
+        tableView.tableFooterView = footerView
+        footerView.delegate = self
     }
     
     func configureNavigationBar(){
@@ -104,6 +114,23 @@ extension EditProfileController: EditProfileHeaderDelegate{
 extension EditProfileController: EditProfileCellDelegate{
     func updateUserInfo(_ cell: EditProfileCell) {
         print("DEBUG: here is nothing")
+    }
+}
+
+// MARK: - EditProfileFooterDelegate
+
+extension EditProfileController: EditProfileFooterDelegate{
+    func handleLogout() {
+        let alert = UIAlertController(title: nil, message: "本当にログアウトしても良いですか？", preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: "ログアウト", style: .destructive, handler: { (_) in
+            self.dismiss(animated: true) {
+                self.delegate?.handleLogout()
+            }
+        }))
+        
+        alert.addAction(UIAlertAction(title: "キャンセル", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
 }
 
