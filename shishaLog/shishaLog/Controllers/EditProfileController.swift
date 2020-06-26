@@ -11,6 +11,7 @@ import UIKit
 private let reuseIdentifier = "EditProfileCell"
 
 protocol EditProfileControllerDelegate: class {
+    func controller(_ controller: EditProfileController, wantsToUpdate user: User)
     func handleLogout()
 }
 
@@ -61,7 +62,9 @@ class EditProfileController: UITableViewController {
     }
     
     @objc func handleUploadProfileInfo(){
-        
+        view.endEditing(true)
+        guard imageChanged || userInfoChanged else { return }
+        updateUserInfo()
     }
     
     // MARK: - API
@@ -69,21 +72,28 @@ class EditProfileController: UITableViewController {
     func updateUserInfo(){
         
         if imageChanged && userInfoChanged{
-            
+            UserService.shared.saveUserData(user: user) { (err, ref) in
+                self.updateProfileImage()
+            }
         }
         
         if imageChanged && !userInfoChanged{
-            
+            updateProfileImage()
         }
         
         if !imageChanged && userInfoChanged{
-            
+            UserService.shared.saveUserData(user: user) { (err, ref) in
+                self.delegate?.controller(self, wantsToUpdate: self.user)
+            }
         }
     }
     
     func updateProfileImage(){
         guard let image = selectedImage else { return }
-        UserService.shared.
+        UserService.shared.updateProfileImage(image: image) { (url) in
+            self.user.profileImageUrl = url
+            self.delegate?.controller(self, wantsToUpdate: self.user)
+        }
     }
     
     // MARK: - Helpers

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 private let reuseIdentifier = "LogCell"
 private let headerIdentifier = "ProfileHeader"
@@ -171,6 +172,27 @@ extension ProfileController: ProfileHeaderDelegate{
     
     func didSelect(filter: ProfileFilterOptions) {
         print(" DEBUG: didSelect FilterView on \(filter.description)")
+    }
+    
+    
+}
+
+extension ProfileController: EditProfileControllerDelegate{
+    func controller(_ controller: EditProfileController, wantsToUpdate user: User) {
+        controller.dismiss(animated: true, completion: nil)
+        self.user = user
+        self.collectionView.reloadData()
+    }
+    
+    func handleLogout() {
+        do {
+            try Auth.auth().signOut()
+            let nav = UINavigationController(rootViewController: LoginController())
+            nav.modalPresentationStyle = .fullScreen
+            self.present(nav, animated: true, completion: nil)
+        }catch let error{
+            print("DEBUG: Failed to sign out with error \(error.localizedDescription)")
+        }
     }
     
     
