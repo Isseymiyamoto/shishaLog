@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 private let reuseIdentifier = "LogCell"
 private let headerIdentifier = "ProfileHeader"
@@ -120,7 +121,6 @@ extension ProfileController{
         cell.log = logs[indexPath.row]
         return cell
     }
-    
 }
 
 // MARK: UICollectionViewDelegate
@@ -131,6 +131,7 @@ extension ProfileController{
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerIdentifier, for: indexPath) as! ProfileHeader
         header.user = user
+        header.delegate = self
         return header
     }
 }
@@ -148,5 +149,52 @@ extension ProfileController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width, height: 160)
     }
+    
+}
+
+// MARK: - ProfileHeaderDelegate
+
+extension ProfileController: ProfileHeaderDelegate{
+    func handleEditProfile(_ header: ProfileHeader) {
+        
+        if user.isCurrentUser {
+            let controller = EditProfileController(user: user)
+            controller.delegate = self
+            let nav = UINavigationController(rootViewController: controller)
+            nav.modalPresentationStyle = .fullScreen
+            present(nav, animated: true, completion: nil)
+        }
+        
+        else{
+            print("DEBUG: this user is not you")
+        }
+        // ユーザーがFollowing or notで分岐させる
+    }
+    
+    func didSelect(filter: ProfileFilterOptions) {
+        print(" DEBUG: didSelect FilterView on \(filter.description)")
+    }
+    
+    
+}
+
+extension ProfileController: EditProfileControllerDelegate{
+    func controller(_ controller: EditProfileController, wantsToUpdate user: User) {
+        controller.dismiss(animated: true, completion: nil)
+        self.user = user
+        self.collectionView.reloadData()
+    }
+    
+    func handleLogout() {
+        do {
+            try Auth.auth().signOut()
+            let nav = UINavigationController(rootViewController: LoginController())
+            nav.modalPresentationStyle = .fullScreen
+            self.present(nav, animated: true, completion: nil)
+        }catch let error{
+            print("DEBUG: Failed to sign out with error \(error.localizedDescription)")
+        }
+    }
+    
     
 }
