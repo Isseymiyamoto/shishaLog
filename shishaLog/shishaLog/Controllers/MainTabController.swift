@@ -9,9 +9,17 @@
 import UIKit
 import Firebase
 
+enum ActionButtonConfiguration {
+    case log
+    case spot
+}
+
+
 class MainTabController: UITabBarController{
     
     // MARK: - Properties
+    
+    private var buttonConfig: ActionButtonConfiguration = .log
     
     var user: User? {
         didSet{
@@ -71,17 +79,24 @@ class MainTabController: UITabBarController{
     // MARK: - Selectors
     
     @objc func actionButtonTapped(){
-        guard let user = user else { return }
-        let controller = UploadLogController(user: user)
-        let nav = UINavigationController(rootViewController: controller)
-        nav.modalPresentationStyle = .fullScreen
-        present(nav, animated: true)
+        if buttonConfig == .log{
+            guard let user = user else { return }
+            let controller = UploadLogController(user: user)
+            let nav = UINavigationController(rootViewController: controller)
+            nav.modalPresentationStyle = .fullScreen
+            present(nav, animated: true)
+        }
+        
+        if buttonConfig == .spot{
+            print("DEBUG: not finished")
+        }
     }
     
     
     // MARK: - Helpers
     
     func configureUI(){
+        self.delegate = self
         view.backgroundColor = .white
         
         view.addSubview(actionButton)
@@ -97,8 +112,8 @@ class MainTabController: UITabBarController{
         let explore = ExploreController()
         let nav2 = templateNavigationController(image: UIImage(systemName: "magnifyingglass"), rootViewController: explore)
         
-        let notifications = NotificationsController()
-        let nav3 = templateNavigationController(image: UIImage(systemName: "bell"), rootViewController: notifications)
+        let spot = SpotController()
+        let nav3 = templateNavigationController(image: UIImage(systemName: "location"), rootViewController: spot)
         
         let profile = ProfileController(user: user!)
         let nav4 = templateNavigationController(image: UIImage(systemName: "person"), rootViewController: profile)
@@ -113,4 +128,15 @@ class MainTabController: UITabBarController{
         return nav
     }
 
+}
+
+extension MainTabController: UITabBarControllerDelegate{
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        // firstIndex(of:) で、配列内における引数に該当する要素が出てきた最初の配列番目を返すようにする
+        // つまり、MainTabBarで定義されたviewControllersにおいてdidSelectされたviewControllerが配列の何番目かを返す
+        let index = viewControllers?.firstIndex(of: viewController)
+        let image = index == 2 ? UIImage(systemName: "location") : UIImage(systemName: "square.and.pencil")
+        actionButton.setImage(image, for: .normal)
+        buttonConfig = index == 2 ? .spot : .log
+    }
 }

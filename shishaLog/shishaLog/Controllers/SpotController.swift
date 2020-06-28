@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NotificationsController: UITableViewController {
+class SpotController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
