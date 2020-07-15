@@ -62,6 +62,7 @@ class ProfileController: UICollectionViewController {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.barStyle = .default
         navigationController?.navigationBar.isHidden = false
+        navigationController?.navigationBar.tintColor = .systemBlue
     }
     
     
@@ -147,7 +148,8 @@ extension ProfileController: UICollectionViewDelegateFlowLayout{
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 160)
+        let height:CGFloat = 200
+        return CGSize(width: view.frame.width, height: height)
     }
     
 }
