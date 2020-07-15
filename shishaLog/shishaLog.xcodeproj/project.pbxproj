@@ -35,6 +35,7 @@
 		8591BD2B24BEC3280001BEA0 /* SpotService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8591BD2A24BEC3280001BEA0 /* SpotService.swift */; };
 		8591BD2D24BEC4510001BEA0 /* UploadSpotController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8591BD2C24BEC4510001BEA0 /* UploadSpotController.swift */; };
 		8591BD2F24BECBDC0001BEA0 /* Shop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8591BD2E24BECBDC0001BEA0 /* Shop.swift */; };
+		8591BD3124BF09630001BEA0 /* ChoiceSpotController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8591BD3024BF09630001BEA0 /* ChoiceSpotController.swift */; };
 		859DF69C24A8A94200D580C6 /* LogHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859DF69B24A8A94200D580C6 /* LogHeader.swift */; };
 		859DF69E24A908A900D580C6 /* Spot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859DF69D24A908A900D580C6 /* Spot.swift */; };
 		859DF6A024AA2BF800D580C6 /* SpotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859DF69F24AA2BF800D580C6 /* SpotCell.swift */; };
@@ -83,6 +84,7 @@
 		8591BD2A24BEC3280001BEA0 /* SpotService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotService.swift; sourceTree = "<group>"; };
 		8591BD2C24BEC4510001BEA0 /* UploadSpotController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadSpotController.swift; sourceTree = "<group>"; };
 		8591BD2E24BECBDC0001BEA0 /* Shop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shop.swift; sourceTree = "<group>"; };
+		8591BD3024BF09630001BEA0 /* ChoiceSpotController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceSpotController.swift; sourceTree = "<group>"; };
 		859DF69B24A8A94200D580C6 /* LogHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogHeader.swift; sourceTree = "<group>"; };
 		859DF69D24A908A900D580C6 /* Spot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spot.swift; sourceTree = "<group>"; };
 		859DF69F24AA2BF800D580C6 /* SpotCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotCell.swift; sourceTree = "<group>"; };
@@ -204,7 +206,7 @@
 				85D8EA19248E74CE002AFEC1 /* UploadLogController.swift */,
 				85C1697D24A3277700BD2EE1 /* EditProfileController.swift */,
 				85EA102624A7BBB000397C46 /* LogController.swift */,
-				8591BD2C24BEC4510001BEA0 /* UploadSpotController.swift */,
+				8591BD3224BF096A0001BEA0 /* Spot */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -237,6 +239,15 @@
 				851AAA8E247ED260006030D1 /* LoginController.swift */,
 			);
 			path = Authentication;
+			sourceTree = "<group>";
+		};
+		8591BD3224BF096A0001BEA0 /* Spot */ = {
+			isa = PBXGroup;
+			children = (
+				8591BD2C24BEC4510001BEA0 /* UploadSpotController.swift */,
+				8591BD3024BF09630001BEA0 /* ChoiceSpotController.swift */,
+			);
+			path = Spot;
 			sourceTree = "<group>";
 		};
 		85EB9A52249BBC9B00C03E49 /* Profile */ = {
@@ -382,6 +393,7 @@
 				851AAA7E247E96E2006030D1 /* Constants.swift in Sources */,
 				854ACFBC24A62C38000C880F /* EditProfileFooter.swift in Sources */,
 				851AAA87247E9E29006030D1 /* ExploreController.swift in Sources */,
+				8591BD3124BF09630001BEA0 /* ChoiceSpotController.swift in Sources */,
 				85E0F57B24A4D5A200FBFBF3 /* EditProfileViewModel.swift in Sources */,
 				851AAA7A247E965E006030D1 /* Utilities.swift in Sources */,
 				85D8EA1C248E81D5002AFEC1 /* LogService.swift in Sources */,

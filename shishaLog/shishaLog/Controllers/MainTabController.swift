@@ -69,10 +69,8 @@ class MainTabController: UITabBarController{
                 self.present(nav, animated: true, completion: nil)
             }
         }else{
-//            configureViewControllers()
             fetchUser()
             configureUI()
-            
         }
     }
     
