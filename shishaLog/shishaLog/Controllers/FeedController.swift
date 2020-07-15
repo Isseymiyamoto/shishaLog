@@ -94,11 +94,6 @@ class FeedController: UICollectionViewController {
         refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
         collectionView.refreshControl = refreshControl
     }
-
-    
-
-    
-
 }
 
 // MARK: UICollectionViewDelegate / DataSource

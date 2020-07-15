@@ -112,7 +112,7 @@ class MainTabController: UITabBarController{
         let explore = ExploreController()
         let nav2 = templateNavigationController(image: UIImage(systemName: "magnifyingglass"), rootViewController: explore)
         
-        let spot = SpotFeedController(collectionViewLayout: UICollectionViewFlowLayout())
+        let spot = SpotFeedController(user: user!)
         let nav3 = templateNavigationController(image: UIImage(systemName: "location"), rootViewController: spot)
         
         let profile = ProfileController(user: user!)
