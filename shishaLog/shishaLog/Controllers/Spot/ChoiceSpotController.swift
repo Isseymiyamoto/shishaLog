@@ -112,4 +112,15 @@ extension ChoiceSpotController{
 
 extension ChoiceSpotController{
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.section {
+        case 0:
+            let controller = ShopRegistrationController()
+            let nav = UINavigationController(rootViewController: controller)
+            nav.modalPresentationStyle = .fullScreen
+            present(nav, animated: true)
+        default:
+            return
+        }
+    }
 }

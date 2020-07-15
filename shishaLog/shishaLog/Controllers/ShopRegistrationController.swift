@@ -16,9 +16,16 @@ class ShopRegistrationController: UIViewController{
         let label = UILabel()
         label.text = "シーシャ情報を登録"
         label.textAlignment = .center
-        label.font = UIFont.boldSystemFont(ofSize: 24)
+        label.font = UIFont.boldSystemFont(ofSize: 18)
         return label
     }()
+    
+    private let textView: UITextView = {
+        let tv = UITextView()
+        return tv
+    }()
+    
+    
     
     
     // MARK: - Lifecycle
@@ -29,16 +36,34 @@ class ShopRegistrationController: UIViewController{
         configureUI()
     }
     
+    // MARK: - Selectors
+    
+    @objc func handleCancel(){
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     
     // MARK: - Helpers
     
+    func configureNavigationBar(){
+        navigationController?.navigationBar.barStyle = .default
+        navigationController?.navigationBar.backgroundColor = .clear
+        navigationController?.navigationBar.shadowImage = UIImage()
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(handleCancel))
+    }
+    
     func configureUI(){
         view.backgroundColor = .white
+        configureNavigationBar()
         
         view.addSubview(titleLabel)
         titleLabel.centerX(inView: view)
-        titleLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 64, paddingLeft: 16, paddingRight: 16)
+        titleLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 32, paddingLeft: 16, paddingRight: 16)
         
+        view.addSubview(textView)
+        textView.centerX(inView: self)
+        textView.anchor(top: titleLabel.bottomAnchor, left: view.leftAnchor, right: )
     }
     
     
