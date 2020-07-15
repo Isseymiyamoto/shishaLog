@@ -118,8 +118,6 @@ class LogCell: UICollectionViewCell {
         topInfoStack.distribution = .equalSpacing
         topInfoStack.alignment = .center
         
-        
-//        let rightSideStack = UIStackView(arrangedSubviews: [topInfoStack, locationLabel, mixLabel, feelingLabel])
         let rightSideStack = UIStackView(arrangedSubviews: [topInfoStack, locationLabel, mixTextView, feelingLabel])
         rightSideStack.axis = .vertical
         rightSideStack.spacing = 12
@@ -134,7 +132,7 @@ class LogCell: UICollectionViewCell {
         stack.alignment = .leading
         
         addSubview(stack)
-        stack.anchor(top: topAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 4, paddingLeft: 12, paddingRight: 12)
+        stack.anchor(top: topAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 12, paddingLeft: 12, paddingRight: 12)
         
         addSubview(underlineView)
         underlineView.anchor(left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, height: 1)

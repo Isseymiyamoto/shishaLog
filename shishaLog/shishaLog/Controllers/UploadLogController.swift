@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class UploadLogController: UIViewController {
     
@@ -100,6 +101,9 @@ class UploadLogController: UIViewController {
     
     // MARK: - API
     
+    func uploadLog(location: String, mix: String, feeling: String, completion: @escaping((Error?, DatabaseReference) -> Void)){
+        LogService.shared.uploadLog(location: location, mix: mix, feeling: feeling, completion: completion)
+    }
     
     
     
@@ -110,13 +114,13 @@ class UploadLogController: UIViewController {
         guard let mix = mixTextView.text else { return }
         guard let feeling = feelTextView.text else { return }
         
-        LogService.shared.uploadLog(location: location, mix: mix, feeling: feeling) { (error, ref) in
+        uploadLog(location: location, mix: mix, feeling: feeling) { (error, ref) in
             if let error = error {
-                print(error.localizedDescription)
+                print("DEBUG: error is \(error.localizedDescription)")
                 return
             }
             
-            print("DEBUG: successfullu uploaded your log")
+            print("DEBUG: successfully uploaded your log")
             self.dismiss(animated: true, completion: nil)
         }
     }
