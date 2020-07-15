@@ -45,9 +45,13 @@ class FeedController: UICollectionViewController {
     // MARK: - API
     
     func fetchLogs(){
+        collectionView.refreshControl?.beginRefreshing()
+        
         LogService.shared.fetchLogs { (logs) in
             self.logs = logs.sorted(by: { $0.timestamp  > $1.timestamp })
             self.checkIfUserLikedLogs()
+            
+            self.collectionView.refreshControl?.endRefreshing()
         }
     }
     
@@ -63,22 +67,11 @@ class FeedController: UICollectionViewController {
         }
     }
     
-//    func handleLogout() {
-//        do {
-//            try Auth.auth().signOut()
-//            let nav = UINavigationController(rootViewController: LoginController())
-//            nav.modalPresentationStyle = .fullScreen
-//            self.present(nav, animated: true, completion: nil)
-//        }catch let error{
-//            print("DEBUG: Failed to sign out with error \(error.localizedDescription)")
-//        }
-//    }
-    
-    
-    
-    
     // MARK: - Selectors
     
+    @objc func handleRefresh(){
+        fetchLogs()
+    }
     
     
     // MARK: - Helpers
@@ -96,7 +89,10 @@ class FeedController: UICollectionViewController {
         imageView.setDimensions(width: 32, height: 32)
         navigationItem.titleView = imageView
         
-        
+        // refresh Control
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+        collectionView.refreshControl = refreshControl
     }
 
     
@@ -131,13 +127,15 @@ extension FeedController{
 extension FeedController: UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 160)
+        let height: CGFloat = 200
+        return CGSize(width: view.frame.width, height: height)
     }
  
     
 }
 
 // MARK: - LogCellDelegate
+
 extension FeedController: LogCellDelegate{
     func handleLikeButtonTapped(_ cell: LogCell) {
         guard let log = cell.log else { return }

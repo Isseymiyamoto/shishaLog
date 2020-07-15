@@ -58,14 +58,27 @@ class LogCell: UICollectionViewCell {
         label.font = UIFont.boldSystemFont(ofSize: 16)
         return label
     }()
+//
+//    private let mixLabel: UILabel = {
+//        let label = UILabel()
+//        label.numberOfLines = 0
+//        label.text = "レモンドロップ4g\nレモン2g\nバニラ2g"
+//        label.font = UIFont.systemFont(ofSize: 14)
+//        label.backgroundColor = .shishaColor
+//        return label
+//    }()
     
-    private let mixLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 0
-        label.text = "レモンドロップ4g\nレモン2g\nバニラ2g"
-        label.font = UIFont.systemFont(ofSize: 14)
-        label.backgroundColor = .shishaColor
-        return label
+    private let mixTextView: UITextView = {
+        let tv = UITextView()
+        tv.text = "レモンドロップ4g\nレモン2g\nバニラ2g"
+        tv.font = UIFont.boldSystemFont(ofSize: 14)
+        tv.textColor = .white
+        tv.isEditable = false
+        tv.isScrollEnabled = false
+        tv.backgroundColor = .shishaColor
+        tv.layer.cornerRadius = 4
+        tv.backgroundColor?.withAlphaComponent(0.1)
+        return tv
     }()
     
     private let feelingLabel: UILabel = {
@@ -106,7 +119,8 @@ class LogCell: UICollectionViewCell {
         topInfoStack.alignment = .center
         
         
-        let rightSideStack = UIStackView(arrangedSubviews: [topInfoStack, locationLabel, mixLabel, feelingLabel])
+//        let rightSideStack = UIStackView(arrangedSubviews: [topInfoStack, locationLabel, mixLabel, feelingLabel])
+        let rightSideStack = UIStackView(arrangedSubviews: [topInfoStack, locationLabel, mixTextView, feelingLabel])
         rightSideStack.axis = .vertical
         rightSideStack.spacing = 12
         rightSideStack.distribution = .fillProportionally
@@ -120,7 +134,7 @@ class LogCell: UICollectionViewCell {
         stack.alignment = .leading
         
         addSubview(stack)
-        stack.anchor(top: topAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 12, paddingLeft: 12, paddingRight: 12)
+        stack.anchor(top: topAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 4, paddingLeft: 12, paddingRight: 12)
         
         addSubview(underlineView)
         underlineView.anchor(left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, height: 1)
@@ -154,7 +168,7 @@ class LogCell: UICollectionViewCell {
         // location text
         locationLabel.text = "@" + log.location
         // mix text
-        mixLabel.text = log.mix
+        mixTextView.text = log.mix
         // feeling text
         feelingLabel.text = log.feeling
         

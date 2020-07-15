@@ -8,9 +8,15 @@
 
 import UIKit
 
+protocol LogHeaderDelegate: class {
+    func handleProfileImageTapped(_ jumpToUser: User)
+}
+
 class LogHeader: UICollectionReusableView {
     
     // MARK: - Properties
+    
+    weak var delegate: LogHeaderDelegate?
     
     var log: Log? {
         didSet { print("DEBUG: successfully set up the log ") }
@@ -105,7 +111,8 @@ class LogHeader: UICollectionReusableView {
     // MARK: - Selectors
     
     @objc func handleProfileImageTapped(){
-        
+        guard let user = log?.user else { return }
+        delegate?.handleProfileImageTapped(user)
     }
     
     // MARK: - Helpers
