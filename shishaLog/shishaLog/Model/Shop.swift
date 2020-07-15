@@ -12,16 +12,24 @@ import Foundation
 struct Shop {
     
     let shopID: String
+    let shopName: String
     let address: String
-    let price: Int
-    let comment: String
+    var shopImageUrl: URL?
+    var phoneNumber: String?
     
     init(shopID: String, dictionary: [String: Any]) {
         self.shopID = shopID
         
         self.address = dictionary["address"] as? String ?? ""
-        self.price = dictionary["price"] as? Int ?? 0
-        self.comment = dictionary["comment"] as? String ?? ""
+        self.shopName = dictionary["shopName"] as? String ?? ""
+        
+        if let shopImageUrl = dictionary["shopImageUrl"] as? String {
+            self.shopImageUrl = URL(string: shopImageUrl)
+        }
+        
+        if let phoneNumber = dictionary["phoneNumber"] as? String{
+            self.phoneNumber = phoneNumber
+        }
     }
     
 }

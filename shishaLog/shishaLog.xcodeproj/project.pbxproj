@@ -32,6 +32,8 @@
 		8563E28E2498FD1F008F9103 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8563E28D2498FD1F008F9103 /* Log.swift */; };
 		8563E2902499DCC9008F9103 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8563E28F2499DCC9008F9103 /* UserCell.swift */; };
 		8563E2922499FFC4008F9103 /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8563E2912499FFC4008F9103 /* ProfileHeader.swift */; };
+		8571AAF024BF43030000C2F6 /* ShopService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8571AAEF24BF43030000C2F6 /* ShopService.swift */; };
+		8571AAF224BF43F60000C2F6 /* ShopRegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8571AAF124BF43F60000C2F6 /* ShopRegistrationController.swift */; };
 		8591BD2B24BEC3280001BEA0 /* SpotService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8591BD2A24BEC3280001BEA0 /* SpotService.swift */; };
 		8591BD2D24BEC4510001BEA0 /* UploadSpotController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8591BD2C24BEC4510001BEA0 /* UploadSpotController.swift */; };
 		8591BD2F24BECBDC0001BEA0 /* Shop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8591BD2E24BECBDC0001BEA0 /* Shop.swift */; };
@@ -82,6 +84,8 @@
 		8563E28D2498FD1F008F9103 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		8563E28F2499DCC9008F9103 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		8563E2912499FFC4008F9103 /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
+		8571AAEF24BF43030000C2F6 /* ShopService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopService.swift; sourceTree = "<group>"; };
+		8571AAF124BF43F60000C2F6 /* ShopRegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopRegistrationController.swift; sourceTree = "<group>"; };
 		8591BD2A24BEC3280001BEA0 /* SpotService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotService.swift; sourceTree = "<group>"; };
 		8591BD2C24BEC4510001BEA0 /* UploadSpotController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadSpotController.swift; sourceTree = "<group>"; };
 		8591BD2E24BECBDC0001BEA0 /* Shop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shop.swift; sourceTree = "<group>"; };
@@ -210,6 +214,7 @@
 				85C1697D24A3277700BD2EE1 /* EditProfileController.swift */,
 				85EA102624A7BBB000397C46 /* LogController.swift */,
 				8591BD3224BF096A0001BEA0 /* Spot */,
+				8571AAF124BF43F60000C2F6 /* ShopRegistrationController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -221,6 +226,7 @@
 				851AAA92247ED61D006030D1 /* AuthService.swift */,
 				85D8EA1B248E81D5002AFEC1 /* LogService.swift */,
 				8591BD2A24BEC3280001BEA0 /* SpotService.swift */,
+				8571AAEF24BF43030000C2F6 /* ShopService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -397,6 +403,7 @@
 				854ACFBC24A62C38000C880F /* EditProfileFooter.swift in Sources */,
 				851AAA87247E9E29006030D1 /* ExploreController.swift in Sources */,
 				8591BD3124BF09630001BEA0 /* ChoiceSpotController.swift in Sources */,
+				8571AAF024BF43030000C2F6 /* ShopService.swift in Sources */,
 				85E0F57B24A4D5A200FBFBF3 /* EditProfileViewModel.swift in Sources */,
 				851AAA7A247E965E006030D1 /* Utilities.swift in Sources */,
 				85D8EA1C248E81D5002AFEC1 /* LogService.swift in Sources */,
@@ -414,6 +421,7 @@
 				85EB9A51249BBADA00C03E49 /* ProfileFilterView.swift in Sources */,
 				859DF69E24A908A900D580C6 /* Spot.swift in Sources */,
 				851AAA62247E92AC006030D1 /* SceneDelegate.swift in Sources */,
+				8571AAF224BF43F60000C2F6 /* ShopRegistrationController.swift in Sources */,
 				851AAA8B247E9EC5006030D1 /* SpotFeedController.swift in Sources */,
 				859DF69C24A8A94200D580C6 /* LogHeader.swift in Sources */,
 				85EB9A54249BBCBF00C03E49 /* ProfileFilterCell.swift in Sources */,

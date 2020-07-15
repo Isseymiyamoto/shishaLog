@@ -72,7 +72,7 @@ extension ChoiceSpotController{
         switch indexPath.section {
         case 0:
             let cell = UITableViewCell(style: .default, reuseIdentifier: identifier)
-            cell.textLabel!.text = "新しいシーシャ家を追加する"
+            cell.textLabel!.text = "新しいシーシャ屋を追加する"
             cell.textLabel?.textAlignment = .center
             cell.textLabel?.textColor = .systemBlue
             cell.textLabel?.font = UIFont.systemFont(ofSize: 14)
