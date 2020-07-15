@@ -88,7 +88,11 @@ class MainTabController: UITabBarController{
         }
         
         if buttonConfig == .spot{
-            print("DEBUG: not finished")
+            guard let user = user else { return }
+            let controller = UploadSpotController(user: user)
+            let nav = UINavigationController(rootViewController: controller)
+            nav.modalPresentationStyle = .fullScreen
+            present(nav, animated: true)
         }
     }
     
@@ -112,7 +116,7 @@ class MainTabController: UITabBarController{
         let explore = ExploreController()
         let nav2 = templateNavigationController(image: UIImage(systemName: "magnifyingglass"), rootViewController: explore)
         
-        let spot = SpotFeedController(user: user!)
+        let spot = SpotFeedController(collectionViewLayout: UICollectionViewFlowLayout())
         let nav3 = templateNavigationController(image: UIImage(systemName: "location"), rootViewController: spot)
         
         let profile = ProfileController(user: user!)
