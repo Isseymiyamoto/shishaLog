@@ -73,6 +73,7 @@ extension ChoiceSpotController{
         case 0:
             let cell = UITableViewCell(style: .default, reuseIdentifier: identifier)
             cell.textLabel!.text = "新しいシーシャ家を追加する"
+            cell.textLabel?.textAlignment = .center
             cell.textLabel?.textColor = .systemBlue
             cell.textLabel?.font = UIFont.systemFont(ofSize: 14)
             return cell
@@ -91,7 +92,7 @@ extension ChoiceSpotController{
         case 0:
             return 1
         default:
-            return 10
+            return 20
         }
     }
     
