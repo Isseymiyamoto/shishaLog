@@ -87,7 +87,7 @@ class MainTabController: UITabBarController{
         
         if buttonConfig == .spot{
             guard let user = user else { return }
-            let controller = UploadSpotController(user: user)
+            let controller = ChoiceSpotController(user: user)
             let nav = UINavigationController(rootViewController: controller)
             nav.modalPresentationStyle = .fullScreen
             present(nav, animated: true)

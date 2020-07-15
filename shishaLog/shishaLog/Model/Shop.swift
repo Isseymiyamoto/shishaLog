@@ -16,4 +16,12 @@ struct Shop {
     let price: Int
     let comment: String
     
+    init(shopID: String, dictionary: [String: Any]) {
+        self.shopID = shopID
+        
+        self.address = dictionary["address"] as? String ?? ""
+        self.price = dictionary["price"] as? Int ?? 0
+        self.comment = dictionary["comment"] as? String ?? ""
+    }
+    
 }
