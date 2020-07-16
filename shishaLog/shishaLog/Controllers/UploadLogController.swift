@@ -17,7 +17,7 @@ class UploadLogController: UIViewController {
 
     private lazy var actionButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Logする", for: .normal)
+        button.setTitle("投稿する", for: .normal)
         button.titleLabel?.textAlignment = .center
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         button.setTitleColor(.white, for: .normal)
@@ -51,7 +51,7 @@ class UploadLogController: UIViewController {
     
     private let logButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Logする", for: .normal)
+        button.setTitle("投稿する", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .shishaColor

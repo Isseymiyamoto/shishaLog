@@ -69,10 +69,8 @@ class MainTabController: UITabBarController{
                 self.present(nav, animated: true, completion: nil)
             }
         }else{
-//            configureViewControllers()
             fetchUser()
             configureUI()
-            
         }
     }
     
@@ -88,7 +86,11 @@ class MainTabController: UITabBarController{
         }
         
         if buttonConfig == .spot{
-            print("DEBUG: not finished")
+            guard let user = user else { return }
+            let controller = ChoiceSpotController(user: user)
+            let nav = UINavigationController(rootViewController: controller)
+            nav.modalPresentationStyle = .fullScreen
+            present(nav, animated: true)
         }
     }
     

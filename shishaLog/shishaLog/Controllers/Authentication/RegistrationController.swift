@@ -49,23 +49,23 @@ class RegistrationController: UIViewController{
     }()
     
     private let emailTextField: UITextField = {
-        let tf = Utilities().textField(withPlaceholder: "Eメール")
+        let tf = Utilities().textField(withPlaceholder: "Eメール", withColor: .white)
         return tf
     }()
     
     private let passwordTextField: UITextField = {
-        let tf = Utilities().textField(withPlaceholder: "パスワード")
+        let tf = Utilities().textField(withPlaceholder: "パスワード", withColor: .white)
         tf.isSecureTextEntry = true
         return tf
     }()
     
     private let fullnameTextField: UITextField = {
-        let tf = Utilities().textField(withPlaceholder: "お名前")
+        let tf = Utilities().textField(withPlaceholder: "お名前", withColor: .white)
         return tf
     }()
     
     private let usernameTextField: UITextField = {
-        let tf = Utilities().textField(withPlaceholder: "ユーザー名")
+        let tf = Utilities().textField(withPlaceholder: "ユーザー名", withColor: .white)
         return tf
     }()
     

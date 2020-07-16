@@ -23,23 +23,23 @@ class LoginController: UIViewController {
     
     private lazy var emailContainerView: UIView = {
         let image = UIImage(systemName: "person")
-        let view = Utilities().inputContainerView(withImage: image!, textField: emailTextField)
+        let view = Utilities().inputContainerView(withImage: image!, textField: emailTextField, withColor: .white)
         return view
     }()
     
     private lazy var passwordContainerView: UIView = {
         let image = UIImage(systemName: "lock")
-        let view = Utilities().inputContainerView(withImage: image!, textField: passwordTextField)
+        let view = Utilities().inputContainerView(withImage: image!, textField: passwordTextField, withColor: .white)
         return view
     }()
     
     private let emailTextField: UITextField = {
-        let tf = Utilities().textField(withPlaceholder: "Eメール")
+        let tf = Utilities().textField(withPlaceholder: "Eメール", withColor: .white)
         return tf
     }()
     
     private let passwordTextField: UITextField = {
-        let tf = Utilities().textField(withPlaceholder: "パスワード")
+        let tf = Utilities().textField(withPlaceholder: "パスワード", withColor: .white)
         tf.isSecureTextEntry = true
         return tf
     }()
@@ -79,7 +79,7 @@ class LoginController: UIViewController {
     
     @objc func handleLogin(){
         guard let email = emailTextField.text else { return }
-        guard let password = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
         
         AuthService.shared.loginUser(withEmail: email, password: password) { (result, error) in
             if let error = error{

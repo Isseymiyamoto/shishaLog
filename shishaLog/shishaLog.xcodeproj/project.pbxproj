@@ -32,9 +32,17 @@
 		8563E28E2498FD1F008F9103 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8563E28D2498FD1F008F9103 /* Log.swift */; };
 		8563E2902499DCC9008F9103 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8563E28F2499DCC9008F9103 /* UserCell.swift */; };
 		8563E2922499FFC4008F9103 /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8563E2912499FFC4008F9103 /* ProfileHeader.swift */; };
+		8571AAF024BF43030000C2F6 /* ShopService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8571AAEF24BF43030000C2F6 /* ShopService.swift */; };
+		8571AAF224BF43F60000C2F6 /* ShopRegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8571AAF124BF43F60000C2F6 /* ShopRegistrationController.swift */; };
+		8571AAF424C02B270000C2F6 /* ShopRegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8571AAF324C02B270000C2F6 /* ShopRegistrationViewModel.swift */; };
+		8591BD2B24BEC3280001BEA0 /* SpotService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8591BD2A24BEC3280001BEA0 /* SpotService.swift */; };
+		8591BD2D24BEC4510001BEA0 /* UploadSpotController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8591BD2C24BEC4510001BEA0 /* UploadSpotController.swift */; };
+		8591BD2F24BECBDC0001BEA0 /* Shop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8591BD2E24BECBDC0001BEA0 /* Shop.swift */; };
+		8591BD3124BF09630001BEA0 /* ChoiceSpotController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8591BD3024BF09630001BEA0 /* ChoiceSpotController.swift */; };
 		859DF69C24A8A94200D580C6 /* LogHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859DF69B24A8A94200D580C6 /* LogHeader.swift */; };
 		859DF69E24A908A900D580C6 /* Spot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859DF69D24A908A900D580C6 /* Spot.swift */; };
 		859DF6A024AA2BF800D580C6 /* SpotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859DF69F24AA2BF800D580C6 /* SpotCell.swift */; };
+		85BF5BCB24BF0D65001BFD0B /* ChoiceSpotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BF5BCA24BF0D65001BFD0B /* ChoiceSpotCell.swift */; };
 		85C1697E24A3277700BD2EE1 /* EditProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C1697D24A3277700BD2EE1 /* EditProfileController.swift */; };
 		85C1698024A33BC500BD2EE1 /* EditProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C1697F24A33BC500BD2EE1 /* EditProfileHeader.swift */; };
 		85C1698224A33BD400BD2EE1 /* EditProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C1698124A33BD400BD2EE1 /* EditProfileCell.swift */; };
@@ -77,9 +85,17 @@
 		8563E28D2498FD1F008F9103 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		8563E28F2499DCC9008F9103 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		8563E2912499FFC4008F9103 /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
+		8571AAEF24BF43030000C2F6 /* ShopService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopService.swift; sourceTree = "<group>"; };
+		8571AAF124BF43F60000C2F6 /* ShopRegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopRegistrationController.swift; sourceTree = "<group>"; };
+		8571AAF324C02B270000C2F6 /* ShopRegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopRegistrationViewModel.swift; sourceTree = "<group>"; };
+		8591BD2A24BEC3280001BEA0 /* SpotService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotService.swift; sourceTree = "<group>"; };
+		8591BD2C24BEC4510001BEA0 /* UploadSpotController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadSpotController.swift; sourceTree = "<group>"; };
+		8591BD2E24BECBDC0001BEA0 /* Shop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shop.swift; sourceTree = "<group>"; };
+		8591BD3024BF09630001BEA0 /* ChoiceSpotController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceSpotController.swift; sourceTree = "<group>"; };
 		859DF69B24A8A94200D580C6 /* LogHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogHeader.swift; sourceTree = "<group>"; };
 		859DF69D24A908A900D580C6 /* Spot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spot.swift; sourceTree = "<group>"; };
 		859DF69F24AA2BF800D580C6 /* SpotCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotCell.swift; sourceTree = "<group>"; };
+		85BF5BCA24BF0D65001BFD0B /* ChoiceSpotCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceSpotCell.swift; sourceTree = "<group>"; };
 		85C1697D24A3277700BD2EE1 /* EditProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileController.swift; sourceTree = "<group>"; };
 		85C1697F24A33BC500BD2EE1 /* EditProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileHeader.swift; sourceTree = "<group>"; };
 		85C1698124A33BD400BD2EE1 /* EditProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileCell.swift; sourceTree = "<group>"; };
@@ -162,6 +178,7 @@
 				8563E28F2499DCC9008F9103 /* UserCell.swift */,
 				859DF69B24A8A94200D580C6 /* LogHeader.swift */,
 				859DF69F24AA2BF800D580C6 /* SpotCell.swift */,
+				85BF5BCA24BF0D65001BFD0B /* ChoiceSpotCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -171,6 +188,7 @@
 			children = (
 				85417CA6249CBD0400FDFDC8 /* ProfileHeaderViewModel.swift */,
 				85E0F57A24A4D5A200FBFBF3 /* EditProfileViewModel.swift */,
+				8571AAF324C02B270000C2F6 /* ShopRegistrationViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -181,6 +199,7 @@
 				85D8EA1D248F363E002AFEC1 /* User.swift */,
 				8563E28D2498FD1F008F9103 /* Log.swift */,
 				859DF69D24A908A900D580C6 /* Spot.swift */,
+				8591BD2E24BECBDC0001BEA0 /* Shop.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -197,6 +216,8 @@
 				85D8EA19248E74CE002AFEC1 /* UploadLogController.swift */,
 				85C1697D24A3277700BD2EE1 /* EditProfileController.swift */,
 				85EA102624A7BBB000397C46 /* LogController.swift */,
+				8591BD3224BF096A0001BEA0 /* Spot */,
+				8571AAF124BF43F60000C2F6 /* ShopRegistrationController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -207,6 +228,8 @@
 				851AAA90247ED5AE006030D1 /* UserService.swift */,
 				851AAA92247ED61D006030D1 /* AuthService.swift */,
 				85D8EA1B248E81D5002AFEC1 /* LogService.swift */,
+				8591BD2A24BEC3280001BEA0 /* SpotService.swift */,
+				8571AAEF24BF43030000C2F6 /* ShopService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -228,6 +251,15 @@
 				851AAA8E247ED260006030D1 /* LoginController.swift */,
 			);
 			path = Authentication;
+			sourceTree = "<group>";
+		};
+		8591BD3224BF096A0001BEA0 /* Spot */ = {
+			isa = PBXGroup;
+			children = (
+				8591BD2C24BEC4510001BEA0 /* UploadSpotController.swift */,
+				8591BD3024BF09630001BEA0 /* ChoiceSpotController.swift */,
+			);
+			path = Spot;
 			sourceTree = "<group>";
 		};
 		85EB9A52249BBC9B00C03E49 /* Profile */ = {
@@ -373,12 +405,16 @@
 				851AAA7E247E96E2006030D1 /* Constants.swift in Sources */,
 				854ACFBC24A62C38000C880F /* EditProfileFooter.swift in Sources */,
 				851AAA87247E9E29006030D1 /* ExploreController.swift in Sources */,
+				8591BD3124BF09630001BEA0 /* ChoiceSpotController.swift in Sources */,
+				8571AAF024BF43030000C2F6 /* ShopService.swift in Sources */,
 				85E0F57B24A4D5A200FBFBF3 /* EditProfileViewModel.swift in Sources */,
+				8571AAF424C02B270000C2F6 /* ShopRegistrationViewModel.swift in Sources */,
 				851AAA7A247E965E006030D1 /* Utilities.swift in Sources */,
 				85D8EA1C248E81D5002AFEC1 /* LogService.swift in Sources */,
 				85EA486E248A7EC10086A140 /* LogCell.swift in Sources */,
 				85C1698024A33BC500BD2EE1 /* EditProfileHeader.swift in Sources */,
 				859DF6A024AA2BF800D580C6 /* SpotCell.swift in Sources */,
+				8591BD2D24BEC4510001BEA0 /* UploadSpotController.swift in Sources */,
 				851AAA80247E98DC006030D1 /* MainTabController.swift in Sources */,
 				851AAA91247ED5AE006030D1 /* UserService.swift in Sources */,
 				85417CA7249CBD0400FDFDC8 /* ProfileHeaderViewModel.swift in Sources */,
@@ -389,9 +425,12 @@
 				85EB9A51249BBADA00C03E49 /* ProfileFilterView.swift in Sources */,
 				859DF69E24A908A900D580C6 /* Spot.swift in Sources */,
 				851AAA62247E92AC006030D1 /* SceneDelegate.swift in Sources */,
+				8571AAF224BF43F60000C2F6 /* ShopRegistrationController.swift in Sources */,
 				851AAA8B247E9EC5006030D1 /* SpotFeedController.swift in Sources */,
 				859DF69C24A8A94200D580C6 /* LogHeader.swift in Sources */,
 				85EB9A54249BBCBF00C03E49 /* ProfileFilterCell.swift in Sources */,
+				8591BD2F24BECBDC0001BEA0 /* Shop.swift in Sources */,
+				85BF5BCB24BF0D65001BFD0B /* ChoiceSpotCell.swift in Sources */,
 				851AAA7C247E9685006030D1 /* Extensions.swift in Sources */,
 				85D8EA1E248F363E002AFEC1 /* User.swift in Sources */,
 				85C1697E24A3277700BD2EE1 /* EditProfileController.swift in Sources */,
@@ -400,6 +439,7 @@
 				851AAA85247E9DD0006030D1 /* FeedController.swift in Sources */,
 				851AAA93247ED61D006030D1 /* AuthService.swift in Sources */,
 				85D8EA1A248E74CE002AFEC1 /* UploadLogController.swift in Sources */,
+				8591BD2B24BEC3280001BEA0 /* SpotService.swift in Sources */,
 				8563E2902499DCC9008F9103 /* UserCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
