@@ -10,14 +10,14 @@ import UIKit
 
 class Utilities{
     
-    func inputContainerView(withImage image: UIImage, textField: UITextField) -> UIView{
+    func inputContainerView(withImage image: UIImage, textField: UITextField, withColor color: UIColor = .white) -> UIView{
         let view = UIView()
         let iv = UIImageView()
         view.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
         iv.image = image
         // test
-        iv.tintColor = .white
+        iv.tintColor = color
         view.addSubview(iv)
         iv.anchor(left: view.leftAnchor, bottom: view.bottomAnchor, paddingLeft: 8, paddingBottom: 8)
         iv.setDimensions(width: 24, height: 24)
@@ -26,18 +26,18 @@ class Utilities{
         textField.anchor(left: iv.rightAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingLeft: 8, paddingBottom: 8)
         
         let dividerView = UIView()
-        dividerView.backgroundColor = .white
+        dividerView.backgroundColor = color
         view.addSubview(dividerView)
         dividerView.anchor(left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingLeft: 8, height: 1)
         
         return view
     }
     
-    func textField(withPlaceholder placeholder: String) -> UITextField{
+    func textField(withPlaceholder placeholder: String, withColor textColor: UIColor = .white, attributedTextColor: UIColor = .white) -> UITextField{
         let tf = UITextField()
-        tf.textColor = .white
+        tf.textColor = textColor
         tf.font = UIFont.systemFont(ofSize: 16)
-        tf.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        tf.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor: attributedTextColor])
         return tf
     }
     

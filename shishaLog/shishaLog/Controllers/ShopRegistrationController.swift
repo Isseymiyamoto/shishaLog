@@ -8,9 +8,16 @@
 
 import UIKit
 
+protocol ShopRegistrationProtocol {
+    func checkFormStatus()
+}
+
+
 class ShopRegistrationController: UIViewController{
     
     // MARK: - Properties
+    
+    private var viewModel = ShopRegistrationViewModel()
     
     private let titleImage: UIImageView = {
         let iv = UIImageView(image: UIImage(systemName: "pencil.circle"))
@@ -29,7 +36,7 @@ class ShopRegistrationController: UIViewController{
     }()
    
     private let imagePicker = UIImagePickerController()
-    private var profileImage: UIImage?
+    private var shopImage: UIImage?
     
     private let plusPhotoButton: UIButton = {
         let button = UIButton(type: .system)
@@ -41,25 +48,39 @@ class ShopRegistrationController: UIViewController{
     }()
     
     private lazy var shopNameContainerView: UIView = {
-        let image = UIImage(systemName: "")
-        let view = Utilities().inputContainerView(withImage: image!, textField: shopNameTextField)
+        let image = UIImage(systemName: "house")
+        let view = Utilities().inputContainerView(withImage: image!, textField: shopNameTextField, withColor: .systemGray)
         return view
     }()
     
     private lazy var shopAddressContainerView: UIView = {
-        let image = UIImage(systemName: "")
-        let view = Utilities().inputContainerView(withImage: image!, textField: shopAddressTextField)
+        let image = UIImage(systemName: "mappin.and.ellipse")
+        let view = Utilities().inputContainerView(withImage: image!, textField: shopAddressTextField, withColor: .systemGray)
         return view
     }()
     
-    private let shopAddressTextField: UITextField = {
-        let tf = Utilities().textField(withPlaceholder: "住所")
+    private let shopNameTextField: UITextField = {
+        let tf = Utilities().textField(withPlaceholder: "ショップ名", withColor: .black, attributedTextColor: .systemGray)
         return tf
     }()
     
-    private let shopNameTextField: UITextField = {
-        let tf = Utilities().textField(withPlaceholder: "ショップ名")
+    private let shopAddressTextField: UITextField = {
+        let tf = Utilities().textField(withPlaceholder: "住所", withColor: .black, attributedTextColor: .systemGray)
         return tf
+    }()
+    
+    private let registrationButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("登録する", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+//        button.backgroundColor = .shishaColor
+        button.backgroundColor = .systemGray
+        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        button.layer.cornerRadius = 5
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        button.addTarget(self, action: #selector(handleRegistration), for: .touchUpInside)
+        button.isEnabled = false
+        return button
     }()
  
     
@@ -71,6 +92,10 @@ class ShopRegistrationController: UIViewController{
         configureUI()
     }
     
+    // MARK: - API
+    
+    
+    
     // MARK: - Selectors
     
     @objc func handleCancel(){
@@ -78,7 +103,23 @@ class ShopRegistrationController: UIViewController{
     }
     
     @objc func handleAddShopPhoto(){
+        present(imagePicker, animated: true)
+    }
+    
+    @objc func handleRegistration(){
         
+    }
+    
+    @objc func textDidChange(sender: UITextField){
+        viewModel.shopImage = shopImage
+        
+        if sender == shopNameTextField{
+            viewModel.shopName = sender.text
+        }else{
+            viewModel.shopAddress = sender.text
+        }
+        
+        checkFormStatus()
     }
     
    
@@ -99,6 +140,9 @@ class ShopRegistrationController: UIViewController{
         view.backgroundColor = .white
         configureNavigationBar()
         
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = true
+        
         view.addSubview(titleLabel)
         titleLabel.centerX(inView: view)
         titleLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 32, paddingLeft: 16, paddingRight: 16)
@@ -110,18 +154,47 @@ class ShopRegistrationController: UIViewController{
         plusPhotoButton.layer.borderColor = UIColor.systemGray.cgColor
         plusPhotoButton.layer.borderWidth = 2
         
-        let stack = UIStackView(arrangedSubviews: [shopNameContainerView, shopAddressContainerView])
+        let stack = UIStackView(arrangedSubviews: [shopNameContainerView, shopAddressContainerView, registrationButton])
         stack.axis = .vertical
-        stack.alignment = .center
-        stack.spacing = 32
+        stack.spacing = 20
+        stack.distribution = .fillEqually
         
         view.addSubview(stack)
         stack.centerX(inView: view, topAnchor: plusPhotoButton.bottomAnchor, paddingTop: 32)
         stack.anchor(left: view.leftAnchor, right: view.rightAnchor, paddingLeft: 16, paddingRight: 16)
         
-     
+        shopNameTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        shopAddressTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
     }
-    
-    
-    
 }
+
+// MARK: - UIImagePickeDelegate
+
+extension ShopRegistrationController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let shopImage = info[.editedImage] as? UIImage else { return }
+        self.shopImage = shopImage
+        
+        plusPhotoButton.layer.masksToBounds = true
+        plusPhotoButton.imageView?.clipsToBounds = true
+        plusPhotoButton.layer.borderWidth = 2
+        
+        self.plusPhotoButton.setImage(shopImage.withRenderingMode(.alwaysOriginal), for: .normal)
+        dismiss(animated: true, completion: nil)
+    }
+}
+
+// MARK: - ShopRegistrationProtocol
+
+extension ShopRegistrationController: ShopRegistrationProtocol{
+    func checkFormStatus() {
+        if viewModel.formIsValid{
+            registrationButton.isEnabled = true
+            registrationButton.backgroundColor = .shishaColor
+        }else{
+            registrationButton.isEnabled = false
+            registrationButton.backgroundColor = .systemGray
+        }
+    }
+}
+
