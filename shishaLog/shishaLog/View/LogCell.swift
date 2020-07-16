@@ -113,6 +113,8 @@ class LogCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        backgroundColor = .white
+        
         let topInfoStack = UIStackView(arrangedSubviews: [infoLabel, likeButton])
         topInfoStack.axis = .horizontal
         topInfoStack.distribution = .equalSpacing

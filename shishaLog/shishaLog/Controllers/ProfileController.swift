@@ -11,6 +11,7 @@ import Firebase
 
 private let reuseIdentifier = "LogCell"
 private let headerIdentifier = "ProfileHeader"
+private let fileterViewIdentifier = "ProfileFilterView"
 
 
 class ProfileController: UICollectionViewController {
@@ -90,19 +91,28 @@ class ProfileController: UICollectionViewController {
     // MARK: - Helpers
     
     func configureCollectionView(){
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = .systemGroupedBackground
         collectionView.contentInsetAdjustmentBehavior = .never
         
         // cell等を登録
         self.collectionView!.register(LogCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        self.collectionView!.register(ProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerIdentifier)
+        self.collectionView.register(ProfileHeader.self, forCellWithReuseIdentifier: headerIdentifier)
+        self.collectionView.register(ProfileFilterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: fileterViewIdentifier)
+        
         
         guard let tabHeight = tabBarController?.tabBar.frame.height else { return }
         collectionView.contentInset.bottom = tabHeight
         
+        guard let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
+        flowLayout.sectionHeadersPinToVisibleBounds = true
     }
     
     func configureNavigationBar(){
+        navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.barTintColor = .systemGroupedBackground
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.shadowImage = UIImage()
+        
         navigationItem.title = user.username
     }
     
@@ -112,15 +122,32 @@ class ProfileController: UICollectionViewController {
 // MARK: UICollectionViewDataSource
 
 extension ProfileController{
+    
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 2
+    }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return logs.count
+        switch section {
+        case 0:
+            return 1
+        default:
+            return logs.count
+        }
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! LogCell
-        cell.log = logs[indexPath.row]
-        return cell
+        switch indexPath.section {
+        case 0:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: headerIdentifier, for: indexPath) as! ProfileHeader
+            cell.user = user
+            cell.delegate = self
+            return cell
+        default:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! LogCell
+            cell.log = logs[indexPath.row]
+            return cell
+        }
     }
 }
 
@@ -128,13 +155,14 @@ extension ProfileController{
 
 extension ProfileController{
     
-    // headerを適用する
+    // headerにfilterViewを設定
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerIdentifier, for: indexPath) as! ProfileHeader
-        header.user = user
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: fileterViewIdentifier, for: indexPath) as! ProfileFilterView
         header.delegate = self
         return header
     }
+    
+
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
@@ -143,13 +171,30 @@ extension ProfileController: UICollectionViewDelegateFlowLayout{
     
     // headerのsizeを決める
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        let height: CGFloat = 420
-        return CGSize(width: view.frame.width, height: height)
+        switch section {
+        case 0:
+            return CGSize(width: 0, height: 0)
+        default:
+            let height: CGFloat = 50
+            return CGSize(width: view.frame.width, height: height)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let height:CGFloat = 200
-        return CGSize(width: view.frame.width, height: height)
+        switch indexPath.section {
+        case 0:
+            return CGSize(width: view.frame.width, height: 280)
+        default:
+            return CGSize(width: view.frame.width, height: 200)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
     }
     
 }
@@ -172,13 +217,18 @@ extension ProfileController: ProfileHeaderDelegate{
         }
         // ユーザーがFollowing or notで分岐させる
     }
-    
-    func didSelect(filter: ProfileFilterOptions) {
-        print(" DEBUG: didSelect FilterView on \(filter.description)")
-    }
-    
-    
 }
+
+// MARK: - ProfileFilterViewDelegate
+
+extension ProfileController: ProfileFilterViewDelegate{
+    func filterView(_ view: ProfileFilterView, didSelect index: Int) {
+        guard let filter = ProfileFilterOptions(rawValue: index) else { return }
+        print("DEBUG: filter is \(filter) in Profile controller")
+    }
+}
+
+// MARK: - EditProfileControllerDelegate
 
 extension ProfileController: EditProfileControllerDelegate{
     func controller(_ controller: EditProfileController, wantsToUpdate user: User) {

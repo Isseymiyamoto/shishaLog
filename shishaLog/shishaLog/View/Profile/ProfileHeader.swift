@@ -10,10 +10,10 @@ import UIKit
 
 protocol ProfileHeaderDelegate: class {
     func handleEditProfile(_ header: ProfileHeader)
-    func didSelect(filter: ProfileFilterOptions)
+//    func didSelect(filter: ProfileFilterOptions)
 }
 
-class ProfileHeader: UICollectionReusableView{
+class ProfileHeader: UICollectionViewCell{
     
     // MARK: - Properties
     
@@ -23,7 +23,7 @@ class ProfileHeader: UICollectionReusableView{
     
     weak var delegate: ProfileHeaderDelegate?
     
-    private let filterBar = ProfileFilterView()
+//    private let filterBar = ProfileFilterView()
     
     private let profileImageView: UIImageView = {
         let iv = UIImageView()
@@ -117,7 +117,7 @@ class ProfileHeader: UICollectionReusableView{
         
         self.backgroundColor = .systemGroupedBackground
         
-        filterBar.delegate = self
+//        filterBar.delegate = self
         
         // 数的情報系のstack
         let logCountStack = makeStackView(button: logCountButton, label: logCountLabel)
@@ -150,8 +150,8 @@ class ProfileHeader: UICollectionReusableView{
         editProfileFollowButton.setDimensions(width: self.frame.width - 32, height: 36)
         editProfileFollowButton.layer.cornerRadius = 6
         
-        addSubview(filterBar)
-        filterBar.anchor(left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, height: 50)
+//        addSubview(filterBar)
+//        filterBar.anchor(left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, height: 50)
     }
     
     required init?(coder: NSCoder) {
@@ -189,9 +189,9 @@ class ProfileHeader: UICollectionReusableView{
     }
 }
 
-extension ProfileHeader: ProfileFilterViewDelegate {
-    func filterView(_ view: ProfileFilterView, didSelect index: Int) {
-        guard let filter = ProfileFilterOptions(rawValue: index) else { return }
-        delegate?.didSelect(filter: filter)
-    }
-}
+//extension ProfileHeader: ProfileFilterViewDelegate {
+//    func filterView(_ view: ProfileFilterView, didSelect index: Int) {
+//        guard let filter = ProfileFilterOptions(rawValue: index) else { return }
+//        delegate?.didSelect(filter: filter)
+//    }
+//}

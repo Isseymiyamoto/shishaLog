@@ -8,13 +8,13 @@
 
 import UIKit
 
-private let reuseIdentifier = "ProfileFilterCell"
+private let identifier = "ProfileFilterCell"
 
 protocol ProfileFilterViewDelegate: class {
     func filterView(_ view: ProfileFilterView, didSelect index: Int)
 }
 
-class ProfileFilterView: UIView {
+class ProfileFilterView: UICollectionReusableView{
     
     // MARK: - Properties
     
@@ -36,12 +36,19 @@ class ProfileFilterView: UIView {
         return view
     }()
     
+    private let abovelineView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .lightGray
+        return view
+    }()
+    
     // MARK: - Lifecycle
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        collectionView.register(ProfileFilterCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView.register(ProfileFilterCell.self, forCellWithReuseIdentifier: identifier)
+//        collectionView.register(ProfileFilterCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
         let selectedIndexPath = IndexPath(row: 0, section: 0)
         collectionView.selectItem(at: selectedIndexPath, animated: true, scrollPosition: .left)
@@ -53,6 +60,9 @@ class ProfileFilterView: UIView {
     override func layoutSubviews() {
         addSubview(underlineView)
         underlineView.anchor(left: leftAnchor, bottom: bottomAnchor, width: frame.width / 3, height: 2)
+        
+        addSubview(abovelineView)
+        abovelineView.anchor(left: leftAnchor, bottom: topAnchor, width: frame.width, height: 0.5)
     }
     
     required init?(coder: NSCoder) {
@@ -68,7 +78,7 @@ extension ProfileFilterView: UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ProfileFilterCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! ProfileFilterCell
         
         let option = ProfileFilterOptions(rawValue: indexPath.row)
         cell.option = option
