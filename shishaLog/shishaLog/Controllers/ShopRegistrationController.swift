@@ -94,7 +94,22 @@ class ShopRegistrationController: UIViewController{
     
     // MARK: - API
     
-    
+    func registerShop(){
+        guard let shopName = shopNameTextField.text else { return }
+        guard let shopAddress = shopAddressTextField.text else { return }
+        guard shopImage != nil else { return }
+        
+        let credential = ShopCredentials(shopName: shopName, shopAddress: shopAddress, shopImage: shopImage!)
+        
+        ShopService.shared.registerShop(credentials: credential) { (error, ref) in
+            if let error = error {
+                print("DEBUG: failed to register shop with error \(error.localizedDescription)")
+                return
+            }
+            // 後でprotocol設定して、choiceSpotControllerから操作も考える
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
     
     // MARK: - Selectors
     
@@ -107,7 +122,7 @@ class ShopRegistrationController: UIViewController{
     }
     
     @objc func handleRegistration(){
-        
+        registerShop()
     }
     
     @objc func textDidChange(sender: UITextField){

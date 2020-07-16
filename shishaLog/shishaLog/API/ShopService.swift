@@ -44,4 +44,16 @@ struct ShopService {
         }
     }
     
+    func fetchAllShops(completion: @escaping(([Shop]) -> Void)){
+        var shops = [Shop]()
+        
+        REF_SHOPS.observe(.childAdded) { (snapshot) in
+            guard let dictionary = snapshot.value as? [String: Any] else { return }
+            
+            let shop = Shop(shopID: snapshot.key, dictionary: dictionary)
+            shops.append(shop)
+            completion(shops)
+        }
+    }
+    
 }
