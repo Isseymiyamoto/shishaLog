@@ -36,7 +36,9 @@ class ShopRegistrationController: UIViewController{
     }()
    
     private let imagePicker = UIImagePickerController()
-    private var shopImage: UIImage?
+    private var shopImage: UIImage? {
+        didSet{ checkFormStatus() }
+    }
     
     private let plusPhotoButton: UIButton = {
         let button = UIButton(type: .system)
@@ -126,8 +128,6 @@ class ShopRegistrationController: UIViewController{
     }
     
     @objc func textDidChange(sender: UITextField){
-        viewModel.shopImage = shopImage
-        
         if sender == shopNameTextField{
             viewModel.shopName = sender.text
         }else{
@@ -202,7 +202,10 @@ extension ShopRegistrationController: UIImagePickerControllerDelegate, UINavigat
 // MARK: - ShopRegistrationProtocol
 
 extension ShopRegistrationController: ShopRegistrationProtocol{
+    
     func checkFormStatus() {
+        viewModel.shopImage = shopImage
+        
         if viewModel.formIsValid{
             registrationButton.isEnabled = true
             registrationButton.backgroundColor = .shishaColor
