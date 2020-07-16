@@ -33,7 +33,7 @@ class ChoiceSpotCell: UITableViewCell {
         let label = UILabel()
         // test的に
         label.text = "Soi 61"
-        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.font = UIFont.boldSystemFont(ofSize: 14)
         return label
     }()
     
@@ -41,7 +41,7 @@ class ChoiceSpotCell: UITableViewCell {
         let label = UILabel()
         label.text = "中野区弥生町12-28-1"
         label.textColor = .lightGray
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.systemFont(ofSize: 10)
         return label
     }()
     
@@ -57,7 +57,7 @@ class ChoiceSpotCell: UITableViewCell {
 
         let stack = UIStackView(arrangedSubviews: [shopNameLabel, addressLabel])
         stack.axis = .vertical
-        stack.spacing = 2
+        stack.spacing = 4
         stack.alignment = .leading
 
         addSubview(stack)

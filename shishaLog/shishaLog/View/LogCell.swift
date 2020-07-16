@@ -26,7 +26,7 @@ class LogCell: UICollectionViewCell {
     
     private lazy var profileImageView: UIImageView = {
         let iv = UIImageView()
-        iv.contentMode = .scaleAspectFit
+        iv.contentMode = .scaleAspectFill
         iv.image = UIImage(named: "issey_job")
         iv.clipsToBounds = true
         iv.setDimensions(width: 48, height: 48)

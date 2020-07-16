@@ -43,7 +43,7 @@ class ShopRegistrationController: UIViewController{
     private let plusPhotoButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "camera"), for: .normal)
-        button.imageView?.contentMode = .scaleAspectFit
+        button.imageView?.contentMode = .scaleAspectFill
         button.tintColor = .systemGray
         button.addTarget(self, action: #selector(handleAddShopPhoto), for: .touchUpInside)
         return button
