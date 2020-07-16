@@ -47,6 +47,10 @@ class ChoiceSpotController: UITableViewController {
     @objc func handleCancel(){
         self.dismiss(animated: true, completion: nil)
     }
+    
+    @objc func handleShowSearchBar(){
+        
+    }
 
     // MARK: - Helpers
     
@@ -61,6 +65,8 @@ class ChoiceSpotController: UITableViewController {
         navigationItem.title = "今どこ？"
         navigationController?.navigationBar.barTintColor = .white
         navigationController?.navigationBar.isTranslucent = false
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(handleShowSearchBar))
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(handleCancel))
     }
 }

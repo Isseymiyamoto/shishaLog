@@ -23,7 +23,7 @@ class ChoiceSpotCell: UITableViewCell {
         iv.backgroundColor = .shishaColor
         
         // test 的に
-        iv.image = UIImage(named: "issey_job")
+        iv.image = UIImage(named: "shisha")
         return iv
     }()
     
