@@ -95,4 +95,25 @@ extension UIColor {
     static let shishaColor = UIColor.rgb(red: 209, green: 111, blue: 105)
 }
 
+// MARK: - UIViewController
 
+extension UIViewController{
+    func configureNavigationBarAppearance(withTitle title: String, prefersLargeTitles: Bool){
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.black]
+        appearance.backgroundColor = .white
+        
+        navigationController?.navigationBar.standardAppearance = appearance
+        // スクロールした際に、sizeがコンパクトになる
+        navigationController?.navigationBar.compactAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        
+        navigationController?.navigationBar.prefersLargeTitles = prefersLargeTitles
+        navigationItem.title = title
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.isTranslucent = true
+        
+        navigationController?.navigationBar.overrideUserInterfaceStyle = .dark
+    }
+}

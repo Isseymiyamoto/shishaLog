@@ -137,7 +137,8 @@ extension ChoiceSpotController{
             nav.modalPresentationStyle = .fullScreen
             present(nav, animated: true)
         default:
-            return
+            let controller = UploadSpotController(user: user, shop: shops[indexPath.row])
+            navigationController?.pushViewController(controller, animated: true)
         }
     }
 }

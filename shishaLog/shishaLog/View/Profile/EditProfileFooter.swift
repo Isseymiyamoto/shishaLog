@@ -24,7 +24,8 @@ class EditProfileFooter: UIView {
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         button.addTarget(self, action: #selector(handleLogout), for: .touchUpInside)
-        button.backgroundColor = .red
+        button.backgroundColor = .systemRed
+        button.layer.cornerRadius = 6
         return button
     }()
     

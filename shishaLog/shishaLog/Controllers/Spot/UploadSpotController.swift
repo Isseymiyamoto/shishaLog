@@ -13,6 +13,7 @@ class UploadSpotController: UIViewController {
     // MARK: - Properties
     
     private let user: User
+    private let shop: Shop
     
     private lazy var actionButton: UIButton = {
         let button = UIButton(type: .system)
@@ -38,8 +39,9 @@ class UploadSpotController: UIViewController {
     
     // MARK: - Lifecycle
     
-    init(user: User) {
+    init(user: User, shop: Shop) {
         self.user = user
+        self.shop = shop
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -59,7 +61,7 @@ class UploadSpotController: UIViewController {
     // MARK: - Selectors
     
     @objc func handleCancel(){
-        self.dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
     
     @objc func handleUploadSpot(){
@@ -72,10 +74,11 @@ class UploadSpotController: UIViewController {
     
     func configureNavigationBar(){
         navigationController?.navigationBar.barTintColor = .white
-        // isTranslucent → ナビゲーションバーを透過にするかのフラグであり,ビューの開始位置を決めるフラグ
         navigationController?.navigationBar.isTranslucent = false
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(handleCancel))
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: actionButton)
+        
+        navigationItem.title = shop.shopName
     }
     
     func configureUI(){
