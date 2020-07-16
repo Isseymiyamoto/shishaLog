@@ -40,7 +40,17 @@ class ChoiceSpotController: UITableViewController {
         super.viewDidLoad()
 
         configureTableView()
+        fetchShops()
     }
+    
+    // MARK: - API
+    
+    func fetchShops(){
+        ShopService.shared.fetchAllShops { (shops) in
+            self.shops = shops
+        }
+    }
+    
     
     // MARK: - Selectors
     
@@ -85,6 +95,7 @@ extension ChoiceSpotController{
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: choiseCellIdentifier, for: indexPath) as! ChoiceSpotCell
+            cell.shop = shops[indexPath.row]
             return cell
         }
     }
@@ -98,7 +109,7 @@ extension ChoiceSpotController{
         case 0:
             return 1
         default:
-            return 20
+            return shops.count
         }
     }
     

@@ -12,7 +12,9 @@ class ChoiceSpotCell: UITableViewCell {
 
     // MARK: - Properties
     
-//    private let shop: Shop
+    var shop: Shop? {
+        didSet{ configureUI() }
+    }
     
     private let shopImageView: UIImageView = {
         let iv = UIImageView()
@@ -61,6 +63,14 @@ class ChoiceSpotCell: UITableViewCell {
         addSubview(stack)
         stack.centerY(inView: self)
         stack.anchor(left: shopImageView.rightAnchor, right: rightAnchor, paddingLeft: 12, paddingRight: 16)
+    }
+    
+    func configureUI(){
+        guard let shop = shop else { return }
+        
+        shopImageView.sd_setImage(with: shop.shopImageUrl, completed: nil)
+        shopNameLabel.text = shop.shopName
+        addressLabel.text = shop.address
     }
     
 //    init(shop: Shop) {

@@ -20,7 +20,7 @@ struct Shop {
     init(shopID: String, dictionary: [String: Any]) {
         self.shopID = shopID
         
-        self.address = dictionary["address"] as? String ?? ""
+        self.address = dictionary["shopAddress"] as? String ?? ""
         self.shopName = dictionary["shopName"] as? String ?? ""
         
         if let shopImageUrl = dictionary["shopImageUrl"] as? String {

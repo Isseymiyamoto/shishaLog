@@ -55,5 +55,4 @@ struct ShopService {
             completion(shops)
         }
     }
-    
 }
