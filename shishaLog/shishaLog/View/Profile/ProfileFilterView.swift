@@ -24,7 +24,7 @@ class ProfileFilterView: UICollectionReusableView{
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.backgroundColor = .white
+        cv.backgroundColor = .systemGroupedBackground
         cv.delegate = self
         cv.dataSource = self
         return cv
@@ -38,7 +38,7 @@ class ProfileFilterView: UICollectionReusableView{
     
     private let abovelineView: UIView = {
         let view = UIView()
-        view.backgroundColor = .lightGray
+        view.backgroundColor = .black
         return view
     }()
     
@@ -62,7 +62,7 @@ class ProfileFilterView: UICollectionReusableView{
         underlineView.anchor(left: leftAnchor, bottom: bottomAnchor, width: frame.width / 3, height: 2)
         
         addSubview(abovelineView)
-        abovelineView.anchor(left: leftAnchor, bottom: topAnchor, width: frame.width, height: 0.5)
+        abovelineView.anchor(left: leftAnchor, bottom: topAnchor, width: frame.width, height: 0.1)
     }
     
     required init?(coder: NSCoder) {
