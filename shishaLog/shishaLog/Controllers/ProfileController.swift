@@ -27,7 +27,7 @@ class ProfileController: UICollectionViewController {
     // ログに入るデータを格納
     private var logs = [Log]()
     // スポットに入るデータを格納予定(後で)(暫定的に適当にLogを入れている)
-    private var spots = [Log]()
+    private var spots = [Spot]()
     // お気に入りのログに関するデータを格納
     private var likeLogs = [Log]()
     
@@ -35,7 +35,7 @@ class ProfileController: UICollectionViewController {
         switch selectedFilter {
         case .logs: return logs
         case .likeLogs: return likeLogs
-        case .locations: return spots
+        case .locations: return logs
         }
     }
     
@@ -57,6 +57,7 @@ class ProfileController: UICollectionViewController {
         configureCollectionView()
         configureNavigationBar()
         fetchLogs()
+        fetchLikeLogs()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -77,15 +78,18 @@ class ProfileController: UICollectionViewController {
     }
     
     func fetchLikeLogs(){
-        
+        LogService.shared.fetchLikes(forUser: user) { (logs) in
+            self.likeLogs = logs.sorted(by: { $0.timestamp > $1.timestamp })
+            self.collectionView.reloadData()
+        }
     }
     
     // spotに関するものも追加予定
     func fetchSpots(){
-        LogService.shared.fetchLogs { (logs) in
-            self.spots = logs.sorted(by: { $0.timestamp > $1.timestamp })
-            self.collectionView.reloadData()
-        }
+//        LogService.shared.fetchLogs { (logs) in
+//            self.spots = logs.sorted(by: { $0.timestamp > $1.timestamp })
+//            self.collectionView.reloadData()
+//        }
     }
     
     // MARK: - Helpers
@@ -132,7 +136,7 @@ extension ProfileController{
         case 0:
             return 1
         default:
-            return logs.count
+            return currentDataSource.count
         }
     }
 
@@ -145,7 +149,7 @@ extension ProfileController{
             return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! LogCell
-            cell.log = logs[indexPath.row]
+            cell.log = currentDataSource[indexPath.row]
             return cell
         }
     }
@@ -224,7 +228,8 @@ extension ProfileController: ProfileHeaderDelegate{
 extension ProfileController: ProfileFilterViewDelegate{
     func filterView(_ view: ProfileFilterView, didSelect index: Int) {
         guard let filter = ProfileFilterOptions(rawValue: index) else { return }
-        print("DEBUG: filter is \(filter) in Profile controller")
+        selectedFilter = filter
+        collectionView.reloadData()
     }
 }
 
