@@ -71,16 +71,24 @@ class ProfileController: UICollectionViewController {
     // MARK: - API
     
     func fetchLogs(){
+        collectionView.refreshControl?.beginRefreshing()
+        
         LogService.shared.fetchMyLogs(forUser: user) { (logs) in
             self.logs = logs.sorted(by: { $0.timestamp > $1.timestamp })
             self.collectionView.reloadData()
+            
+            self.collectionView.refreshControl?.endRefreshing()
         }
     }
     
     func fetchLikeLogs(){
+        collectionView.refreshControl?.beginRefreshing()
+        
         LogService.shared.fetchLikes(forUser: user) { (logs) in
             self.likeLogs = logs.sorted(by: { $0.timestamp > $1.timestamp })
             self.collectionView.reloadData()
+            
+            self.collectionView.refreshControl?.endRefreshing()
         }
     }
     
@@ -92,11 +100,28 @@ class ProfileController: UICollectionViewController {
 //        }
     }
     
+    // MARK: - Selectors
+    
+    @objc func handleRefresh(){
+        switch selectedFilter {
+        case .logs:
+            fetchLogs()
+        case .locations:
+            fetchSpots()
+        case .likeLogs:
+            fetchLikeLogs()
+        }
+    }
+    
     // MARK: - Helpers
     
     func configureCollectionView(){
         collectionView.backgroundColor = .systemGroupedBackground
         collectionView.contentInsetAdjustmentBehavior = .never
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+        collectionView.refreshControl = refreshControl
         
         // cell等を登録
         self.collectionView!.register(LogCell.self, forCellWithReuseIdentifier: reuseIdentifier)
