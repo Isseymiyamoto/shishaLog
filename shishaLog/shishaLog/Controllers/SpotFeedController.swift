@@ -62,8 +62,9 @@ class SpotFeedController: UICollectionViewController {
     }
     
     func configure(){
+        view.backgroundColor = .white
         collectionView.register(SpotCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        collectionView.backgroundColor = .systemGroupedBackground
+        collectionView.backgroundColor = .white
         
         // refresh Control
         let refreshControl = UIRefreshControl()
@@ -87,6 +88,7 @@ extension SpotFeedController{
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! SpotCell
         cell.spot = spots[indexPath.row]
+        cell.delegate = self
         return cell
     }
     
@@ -102,5 +104,12 @@ extension SpotFeedController: UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 1
+    }
+}
+
+extension SpotFeedController: SpotCellDelegate{
+    func handleProfileImageTapped(user: User) {
+        let controller = ProfileController(user: user)
+        navigationController?.pushViewController(controller, animated: true)
     }
 }

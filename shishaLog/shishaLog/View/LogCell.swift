@@ -138,8 +138,7 @@ class LogCell: UICollectionViewCell {
         
         addSubview(underlineView)
         underlineView.anchor(left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, height: 1)
-        
-        infoLabel.attributedText = userInfoText
+
     }
     
     required init?(coder: NSCoder) {

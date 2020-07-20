@@ -42,6 +42,9 @@ struct SpotViewModel {
         return user.profileImageUrl
     }
     
+    var comment: String? {
+        return spot.comment
+    }
     
     // MARK: - Lifecycle
     

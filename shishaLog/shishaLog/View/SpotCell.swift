@@ -8,9 +8,15 @@
 
 import UIKit
 
+protocol SpotCellDelegate: class {
+    func handleProfileImageTapped(user: User)
+}
+
 class SpotCell: UICollectionViewCell {
     
     // MARK: - Properties
+    
+    weak var delegate: SpotCellDelegate?
     
     var spot: Spot? {
         didSet{ configure() }
@@ -59,10 +65,18 @@ class SpotCell: UICollectionViewCell {
         return label
     }()
     
+    let underlineView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemGroupedBackground
+        return view
+    }()
+    
     // MARK: - Lifecycle
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        backgroundColor = .white
         
         addSubview(profileImageView)
         profileImageView.anchor(top: topAnchor, left: leftAnchor, paddingTop: 16, paddingLeft: 16)
@@ -76,7 +90,8 @@ class SpotCell: UICollectionViewCell {
         addSubview(stack)
         stack.anchor(top: topAnchor, left: profileImageView.rightAnchor, right: rightAnchor, paddingTop: 16, paddingLeft: 16, paddingRight: 16)
         
-        configure()
+        addSubview(underlineView)
+        underlineView.anchor(left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, height: 1)
     }
     
     required init?(coder: NSCoder) {
@@ -88,6 +103,8 @@ class SpotCell: UICollectionViewCell {
     
     @objc func handleProfileImageTapped(){
         // profileへ飛ばす
+        guard let user = spot?.user else { return }
+        delegate?.handleProfileImageTapped(user: user)
     }
     
     @objc func handleLocationTapped(){
@@ -98,7 +115,6 @@ class SpotCell: UICollectionViewCell {
     // MARK: - Helpers
     
     func configure(){
-        backgroundColor = .white
         
         guard let spot = spot else { return }
         let viewModel = SpotViewModel(spot: spot)
@@ -106,6 +122,7 @@ class SpotCell: UICollectionViewCell {
         infoLabel.attributedText = viewModel.userInfoText
         locationButton.setTitle(viewModel.shopName, for: .normal)
         profileImageView.sd_setImage(with: viewModel.profileImageUrl, completed: nil)
+        commentLabel.text = viewModel.comment
     }
     
 }
