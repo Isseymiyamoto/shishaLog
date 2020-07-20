@@ -90,6 +90,20 @@ class UploadSpotController: UIViewController {
     
     // MARK: - API
     
+    func uploadSpot(){
+        guard let comment = commentTextView.text else { return }
+        
+        SpotService.shared.uploadSpot(spotID: shop.shopID, comment: comment) { (error, ref) in
+            if let error = error {
+                print("DEBUG: error is \(error.localizedDescription)")
+                return
+            }
+            
+            print("DEBUG: uploaded your spot")
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
     
     // MARK: - Selectors
     
@@ -98,9 +112,7 @@ class UploadSpotController: UIViewController {
     }
     
     @objc func handleUploadSpot(){
-        guard let text = commentTextView.text else { return }
-        // firebaseに接続
-        print("DEBUG: text is \(text)")
+        uploadSpot()
     }
     
     @objc func keyboardWillShow(_ notification: Notification){

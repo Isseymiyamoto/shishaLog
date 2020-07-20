@@ -39,6 +39,10 @@ class SpotFeedController: UICollectionViewController {
 
     // MARK: - API
     
+    func fetchSpots(){
+        
+    }
+    
     
     // MARK: - Selectors
     
