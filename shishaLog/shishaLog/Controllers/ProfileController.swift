@@ -12,6 +12,7 @@ import Firebase
 private let reuseIdentifier = "LogCell"
 private let headerIdentifier = "ProfileHeader"
 private let fileterViewIdentifier = "ProfileFilterView"
+private let spotCellIdentifier = "SpotCell"
 
 
 class ProfileController: UICollectionViewController {
@@ -31,11 +32,11 @@ class ProfileController: UICollectionViewController {
     // お気に入りのログに関するデータを格納
     private var likeLogs = [Log]()
     
-    private var currentDataSource: [Log]{
+    private var currentDataSource: [Any]{
         switch selectedFilter {
         case .logs: return logs
         case .likeLogs: return likeLogs
-        case .locations: return logs
+        case .locations: return spots
         }
     }
     
@@ -58,6 +59,7 @@ class ProfileController: UICollectionViewController {
         configureNavigationBar()
         fetchLogs()
         fetchLikeLogs()
+        fetchSpots()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -94,7 +96,14 @@ class ProfileController: UICollectionViewController {
     
     // spotに関するものも追加予定
     func fetchSpots(){
+        collectionView.refreshControl?.beginRefreshing()
         
+        SpotService.shared.fetchMySpot(forUser: user) { (spots) in
+            self.spots = spots.sorted(by: { $0.timestamp > $1.timestamp })
+            self.collectionView.reloadData()
+        }
+        
+        self.collectionView.refreshControl?.endRefreshing()
     }
     
     // MARK: - Selectors
@@ -124,6 +133,7 @@ class ProfileController: UICollectionViewController {
         self.collectionView!.register(LogCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView.register(ProfileHeader.self, forCellWithReuseIdentifier: headerIdentifier)
         self.collectionView.register(ProfileFilterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: fileterViewIdentifier)
+        self.collectionView.register(SpotCell.self, forCellWithReuseIdentifier: spotCellIdentifier)
         
         
         guard let tabHeight = tabBarController?.tabBar.frame.height else { return }
@@ -170,9 +180,16 @@ extension ProfileController{
             cell.delegate = self
             return cell
         default:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! LogCell
-            cell.log = currentDataSource[indexPath.row]
-            return cell
+            switch selectedFilter{
+            case .locations:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: spotCellIdentifier, for: indexPath) as! SpotCell
+                cell.spot = currentDataSource[indexPath.row] as! Spot
+                return cell
+            default:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! LogCell
+                cell.log = currentDataSource[indexPath.row] as! Log
+                return cell
+            }
         }
     }
 }
@@ -211,7 +228,11 @@ extension ProfileController: UICollectionViewDelegateFlowLayout{
         case 0:
             return CGSize(width: view.frame.width, height: 280)
         default:
-            return CGSize(width: view.frame.width, height: 200)
+            var height: CGFloat = 200
+            if selectedFilter == .locations{
+                height = 120
+            }
+            return CGSize(width: view.frame.width, height: height)
         }
     }
     
