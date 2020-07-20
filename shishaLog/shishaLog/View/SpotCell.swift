@@ -19,7 +19,7 @@ class SpotCell: UICollectionViewCell {
     private lazy var profileImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFit
-        iv.image = UIImage(named: "issey_job")
+        iv.image = UIImage(systemName: "person")
         iv.clipsToBounds = true
         iv.setDimensions(width: 48, height: 48)
         iv.layer.cornerRadius = 48 / 2
@@ -98,6 +98,8 @@ class SpotCell: UICollectionViewCell {
     
     func configure(){
         backgroundColor = .white
+        
+        
         
         infoLabel.attributedText = userInfoText
     }

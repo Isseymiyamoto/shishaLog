@@ -40,7 +40,9 @@ class SpotFeedController: UICollectionViewController {
     // MARK: - API
     
     func fetchSpots(){
-        
+        SpotService.shared.fetchSpots { (spots) in
+            self.spots = spots
+        }
     }
     
     
@@ -68,11 +70,12 @@ class SpotFeedController: UICollectionViewController {
 extension SpotFeedController{
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return spots.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! SpotCell
+        cell.spot = spots[indexPath.row]
         return cell
     }
     
