@@ -94,10 +94,7 @@ class ProfileController: UICollectionViewController {
     
     // spotに関するものも追加予定
     func fetchSpots(){
-//        LogService.shared.fetchLogs { (logs) in
-//            self.spots = logs.sorted(by: { $0.timestamp > $1.timestamp })
-//            self.collectionView.reloadData()
-//        }
+        
     }
     
     // MARK: - Selectors

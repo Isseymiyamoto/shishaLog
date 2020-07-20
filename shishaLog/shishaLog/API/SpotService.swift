@@ -52,6 +52,37 @@ struct SpotService {
         }
     }
     
+    // 自分のspot取得
+    func fetchMySpot(forUser user: User, completion: @escaping(([Spot]) -> Void)){
+        var spots = [Spot]()
+        
+        REF_USER_SPOTS.child(user.uid).observe(.childAdded) { (snapshot) in
+            let spotID = snapshot.key
+            self.fetchSpot(withSpotID: spotID) { (spot) in
+                spots.append(spot)
+                completion(spots)
+            }
+            
+        }
+        
+    }
+    
+    // spotIDを指定してspot取得
+    func fetchSpot(withSpotID spotID: String, completion: @escaping(Spot) -> Void){
+        REF_SPOTS.child(spotID).observeSingleEvent(of: .value) { (snapshot) in
+            guard let dictionary = snapshot.value as? [String: Any] else { return }
+            guard let uid = dictionary["uid"] as? String else { return }
+            guard let shopID = dictionary["shopID"] as? String else { return }
+            
+            UserService.shared.fetchUser(uid: uid) { (user) in
+                ShopService.shared.fetchSomeShop(shopID: shopID) { (shop) in
+                    let spot = Spot(user: user, shop: shop, dictionary: dictionary)
+                    completion(spot)
+                }
+            }
+        }
+    }
+    
     
     
 }
