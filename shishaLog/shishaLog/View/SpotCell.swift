@@ -18,7 +18,7 @@ class SpotCell: UICollectionViewCell {
     
     private lazy var profileImageView: UIImageView = {
         let iv = UIImageView()
-        iv.contentMode = .scaleAspectFit
+        iv.contentMode = .scaleAspectFill
         iv.image = UIImage(systemName: "person")
         iv.clipsToBounds = true
         iv.setDimensions(width: 48, height: 48)
@@ -51,9 +51,10 @@ class SpotCell: UICollectionViewCell {
         return button
     }()
     
-    private let checkInLabel: UILabel = {
+    private let commentLabel: UILabel = {
         let label = UILabel()
-        label.text = "にチェックインしました"
+        label.numberOfLines = 0
+        label.text = "test comment"
         label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
@@ -66,7 +67,7 @@ class SpotCell: UICollectionViewCell {
         addSubview(profileImageView)
         profileImageView.anchor(top: topAnchor, left: leftAnchor, paddingTop: 16, paddingLeft: 16)
         
-        let stack = UIStackView(arrangedSubviews: [infoLabel, locationButton, checkInLabel])
+        let stack = UIStackView(arrangedSubviews: [infoLabel, locationButton, commentLabel])
         stack.axis = .vertical
         stack.alignment = .leading
         stack.distribution = .fillProportionally
@@ -86,11 +87,11 @@ class SpotCell: UICollectionViewCell {
     // MARK: - Selectors
     
     @objc func handleProfileImageTapped(){
-        
+        // profileへ飛ばす
     }
     
     @objc func handleLocationTapped(){
-        
+        // shop情報へ飛ばす
     }
     
     
@@ -99,9 +100,12 @@ class SpotCell: UICollectionViewCell {
     func configure(){
         backgroundColor = .white
         
+        guard let spot = spot else { return }
+        let viewModel = SpotViewModel(spot: spot)
         
-        
-        infoLabel.attributedText = userInfoText
+        infoLabel.attributedText = viewModel.userInfoText
+        locationButton.setTitle(viewModel.shopName, for: .normal)
+        profileImageView.sd_setImage(with: viewModel.profileImageUrl, completed: nil)
     }
     
 }

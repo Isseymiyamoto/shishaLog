@@ -12,12 +12,12 @@ import Firebase
 struct SpotService {
     static let shared = SpotService()
     
-    func uploadSpot(spotID: String, comment: String, completion: @escaping((Error?, DatabaseReference) -> Void)){
+    func uploadSpot(shopID: String, comment: String, completion: @escaping((Error?, DatabaseReference) -> Void)){
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
         let values = [
             "uid": uid,
-            "spotID": spotID,
+            "shopID": shopID,
             "comment": comment,
             "timestamp": Int(NSDate().timeIntervalSince1970)
         ] as [String: Any]

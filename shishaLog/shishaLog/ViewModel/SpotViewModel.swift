@@ -34,6 +34,14 @@ struct SpotViewModel {
         return title
     }
     
+    var shopName: String{
+        return shop.shopName
+    }
+    
+    var profileImageUrl: URL? {
+        return user.profileImageUrl
+    }
+    
     
     // MARK: - Lifecycle
     

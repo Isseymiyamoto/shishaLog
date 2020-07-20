@@ -18,8 +18,6 @@ class SpotFeedController: UICollectionViewController {
         didSet{ collectionView.reloadData() }
     }
     
-    
-    
     // MARK: - Lifecycle
     
     
@@ -28,7 +26,7 @@ class SpotFeedController: UICollectionViewController {
 
         configureNavigationBar()
         configure()
-        
+        fetchSpots()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,13 +38,21 @@ class SpotFeedController: UICollectionViewController {
     // MARK: - API
     
     func fetchSpots(){
+        collectionView.refreshControl?.beginRefreshing()
+        
         SpotService.shared.fetchSpots { (spots) in
             self.spots = spots
+            
+            self.collectionView.refreshControl?.endRefreshing()
         }
     }
     
     
     // MARK: - Selectors
+    
+    @objc func handleRefresh(){
+        fetchSpots()
+    }
     
     
     // MARK: - Helpers
@@ -58,6 +64,11 @@ class SpotFeedController: UICollectionViewController {
     func configure(){
         collectionView.register(SpotCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView.backgroundColor = .systemGroupedBackground
+        
+        // refresh Control
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+        collectionView.refreshControl = refreshControl
     }
     
     
