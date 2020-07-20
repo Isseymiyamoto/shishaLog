@@ -46,6 +46,7 @@
 		85C1697E24A3277700BD2EE1 /* EditProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C1697D24A3277700BD2EE1 /* EditProfileController.swift */; };
 		85C1698024A33BC500BD2EE1 /* EditProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C1697F24A33BC500BD2EE1 /* EditProfileHeader.swift */; };
 		85C1698224A33BD400BD2EE1 /* EditProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C1698124A33BD400BD2EE1 /* EditProfileCell.swift */; };
+		85C2352D24C5A5CB003FD668 /* SpotViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C2352C24C5A5CB003FD668 /* SpotViewModel.swift */; };
 		85D8EA1A248E74CE002AFEC1 /* UploadLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D8EA19248E74CE002AFEC1 /* UploadLogController.swift */; };
 		85D8EA1C248E81D5002AFEC1 /* LogService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D8EA1B248E81D5002AFEC1 /* LogService.swift */; };
 		85D8EA1E248F363E002AFEC1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D8EA1D248F363E002AFEC1 /* User.swift */; };
@@ -99,6 +100,7 @@
 		85C1697D24A3277700BD2EE1 /* EditProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileController.swift; sourceTree = "<group>"; };
 		85C1697F24A33BC500BD2EE1 /* EditProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileHeader.swift; sourceTree = "<group>"; };
 		85C1698124A33BD400BD2EE1 /* EditProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileCell.swift; sourceTree = "<group>"; };
+		85C2352C24C5A5CB003FD668 /* SpotViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotViewModel.swift; sourceTree = "<group>"; };
 		85D8EA19248E74CE002AFEC1 /* UploadLogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadLogController.swift; sourceTree = "<group>"; };
 		85D8EA1B248E81D5002AFEC1 /* LogService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogService.swift; sourceTree = "<group>"; };
 		85D8EA1D248F363E002AFEC1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 				85417CA6249CBD0400FDFDC8 /* ProfileHeaderViewModel.swift */,
 				85E0F57A24A4D5A200FBFBF3 /* EditProfileViewModel.swift */,
 				8571AAF324C02B270000C2F6 /* ShopRegistrationViewModel.swift */,
+				85C2352C24C5A5CB003FD668 /* SpotViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -426,6 +429,7 @@
 				859DF69E24A908A900D580C6 /* Spot.swift in Sources */,
 				851AAA62247E92AC006030D1 /* SceneDelegate.swift in Sources */,
 				8571AAF224BF43F60000C2F6 /* ShopRegistrationController.swift in Sources */,
+				85C2352D24C5A5CB003FD668 /* SpotViewModel.swift in Sources */,
 				851AAA8B247E9EC5006030D1 /* SpotFeedController.swift in Sources */,
 				859DF69C24A8A94200D580C6 /* LogHeader.swift in Sources */,
 				85EB9A54249BBCBF00C03E49 /* ProfileFilterCell.swift in Sources */,
