@@ -25,7 +25,7 @@ class UploadSpotController: UIViewController {
         return iv
     }()
     
-    private lazy var actionButton: UIButton = {
+    private let actionButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Check In", for: .normal)
         button.titleLabel?.textAlignment = .center
@@ -39,7 +39,7 @@ class UploadSpotController: UIViewController {
         return button
     }()
     
-    private lazy var cancelButton: UIButton = {
+    private let cancelButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("キャンセル", for: .normal)
         button.setTitleColor(.shishaColor, for: .normal)
@@ -51,6 +51,14 @@ class UploadSpotController: UIViewController {
         button.layer.cornerRadius = 32 / 2
         button.addTarget(self, action: #selector(handleCancel), for: .touchUpInside)
         return button
+    }()
+    
+    private lazy var buttonStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [cancelButton, actionButton])
+        stack.axis = .horizontal
+        stack.distribution = .fillEqually
+        stack.spacing = 8
+        return stack
     }()
     
     private let commentTextView: UITextField = {
@@ -77,6 +85,7 @@ class UploadSpotController: UIViewController {
         super.viewDidLoad()
         
         configureUI()
+        configureNotificationObservers()
     }
     
     // MARK: - API
@@ -91,6 +100,27 @@ class UploadSpotController: UIViewController {
     @objc func handleUploadSpot(){
         // firebaseに接続
         print("DEBUG: this is successfully good")
+    }
+    
+    @objc func keyboardWillShow(_ notification: Notification){
+        guard let userInfo = notification.userInfo as? [String: Any] else {
+            return
+        }
+        guard let keyboardInfo = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {
+            return
+        }
+        guard let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double else {
+            return
+        }
+        let keyboardSize = keyboardInfo.cgRectValue.size
+//        let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0) //←
+        UIView.animate(withDuration: duration, animations: {
+            self.buttonStack.frame.origin.y -= keyboardSize.height
+        })
+    }
+    
+    @objc func keyboardWillHide(_ notification: Notification){
+        
     }
     
     
@@ -115,10 +145,10 @@ class UploadSpotController: UIViewController {
         commentTextView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor,
                                paddingTop: 32, paddingLeft: 16, paddingRight: 16)
         
-        let buttonStack = UIStackView(arrangedSubviews: [cancelButton, actionButton])
-        buttonStack.axis = .horizontal
-        buttonStack.distribution = .fillEqually
-        buttonStack.spacing = 8
+//        let stack = UIStackView(arrangedSubviews: [cancelButton, actionButton])
+//        stack.axis = .horizontal
+//        stack.distribution = .fillEqually
+//        stack.spacing = 8
         
         view.addSubview(buttonStack)
         buttonStack.anchor(left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor,
@@ -126,6 +156,11 @@ class UploadSpotController: UIViewController {
         
         
         
+    }
+    
+    func configureNotificationObservers(){
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_: )), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_: )), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
 }
