@@ -18,8 +18,6 @@ class SpotFeedController: UICollectionViewController {
         didSet{ collectionView.reloadData() }
     }
     
-    
-    
     // MARK: - Lifecycle
     
     
@@ -28,7 +26,7 @@ class SpotFeedController: UICollectionViewController {
 
         configureNavigationBar()
         configure()
-        
+        fetchSpots()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,8 +37,22 @@ class SpotFeedController: UICollectionViewController {
 
     // MARK: - API
     
+    func fetchSpots(){
+        collectionView.refreshControl?.beginRefreshing()
+        
+        SpotService.shared.fetchSpots { (spots) in
+            self.spots = spots
+            
+            self.collectionView.refreshControl?.endRefreshing()
+        }
+    }
+    
     
     // MARK: - Selectors
+    
+    @objc func handleRefresh(){
+        fetchSpots()
+    }
     
     
     // MARK: - Helpers
@@ -50,8 +62,14 @@ class SpotFeedController: UICollectionViewController {
     }
     
     func configure(){
+        view.backgroundColor = .white
         collectionView.register(SpotCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        collectionView.backgroundColor = .systemGroupedBackground
+        collectionView.backgroundColor = .white
+        
+        // refresh Control
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+        collectionView.refreshControl = refreshControl
     }
     
     
@@ -64,11 +82,13 @@ class SpotFeedController: UICollectionViewController {
 extension SpotFeedController{
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return spots.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! SpotCell
+        cell.spot = spots[indexPath.row]
+        cell.delegate = self
         return cell
     }
     
@@ -84,5 +104,12 @@ extension SpotFeedController: UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 1
+    }
+}
+
+extension SpotFeedController: SpotCellDelegate{
+    func handleProfileImageTapped(user: User) {
+        let controller = ProfileController(user: user)
+        navigationController?.pushViewController(controller, animated: true)
     }
 }

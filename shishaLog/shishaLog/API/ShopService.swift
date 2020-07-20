@@ -55,4 +55,14 @@ struct ShopService {
             completion(shops)
         }
     }
+    
+    // 一件だけ取得
+    func fetchSomeShop(shopID: String, completion: @escaping(Shop) -> Void){
+        REF_SHOPS.child(shopID).observeSingleEvent(of: .value) { (snapshot) in
+            guard let dictionary = snapshot.value as? [String: Any] else { return }
+            let shop = Shop(shopID: shopID, dictionary: dictionary)
+            completion(shop)
+        }
+    }
+    
 }
