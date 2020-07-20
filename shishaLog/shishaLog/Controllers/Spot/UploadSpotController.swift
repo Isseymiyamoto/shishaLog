@@ -98,8 +98,9 @@ class UploadSpotController: UIViewController {
     }
     
     @objc func handleUploadSpot(){
+        guard let text = commentTextView.text else { return }
         // firebaseに接続
-        print("DEBUG: this is successfully good")
+        print("DEBUG: text is \(text)")
     }
     
     @objc func keyboardWillShow(_ notification: Notification){
