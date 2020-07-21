@@ -102,7 +102,7 @@ class ProfileHeader: UICollectionViewCell{
         button.setTitle("Loading", for: .normal)
         button.layer.borderColor = UIColor.shishaColor.cgColor
         button.layer.borderWidth = 1.25
-        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         button.titleLabel?.textAlignment = .center
         button.backgroundColor = .shishaColor

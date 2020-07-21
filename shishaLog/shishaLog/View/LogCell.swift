@@ -71,8 +71,8 @@ class LogCell: UICollectionViewCell {
     private let mixTextView: UITextView = {
         let tv = UITextView()
         tv.text = "レモンドロップ4g\nレモン2g\nバニラ2g"
-        tv.font = UIFont.boldSystemFont(ofSize: 14)
-        tv.textColor = .white
+        tv.font = UIFont.systemFont(ofSize: 14)
+        tv.textColor = .black
         tv.isEditable = false
         tv.isScrollEnabled = false
         tv.backgroundColor = .shishaColor
@@ -101,7 +101,8 @@ class LogCell: UICollectionViewCell {
         button.setImage(UIImage(systemName: "star"), for: .normal)
         button.addTarget(self, action: #selector(handleLikeButtonTapped), for: .touchUpInside)
         button.setDimensions(width: 20, height: 20)
-        button.tintColor = .shishaColor
+//        button.tintColor = .shishaColor
+        button.tintColor = UIColor.rgb(red: 232, green: 75, blue: 110)
         button.imageView?.contentMode = .scaleAspectFit
         return button
     }()

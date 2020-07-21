@@ -27,7 +27,7 @@ class ProfileController: UICollectionViewController {
     
     // ログに入るデータを格納
     private var logs = [Log]()
-    // スポットに入るデータを格納予定(後で)(暫定的に適当にLogを入れている)
+    // スポットに入るデータを格納
     private var spots = [Spot]()
     // お気に入りのログに関するデータを格納
     private var likeLogs = [Log]()
@@ -183,11 +183,11 @@ extension ProfileController{
             switch selectedFilter{
             case .locations:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: spotCellIdentifier, for: indexPath) as! SpotCell
-                cell.spot = currentDataSource[indexPath.row] as! Spot
+                cell.spot = currentDataSource[indexPath.row] as? Spot
                 return cell
             default:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! LogCell
-                cell.log = currentDataSource[indexPath.row] as! Log
+                cell.log = currentDataSource[indexPath.row] as? Log
                 return cell
             }
         }

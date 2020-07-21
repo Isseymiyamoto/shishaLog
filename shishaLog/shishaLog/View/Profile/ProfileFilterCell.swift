@@ -18,16 +18,16 @@ class ProfileFilterCell: UICollectionViewCell {
     
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .lightGray
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = .systemGray
+        label.font = UIFont.boldSystemFont(ofSize: 14)
         label.text = "Test Filter"
         return label
     }()
     
     override var isSelected: Bool {
         didSet{
-            titleLabel.font = isSelected ? UIFont.boldSystemFont(ofSize: 16) : UIFont.systemFont(ofSize: 14)
-            titleLabel.textColor = isSelected ? .shishaColor : .lightGray
+//            titleLabel.font = isSelected ? UIFont.boldSystemFont(ofSize: 16) : UIFont.boldSystemFont(ofSize: 14)
+            titleLabel.textColor = isSelected ? .systemBlue : .systemGray
         }
     }
     
