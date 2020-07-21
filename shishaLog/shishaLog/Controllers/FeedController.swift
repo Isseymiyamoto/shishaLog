@@ -112,9 +112,13 @@ extension FeedController{
         return cell
     }
     
-//    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        // Logを詳しく見るためのLogControllerにでも飛ばそう
-//    }
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? LogCell else { return }
+        guard let log = cell.log else { return }
+        
+        let controller = LogController(log: log)
+        navigationController?.pushViewController(controller, animated: true)
+    }
     
 }
 
