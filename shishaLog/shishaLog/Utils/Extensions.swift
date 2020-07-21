@@ -92,8 +92,8 @@ extension UIColor {
         return UIColor(red: red/255, green: green/255, blue: blue/255, alpha: 1)
     }
     
-//    static let shishaColor = UIColor.rgb(red: 209, green: 111, blue: 105)
     static let shishaColor = UIColor.rgb(red: 199, green: 230, blue: 230)
+    static let shishaColor2 = UIColor.rgb(red: 209, green: 111, blue: 105)
 }
 
 // MARK: - UIViewController

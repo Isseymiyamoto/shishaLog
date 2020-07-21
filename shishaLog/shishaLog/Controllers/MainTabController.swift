@@ -33,7 +33,7 @@ class MainTabController: UITabBarController{
     
     let actionButton: UIButton = {
         let button = UIButton(type: .system)
-        button.tintColor = .white
+        button.tintColor = .black
         button.backgroundColor = .shishaColor
         button.setImage(UIImage(systemName: "square.and.pencil"), for: .normal)
         button.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)

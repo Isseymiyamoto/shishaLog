@@ -11,6 +11,8 @@ import UIKit
 private let reuseIdentifier = "LogHeader"
 
 class LogController: UICollectionViewController {
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
