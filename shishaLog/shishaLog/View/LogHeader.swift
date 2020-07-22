@@ -102,6 +102,13 @@ class LogHeader: UICollectionReusableView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        let labelStack = UIStackView(arrangedSubviews: [fullnameLabel, usernameLabel])
+        labelStack.axis = .vertical
+        labelStack.spacing = -6
+        
+        let imageCaptionStack = UIStackView(arrangedSubviews: [profileImageView, labelStack])
+        imageCaptionStack.spacing = 12
     }
     
     required init?(coder: NSCoder) {
