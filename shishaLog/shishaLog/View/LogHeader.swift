@@ -19,7 +19,7 @@ class LogHeader: UICollectionReusableView {
     weak var delegate: LogHeaderDelegate?
     
     var log: Log? {
-        didSet { print("DEBUG: successfully set up the log ") }
+        didSet { configure() }
     }
     
     private lazy var profileImageView: UIImageView = {
@@ -103,12 +103,18 @@ class LogHeader: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        
         let labelStack = UIStackView(arrangedSubviews: [fullnameLabel, usernameLabel])
         labelStack.axis = .vertical
         labelStack.spacing = -6
         
         let imageCaptionStack = UIStackView(arrangedSubviews: [profileImageView, labelStack])
         imageCaptionStack.spacing = 12
+        
+        addSubview(imageCaptionStack)
+        imageCaptionStack.anchor(top: safeAreaLayoutGuide.topAnchor, left: leftAnchor, right: rightAnchor,
+                                 paddingTop: 16, paddingLeft: 16, paddingRight: 16)
+        
     }
     
     required init?(coder: NSCoder) {
@@ -124,4 +130,10 @@ class LogHeader: UICollectionReusableView {
     
     // MARK: - Helpers
         
+    func configure(){
+        guard let log = log else { return }
+        guard let user = log.user as? User else { return }
+        
+        profileImageView.sd_setImage(with: user.profileImageUrl, completed: nil)
+    }
 }

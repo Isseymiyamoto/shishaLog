@@ -84,9 +84,11 @@ class FeedController: UICollectionViewController {
         collectionView.backgroundColor = .white
         
         // 後でlogo入れる
-        let imageView = UIImageView(image: UIImage(systemName: "pencil.circle"))
+//        let imageView = UIImageView(image: UIImage(systemName: "pencil.circle"))
+        let imageView = UIImageView(image: UIImage(named: "shsihaLog"))
         imageView.tintColor = .gray
         imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
         imageView.setDimensions(width: 32, height: 32)
         navigationItem.titleView = imageView
         
