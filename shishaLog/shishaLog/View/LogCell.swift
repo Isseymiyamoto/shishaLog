@@ -116,12 +116,12 @@ class LogCell: UICollectionViewCell {
         
         backgroundColor = .white
         
-        let topInfoStack = UIStackView(arrangedSubviews: [infoLabel, likeButton])
-        topInfoStack.axis = .horizontal
-        topInfoStack.distribution = .equalSpacing
-        topInfoStack.alignment = .center
+//        let topInfoStack = UIStackView(arrangedSubviews: [infoLabel, likeButton])
+//        topInfoStack.axis = .horizontal
+//        topInfoStack.distribution = .equalSpacing
+//        topInfoStack.alignment = .center
         
-        let rightSideStack = UIStackView(arrangedSubviews: [topInfoStack, locationLabel, mixTextView, feelingLabel])
+        let rightSideStack = UIStackView(arrangedSubviews: [infoLabel, locationLabel, mixTextView, feelingLabel])
         rightSideStack.axis = .vertical
         rightSideStack.spacing = 12
         rightSideStack.distribution = .fillProportionally
@@ -136,6 +136,9 @@ class LogCell: UICollectionViewCell {
         
         addSubview(stack)
         stack.anchor(top: topAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 12, paddingLeft: 12, paddingRight: 12)
+        
+        addSubview(likeButton)
+        likeButton.anchor(bottom: bottomAnchor, right: rightAnchor, paddingBottom: 12, paddingRight: 12)
         
         addSubview(underlineView)
         underlineView.anchor(left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, height: 1)

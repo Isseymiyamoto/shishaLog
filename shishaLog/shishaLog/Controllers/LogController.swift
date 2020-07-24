@@ -51,12 +51,19 @@ class LogController: UICollectionViewController {
         view.backgroundColor = .white
         collectionView.backgroundColor = .white
         
+        configureNavigationBar()
+        
         self.collectionView!.register(LogCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView.register(LogHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: logHeaderIdentifier)
         
-        navigationItem.title = "スレッド"
         
         
+        
+    }
+    
+    func configureNavigationBar(){
+        navigationItem.title = "ログ"
+        navigationController?.navigationBar.tintColor = .systemBlue
     }
    
 

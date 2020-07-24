@@ -52,6 +52,13 @@ class LogHeader: UICollectionReusableView {
         return label
     }()
     
+    private let captionLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 20)
+        label.numberOfLines = 6
+        return label
+    }()
+    
     private let dateLabel: UILabel = {
         let label = UILabel()
         label.textColor = .lightGray
@@ -115,6 +122,17 @@ class LogHeader: UICollectionReusableView {
         imageCaptionStack.anchor(top: safeAreaLayoutGuide.topAnchor, left: leftAnchor, right: rightAnchor,
                                  paddingTop: 16, paddingLeft: 16, paddingRight: 16)
         
+        addSubview(dateLabel)
+        dateLabel.anchor(top: imageCaptionStack.bottomAnchor, left: leftAnchor, paddingTop: 20,
+                         paddingLeft: 16)
+        
+        addSubview(optionsButton)
+        optionsButton.centerY(inView: imageCaptionStack)
+        optionsButton.anchor(right: rightAnchor, paddingRight: 8)
+        
+        addSubview(statsView)
+        statsView.anchor(top: dateLabel.bottomAnchor, left: leftAnchor,
+                         right: rightAnchor, paddingTop: 12, height: 40)
     }
     
     required init?(coder: NSCoder) {
@@ -131,9 +149,10 @@ class LogHeader: UICollectionReusableView {
     // MARK: - Helpers
         
     func configure(){
-        guard let log = log else { return }
-        guard let user = log.user as? User else { return }
+        guard let user = log?.user else { return }
         
         profileImageView.sd_setImage(with: user.profileImageUrl, completed: nil)
+        fullnameLabel.text = user.fullname
+        usernameLabel.text = user.username
     }
 }
