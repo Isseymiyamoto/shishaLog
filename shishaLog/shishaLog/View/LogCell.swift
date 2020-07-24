@@ -58,15 +58,6 @@ class LogCell: UICollectionViewCell {
         label.font = UIFont.boldSystemFont(ofSize: 16)
         return label
     }()
-//
-//    private let mixLabel: UILabel = {
-//        let label = UILabel()
-//        label.numberOfLines = 0
-//        label.text = "レモンドロップ4g\nレモン2g\nバニラ2g"
-//        label.font = UIFont.systemFont(ofSize: 14)
-//        label.backgroundColor = .shishaColor
-//        return label
-//    }()
     
     private let mixTextView: UITextView = {
         let tv = UITextView()

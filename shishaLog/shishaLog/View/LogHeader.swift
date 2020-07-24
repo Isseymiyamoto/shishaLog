@@ -52,10 +52,32 @@ class LogHeader: UICollectionReusableView {
         return label
     }()
     
-    private let captionLabel: UILabel = {
+    private lazy var locationLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 20)
-        label.numberOfLines = 6
+        label.text = "Soi 61"
+        label.textColor = .systemBlue
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        return label
+    }()
+    
+    private let mixTextView: UITextView = {
+        let tv = UITextView()
+        tv.text = "レモンドロップ4g\nレモン2g\nバニラ2g"
+        tv.font = UIFont.systemFont(ofSize: 14)
+        tv.textColor = .black
+        tv.isEditable = false
+        tv.isScrollEnabled = false
+        tv.backgroundColor = .shishaColor
+        tv.layer.cornerRadius = 4
+        tv.backgroundColor?.withAlphaComponent(0.1)
+        return tv
+    }()
+    
+    private let feelingLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.text = "ナハラと豚のレモン\n酸っぱい甘く無い\nそうじゃ無い感"
+        label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
     
@@ -71,7 +93,9 @@ class LogHeader: UICollectionReusableView {
     private lazy var optionsButton: UIButton = {
         let button = UIButton(type: .system)
         button.tintColor = .lightGray
-        button.setImage(UIImage(named: "down_arrow_24pt"), for: .normal)
+        button.setImage(UIImage(systemName: "chevron.down"), for: .normal)
+        button.imageView?.contentMode = .scaleToFill
+        button.setDimensions(width: 16, height: 16)
         return button
     }()
     
@@ -128,7 +152,7 @@ class LogHeader: UICollectionReusableView {
         
         addSubview(optionsButton)
         optionsButton.centerY(inView: imageCaptionStack)
-        optionsButton.anchor(right: rightAnchor, paddingRight: 8)
+        optionsButton.anchor(right: rightAnchor, paddingRight: 16)
         
         addSubview(statsView)
         statsView.anchor(top: dateLabel.bottomAnchor, left: leftAnchor,
