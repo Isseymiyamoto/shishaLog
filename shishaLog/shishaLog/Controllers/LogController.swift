@@ -19,6 +19,7 @@ class LogController: UICollectionViewController {
     private var replies = [Log]() {
         didSet{ collectionView.reloadData() }
     }
+    private var actionSheetLauncher: ActionSheetLauncher!
     
     
     // MARK: - Lifecycle
@@ -57,14 +58,17 @@ class LogController: UICollectionViewController {
         self.collectionView!.register(LogCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView.register(LogHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: logHeaderIdentifier)
         
-        
-        
-        
     }
     
     func configureNavigationBar(){
         navigationItem.title = "ログ"
         navigationController?.navigationBar.tintColor = .systemBlue
+    }
+    
+    fileprivate func showActionSheet(forUser user: User){
+        actionSheetLauncher = ActionSheetLauncher(user: user)
+        actionSheetLauncher.delegate = self
+        actionSheetLauncher.show()
     }
    
 
@@ -114,7 +118,13 @@ extension LogController: UICollectionViewDelegateFlowLayout{
 
 extension LogController: LogHeaderDelegate{
     func showActionSheet() {
-        print("DEBUG: option button is tapped")
+        if log.user.isCurrentUser{
+            showActionSheet(forUser: log.user)
+        }else{
+            var user = log.user
+            showActionSheet(forUser: user)
+        }
+        
     }
     
     func handleLikeButtonTapped(_ header: LogHeader) {
@@ -136,6 +146,22 @@ extension LogController: LogHeaderDelegate{
     }
 }
 
+// MARK: - ActionSheetLauncherDelegate
+
+extension LogController: ActionSheetLauncherDelegate{
+    func didSelect(option: ActionSheetOptions) {
+        switch option {
+        case .follow(let user):
+            print("DEBUG: follow some user with \(user.fullname)")
+        case .unfollow(let user):
+            print("DEBUG: unfollow some user with \(user.fullname)")
+        case .report:
+            print("DEBUG: report tweet..")
+        case .delete:
+            print("DEBUG: delete tweet..")
+        }
+    }
+}
 
 
 
