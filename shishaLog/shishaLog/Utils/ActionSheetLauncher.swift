@@ -63,6 +63,8 @@ class ActionSheetLauncher: NSObject {
     init(user: User) {
         self.user = user
         super.init()
+        
+        configureTableView()
     }
     
     
@@ -75,8 +77,37 @@ class ActionSheetLauncher: NSObject {
         }
     }
     
-    
     // MARK: - Helpers
     
+    func showTableView(_ shouldShow: Bool){
+        guard let window = window else { return }
+        guard let height = tableViewHeight else { return }
+        let y = shouldShow ? window.frame.height - height : window.frame.height
+        tableView.frame.origin.y = y
+    }
+    
+    func configureTableView(){
+        tableView.backgroundColor = .white
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.rowHeight = 60
+        tableView.separatorStyle = .none
+        tableView.layer.cornerRadius = 5
+        tableView.isScrollEnabled = false
+        
+        
+    }
+    
+}
+
+// MARK: - UITableViewDelegate
+
+extension ActionSheetLauncher: UITableViewDelegate {
+    
+}
+
+// MARK: - UITableViewDataSource
+
+extension ActionSheetLauncher: UITableViewDataSource{
     
 }
