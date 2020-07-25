@@ -112,8 +112,18 @@ extension LogController: UICollectionViewDelegateFlowLayout{
 // MARK: - LogHeaderDelegate
 
 extension LogController: LogHeaderDelegate{
-    func handleProfileImageTapped(_ jumpToUser: User) {
+    func handleLikeButtonTapped(_ header: LogHeader) {
+        guard let log = header.log else { return }
         
+        LogService.shared.likeLog(log: log) { (err, ref) in
+            header.log?.didLike.toggle()
+            
+            let likes = log.didLike ? log.likes - 1 : log.likes + 1
+            header.log?.likes = likes
+        }
+    }
+    
+    func handleProfileImageTapped(_ jumpToUser: User) {
         let controller = ProfileController(user: jumpToUser)
         navigationController?.pushViewController(controller, animated: true)
         

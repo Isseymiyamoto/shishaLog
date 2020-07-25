@@ -33,6 +33,10 @@ struct LogViewModel {
         return "@\(user.username)"
     }
     
+    var locationLabelText: String{
+        return "@\(log.location)"
+    }
+    
     var headerTimeStamp: String {
         let formatter = DateFormatter()
         formatter.dateFormat = "h:mm a ・ MM/dd/yyyy"

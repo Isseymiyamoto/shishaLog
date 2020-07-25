@@ -10,6 +10,7 @@ import UIKit
 
 protocol LogHeaderDelegate: class {
     func handleProfileImageTapped(_ jumpToUser: User)
+    func handleLikeButtonTapped(_ header: LogHeader)
 }
 
 class LogHeader: UICollectionReusableView {
@@ -99,6 +100,16 @@ class LogHeader: UICollectionReusableView {
         return button
     }()
     
+    lazy var likeButton: UIButton = {
+            let button = UIButton(type: .system)
+            button.setImage(UIImage(systemName: "star"), for: .normal)
+            button.addTarget(self, action: #selector(handleLikeButtonTapped), for: .touchUpInside)
+            button.setDimensions(width: 20, height: 20)
+            button.tintColor = UIColor.rgb(red: 232, green: 75, blue: 110)
+            button.imageView?.contentMode = .scaleAspectFit
+            return button
+        }()
+    
     private lazy var retweetsLabel = UILabel()
     private lazy var likesLabel = UILabel()
     
@@ -166,6 +177,9 @@ class LogHeader: UICollectionReusableView {
         addSubview(statsView)
         statsView.anchor(top: dateLabel.bottomAnchor, left: leftAnchor,
                          right: rightAnchor, paddingTop: 12, height: 40)
+        
+        addSubview(likeButton)
+        likeButton.anchor(bottom: statsView.topAnchor, right: rightAnchor, paddingBottom: 12, paddingRight: 12)
     }
     
     required init?(coder: NSCoder) {
@@ -179,20 +193,27 @@ class LogHeader: UICollectionReusableView {
         delegate?.handleProfileImageTapped(user)
     }
     
+    @objc func handleLikeButtonTapped(){
+        delegate?.handleLikeButtonTapped(self)
+    }
+    
     // MARK: - Helpers
         
     func configure(){
         guard let log = log else { return }
-        let user = log.user
+        let viewModel = LogViewModel(log: log)
         
-        profileImageView.sd_setImage(with: user.profileImageUrl, completed: nil)
-        fullnameLabel.text = user.fullname
-        usernameLabel.text = "@" + user.username
+        profileImageView.sd_setImage(with: viewModel.profileImageUrl, completed: nil)
+        fullnameLabel.text = log.user.fullname
+        usernameLabel.text = viewModel.usernameText
         
-        locationLabel.text = "@" + log.location
+        locationLabel.text = viewModel.locationLabelText
         mixTextView.text = log.mix
         feelingLabel.text = log.feeling
         
+        dateLabel.text = viewModel.headerTimeStamp
         
+        likeButton.setImage(viewModel.likeButtonImage, for: .normal)
+        likeButton.tintColor = viewModel.likeButtonTintColor
     }
 }
