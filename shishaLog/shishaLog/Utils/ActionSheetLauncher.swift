@@ -95,7 +95,7 @@ class ActionSheetLauncher: NSObject {
         tableView.layer.cornerRadius = 5
         tableView.isScrollEnabled = false
         
-        
+        tableView.register(ActionSheetCell.self, forCellReuseIdentifier: reuseIdentifier)
     }
     
 }
@@ -103,7 +103,17 @@ class ActionSheetLauncher: NSObject {
 // MARK: - UITableViewDelegate
 
 extension ActionSheetLauncher: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return footerView
+    }
     
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 60
+    }
+    
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//
+//    }
 }
 
 // MARK: - UITableViewDataSource
@@ -114,7 +124,7 @@ extension ActionSheetLauncher: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier)!
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! ActionSheetCell
         return cell
     }
     
