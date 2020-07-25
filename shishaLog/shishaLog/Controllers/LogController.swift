@@ -20,6 +20,7 @@ class LogController: UICollectionViewController {
         didSet{ collectionView.reloadData() }
     }
     
+    
     // MARK: - Lifecycle
     
     init(log: Log){
@@ -113,7 +114,7 @@ extension LogController: UICollectionViewDelegateFlowLayout{
 
 extension LogController: LogHeaderDelegate{
     func showActionSheet() {
-        
+        print("DEBUG: option button is tapped")
     }
     
     func handleLikeButtonTapped(_ header: LogHeader) {
