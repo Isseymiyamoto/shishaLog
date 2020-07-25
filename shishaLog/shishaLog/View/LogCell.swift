@@ -58,15 +58,6 @@ class LogCell: UICollectionViewCell {
         label.font = UIFont.boldSystemFont(ofSize: 16)
         return label
     }()
-//
-//    private let mixLabel: UILabel = {
-//        let label = UILabel()
-//        label.numberOfLines = 0
-//        label.text = "レモンドロップ4g\nレモン2g\nバニラ2g"
-//        label.font = UIFont.systemFont(ofSize: 14)
-//        label.backgroundColor = .shishaColor
-//        return label
-//    }()
     
     private let mixTextView: UITextView = {
         let tv = UITextView()
@@ -116,12 +107,12 @@ class LogCell: UICollectionViewCell {
         
         backgroundColor = .white
         
-        let topInfoStack = UIStackView(arrangedSubviews: [infoLabel, likeButton])
-        topInfoStack.axis = .horizontal
-        topInfoStack.distribution = .equalSpacing
-        topInfoStack.alignment = .center
+//        let topInfoStack = UIStackView(arrangedSubviews: [infoLabel, likeButton])
+//        topInfoStack.axis = .horizontal
+//        topInfoStack.distribution = .equalSpacing
+//        topInfoStack.alignment = .center
         
-        let rightSideStack = UIStackView(arrangedSubviews: [topInfoStack, locationLabel, mixTextView, feelingLabel])
+        let rightSideStack = UIStackView(arrangedSubviews: [infoLabel, locationLabel, mixTextView, feelingLabel])
         rightSideStack.axis = .vertical
         rightSideStack.spacing = 12
         rightSideStack.distribution = .fillProportionally
@@ -136,6 +127,9 @@ class LogCell: UICollectionViewCell {
         
         addSubview(stack)
         stack.anchor(top: topAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 12, paddingLeft: 12, paddingRight: 12)
+        
+        addSubview(likeButton)
+        likeButton.anchor(bottom: bottomAnchor, right: rightAnchor, paddingBottom: 12, paddingRight: 12)
         
         addSubview(underlineView)
         underlineView.anchor(left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, height: 1)
@@ -160,21 +154,21 @@ class LogCell: UICollectionViewCell {
     
     func configureUI(){
         guard let log = log else { return }
+        let viewModel = LogViewModel(log: log)
         
         // set image
-        profileImageView.sd_setImage(with: log.user.profileImageUrl, completed: nil)
+        profileImageView.sd_setImage(with: viewModel.profileImageUrl, completed: nil)
         // infoLabel text
-        infoLabel.attributedText = configureAttributedText(fullname: log.user.fullname, username: log.user.username, timestamp: log.timestamp)
+        infoLabel.attributedText = viewModel.userInfoText
         // location text
-        locationLabel.text = "@" + log.location
+        locationLabel.text = viewModel.locationLabelText
         // mix text
         mixTextView.text = log.mix
         // feeling text
         feelingLabel.text = log.feeling
         
-        if(log.didLike){
-            likeButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
-        }
+        likeButton.setImage(viewModel.likeButtonImage, for: .normal)
+        likeButton.tintColor = viewModel.likeButtonTintColor
     }
     
     private func configureAttributedText(fullname: String, username: String, timestamp: Date) -> NSAttributedString{

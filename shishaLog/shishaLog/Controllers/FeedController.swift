@@ -84,9 +84,11 @@ class FeedController: UICollectionViewController {
         collectionView.backgroundColor = .white
         
         // 後でlogo入れる
-        let imageView = UIImageView(image: UIImage(systemName: "pencil.circle"))
+//        let imageView = UIImageView(image: UIImage(systemName: "pencil.circle"))
+        let imageView = UIImageView(image: UIImage(named: "shsihaLog"))
         imageView.tintColor = .gray
         imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
         imageView.setDimensions(width: 32, height: 32)
         navigationItem.titleView = imageView
         
@@ -112,9 +114,13 @@ extension FeedController{
         return cell
     }
     
-//    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        // Logを詳しく見るためのLogControllerにでも飛ばそう
-//    }
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? LogCell else { return }
+        guard let log = cell.log else { return }
+        
+        let controller = LogController(log: log)
+        navigationController?.pushViewController(controller, animated: true)
+    }
     
 }
 

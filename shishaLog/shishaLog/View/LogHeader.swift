@@ -10,6 +10,8 @@ import UIKit
 
 protocol LogHeaderDelegate: class {
     func handleProfileImageTapped(_ jumpToUser: User)
+    func handleLikeButtonTapped(_ header: LogHeader)
+    func showActionSheet()
 }
 
 class LogHeader: UICollectionReusableView {
@@ -19,7 +21,7 @@ class LogHeader: UICollectionReusableView {
     weak var delegate: LogHeaderDelegate?
     
     var log: Log? {
-        didSet { print("DEBUG: successfully set up the log ") }
+        didSet { configure() }
     }
     
     private lazy var profileImageView: UIImageView = {
@@ -52,6 +54,35 @@ class LogHeader: UICollectionReusableView {
         return label
     }()
     
+    private lazy var locationLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Soi 61"
+        label.textColor = .systemBlue
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        return label
+    }()
+    
+    private let mixTextView: UITextView = {
+        let tv = UITextView()
+        tv.text = "レモンドロップ4g\nレモン2g\nバニラ2g"
+        tv.font = UIFont.systemFont(ofSize: 14)
+        tv.textColor = .black
+        tv.isEditable = false
+        tv.isScrollEnabled = false
+        tv.backgroundColor = .shishaColor
+        tv.layer.cornerRadius = 4
+        tv.backgroundColor?.withAlphaComponent(0.1)
+        return tv
+    }()
+    
+    private let feelingLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.text = "ナハラと豚のレモン\n酸っぱい甘く無い\nそうじゃ無い感"
+        label.font = UIFont.systemFont(ofSize: 14)
+        return label
+    }()
+    
     private let dateLabel: UILabel = {
         let label = UILabel()
         label.textColor = .lightGray
@@ -64,11 +95,23 @@ class LogHeader: UICollectionReusableView {
     private lazy var optionsButton: UIButton = {
         let button = UIButton(type: .system)
         button.tintColor = .lightGray
-        button.setImage(UIImage(named: "down_arrow_24pt"), for: .normal)
+        button.setImage(UIImage(systemName: "chevron.down"), for: .normal)
+        button.imageView?.contentMode = .scaleToFill
+        button.addTarget(self, action: #selector(handleActionSheetShow), for: .touchUpInside)
+        button.setDimensions(width: 16, height: 16)
         return button
     }()
     
-    private lazy var retweetsLabel = UILabel()
+    lazy var likeButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "star"), for: .normal)
+        button.addTarget(self, action: #selector(handleLikeButtonTapped), for: .touchUpInside)
+        button.setDimensions(width: 20, height: 20)
+        button.tintColor = UIColor.rgb(red: 232, green: 75, blue: 110)
+        button.imageView?.contentMode = .scaleAspectFit
+        return button
+    }()
+    
     private lazy var likesLabel = UILabel()
     
     private lazy var statsView: UIView = {
@@ -80,13 +123,10 @@ class LogHeader: UICollectionReusableView {
         divider1.anchor(top: view.topAnchor, left: view.leftAnchor,
                         right: view.rightAnchor, paddingLeft: 8, height: 1.0)
         
-        let stack = UIStackView(arrangedSubviews: [retweetsLabel, likesLabel])
-        stack.axis = .horizontal
-        stack.spacing = 12
         
-        view.addSubview(stack)
-        stack.centerY(inView: view)
-        stack.anchor(left: view.leftAnchor, paddingLeft: 16)
+        view.addSubview(likesLabel)
+        likesLabel.centerY(inView: view)
+        likesLabel.anchor(left: view.leftAnchor, paddingLeft: 16)
         
         let divider2 = UIView()
         divider2.backgroundColor = .systemGroupedBackground
@@ -102,6 +142,42 @@ class LogHeader: UICollectionReusableView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        
+        let labelStack = UIStackView(arrangedSubviews: [fullnameLabel, usernameLabel])
+        labelStack.axis = .vertical
+        labelStack.spacing = -6
+        
+        let imageCaptionStack = UIStackView(arrangedSubviews: [profileImageView, labelStack])
+        imageCaptionStack.spacing = 12
+        
+        addSubview(imageCaptionStack)
+        imageCaptionStack.anchor(top: safeAreaLayoutGuide.topAnchor, left: leftAnchor, right: rightAnchor,
+                                 paddingTop: 16, paddingLeft: 16, paddingRight: 16)
+        
+        let captionLabelStack = UIStackView(arrangedSubviews: [locationLabel, mixTextView, feelingLabel])
+        captionLabelStack.axis = .vertical
+        captionLabelStack.spacing = 12
+        captionLabelStack.distribution = .fillProportionally
+        captionLabelStack.alignment = .fill
+        
+        addSubview(captionLabelStack)
+        captionLabelStack.anchor(top: imageCaptionStack.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 20, paddingLeft: 16, paddingRight: 16)
+        
+        addSubview(dateLabel)
+        dateLabel.anchor(top: captionLabelStack.bottomAnchor, left: leftAnchor, paddingTop: 20,
+                         paddingLeft: 16)
+        
+        addSubview(optionsButton)
+        optionsButton.centerY(inView: imageCaptionStack)
+        optionsButton.anchor(right: rightAnchor, paddingRight: 16)
+        
+        addSubview(statsView)
+        statsView.anchor(top: dateLabel.bottomAnchor, left: leftAnchor,
+                         right: rightAnchor, paddingTop: 12, height: 40)
+        
+        addSubview(likeButton)
+        likeButton.anchor(bottom: statsView.topAnchor, right: rightAnchor, paddingBottom: 12, paddingRight: 12)
     }
     
     required init?(coder: NSCoder) {
@@ -115,6 +191,32 @@ class LogHeader: UICollectionReusableView {
         delegate?.handleProfileImageTapped(user)
     }
     
+    @objc func handleLikeButtonTapped(){
+        delegate?.handleLikeButtonTapped(self)
+    }
+    
+    @objc func handleActionSheetShow(){
+        delegate?.showActionSheet()
+    }
+    
     // MARK: - Helpers
         
+    func configure(){
+        guard let log = log else { return }
+        let viewModel = LogViewModel(log: log)
+        
+        profileImageView.sd_setImage(with: viewModel.profileImageUrl, completed: nil)
+        fullnameLabel.text = log.user.fullname
+        usernameLabel.text = viewModel.usernameText
+        
+        locationLabel.text = viewModel.locationLabelText
+        mixTextView.text = log.mix
+        feelingLabel.text = log.feeling
+        
+        dateLabel.text = viewModel.headerTimeStamp
+        
+        likesLabel.attributedText = viewModel.likesAttributedString
+        likeButton.setImage(viewModel.likeButtonImage, for: .normal)
+        likeButton.tintColor = viewModel.likeButtonTintColor
+    }
 }
