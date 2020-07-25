@@ -147,7 +147,7 @@ extension ActionSheetLauncher: UITableViewDelegate {
 
 extension ActionSheetLauncher: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return viewModel.options.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

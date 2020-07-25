@@ -20,7 +20,7 @@ class ActionSheetCell: UITableViewCell{
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFit
         iv.clipsToBounds = true
-        iv.image = UIImage(named: "shishaLog")
+        iv.image = UIImage(named: "shsihaLog")
         return iv
     }()
     
