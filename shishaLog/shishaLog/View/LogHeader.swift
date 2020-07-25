@@ -11,6 +11,7 @@ import UIKit
 protocol LogHeaderDelegate: class {
     func handleProfileImageTapped(_ jumpToUser: User)
     func handleLikeButtonTapped(_ header: LogHeader)
+    func showActionSheet()
 }
 
 class LogHeader: UICollectionReusableView {
@@ -96,21 +97,21 @@ class LogHeader: UICollectionReusableView {
         button.tintColor = .lightGray
         button.setImage(UIImage(systemName: "chevron.down"), for: .normal)
         button.imageView?.contentMode = .scaleToFill
+        button.addTarget(self, action: #selector(handleActionSheetShow), for: .touchUpInside)
         button.setDimensions(width: 16, height: 16)
         return button
     }()
     
     lazy var likeButton: UIButton = {
-            let button = UIButton(type: .system)
-            button.setImage(UIImage(systemName: "star"), for: .normal)
-            button.addTarget(self, action: #selector(handleLikeButtonTapped), for: .touchUpInside)
-            button.setDimensions(width: 20, height: 20)
-            button.tintColor = UIColor.rgb(red: 232, green: 75, blue: 110)
-            button.imageView?.contentMode = .scaleAspectFit
-            return button
-        }()
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "star"), for: .normal)
+        button.addTarget(self, action: #selector(handleLikeButtonTapped), for: .touchUpInside)
+        button.setDimensions(width: 20, height: 20)
+        button.tintColor = UIColor.rgb(red: 232, green: 75, blue: 110)
+        button.imageView?.contentMode = .scaleAspectFit
+        return button
+    }()
     
-    private lazy var retweetsLabel = UILabel()
     private lazy var likesLabel = UILabel()
     
     private lazy var statsView: UIView = {
@@ -122,13 +123,10 @@ class LogHeader: UICollectionReusableView {
         divider1.anchor(top: view.topAnchor, left: view.leftAnchor,
                         right: view.rightAnchor, paddingLeft: 8, height: 1.0)
         
-        let stack = UIStackView(arrangedSubviews: [retweetsLabel, likesLabel])
-        stack.axis = .horizontal
-        stack.spacing = 12
         
-        view.addSubview(stack)
-        stack.centerY(inView: view)
-        stack.anchor(left: view.leftAnchor, paddingLeft: 16)
+        view.addSubview(likesLabel)
+        likesLabel.centerY(inView: view)
+        likesLabel.anchor(left: view.leftAnchor, paddingLeft: 16)
         
         let divider2 = UIView()
         divider2.backgroundColor = .systemGroupedBackground
@@ -197,6 +195,10 @@ class LogHeader: UICollectionReusableView {
         delegate?.handleLikeButtonTapped(self)
     }
     
+    @objc func handleActionSheetShow(){
+        delegate?.showActionSheet()
+    }
+    
     // MARK: - Helpers
         
     func configure(){
@@ -213,6 +215,7 @@ class LogHeader: UICollectionReusableView {
         
         dateLabel.text = viewModel.headerTimeStamp
         
+        likesLabel.attributedText = viewModel.likesAttributedString
         likeButton.setImage(viewModel.likeButtonImage, for: .normal)
         likeButton.tintColor = viewModel.likeButtonTintColor
     }

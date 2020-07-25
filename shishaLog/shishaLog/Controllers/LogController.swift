@@ -112,7 +112,12 @@ extension LogController: UICollectionViewDelegateFlowLayout{
 // MARK: - LogHeaderDelegate
 
 extension LogController: LogHeaderDelegate{
+    func showActionSheet() {
+        
+    }
+    
     func handleLikeButtonTapped(_ header: LogHeader) {
+        print("DEBUG: 処理は走っておりますよ")
         guard let log = header.log else { return }
         
         LogService.shared.likeLog(log: log) { (err, ref) in

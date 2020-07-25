@@ -154,21 +154,21 @@ class LogCell: UICollectionViewCell {
     
     func configureUI(){
         guard let log = log else { return }
+        let viewModel = LogViewModel(log: log)
         
         // set image
-        profileImageView.sd_setImage(with: log.user.profileImageUrl, completed: nil)
+        profileImageView.sd_setImage(with: viewModel.profileImageUrl, completed: nil)
         // infoLabel text
-        infoLabel.attributedText = configureAttributedText(fullname: log.user.fullname, username: log.user.username, timestamp: log.timestamp)
+        infoLabel.attributedText = viewModel.userInfoText
         // location text
-        locationLabel.text = "@" + log.location
+        locationLabel.text = viewModel.locationLabelText
         // mix text
         mixTextView.text = log.mix
         // feeling text
         feelingLabel.text = log.feeling
         
-        if(log.didLike){
-            likeButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
-        }
+        likeButton.setImage(viewModel.likeButtonImage, for: .normal)
+        likeButton.tintColor = viewModel.likeButtonTintColor
     }
     
     private func configureAttributedText(fullname: String, username: String, timestamp: Date) -> NSAttributedString{

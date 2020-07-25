@@ -63,6 +63,10 @@ struct LogViewModel {
         return UIImage(systemName: imageName)!
     }
     
+    var likesAttributedString: NSAttributedString? {
+        return attributedText(withValue: log.likes, text: " いいね")
+    }
+    
     // MARK: - Lifecycle
     
     init(log: Log) {
