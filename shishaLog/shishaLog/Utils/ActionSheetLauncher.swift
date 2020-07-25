@@ -109,5 +109,14 @@ extension ActionSheetLauncher: UITableViewDelegate {
 // MARK: - UITableViewDataSource
 
 extension ActionSheetLauncher: UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier)!
+        return cell
+    }
+    
     
 }
