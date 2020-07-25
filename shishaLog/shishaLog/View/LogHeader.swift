@@ -146,8 +146,17 @@ class LogHeader: UICollectionReusableView {
         imageCaptionStack.anchor(top: safeAreaLayoutGuide.topAnchor, left: leftAnchor, right: rightAnchor,
                                  paddingTop: 16, paddingLeft: 16, paddingRight: 16)
         
+        let captionLabelStack = UIStackView(arrangedSubviews: [locationLabel, mixTextView, feelingLabel])
+        captionLabelStack.axis = .vertical
+        captionLabelStack.spacing = 12
+        captionLabelStack.distribution = .fillProportionally
+        captionLabelStack.alignment = .fill
+        
+        addSubview(captionLabelStack)
+        captionLabelStack.anchor(top: imageCaptionStack.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 20, paddingLeft: 16, paddingRight: 16)
+        
         addSubview(dateLabel)
-        dateLabel.anchor(top: imageCaptionStack.bottomAnchor, left: leftAnchor, paddingTop: 20,
+        dateLabel.anchor(top: captionLabelStack.bottomAnchor, left: leftAnchor, paddingTop: 20,
                          paddingLeft: 16)
         
         addSubview(optionsButton)
@@ -173,10 +182,17 @@ class LogHeader: UICollectionReusableView {
     // MARK: - Helpers
         
     func configure(){
-        guard let user = log?.user else { return }
+        guard let log = log else { return }
+        let user = log.user
         
         profileImageView.sd_setImage(with: user.profileImageUrl, completed: nil)
         fullnameLabel.text = user.fullname
-        usernameLabel.text = user.username
+        usernameLabel.text = "@" + user.username
+        
+        locationLabel.text = "@" + log.location
+        mixTextView.text = log.mix
+        feelingLabel.text = log.feeling
+        
+        
     }
 }
