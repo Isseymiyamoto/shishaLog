@@ -121,7 +121,7 @@ extension LogController: LogHeaderDelegate{
         if log.user.isCurrentUser{
             showActionSheet(forUser: log.user)
         }else{
-            var user = log.user
+            let user = log.user
             showActionSheet(forUser: user)
         }
         

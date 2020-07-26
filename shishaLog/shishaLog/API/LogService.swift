@@ -115,4 +115,17 @@ struct LogService {
         
     }
     
+    // 指定したログの削除
+    func deleteLog(withLogID logID: String){
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        REF_LOGS.child(logID).removeValue { (error, ref) in
+            if let error = error {
+                print("DEBUG: error is \(error.localizedDescription)")
+                return
+            }
+            
+        }
+    }
+    
 }
