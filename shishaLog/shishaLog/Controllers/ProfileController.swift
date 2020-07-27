@@ -178,6 +178,8 @@ extension ProfileController{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: headerIdentifier, for: indexPath) as! ProfileHeader
             cell.user = user
             cell.delegate = self
+            let logCount = String(logs.count) ?? "0"
+            cell.logCountButton.setTitle(logCount, for: .normal)
             return cell
         default:
             switch selectedFilter{

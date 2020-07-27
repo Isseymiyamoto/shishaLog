@@ -37,9 +37,9 @@ class ProfileHeader: UICollectionViewCell{
         return iv
     }()
     
-    private lazy var logCountButton: UIButton = {
+    lazy var logCountButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("30", for: .normal)
+        button.setTitle("0", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         return button
