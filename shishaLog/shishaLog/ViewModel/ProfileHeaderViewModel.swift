@@ -40,6 +40,14 @@ struct ProfileHeaderViewModel {
         return "Loading now"
     }
     
+    var followingLabelText: String?{
+        return "\(user.stats?.following ?? 0)"
+    }
+    
+    var followersLabelText: String?{
+        return "\(user.stats?.followers ?? 0)" 
+    }
+    
     
     
     init(user: User) {

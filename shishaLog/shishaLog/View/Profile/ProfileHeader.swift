@@ -185,6 +185,8 @@ class ProfileHeader: UICollectionViewCell{
         editProfileFollowButton.setTitle(viewModel.actionButtonTitle, for: .normal)
         profileImageView.sd_setImage(with: user.profileImageUrl, completed: nil)
         fullnameLabel.text = user.fullname
+        followingCountButton.setTitle(viewModel.followingLabelText, for: .normal)
+        followedCountButton.setTitle(viewModel.followersLabelText, for: .normal)
         
     }
 }

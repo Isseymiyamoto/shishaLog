@@ -60,6 +60,8 @@ class ProfileController: UICollectionViewController {
         fetchLogs()
         fetchLikeLogs()
         fetchSpots()
+        checkIfUserIsFollowed()
+        fetchUserStats()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -115,6 +117,12 @@ class ProfileController: UICollectionViewController {
     }
     
     // フォローフォロワーステータスをfetch
+    func fetchUserStats(){
+        UserService.shared.fetchUserStats(uid: user.uid) { (stats) in
+            self.user.stats = stats
+            self.collectionView.reloadData()
+        }
+    }
     
     
     // MARK: - Selectors
