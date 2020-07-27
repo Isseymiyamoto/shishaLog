@@ -106,6 +106,17 @@ class ProfileController: UICollectionViewController {
         self.collectionView.refreshControl?.endRefreshing()
     }
     
+    // フォローしているか確認
+    func checkIfUserIsFollowed(){
+        UserService.shared.checkIfUserIsFollowed(uid: user.uid) { (result) in
+            self.user.isFollowed = result
+            self.collectionView.reloadData()
+        }
+    }
+    
+    // フォローフォロワーステータスをfetch
+    
+    
     // MARK: - Selectors
     
     @objc func handleRefresh(){
