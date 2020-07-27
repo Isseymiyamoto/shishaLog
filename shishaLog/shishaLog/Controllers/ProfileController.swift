@@ -261,8 +261,26 @@ extension ProfileController: ProfileHeaderDelegate{
             present(nav, animated: true, completion: nil)
         }
         
-        
-        // ユーザーがFollowing or notで分岐させる
+        // 相手をフォローしている時
+        if user.isFollowed{
+            UserService.shared.unfollowUser(uid: user.uid) { (err, ref) in
+                if let err = err {
+                    print("DEBUG: error is \(err.localizedDescription)")
+                    return
+                }
+                self.user.isFollowed = false
+                self.collectionView.reloadData()
+            }
+        }else{
+            UserService.shared.followUser(uid: user.uid) { (err, ref) in
+                if let err = err {
+                    print("DEBUG: error is \(err.localizedDescription)")
+                    return
+                }
+                self.user.isFollowed = true
+                self.collectionView.reloadData()
+            }
+        }
     }
 }
 
