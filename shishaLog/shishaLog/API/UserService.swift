@@ -61,8 +61,30 @@ struct UserService {
         REF_USERS.child(uid).updateChildValues(values, withCompletionBlock: completion)
     }
     
+    func followUser(uid: String, completion: @escaping((Error?, DatabaseReference) -> Void)){
+        guard let currentUid = Auth.auth().currentUser?.uid else { return }
+        
+        REF_USER_FOLLOWING.child(currentUid).updateChildValues([uid: 1]) { (error, ref) in
+            if let error = error {
+                print("DEBUG: error is \(error.localizedDescription)")
+                return
+            }
+            REF_USER_FOLLOWERS.child(uid).updateChildValues([currentUid: 1], withCompletionBlock: completion)
+        }
+    }
     
-    
+    func unfollowUser(uid: String, completion: @escaping((Error?, DatabaseReference) -> Void)){
+        guard let currentUid = Auth.auth().currentUser?.uid else { return }
+        
+        REF_USER_FOLLOWING.child(currentUid).child(uid).removeValue { (error, ref) in
+            if let error = error {
+                print("DEBUG: error is \(error.localizedDescription)")
+                return
+            }
+            
+            REF_USER_FOLLOWERS.child(uid).child(currentUid).removeValue(completionBlock: completion)
+        }
+    }
     
     
 }
