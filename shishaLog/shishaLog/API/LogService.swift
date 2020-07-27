@@ -115,6 +115,12 @@ struct LogService {
         
     }
     
+    // userによるログに関するレポート送信
+    func reportLog(logID: String){
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        REF_REPORT_LOGS.child(logID).setValue([uid: 1])
+    }
+    
     // 指定したログの削除
     func deleteLog(withLogID logID: String){
         guard let uid = Auth.auth().currentUser?.uid else { return }

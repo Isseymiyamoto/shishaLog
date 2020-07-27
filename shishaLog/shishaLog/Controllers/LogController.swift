@@ -156,7 +156,8 @@ extension LogController: ActionSheetLauncherDelegate{
         case .unfollow(let user):
             print("DEBUG: unfollow some user with \(user.fullname)")
         case .report:
-            print("DEBUG: report tweet..")
+            let logID = log.logID
+            LogService.shared.reportLog(logID: logID)
         case .delete:
             print("DEBUG: delete tweet..")
         }
