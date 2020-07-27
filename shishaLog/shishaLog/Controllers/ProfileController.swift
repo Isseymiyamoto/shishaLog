@@ -60,6 +60,8 @@ class ProfileController: UICollectionViewController {
         fetchLogs()
         fetchLikeLogs()
         fetchSpots()
+        checkIfUserIsFollowed()
+        fetchUserStats()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -105,6 +107,23 @@ class ProfileController: UICollectionViewController {
         
         self.collectionView.refreshControl?.endRefreshing()
     }
+    
+    // フォローしているか確認
+    func checkIfUserIsFollowed(){
+        UserService.shared.checkIfUserIsFollowed(uid: user.uid) { (result) in
+            self.user.isFollowed = result
+            self.collectionView.reloadData()
+        }
+    }
+    
+    // フォローフォロワーステータスをfetch
+    func fetchUserStats(){
+        UserService.shared.fetchUserStats(uid: user.uid) { (stats) in
+            self.user.stats = stats
+            self.collectionView.reloadData()
+        }
+    }
+    
     
     // MARK: - Selectors
     
@@ -178,7 +197,7 @@ extension ProfileController{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: headerIdentifier, for: indexPath) as! ProfileHeader
             cell.user = user
             cell.delegate = self
-            let logCount = String(logs.count) ?? "0"
+            let logCount = String(logs.count) 
             cell.logCountButton.setTitle(logCount, for: .normal)
             return cell
         default:
@@ -261,10 +280,26 @@ extension ProfileController: ProfileHeaderDelegate{
             present(nav, animated: true, completion: nil)
         }
         
-        else{
-            print("DEBUG: this user is not you")
+        // 相手をフォローしている時
+        if user.isFollowed{
+            UserService.shared.unfollowUser(uid: user.uid) { (err, ref) in
+                if let err = err {
+                    print("DEBUG: error is \(err.localizedDescription)")
+                    return
+                }
+                self.user.isFollowed = false
+                self.collectionView.reloadData()
+            }
+        }else{
+            UserService.shared.followUser(uid: user.uid) { (err, ref) in
+                if let err = err {
+                    print("DEBUG: error is \(err.localizedDescription)")
+                    return
+                }
+                self.user.isFollowed = true
+                self.collectionView.reloadData()
+            }
         }
-        // ユーザーがFollowing or notで分岐させる
     }
 }
 

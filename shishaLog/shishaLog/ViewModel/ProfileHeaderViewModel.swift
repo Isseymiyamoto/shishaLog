@@ -31,12 +31,24 @@ struct ProfileHeaderViewModel {
             return "プロフィールを編集する"
         }
         
-        if !user.isCurrentUser {
-            return "シーシャ友達になる"
+        if user.isFollowed {
+            return "フォロー中"
+        }else if !user.isFollowed{
+            return "フォローする"
         }
         
         return "Loading now"
     }
+    
+    var followingLabelText: String?{
+        return "\(user.stats?.following ?? 0)"
+    }
+    
+    var followersLabelText: String?{
+        return "\(user.stats?.followers ?? 0)" 
+    }
+    
+    
     
     init(user: User) {
         self.user = user
