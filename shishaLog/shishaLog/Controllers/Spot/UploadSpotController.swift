@@ -31,9 +31,8 @@ class UploadSpotController: UIViewController {
         button.titleLabel?.textAlignment = .center
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
         button.setTitleColor(.white, for: .normal)
-//        button.frame = CGRect(x: 0, y: 0, width: 96, height: 32)
-//        button.layer.cornerRadius = 32 / 2
-        button.backgroundColor = .shishaColor
+//        button.backgroundColor = .shishaColor
+        button.backgroundColor = .systemBlue
         button.addTarget(self, action: #selector(handleUploadSpot), for: .touchUpInside)
         button.layer.cornerRadius = 32 / 2
         return button
@@ -42,12 +41,14 @@ class UploadSpotController: UIViewController {
     private let cancelButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("キャンセル", for: .normal)
-        button.setTitleColor(.shishaColor, for: .normal)
+//        button.setTitleColor(.shishaColor, for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
         button.titleLabel?.textAlignment = .center
         button.backgroundColor = .white
         button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.shishaColor.cgColor
+//        button.layer.borderColor = UIColor.shishaColor.cgColor
+        button.layer.borderColor = UIColor.systemBlue.cgColor
         button.layer.cornerRadius = 32 / 2
         button.addTarget(self, action: #selector(handleCancel), for: .touchUpInside)
         return button
@@ -157,11 +158,6 @@ class UploadSpotController: UIViewController {
         view.addSubview(commentTextView)
         commentTextView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor,
                                paddingTop: 32, paddingLeft: 16, paddingRight: 16)
-        
-//        let stack = UIStackView(arrangedSubviews: [cancelButton, actionButton])
-//        stack.axis = .horizontal
-//        stack.distribution = .fillEqually
-//        stack.spacing = 8
         
         view.addSubview(buttonStack)
         buttonStack.anchor(left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor,

@@ -150,8 +150,6 @@ class ProfileHeader: UICollectionViewCell{
         editProfileFollowButton.setDimensions(width: self.frame.width - 32, height: 36)
         editProfileFollowButton.layer.cornerRadius = 6
         
-//        addSubview(filterBar)
-//        filterBar.anchor(left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, height: 50)
     }
     
     required init?(coder: NSCoder) {

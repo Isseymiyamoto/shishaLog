@@ -14,18 +14,49 @@ class UploadLogController: UIViewController {
     // MARK: - Properties
     
     private let user: User
-
-    private lazy var actionButton: UIButton = {
+    
+    private lazy var profileImageView: UIImageView = {
+        let iv = UIImageView()
+        iv.setDimensions(width: 32, height: 32)
+        iv.layer.cornerRadius = 32 / 2
+        iv.contentMode = .scaleAspectFill
+        iv.clipsToBounds = true
+        iv.image = UIImage(systemName: "person.fill")
+        return iv
+    }()
+    
+    private let actionButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("投稿する", for: .normal)
         button.titleLabel?.textAlignment = .center
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
         button.setTitleColor(.white, for: .normal)
-        button.frame = CGRect(x: 0, y: 0, width: 96, height: 32)
-        button.layer.cornerRadius = 32 / 2
-        button.backgroundColor = .shishaColor
+        button.backgroundColor = .systemBlue
         button.addTarget(self, action: #selector(handleUploadLog), for: .touchUpInside)
+        button.layer.cornerRadius = 32 / 2
         return button
+    }()
+    
+    private let cancelButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("キャンセル", for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        button.titleLabel?.textAlignment = .center
+        button.backgroundColor = .white
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.systemBlue.cgColor
+        button.layer.cornerRadius = 32 / 2
+        button.addTarget(self, action: #selector(handleCancel), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var buttonStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [cancelButton, actionButton])
+        stack.axis = .horizontal
+        stack.distribution = .fillEqually
+        stack.spacing = 8
+        return stack
     }()
     
     private let spotLabel: UILabel = {
@@ -59,13 +90,6 @@ class UploadLogController: UIViewController {
         return button
     }()
     
-//    private let spotTextField: UITextField = {
-//        let tf = Utilities().textField(withPlaceholder: "spotを教えてください")
-//        tf.textColor = .black
-//        tf.font = UIFont.systemFont(ofSize: 16)
-//        return tf
-//    }()
-    
     private let spotTextView: UITextView = {
         let tv = CaptionTextView(withPlaceholder: "spotを書き留める")
         return tv
@@ -96,7 +120,7 @@ class UploadLogController: UIViewController {
         super.viewDidLoad()
 
         configureUI()
-        
+//        configureNotificationObservers()
     }
     
     // MARK: - API
@@ -129,12 +153,37 @@ class UploadLogController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    @objc func keyboardWillShow(_ notification: Notification){
+        guard let userInfo = notification.userInfo as? [String: Any] else {
+            return
+        }
+        guard let keyboardInfo = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {
+            return
+        }
+        guard let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double else {
+            return
+        }
+        let keyboardSize = keyboardInfo.cgRectValue.size
+        //        let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0) //←
+        UIView.animate(withDuration: duration, animations: {
+            self.buttonStack.frame.origin.y -= keyboardSize.height
+        })
+    }
+    
+    @objc func keyboardWillHide(_ notification: Notification){
+        
+    }
+    
     
     // MARK: - Helpers
     
     func configureUI(){
         view.backgroundColor = .white
         configureNavigationBar()
+        
+        profileImageView.sd_setImage(with: user.profileImageUrl, completed: nil)
+        
+        
         
         let stack = UIStackView(arrangedSubviews: [spotLabel, spotTextView, mixLabel, mixTextView, feelLabel, feelTextView])
         stack.spacing = 12
@@ -144,10 +193,9 @@ class UploadLogController: UIViewController {
         view.addSubview(stack)
         stack.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 32, paddingLeft: 16, paddingRight: 16)
         
-        view.addSubview(logButton)
-        logButton.heightAnchor.constraint(equalToConstant: 48).isActive = true
-        logButton.anchor(top: stack.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 32, paddingLeft: 16, paddingRight: 16)
-        logButton.layer.cornerRadius = 48 / 2
+        view.addSubview(buttonStack)
+        buttonStack.anchor(left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor,
+                           paddingLeft: 16, paddingBottom: 12, paddingRight: 16, height: 32)
     }
     
     
@@ -155,8 +203,13 @@ class UploadLogController: UIViewController {
         navigationController?.navigationBar.barTintColor = .white
         // isTranslucent → ナビゲーションバーを透過にするかのフラグであり,ビューの開始位置を決めるフラグ
         navigationController?.navigationBar.isTranslucent = false
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(handleCancel))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: actionButton)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: profileImageView)
+        navigationItem.title = "新規ログ"
+    }
+    
+    func configureNotificationObservers(){
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_: )), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_: )), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
     

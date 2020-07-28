@@ -278,6 +278,7 @@ extension ProfileController: ProfileHeaderDelegate{
             let nav = UINavigationController(rootViewController: controller)
             nav.modalPresentationStyle = .fullScreen
             present(nav, animated: true, completion: nil)
+            return
         }
         
         // 相手をフォローしている時
