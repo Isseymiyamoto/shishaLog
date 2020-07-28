@@ -115,7 +115,7 @@ class LogCell: UICollectionViewCell {
         let rightSideStack = UIStackView(arrangedSubviews: [infoLabel, locationLabel, mixTextView, feelingLabel])
         rightSideStack.axis = .vertical
         rightSideStack.spacing = 12
-        rightSideStack.distribution = .fillProportionally
+//        rightSideStack.distribution = .fillProportionally
         rightSideStack.alignment = .fill
         
         

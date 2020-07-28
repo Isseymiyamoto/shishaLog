@@ -149,7 +149,7 @@ struct LogService {
                 print("DEBUG: error is \(error.localizedDescription)")
                 return
             }
-            REF_USER_LOGS.child(uid).removeValue { (error, ref) in
+            REF_USER_LOGS.child(uid).child(logID).removeValue { (error, ref) in
                 if let error = error {
                     print("DEBUG: error is \(error.localizedDescription)")
                     return
@@ -168,13 +168,13 @@ struct LogService {
     // 削除するログに対して、likeしているユーザーを取得し、user-likesから削除する
     func deleteSomeUserLikes(withLogID logID: String, completion: @escaping(Bool) -> Void){
         REF_LOG_LIKES.child(logID).observe(.value) { (snapshot) in
-            if !snapshot.exists(){
-                completion(false)
-                return
-            }else{
+            if snapshot.exists(){
                 let likeUserUid = snapshot.key
                 REF_USER_LIKES.child(likeUserUid).child(logID).removeValue()
                 completion(true)
+            }else{
+                completion(false)
+                return
             }
         }
     }
