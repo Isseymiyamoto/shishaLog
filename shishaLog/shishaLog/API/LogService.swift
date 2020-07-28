@@ -34,6 +34,25 @@ struct LogService {
         }
     }
     
+    
+    // フォローしている人のみlogを全件取得
+    func fetchFollowingLogs(completion: @escaping(([Log]) -> Void)){
+        guard let currentUid = Auth.auth().currentUser?.uid else { return }
+        var logs = [Log]()
+        
+        REF_USER_FOLLOWING.child(currentUid).observe(.childAdded) { (snapshot) in
+            let followingUid = snapshot.key
+            
+            REF_USER_LOGS.child(followingUid).observe(.childAdded) { (snapshot) in
+                let logID = snapshot.key
+                self.fetchLog(withLogID: logID) { (log) in
+                    logs.append(log)
+                    completion(logs)
+                }
+            }
+        }
+    }
+    
     // logを全件取得
     func fetchLogs(completion: @escaping(([Log]) -> Void)){
         var logs = [Log]()
@@ -122,18 +141,18 @@ struct LogService {
     }
     
     // 指定したログの削除
-    func deleteLog(withLogID logID: String){
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        
-        REF_LOGS.child(logID).removeValue { (error, ref) in
-            if let error = error {
-                print("DEBUG: error is \(error.localizedDescription)")
-                return
-            }
-            
-            
-            
-        }
-    }
+//    func deleteLog(withLogID logID: String){
+//        guard let uid = Auth.auth().currentUser?.uid else { return }
+//
+//        REF_LOGS.child(logID).removeValue { (error, ref) in
+//            if let error = error {
+//                print("DEBUG: error is \(error.localizedDescription)")
+//                return
+//            }
+//
+//
+//
+//        }
+//    }
     
 }
