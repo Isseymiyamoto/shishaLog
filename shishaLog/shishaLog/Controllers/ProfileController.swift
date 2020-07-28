@@ -226,6 +226,22 @@ extension ProfileController{
         return header
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch indexPath.section {
+        case 0:
+            return
+        default:
+            switch selectedFilter {
+            case .locations:
+                return
+            default:
+                guard let log = currentDataSource[indexPath.item] as? Log else { return }
+                let controller = LogController(log: log)
+                navigationController?.pushViewController(controller, animated: true)
+            }
+        }
+    }
+    
 
 }
 
