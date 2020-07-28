@@ -152,14 +152,29 @@ extension LogController: ActionSheetLauncherDelegate{
     func didSelect(option: ActionSheetOptions) {
         switch option {
         case .follow(let user):
-            print("DEBUG: follow some user with \(user.fullname)")
+            let uid = user.uid
+            UserService.shared.followUser(uid: uid) { (error, ref) in
+                if let error = error {
+                    print("DEBUG: error is \(error.localizedDescription)")
+                    return
+                }
+                print("DEBUG: follow 成功")
+            }
         case .unfollow(let user):
-            print("DEBUG: unfollow some user with \(user.fullname)")
+            let uid = user.uid
+            UserService.shared.unfollowUser(uid: uid) { (error, ref) in
+                if let error = error {
+                    print("DEBUG: error is \(error.localizedDescription)")
+                    return
+                }
+                print("DEBUG: unfollow 成功")
+            }
         case .report:
             let logID = log.logID
             LogService.shared.reportLog(logID: logID)
         case .delete:
-            print("DEBUG: delete tweet..")
+            let logID = log.logID
+            LogService.shared.deleteLog(withLogID: logID)
         }
     }
 }
