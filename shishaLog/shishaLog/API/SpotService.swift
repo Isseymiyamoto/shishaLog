@@ -83,6 +83,18 @@ struct SpotService {
         }
     }
     
+    func deleteSpot(withSpotID spotID: String, completion: @escaping(Error?, DatabaseReference) -> Void){
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        REF_SPOTS.child(spotID).removeValue { (error, ref) in
+            if let error = error {
+                print("DEBUG: error is \(error.localizedDescription)")
+                return
+            }
+            REF_USER_SPOTS.child(uid).removeValue(completionBlock: completion)
+        }
+    }
+    
     
     
 }
