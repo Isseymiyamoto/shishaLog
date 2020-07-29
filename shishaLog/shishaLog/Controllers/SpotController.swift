@@ -34,7 +34,7 @@ class SpotController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        configureCollecitonView()
     }
     
     

@@ -92,6 +92,13 @@ extension SpotFeedController{
         return cell
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let spot = spots[indexPath.item] as Spot? else { return }
+        let controller = SpotController(spot: spot)
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
