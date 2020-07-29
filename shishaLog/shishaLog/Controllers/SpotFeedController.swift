@@ -73,8 +73,6 @@ class SpotFeedController: UICollectionViewController {
     }
     
     
-    
-    
 }
 
 // MARK: - UICollectionViewDelegate / DataSource
@@ -95,6 +93,7 @@ extension SpotFeedController{
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let spot = spots[indexPath.item] as Spot? else { return }
         let controller = SpotController(spot: spot)
+        controller.indexValue = indexPath.item
         controller.delegate = self
         navigationController?.pushViewController(controller, animated: true)
     }
@@ -126,6 +125,8 @@ extension SpotFeedController: SpotCellDelegate{
 
 extension SpotFeedController: SpotControllerDelegate{
     func controller(_ controller: SpotController) {
-        controller.navigationController?.popViewController(animated: true)        
+        spots.remove(at: controller.indexValue!)
+        controller.navigationController?.popViewController(animated: true)
+        self.collectionView.reloadData()
     }
 }

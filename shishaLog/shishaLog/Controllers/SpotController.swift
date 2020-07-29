@@ -18,6 +18,7 @@ protocol SpotControllerDelegate: class {
 class SpotController: UICollectionViewController {
     
     // MARK: - Properties
+    var indexValue: Int?
     weak var delegate: SpotControllerDelegate?
     private let spot: Spot
     private var actionSheetLauncher: ActionSheetLauncher!
