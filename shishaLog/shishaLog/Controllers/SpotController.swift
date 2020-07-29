@@ -56,7 +56,7 @@ class SpotController: UICollectionViewController {
     }
     
     fileprivate func showActionSheet(forUser user: User){
-        actionSheetLauncher = ActionSheetLauncher(user: user)
+        actionSheetLauncher = ActionSheetLauncher(user: user, isLog: false)
         actionSheetLauncher.delegate = self
         actionSheetLauncher.show()
     }
@@ -98,7 +98,15 @@ extension SpotController: SpotHeaderDelegate{
     }
     
     func showActionSheet() {
-        print("DEBUG: show action sheet here...")
+        if spot.user.isCurrentUser {
+            showActionSheet(forUser: spot.user)
+        }else{
+            UserService.shared.checkIfUserIsFollowed(uid: spot.user.uid) { (isFollowed) in
+                var user = self.spot.user
+                user.isFollowed = isFollowed
+                self.showActionSheet(forUser: user)
+            }
+        }
     }
     
     
