@@ -41,10 +41,11 @@ struct SpotService {
             guard let dictionary = snapshot.value as? [String: Any] else { return }
             guard let uid = dictionary["uid"] as? String else { return }
             guard let shopID = dictionary["shopID"] as? String else { return }
+            guard let spotID = snapshot.key as? String else { return }
             
             UserService.shared.fetchUser(uid: uid) { (user) in
                 ShopService.shared.fetchSomeShop(shopID: shopID) { (shop) in
-                    let spot = Spot(user: user, shop: shop, dictionary: dictionary)
+                    let spot = Spot(user: user, spotID: spotID, shop: shop, dictionary: dictionary)
                     spots.append(spot)
                     completion(spots)
                 }
@@ -73,10 +74,11 @@ struct SpotService {
             guard let dictionary = snapshot.value as? [String: Any] else { return }
             guard let uid = dictionary["uid"] as? String else { return }
             guard let shopID = dictionary["shopID"] as? String else { return }
+            guard let spotID = snapshot.key as? String else { return }
             
             UserService.shared.fetchUser(uid: uid) { (user) in
                 ShopService.shared.fetchSomeShop(shopID: shopID) { (shop) in
-                    let spot = Spot(user: user, shop: shop, dictionary: dictionary)
+                    let spot = Spot(user: user, spotID: spotID, shop: shop, dictionary: dictionary)
                     completion(spot)
                 }
             }

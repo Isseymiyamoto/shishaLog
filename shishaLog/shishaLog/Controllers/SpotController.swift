@@ -11,10 +11,14 @@ import UIKit
 private let reuseIdentifier = "SpotHeader"
 private let spotCellIdentifier = "SpotCell"
 
+protocol SpotControllerDelegate: class {
+    func controller(_ controller: SpotController)
+}
+
 class SpotController: UICollectionViewController {
     
     // MARK: - Properties
-    
+    weak var delegate: SpotControllerDelegate?
     private let spot: Spot
     private var actionSheetLauncher: ActionSheetLauncher!
     
@@ -136,7 +140,14 @@ extension SpotController: ActionSheetLauncherDelegate{
                 print("DEBUG: unfollow 成功")
             }
         case .delete:
-            print("DEBUG: delete spot here")
+            guard let spotID = spot.spotID as? String else { return }
+            SpotService.shared.deleteSpot(withSpotID: spotID) { (error, ref) in
+                if let error = error {
+                    print("DEBUG: error is \(error.localizedDescription)")
+                    return
+                }
+                self.delegate?.controller(self)
+            }
         case .report:
             print("DEBUG: report spot here")
         }

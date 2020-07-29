@@ -95,6 +95,7 @@ extension SpotFeedController{
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let spot = spots[indexPath.item] as Spot? else { return }
         let controller = SpotController(spot: spot)
+        controller.delegate = self
         navigationController?.pushViewController(controller, animated: true)
     }
     
@@ -118,5 +119,13 @@ extension SpotFeedController: SpotCellDelegate{
     func handleProfileImageTapped(user: User) {
         let controller = ProfileController(user: user)
         navigationController?.pushViewController(controller, animated: true)
+    }
+}
+
+// MARK: - SpotControllerDelegate
+
+extension SpotFeedController: SpotControllerDelegate{
+    func controller(_ controller: SpotController) {
+        controller.navigationController?.popViewController(animated: true)        
     }
 }
