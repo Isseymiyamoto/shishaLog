@@ -117,7 +117,7 @@ class SpotHeader: UICollectionReusableView{
         captionLabelStack.axis = .vertical
         captionLabelStack.spacing = 12
         captionLabelStack.distribution = .fillProportionally
-        captionLabelStack.alignment = .fill
+        captionLabelStack.alignment = .leading
         
         addSubview(captionLabelStack)
         captionLabelStack.anchor(top: imageCaptionStack.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 20, paddingLeft: 16, paddingRight: 16)
@@ -128,6 +128,10 @@ class SpotHeader: UICollectionReusableView{
         
         addSubview(underlineView)
         underlineView.anchor(left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, height: 1)
+        
+        addSubview(optionsButton)
+        optionsButton.centerY(inView: imageCaptionStack)
+        optionsButton.anchor(right: rightAnchor, paddingRight: 16)
     }
     
     required init?(coder: NSCoder) {

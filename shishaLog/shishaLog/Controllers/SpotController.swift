@@ -16,9 +16,7 @@ class SpotController: UICollectionViewController {
     // MARK: - Properties
     
     private let spot: Spot
-    
-    
-    
+    private var actionSheetLauncher: ActionSheetLauncher!
     
     // MARK: - Lifecycle
     
@@ -37,13 +35,30 @@ class SpotController: UICollectionViewController {
         configureCollecitonView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
     
     // MARK: - Helpers
     
     func configureCollecitonView(){
+        view.backgroundColor = .white
         collectionView.backgroundColor = .white
+        configureNavigationBar()
         
         collectionView.register(SpotHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: reuseIdentifier)
+    }
+    
+    func configureNavigationBar(){
+        navigationItem.title = "スポット"
+        navigationController?.navigationBar.tintColor = .systemBlue
+    }
+    
+    fileprivate func showActionSheet(forUser user: User){
+        actionSheetLauncher = ActionSheetLauncher(user: user)
+        actionSheetLauncher.delegate = self
+        actionSheetLauncher.show()
     }
 }
 
@@ -69,7 +84,7 @@ extension SpotController{
 
 extension SpotController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: view.frame.width, height: 240)
+        return CGSize(width: view.frame.width, height: 200)
     }
 }
 
@@ -87,4 +102,35 @@ extension SpotController: SpotHeaderDelegate{
     }
     
     
+}
+
+// MARK: - ActionSheetLauncherDelegate
+
+extension SpotController: ActionSheetLauncherDelegate{
+    func didSelect(option: ActionSheetOptions) {
+        switch option {
+        case .follow(let user):
+            let uid = user.uid
+            UserService.shared.followUser(uid: uid) { (error, ref) in
+                if let error = error {
+                    print("DEBUG: error is \(error.localizedDescription)")
+                    return
+                }
+                print("DEBUG: follow 成功")
+            }
+        case .unfollow(let user):
+            let uid = user.uid
+            UserService.shared.unfollowUser(uid: uid) { (error, ref) in
+                if let error = error {
+                    print("DEBUG: error is \(error.localizedDescription)")
+                    return
+                }
+                print("DEBUG: unfollow 成功")
+            }
+        case .delete:
+            print("DEBUG: delete spot here")
+        case .report:
+            print("DEBUG: report spot here")
+        }
+    }
 }

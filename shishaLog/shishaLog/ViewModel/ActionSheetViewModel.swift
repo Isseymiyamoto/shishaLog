@@ -54,4 +54,13 @@ enum ActionSheetOptions {
         case .delete: return "ログを削除"
         }
     }
+    
+    var descriptionforSpot: String{
+        switch self {
+        case .follow(let user): return "フォロー @\(user.username)"
+        case .unfollow(let user): return "アンフォロー @\(user.username)"
+        case .report: return "スポットを報告"
+        case .delete: return "スポットを削除"
+        }
+    }
 }
