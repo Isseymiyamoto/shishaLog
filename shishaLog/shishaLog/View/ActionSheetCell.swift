@@ -57,7 +57,7 @@ class ActionSheetCell: UITableViewCell{
     func configure(){
         guard let isLog = isLog else { return }
         if isLog{
-            titleLabel.text = option?.description
+            titleLabel.text = option?.descriptionForLog
         }else{
             titleLabel.text = option?.descriptionforSpot
         }

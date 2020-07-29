@@ -46,7 +46,7 @@ enum ActionSheetOptions {
     case report
     case delete
     
-    var description: String{
+    var descriptionForLog: String{
         switch self {
         case .follow(let user): return "フォロー @\(user.username)"
         case .unfollow(let user): return "アンフォロー @\(user.username)"
