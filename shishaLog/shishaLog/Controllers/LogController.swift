@@ -121,10 +121,12 @@ extension LogController: LogHeaderDelegate{
         if log.user.isCurrentUser{
             showActionSheet(forUser: log.user)
         }else{
-            let user = log.user
-            showActionSheet(forUser: user)
+            UserService.shared.checkIfUserIsFollowed(uid: log.user.uid) { (isFollowed) in
+                var user = self.log.user
+                user.isFollowed = isFollowed
+                self.showActionSheet(forUser: user)
+            }
         }
-        
     }
     
     func handleLikeButtonTapped(_ header: LogHeader) {
