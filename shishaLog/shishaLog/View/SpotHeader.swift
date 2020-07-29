@@ -156,5 +156,12 @@ class SpotHeader: UICollectionReusableView{
         
         guard let spot = spot else { return }
         let viewModel = SpotViewModel(spot: spot)
+        
+        profileImageView.sd_setImage(with: viewModel.profileImageUrl, completed: nil)
+        fullnameLabel.text = spot.user.fullname
+        usernameLabel.text = "@\(spot.user.username)"
+        dateLabel.text = viewModel.headerTimeStamp
+        locationButton.setTitle(viewModel.shopName, for: .normal)
+        commentLabel.text = viewModel.comment
     }
 }
