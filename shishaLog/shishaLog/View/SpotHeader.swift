@@ -102,7 +102,32 @@ class SpotHeader: UICollectionReusableView{
         
         backgroundColor = .white
         
+        let labelStack = UIStackView(arrangedSubviews: [fullnameLabel, usernameLabel])
+        labelStack.axis = .vertical
+        labelStack.spacing = -6
         
+        let imageCaptionStack = UIStackView(arrangedSubviews: [profileImageView, labelStack])
+        imageCaptionStack.spacing = 12
+        
+        addSubview(imageCaptionStack)
+        imageCaptionStack.anchor(top: safeAreaLayoutGuide.topAnchor, left: leftAnchor, right: rightAnchor,
+                                 paddingTop: 16, paddingLeft: 16, paddingRight: 16)
+        
+        let captionLabelStack = UIStackView(arrangedSubviews: [locationButton, commentLabel])
+        captionLabelStack.axis = .vertical
+        captionLabelStack.spacing = 12
+        captionLabelStack.distribution = .fillProportionally
+        captionLabelStack.alignment = .fill
+        
+        addSubview(captionLabelStack)
+        captionLabelStack.anchor(top: imageCaptionStack.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 20, paddingLeft: 16, paddingRight: 16)
+        
+        addSubview(dateLabel)
+        dateLabel.anchor(top: captionLabelStack.bottomAnchor, left: leftAnchor, paddingTop: 20,
+                         paddingLeft: 16)
+        
+        addSubview(underlineView)
+        underlineView.anchor(left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, height: 1)
     }
     
     required init?(coder: NSCoder) {
