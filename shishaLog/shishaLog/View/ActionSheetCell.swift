@@ -12,6 +12,8 @@ class ActionSheetCell: UITableViewCell{
     
     // MARK: - Properties
     
+    var isLog: Bool?
+    
     var option: ActionSheetOptions? {
         didSet{ configure() }
     }
@@ -53,7 +55,13 @@ class ActionSheetCell: UITableViewCell{
     // MARK: - Helpers
     
     func configure(){
-        titleLabel.text = option?.description
+        guard let isLog = isLog else { return }
+        if isLog{
+            titleLabel.text = option?.descriptionForLog
+        }else{
+            titleLabel.text = option?.descriptionforSpot
+        }
+        
     }
     
 }

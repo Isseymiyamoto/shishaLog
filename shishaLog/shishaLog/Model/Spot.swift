@@ -10,15 +10,17 @@ import Foundation
 
 struct Spot {
 
+    let spotID: String
     var timestamp: Date!
     let user: User
     var shop: Shop
     var comment: String?
     
     
-    init(user: User, shop: Shop, dictionary: [String: Any]) {
+    init(user: User, spotID: String, shop: Shop, dictionary: [String: Any]) {
         self.user = user
         self.shop = shop
+        self.spotID = spotID
         
         if let timestamp = dictionary["timestamp"] as? Double{
             self.timestamp = Date(timeIntervalSince1970: timestamp)

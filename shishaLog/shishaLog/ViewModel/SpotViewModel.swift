@@ -34,6 +34,12 @@ struct SpotViewModel {
         return title
     }
     
+    var headerTimeStamp: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "h:mm a ・ MM/dd/yyyy"
+        return formatter.string(from: spot.timestamp)
+    }
+    
     var shopName: String{
         return shop.shopName
     }

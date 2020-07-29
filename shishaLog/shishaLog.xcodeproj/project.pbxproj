@@ -28,6 +28,8 @@
 		851AAA93247ED61D006030D1 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851AAA92247ED61D006030D1 /* AuthService.swift */; };
 		85417CA7249CBD0400FDFDC8 /* ProfileHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85417CA6249CBD0400FDFDC8 /* ProfileHeaderViewModel.swift */; };
 		854ACFBC24A62C38000C880F /* EditProfileFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854ACFBB24A62C38000C880F /* EditProfileFooter.swift */; };
+		8555C38824D131DA00DE30DA /* SpotController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8555C38724D131DA00DE30DA /* SpotController.swift */; };
+		8555C38A24D1332D00DE30DA /* SpotHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8555C38924D1332D00DE30DA /* SpotHeader.swift */; };
 		8563E28C2497AD56008F9103 /* CaptionTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8563E28B2497AD56008F9103 /* CaptionTextView.swift */; };
 		8563E28E2498FD1F008F9103 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8563E28D2498FD1F008F9103 /* Log.swift */; };
 		8563E2902499DCC9008F9103 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8563E28F2499DCC9008F9103 /* UserCell.swift */; };
@@ -86,6 +88,8 @@
 		851AAA92247ED61D006030D1 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		85417CA6249CBD0400FDFDC8 /* ProfileHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderViewModel.swift; sourceTree = "<group>"; };
 		854ACFBB24A62C38000C880F /* EditProfileFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileFooter.swift; sourceTree = "<group>"; };
+		8555C38724D131DA00DE30DA /* SpotController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotController.swift; sourceTree = "<group>"; };
+		8555C38924D1332D00DE30DA /* SpotHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotHeader.swift; sourceTree = "<group>"; };
 		8563E28B2497AD56008F9103 /* CaptionTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionTextView.swift; sourceTree = "<group>"; };
 		8563E28D2498FD1F008F9103 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		8563E28F2499DCC9008F9103 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
@@ -190,6 +194,7 @@
 				859DF69F24AA2BF800D580C6 /* SpotCell.swift */,
 				85BF5BCA24BF0D65001BFD0B /* ChoiceSpotCell.swift */,
 				85EA446124CC551A00FA5FEE /* ActionSheetCell.swift */,
+				8555C38924D1332D00DE30DA /* SpotHeader.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -232,6 +237,7 @@
 				85EA102624A7BBB000397C46 /* LogController.swift */,
 				8591BD3224BF096A0001BEA0 /* Spot */,
 				8571AAF124BF43F60000C2F6 /* ShopRegistrationController.swift */,
+				8555C38724D131DA00DE30DA /* SpotController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -430,6 +436,7 @@
 				85C1698024A33BC500BD2EE1 /* EditProfileHeader.swift in Sources */,
 				859DF6A024AA2BF800D580C6 /* SpotCell.swift in Sources */,
 				8591BD2D24BEC4510001BEA0 /* UploadSpotController.swift in Sources */,
+				8555C38A24D1332D00DE30DA /* SpotHeader.swift in Sources */,
 				851AAA80247E98DC006030D1 /* MainTabController.swift in Sources */,
 				851AAA91247ED5AE006030D1 /* UserService.swift in Sources */,
 				85417CA7249CBD0400FDFDC8 /* ProfileHeaderViewModel.swift in Sources */,
@@ -455,6 +462,7 @@
 				85D8EA1E248F363E002AFEC1 /* User.swift in Sources */,
 				85C1697E24A3277700BD2EE1 /* EditProfileController.swift in Sources */,
 				85EA102724A7BBB000397C46 /* LogController.swift in Sources */,
+				8555C38824D131DA00DE30DA /* SpotController.swift in Sources */,
 				85C1698224A33BD400BD2EE1 /* EditProfileCell.swift in Sources */,
 				851AAA85247E9DD0006030D1 /* FeedController.swift in Sources */,
 				851AAA93247ED61D006030D1 /* AuthService.swift in Sources */,
