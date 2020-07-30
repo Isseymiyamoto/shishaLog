@@ -90,6 +90,14 @@ class UploadLogController: UIViewController {
         return button
     }()
     
+    
+    // test
+    private let spotTextField: UITextField = {
+        let tf = UITextField()
+        tf.placeholder = "spotを書き留める"
+        return tf
+    }()
+    
     private let spotTextView: UITextView = {
         let tv = CaptionTextView(withPlaceholder: "spotを書き留める")
         return tv

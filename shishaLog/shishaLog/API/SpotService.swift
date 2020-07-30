@@ -93,7 +93,7 @@ struct SpotService {
                 print("DEBUG: error is \(error.localizedDescription)")
                 return
             }
-            REF_USER_SPOTS.child(uid).removeValue(completionBlock: completion)
+            REF_USER_SPOTS.child(uid).child(spotID).removeValue(completionBlock: completion)
         }
     }
     
