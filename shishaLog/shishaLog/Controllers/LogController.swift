@@ -11,10 +11,16 @@ import UIKit
 private let reuseIdentifier = "LogCell"
 private let logHeaderIdentifier = "LogHeader"
 
+protocol LogControllerDelegate: class {
+    func controller(_ controller: LogController)
+}
+
 class LogController: UICollectionViewController {
     
     // MARK: - Properties
     
+    var indexValue: Int?
+    weak var delegate: LogControllerDelegate?
     private let log: Log
     private var replies = [Log]() {
         didSet{ collectionView.reloadData() }
@@ -176,7 +182,14 @@ extension LogController: ActionSheetLauncherDelegate{
             LogService.shared.reportLog(logID: logID)
         case .delete:
             let logID = log.logID
-            LogService.shared.deleteLog(withLogID: logID)
+            LogService.shared.deleteLog(withLogID: logID) { (error, ref) in
+                if let error = error {
+                    print("DEBUG: error is \(error.localizedDescription)")
+                    return
+                }
+                LogService.shared.deleteSomeUserLikes(withLogID: logID)
+                self.delegate?.controller(self)
+            }
         }
     }
 }

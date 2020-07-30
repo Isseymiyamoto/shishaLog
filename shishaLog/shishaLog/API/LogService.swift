@@ -141,7 +141,7 @@ struct LogService {
     }
     
     // 指定したログの削除
-    func deleteLog(withLogID logID: String){
+    func deleteLog(withLogID logID: String, completion: @escaping(Error?, DatabaseReference) -> Void){
         guard let uid = Auth.auth().currentUser?.uid else { return }
 
         REF_LOGS.child(logID).removeValue { (error, ref) in
@@ -149,31 +149,17 @@ struct LogService {
                 print("DEBUG: error is \(error.localizedDescription)")
                 return
             }
-            REF_USER_LOGS.child(uid).child(logID).removeValue { (error, ref) in
-                if let error = error {
-                    print("DEBUG: error is \(error.localizedDescription)")
-                    return
-                }
-                self.deleteSomeUserLikes(withLogID: logID) { (result) in
-                    if result{
-                        REF_LOG_LIKES.child(logID).removeValue()
-                    }else{
-                        return
-                    }
-                }
-            }
+            REF_USER_LOGS.child(uid).child(logID).removeValue(completionBlock: completion)
         }
     }
     
     // 削除するログに対して、likeしているユーザーを取得し、user-likesから削除する
-    func deleteSomeUserLikes(withLogID logID: String, completion: @escaping(Bool) -> Void){
+    func deleteSomeUserLikes(withLogID logID: String){
         REF_LOG_LIKES.child(logID).observe(.value) { (snapshot) in
             if snapshot.exists(){
                 let likeUserUid = snapshot.key
                 REF_USER_LIKES.child(likeUserUid).child(logID).removeValue()
-                completion(true)
             }else{
-                completion(false)
                 return
             }
         }

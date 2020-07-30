@@ -119,6 +119,8 @@ extension FeedController{
         guard let log = cell.log else { return }
         
         let controller = LogController(log: log)
+        controller.delegate = self
+        controller.indexValue = indexPath.item
         navigationController?.pushViewController(controller, animated: true)
     }
     
@@ -154,6 +156,16 @@ extension FeedController: LogCellDelegate{
         guard let user = cell.log?.user else { return }
         let controller = ProfileController(user: user)
         navigationController?.pushViewController(controller, animated: true)
+    }
+}
+
+// MARK: - LogControllerDelegate
+
+extension FeedController: LogControllerDelegate{
+    func controller(_ controller: LogController) {
+        logs.remove(at: controller.indexValue!)
+        controller.navigationController?.popViewController(animated: true)
+        self.collectionView.reloadData()
     }
 }
 
