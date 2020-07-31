@@ -78,11 +78,11 @@ class RegistrationController: UIViewController{
     private let registrationButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("登録する", for: .normal)
-        button.setTitleColor(.shishaColor, for: .normal)
-        button.backgroundColor = .white
-        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
+        button.heightAnchor.constraint(equalToConstant: 48).isActive = true
         button.layer.cornerRadius = 5
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         button.addTarget(self, action: #selector(handleRegistration), for: .touchUpInside)
         return button
     }()
@@ -141,7 +141,8 @@ class RegistrationController: UIViewController{
     
     // MARK: - Helpers
     func configureUI(){
-        view.backgroundColor = .shishaColor
+//        view.backgroundColor = .shishaColor
+        configureGradientLayer()
         
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
