@@ -112,7 +112,15 @@ class LogHeader: UICollectionReusableView {
         return button
     }()
     
-    private lazy var likesLabel = UILabel()
+    private lazy var likesLabel: UILabel = {
+        let label = UILabel()
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleLikesLabelTapped))
+        label.addGestureRecognizer(tap)
+        label.isUserInteractionEnabled = true
+        
+        return label
+    }()
     
     private lazy var statsView: UIView = {
         let view = UIView()
@@ -197,6 +205,10 @@ class LogHeader: UICollectionReusableView {
     
     @objc func handleActionSheetShow(){
         delegate?.showActionSheet()
+    }
+    
+    @objc func handleLikesLabelTapped(){
+        
     }
     
     // MARK: - Helpers
