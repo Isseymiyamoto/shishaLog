@@ -10,17 +10,25 @@ import UIKit
 
 private let identifier = "UserCell"
 
+enum UserListOptions{
+    case likeUser
+    case followingUser
+    case followedUser
+}
+
 class UserListController: UITableViewController {
     
     // MARK: - Properties
     
-    private var users = [User]()
-    
+    private var users = [User]() {
+        didSet{ tableView.reloadData() }
+    }
+    var option: UserListOptions
     
     // MARK: - Lifecycle
     
-    init(users: [User]) {
-        self.users = users
+    init(option: UserListOptions) {
+        self.option = option
         super.init(style: .plain)
     }
     
@@ -37,6 +45,18 @@ class UserListController: UITableViewController {
     
     // MARK: - API
     
+    func fetchLogLikesUser(){
+        
+    }
+    
+    func fetchFollowingUser(){
+        
+    }
+    
+    func fetchFollowedUser(){
+        
+    }
+    
     
     
     // MARK: - Helpers
@@ -46,6 +66,10 @@ class UserListController: UITableViewController {
         tableView.backgroundColor = .white
         
         tableView.register(UserCell.self, forCellReuseIdentifier: identifier)
+    }
+    
+    func fetchSomeUsers(){
+        
     }
 }
 
