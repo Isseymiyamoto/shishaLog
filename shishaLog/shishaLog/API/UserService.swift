@@ -109,8 +109,4 @@ struct UserService {
         }
     }
     
-    // Logをlikeしているuserをfetch
-    func fetchLogLikesUser(){
-        
-    }
 }

@@ -165,4 +165,8 @@ struct LogService {
         }
     }
     
+    func fetchLogLikesUserUid(logID: String, completion: @escaping(DataSnapshot) -> Void){
+        REF_LOG_LIKES.child(logID).observeSingleEvent(of: .value, with: completion)
+    }
+    
 }
