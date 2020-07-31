@@ -8,12 +8,13 @@
 
 import UIKit
 
+private let identifier = "UserCell"
+
 class UserListController: UITableViewController {
     
     // MARK: - Properties
     
-    private var users: [User]
-    
+    private var users = [User]()
     
     
     // MARK: - Lifecycle
@@ -29,6 +30,8 @@ class UserListController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        configureTableView()
     }
     
     
@@ -39,10 +42,31 @@ class UserListController: UITableViewController {
     // MARK: - Helpers
     
     func configureTableView(){
+        view.backgroundColor = .white
+        tableView.backgroundColor = .white
         
+        tableView.register(UserCell.self, forCellReuseIdentifier: identifier)
+    }
+}
+
+
+// MARK: - UITableViewDelegate & UITableViewDataSource
+
+extension UserListController{
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("DEBUG: did tapped \(indexPath.row)th item")
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 64
+    }
     
-    
-    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! UserCell
+        cell.user = users[indexPath.row]
+        return cell
+    }
 }
+
+
+
