@@ -42,6 +42,7 @@ class UserListController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureNavigationBar()
         configureTableView()
         fetchSomeUsers()
     }
@@ -90,7 +91,14 @@ class UserListController: UITableViewController {
     }
     
     func configureNavigationBar(){
-        
+        switch option {
+        case .likeUser:
+            navigationItem.title = "いいねしたユーザー"
+        case .followingUser:
+            navigationItem.title = "フォロー中"
+        case .followedUser:
+            navigationItem.title = "フォロワー"
+        }
     }
 }
 
