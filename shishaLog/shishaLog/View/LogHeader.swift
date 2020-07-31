@@ -12,6 +12,7 @@ protocol LogHeaderDelegate: class {
     func handleProfileImageTapped(_ jumpToUser: User)
     func handleLikeButtonTapped(_ header: LogHeader)
     func showActionSheet()
+    func handleLikesLabelTapped()
 }
 
 class LogHeader: UICollectionReusableView {
@@ -112,18 +113,24 @@ class LogHeader: UICollectionReusableView {
         return button
     }()
     
-    private lazy var likesLabel: UILabel = {
-        let label = UILabel()
-        
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleLikesLabelTapped))
-        label.addGestureRecognizer(tap)
-        label.isUserInteractionEnabled = true
-        
-        return label
-    }()
+//    private lazy var likesLabel: UILabel = {
+//        let label = UILabel()
+//
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(handleLikesLabelTapped))
+//        label.addGestureRecognizer(tap)
+//        label.isUserInteractionEnabled = true
+//
+//        return label
+//    }()
+    
+    private lazy var likesLabel = UILabel()
     
     private lazy var statsView: UIView = {
         let view = UIView()
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleStatsViewTapped))
+        view.addGestureRecognizer(tap)
+        view.isUserInteractionEnabled = true
         
         let divider1 = UIView()
         divider1.backgroundColor = .systemGroupedBackground
@@ -207,8 +214,14 @@ class LogHeader: UICollectionReusableView {
         delegate?.showActionSheet()
     }
     
-    @objc func handleLikesLabelTapped(){
-        
+    @objc func handleStatsViewTapped(){
+        print("DEBUG: test")
+        guard let likes = log?.likes else { return }
+        if likes == 0{
+            print("DEBUG: likes is 0")
+            return
+        }
+        delegate?.handleLikesLabelTapped()
     }
     
     // MARK: - Helpers

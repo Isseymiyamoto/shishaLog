@@ -123,6 +123,12 @@ extension LogController: UICollectionViewDelegateFlowLayout{
 // MARK: - LogHeaderDelegate
 
 extension LogController: LogHeaderDelegate{
+    func handleLikesLabelTapped() {
+        let logID = log.logID
+        let controller = UserListController(logID: logID, option: .likeUser)
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
     func showActionSheet() {
         if log.user.isCurrentUser{
             showActionSheet(forUser: log.user)
