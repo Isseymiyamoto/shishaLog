@@ -154,6 +154,7 @@ extension LogController: LogHeaderDelegate{
     }
     
     func handleProfileImageTapped(_ jumpToUser: User) {
+        print("DEBUG: 処理は走っておりますよ")
         let controller = ProfileController(user: jumpToUser)
         navigationController?.pushViewController(controller, animated: true)
         

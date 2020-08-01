@@ -123,21 +123,25 @@ class LogHeader: UICollectionReusableView {
 //        return label
 //    }()
     
-    private lazy var likesLabel = UILabel()
+    private lazy var likesLabel: UILabel = {
+        let label = UILabel()
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleStatsViewTapped))
+        label.addGestureRecognizer(tap)
+        label.isUserInteractionEnabled = true
+        label.backgroundColor = .systemRed
+        
+        return label
+    }()
     
     private lazy var statsView: UIView = {
         let view = UIView()
-        
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleStatsViewTapped))
-        view.addGestureRecognizer(tap)
-        view.isUserInteractionEnabled = true
         
         let divider1 = UIView()
         divider1.backgroundColor = .systemGroupedBackground
         view.addSubview(divider1)
         divider1.anchor(top: view.topAnchor, left: view.leftAnchor,
                         right: view.rightAnchor, paddingLeft: 8, height: 1.0)
-        
         
         view.addSubview(likesLabel)
         likesLabel.centerY(inView: view)
@@ -215,13 +219,13 @@ class LogHeader: UICollectionReusableView {
     }
     
     @objc func handleStatsViewTapped(){
-        print("DEBUG: test")
-        guard let likes = log?.likes else { return }
-        if likes == 0{
-            print("DEBUG: likes is 0")
-            return
-        }
-        delegate?.handleLikesLabelTapped()
+        print("DEBUG: これはきてますねえ")
+//        guard let likes = log?.likes else { return }
+//        if likes == 0{
+//            print("DEBUG: likes is 0")
+//            return
+//        }
+//        delegate?.handleLikesLabelTapped()
     }
     
     // MARK: - Helpers
