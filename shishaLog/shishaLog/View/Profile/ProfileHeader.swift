@@ -167,10 +167,16 @@ class ProfileHeader: UICollectionViewCell{
     }
     
     @objc func handleFollowingCountButtonTapped(){
+        if user?.stats?.following == 0{
+            return
+        }
         delegate?.handleFollowingButtonTapped()
     }
     
     @objc func handleFollowedCountButtonTapped(){
+        if user?.stats?.followers == 0{
+            return
+        }
         delegate?.handleFollowedButtonTapped()
     }
     
