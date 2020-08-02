@@ -113,29 +113,19 @@ class LogHeader: UICollectionReusableView {
         return button
     }()
     
-//    private lazy var likesLabel: UILabel = {
-//        let label = UILabel()
-//
-//        let tap = UITapGestureRecognizer(target: self, action: #selector(handleLikesLabelTapped))
-//        label.addGestureRecognizer(tap)
-//        label.isUserInteractionEnabled = true
-//
-//        return label
-//    }()
-    
     private lazy var likesLabel: UILabel = {
         let label = UILabel()
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleStatsViewTapped))
         label.addGestureRecognizer(tap)
         label.isUserInteractionEnabled = true
-        label.backgroundColor = .systemRed
         
         return label
     }()
     
     private lazy var statsView: UIView = {
         let view = UIView()
+        view.isUserInteractionEnabled = true
         
         let divider1 = UIView()
         divider1.backgroundColor = .systemGroupedBackground
