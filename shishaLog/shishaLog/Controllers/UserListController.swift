@@ -72,8 +72,8 @@ class UserListController: UITableViewController {
     // MARK: - Helpers
     
     func configureTableView(){
-        view.backgroundColor = .white
-        tableView.backgroundColor = .white
+        view.backgroundColor = .systemGroupedBackground
+        tableView.backgroundColor = .systemGroupedBackground
         tableView.rowHeight = 60
 //        tableView.separatorStyle = .none
         
@@ -125,6 +125,15 @@ extension UserListController{
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! UserCell
         cell.user = users[indexPath.row]
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView: UIView = {
+            let view = UIView()
+            view.backgroundColor = .systemGroupedBackground
+            return view
+        }()
+        return footerView
     }
 }
 
