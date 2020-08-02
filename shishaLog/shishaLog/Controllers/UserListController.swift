@@ -20,7 +20,8 @@ class UserListController: UITableViewController {
     
     // MARK: - Properties
     
-    let logID: String
+    let logID: String?
+    let currentUserUid: String?
     let option: UserListOptions
     private var users = [User]() {
         didSet{ tableView.reloadData() }
@@ -29,8 +30,9 @@ class UserListController: UITableViewController {
     
     // MARK: - Lifecycle
     
-    init(logID: String, option: UserListOptions) {
+    init(option: UserListOptions, logID: String? = nil, currentUserUid: String? = nil) {
         self.logID = logID
+        self.currentUserUid = currentUserUid
         self.option = option
         super.init(style: .plain)
     }
@@ -51,10 +53,12 @@ class UserListController: UITableViewController {
     // MARK: - API
     
     func fetchLogLikesUser(){
-        LogService.shared.fetchLogLikesUserUid(logID: logID) { (snapshot) in
-            let uid = snapshot.key
-            UserService.shared.fetchUser(uid: uid) { (user) in
-                self.users.append(user)
+        if let logID = logID{
+            LogService.shared.fetchLogLikesUserUid(logID: logID) { (snapshot) in
+                let uid = snapshot.key
+                UserService.shared.fetchUser(uid: uid) { (user) in
+                    self.users.append(user)
+                }
             }
         }
     }

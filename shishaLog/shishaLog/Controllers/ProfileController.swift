@@ -125,6 +125,8 @@ class ProfileController: UICollectionViewController {
     }
     
     
+    
+    
     // MARK: - Selectors
     
     @objc func handleRefresh(){
@@ -286,6 +288,18 @@ extension ProfileController: UICollectionViewDelegateFlowLayout{
 // MARK: - ProfileHeaderDelegate
 
 extension ProfileController: ProfileHeaderDelegate{
+    func handleFollowingButtonTapped() {
+        let currentUserUid = user.uid
+        let controller = UserListController(option: .followingUser, currentUserUid: currentUserUid)
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    func handleFollowedButtonTapped() {
+        let currentUserUid = user.uid
+        let controller = UserListController(option: .followedUser, currentUserUid: currentUserUid)
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
     func handleEditProfile(_ header: ProfileHeader) {
         
         if user.isCurrentUser {

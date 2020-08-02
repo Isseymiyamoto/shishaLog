@@ -10,7 +10,8 @@ import UIKit
 
 protocol ProfileHeaderDelegate: class {
     func handleEditProfile(_ header: ProfileHeader)
-//    func didSelect(filter: ProfileFilterOptions)
+    func handleFollowingButtonTapped()
+    func handleFollowedButtonTapped()
 }
 
 class ProfileHeader: UICollectionViewCell{
@@ -161,6 +162,14 @@ class ProfileHeader: UICollectionViewCell{
     // 自分のprofileか他者かによって挙動を変える
     @objc func handleEdidFollowProfile(){
         delegate?.handleEditProfile(self)
+    }
+    
+    @objc func handleFollowingCountButtonTapped(){
+        delegate?.handleFollowingButtonTapped()
+    }
+    
+    @objc func handleFollowedCountButtonTapped(){
+        delegate?.handleFollowedButtonTapped()
     }
     
     

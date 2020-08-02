@@ -124,7 +124,7 @@ extension LogController: UICollectionViewDelegateFlowLayout{
 extension LogController: LogHeaderDelegate{
     func handleLikesLabelTapped() {
         let logID = log.logID
-        let controller = UserListController(logID: logID, option: .likeUser)
+        let controller = UserListController(option: .likeUser, logID: logID)
         navigationController?.pushViewController(controller, animated: true)
     }
     
