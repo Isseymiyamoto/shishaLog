@@ -13,7 +13,7 @@ protocol SpotHeaderDelegate: class {
     func showActionSheet()
 }
 
-class SpotHeader: UICollectionReusableView{
+class SpotHeaderSupplementaryView: UICollectionReusableView{
     
     // MARK: - Properties
     

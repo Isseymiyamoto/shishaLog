@@ -52,7 +52,7 @@ class SpotController: UICollectionViewController {
         collectionView.backgroundColor = .white
         configureNavigationBar()
         
-        collectionView.register(SpotHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: reuseIdentifier)
+        collectionView.register(SpotHeaderSupplementaryView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: reuseIdentifier)
     }
     
     func configureNavigationBar(){
@@ -77,7 +77,7 @@ extension SpotController{
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: reuseIdentifier, for: indexPath) as! SpotHeader
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: reuseIdentifier, for: indexPath) as! SpotHeaderSupplementaryView
         header.delegate = self
         header.spot = spot
         return header

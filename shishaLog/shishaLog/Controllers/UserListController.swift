@@ -74,6 +74,8 @@ class UserListController: UITableViewController {
     func configureTableView(){
         view.backgroundColor = .white
         tableView.backgroundColor = .white
+        tableView.rowHeight = 60
+//        tableView.separatorStyle = .none
         
         tableView.register(UserCell.self, forCellReuseIdentifier: identifier)
     }
@@ -115,6 +117,7 @@ extension UserListController{
 //    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("DEBUG: users.count is \(users.count)")
         return users.count
     }
     

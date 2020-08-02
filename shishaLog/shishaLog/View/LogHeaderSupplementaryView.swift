@@ -10,12 +10,12 @@ import UIKit
 
 protocol LogHeaderDelegate: class {
     func handleProfileImageTapped(_ jumpToUser: User)
-    func handleLikeButtonTapped(_ header: LogHeader)
+    func handleLikeButtonTapped(_ header: LogHeaderSupplementaryView)
     func showActionSheet()
     func handleLikesLabelTapped()
 }
 
-class LogHeader: UICollectionReusableView {
+class LogHeaderSupplementaryView: UICollectionReusableView {
     
     // MARK: - Properties
     
@@ -116,7 +116,7 @@ class LogHeader: UICollectionReusableView {
     private lazy var likesLabel: UILabel = {
         let label = UILabel()
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleStatsViewTapped))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleLikeLabelTapped))
         label.addGestureRecognizer(tap)
         label.isUserInteractionEnabled = true
         
@@ -208,14 +208,14 @@ class LogHeader: UICollectionReusableView {
         delegate?.showActionSheet()
     }
     
-    @objc func handleStatsViewTapped(){
+    @objc func handleLikeLabelTapped(){
         print("DEBUG: これはきてますねえ")
-//        guard let likes = log?.likes else { return }
-//        if likes == 0{
-//            print("DEBUG: likes is 0")
-//            return
-//        }
-//        delegate?.handleLikesLabelTapped()
+        guard let likes = log?.likes else { return }
+        if likes == 0{
+            print("DEBUG: likes is 0")
+            return
+        }
+        delegate?.handleLikesLabelTapped()
     }
     
     // MARK: - Helpers

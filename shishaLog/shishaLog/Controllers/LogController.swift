@@ -62,8 +62,7 @@ class LogController: UICollectionViewController {
         configureNavigationBar()
         
         self.collectionView!.register(LogCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        self.collectionView.register(LogHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: logHeaderIdentifier)
-        
+        self.collectionView.register(LogHeaderSupplementaryView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: logHeaderIdentifier)
     }
     
     func configureNavigationBar(){
@@ -100,7 +99,7 @@ extension LogController{
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: logHeaderIdentifier, for: indexPath) as! LogHeader
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: logHeaderIdentifier, for: indexPath) as! LogHeaderSupplementaryView
         header.log = log
         header.delegate = self
         return header
@@ -116,7 +115,7 @@ extension LogController: UICollectionViewDelegateFlowLayout{
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: view.frame.width, height: 200)
+        return CGSize(width: view.frame.width, height: 280)
     }
 }
 
@@ -141,7 +140,7 @@ extension LogController: LogHeaderDelegate{
         }
     }
     
-    func handleLikeButtonTapped(_ header: LogHeader) {
+    func handleLikeButtonTapped(_ header: LogHeaderSupplementaryView) {
         print("DEBUG: 処理は走っておりますよ")
         guard let log = header.log else { return }
         
