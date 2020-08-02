@@ -102,7 +102,7 @@ struct LogService {
         
         if log.didLike {
             REF_USER_LIKES.child(uid).child(log.logID).removeValue { (err, ref) in
-                REF_LOG_LIKES.child(log.logID).removeValue(completionBlock: completion)
+                REF_LOG_LIKES.child(log.logID).child(uid).removeValue(completionBlock: completion)
             }
         }else{
             REF_USER_LIKES.child(uid).updateChildValues([log.logID: 1]) { (err, ref) in
@@ -163,6 +163,10 @@ struct LogService {
                 return
             }
         }
+    }
+    
+    func fetchLogLikesUserUid(logID: String, completion: @escaping(DataSnapshot) -> Void){
+        REF_LOG_LIKES.child(logID).observeSingleEvent(of: .value, with: completion)
     }
     
 }

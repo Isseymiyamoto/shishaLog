@@ -14,11 +14,7 @@ private let reuseIdentifier = "LogCell"
 class FeedController: UICollectionViewController {
     
     // MARK: - Properties
-    var user: User? {
-        didSet{
-            print("DEBUG: test")
-        }
-    }
+    var user: User? 
     
     private var logs = [Log]() {
         didSet { collectionView.reloadData() }
