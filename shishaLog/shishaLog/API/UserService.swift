@@ -122,4 +122,15 @@ struct UserService {
         }
     }
     
+    func fetchFollowedUsers(currentUserUid: String, completion: @escaping([User]) -> Void){
+        var users = [User]()
+        REF_USER_FOLLOWERS.child(currentUserUid).observe(.childAdded) { (snapshot) in
+            let followerUid = snapshot.key
+            self.fetchUser(uid: followerUid) { (user) in
+                users.append(user)
+                completion(users)
+            }
+        }
+    }
+    
 }

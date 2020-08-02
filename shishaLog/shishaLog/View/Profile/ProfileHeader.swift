@@ -51,6 +51,7 @@ class ProfileHeader: UICollectionViewCell{
         button.setTitle("290", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        button.addTarget(self, action: #selector(handleFollowingCountButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -59,6 +60,7 @@ class ProfileHeader: UICollectionViewCell{
         button.setTitle("3000", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        button.addTarget(self, action: #selector(handleFollowedCountButtonTapped), for: .touchUpInside)
         return button
     }()
     

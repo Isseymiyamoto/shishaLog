@@ -65,13 +65,17 @@ class UserListController: UITableViewController {
     
     func fetchFollowingUser(){
         if let currentUserUid = currentUserUid {
-            
+            UserService.shared.fetchFollowingUsers(currentUserUid: currentUserUid) { (users) in
+                self.users = users
+            }
         }
     }
     
     func fetchFollowedUser(){
         if let currentUserUid = currentUserUid {
-            
+            UserService.shared.fetchFollowedUsers(currentUserUid: currentUserUid) { (users) in
+                self.users = users
+            }
         }
     }
     
