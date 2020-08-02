@@ -64,11 +64,15 @@ class UserListController: UITableViewController {
     }
     
     func fetchFollowingUser(){
-        
+        if let currentUserUid = currentUserUid {
+            
+        }
     }
     
     func fetchFollowedUser(){
-        
+        if let currentUserUid = currentUserUid {
+            
+        }
     }
     
     

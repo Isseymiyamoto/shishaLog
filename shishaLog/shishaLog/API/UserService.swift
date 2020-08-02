@@ -109,4 +109,17 @@ struct UserService {
         }
     }
     
+    // フォローしているうユーザーを取得
+    
+    func fetchFollowingUsers(currentUserUid: String, completion: @escaping([User]) -> Void){
+        var users = [User]()
+        REF_USER_FOLLOWING.child(currentUserUid).observe(.childAdded) { (snapshot) in
+            let followingUid = snapshot.key
+            self.fetchUser(uid: followingUid) { (user) in
+                users.append(user)
+                completion(users)
+            }
+        }
+    }
+    
 }
