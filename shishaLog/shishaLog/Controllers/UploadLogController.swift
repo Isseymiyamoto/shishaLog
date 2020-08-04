@@ -209,11 +209,9 @@ class UploadLogController: UIViewController {
         profileImageView.sd_setImage(with: user.profileImageUrl, completed: nil)
         
         
-        
         let stack = UIStackView(arrangedSubviews: [spotLabel, spotTextField, mixLabel, mixTextView, feelLabel, feelTextView])
         stack.spacing = 12
         stack.axis = .vertical
-//        stack.distribution = .fillProportionally
         
         view.addSubview(stack)
         stack.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 32, paddingLeft: 16, paddingRight: 16)

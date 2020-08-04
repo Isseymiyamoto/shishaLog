@@ -12,7 +12,7 @@ private let choiseCellIdentifier = "spotCell"
 private let identifier = "addNewSpotCell"
 
 protocol ChoiceSpotControllerDelegate: class {
-    func controller(_ controller: ChoiceSpotController)
+    func controller(_ controller: ChoiceSpotController, shop: Shop)
 }
 
 class ChoiceSpotController: UITableViewController {
@@ -149,8 +149,13 @@ extension ChoiceSpotController{
             nav.modalPresentationStyle = .fullScreen
             present(nav, animated: true)
         default:
-            let controller = UploadSpotController(user: user, shop: shops[indexPath.row])
-            navigationController?.pushViewController(controller, animated: true)
+            switch option {
+            case .fromSpotFeed:
+                let controller = UploadSpotController(user: user, shop: shops[indexPath.row])
+                navigationController?.pushViewController(controller, animated: true)
+            case .fromUploadLog:
+                delegate?.controller(self, shop: shops[indexPath.row])
+            }
         }
     }
 }
