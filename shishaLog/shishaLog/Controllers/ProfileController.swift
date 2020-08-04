@@ -211,6 +211,7 @@ extension ProfileController{
             default:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! LogCell
                 cell.log = currentDataSource[indexPath.row] as? Log
+                cell.delegate = self
                 return cell
             }
         }
@@ -363,6 +364,33 @@ extension ProfileController: EditProfileControllerDelegate{
             print("DEBUG: Failed to sign out with error \(error.localizedDescription)")
         }
     }
+}
+
+// MARK: - LogCellDelegate
+
+extension ProfileController: LogCellDelegate{
+    func handleLocationLabelTapped(shop: Shop) {
+        let controller = ShopController(shop: shop)
+        navigationController?.pushViewController(controller, animated: true)
+    }
     
+    func handleLikeButtonTapped(_ cell: LogCell) {
+        guard let log = cell.log else { return }
+        
+        LogService.shared.likeLog(log: log) { (err, ref) in
+            cell.log?.didLike.toggle()
+            
+            let likes = log.didLike ? log.likes - 1 : log.likes + 1
+            cell.log?.likes = likes
+        }
+    }
     
+    func handleProfileImageTapped(_ cell: LogCell) {
+        guard let user = cell.log?.user else { return }
+        if self.user.uid == user.uid {
+            return
+        }
+        let controller = ProfileController(user: user)
+        navigationController?.pushViewController(controller, animated: true)
+    }
 }
