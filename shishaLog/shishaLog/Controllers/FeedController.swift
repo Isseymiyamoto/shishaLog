@@ -81,11 +81,12 @@ class FeedController: UICollectionViewController {
         
         // 後でlogo入れる
 //        let imageView = UIImageView(image: UIImage(systemName: "pencil.circle"))
-        let imageView = UIImageView(image: UIImage(named: "shsihaLog"))
+        let imageView = UIImageView(image: UIImage(named: "shishaLog_theme"))
         imageView.tintColor = .gray
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         imageView.setDimensions(width: 32, height: 32)
+        imageView.layer.cornerRadius = 32 / 2
         navigationItem.titleView = imageView
         
         // refresh Control

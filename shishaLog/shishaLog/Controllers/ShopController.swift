@@ -9,6 +9,8 @@
 import UIKit
 import MapKit
 
+private let reuseIdentifier = "reuseIdentifier"
+
 class ShopController: UIViewController {
     
     // MARK: - Properties
@@ -40,6 +42,8 @@ class ShopController: UIViewController {
         return button
     }()
     
+    private let tableView = UITableView()
+    
     // MARK: - Lifecycle
     
     init(shop: Shop){
@@ -56,6 +60,7 @@ class ShopController: UIViewController {
         
         configureUI()
         configureNavigationBar()
+        configureTableView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -74,10 +79,14 @@ class ShopController: UIViewController {
         shopImageView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, height: frameWidth / 2)
         
         view.addSubview(shopNameLabel)
-        shopNameLabel.anchor(top: shopImageView.bottomAnchor, left: view.leftAnchor, paddingTop: 16, paddingLeft: 8)
+        shopNameLabel.anchor(top: shopImageView.bottomAnchor, left: view.leftAnchor, paddingTop: 16, paddingLeft: 16)
         
         view.addSubview(mapView)
-        mapView.anchor(top: shopImageView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 64, height: frameWidth / 3 * 2)
+        mapView.anchor(top: shopImageView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 64, paddingLeft: 16, paddingRight: 16, height: frameWidth / 3 * 2)
+        
+        view.addSubview(tableView)
+        tableView.isScrollEnabled = true
+        tableView.anchor(top: mapView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 32, height: 1000)
         
         shopImageView.sd_setImage(with: shop.shopImageUrl, completed: nil)
         shopNameLabel.text = shop.shopName
@@ -87,6 +96,16 @@ class ShopController: UIViewController {
     
     func configureNavigationBar(){
         navigationItem.title = shop.shopName
+    }
+    
+    func configureTableView(){
+        tableView.backgroundColor = .white
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.rowHeight = 60
+        tableView.separatorStyle = .none
+        tableView.layer.cornerRadius = 5
+        tableView.isScrollEnabled = false
     }
     
     fileprivate func geoCording(){
@@ -123,5 +142,19 @@ class ShopController: UIViewController {
                 self.mapView.addAnnotation(pin)
             }
         }
+    }
+}
+
+// MARK: - UITableViewDelegate / DataSource
+
+extension ShopController: UITableViewDelegate & UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .value2, reuseIdentifier: reuseIdentifier)
+        cell.textLabel?.text = "これはテスト"
+        return cell
     }
 }

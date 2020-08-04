@@ -94,7 +94,9 @@ class UploadLogController: UIViewController {
     // test
     private let spotTextField: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "spotを書き留める"
+        tf.layer.borderColor = UIColor.darkGray.cgColor
+        tf.layer.borderWidth = 0.75
+        tf.placeholder = " spotを書き留める"
         return tf
     }()
     
@@ -193,7 +195,7 @@ class UploadLogController: UIViewController {
         
         
         
-        let stack = UIStackView(arrangedSubviews: [spotLabel, spotTextView, mixLabel, mixTextView, feelLabel, feelTextView])
+        let stack = UIStackView(arrangedSubviews: [spotLabel, spotTextField, mixLabel, mixTextView, feelLabel, feelTextView])
         stack.spacing = 12
         stack.axis = .vertical
         stack.distribution = .fillProportionally

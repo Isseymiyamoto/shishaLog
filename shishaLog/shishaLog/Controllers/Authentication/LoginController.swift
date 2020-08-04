@@ -16,7 +16,7 @@ class LoginController: UIViewController {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFit
         iv.clipsToBounds = true
-        iv.image = UIImage(systemName: "house")
+        iv.image = UIImage(named: "shishaLog_theme")
         iv.tintColor = .white
         return iv
     }()
@@ -112,6 +112,7 @@ class LoginController: UIViewController {
         view.addSubview(logoImageView)
         logoImageView.centerX(inView: view, topAnchor: view.safeAreaLayoutGuide.topAnchor, paddingTop: 64)
         logoImageView.setDimensions(width: 120, height: 120)
+        logoImageView.layer.cornerRadius = 120 / 2
         
         // stackViewでmail & passwordのtextField & login Buttonを配置
         let stack = UIStackView(arrangedSubviews: [emailContainerView, passwordContainerView, loginButton])
