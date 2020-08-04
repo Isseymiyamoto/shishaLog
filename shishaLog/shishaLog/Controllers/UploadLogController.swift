@@ -147,11 +147,11 @@ class UploadLogController: UIViewController {
     
     // MARK: - API
     
-    func uploadLog(location: String, mix: String, feeling: String, shopID: String? = nil, completion: @escaping((Error?, DatabaseReference) -> Void)){
+    func uploadLog(location: String, mix: String, feeling: String, completion: @escaping((Error?, DatabaseReference) -> Void)){
         LogService.shared.uploadLog(location: location, mix: mix, feeling: feeling, completion: completion)
     }
     
-    func uploadLog(withShopID shopID: String, location: String, mix: String, feeling: String, shopID: String? = nil, completion: @escaping((Error?, DatabaseReference) -> Void)){
+    func uploadLog(withShopID shopID: String, location: String, mix: String, feeling: String, completion: @escaping((Error?, DatabaseReference) -> Void)){
         LogService.shared.uploadLog(withShopID: shopID, location: location, mix: mix, feeling: feeling, completion: completion)
     }
     
@@ -180,12 +180,11 @@ class UploadLogController: UIViewController {
                 self.dismiss(animated: true, completion: nil)
             }
         }else{
-            uploadLog(location: location, mix: mix, feeling: feeling, shopID: shop?.shopID) { (error, ref) in
+            uploadLog(location: location, mix: mix, feeling: feeling) { (error, ref) in
                 if let error = error {
                     print("DEBUG: error is \(error.localizedDescription)")
                     return
                 }
-                
                 print("DEBUG: successfully uploaded your log")
                 self.dismiss(animated: true, completion: nil)
             }
