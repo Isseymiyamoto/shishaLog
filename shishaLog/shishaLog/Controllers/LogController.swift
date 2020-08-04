@@ -122,6 +122,11 @@ extension LogController: UICollectionViewDelegateFlowLayout{
 // MARK: - LogHeaderDelegate
 
 extension LogController: LogHeaderDelegate{
+    func handleLocationLabelTapped(shop: Shop) {
+        let controller = ShopController(shop: shop)
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
     func handleLikesLabelTapped() {
         let logID = log.logID
         let controller = UserListController(option: .likeUser, logID: logID)

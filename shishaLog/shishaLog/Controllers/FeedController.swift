@@ -138,6 +138,11 @@ extension FeedController: UICollectionViewDelegateFlowLayout{
 // MARK: - LogCellDelegate
 
 extension FeedController: LogCellDelegate{
+    func handleLocationLabelTapped(shop: Shop) {
+        let controller = ShopController(shop: shop)
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
     func handleLikeButtonTapped(_ cell: LogCell) {
         guard let log = cell.log else { return }
         

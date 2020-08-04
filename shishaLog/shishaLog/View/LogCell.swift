@@ -12,6 +12,7 @@ import SDWebImage
 protocol LogCellDelegate: class {
     func handleProfileImageTapped(_ cell: LogCell)
     func handleLikeButtonTapped(_ cell: LogCell)
+    func handleLocationLabelTapped(shop: Shop)
 }
 
 class LogCell: UICollectionViewCell {
@@ -53,9 +54,13 @@ class LogCell: UICollectionViewCell {
     
     private lazy var locationLabel: UILabel = {
         let label = UILabel()
-        label.text = "Soi 61"
-        label.textColor = .systemBlue
         label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.textColor = .systemBlue
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleLocationLabelTapped))
+        label.addGestureRecognizer(tap)
+        label.isUserInteractionEnabled = true
+        
         return label
     }()
     
@@ -107,15 +112,9 @@ class LogCell: UICollectionViewCell {
         
         backgroundColor = .white
         
-//        let topInfoStack = UIStackView(arrangedSubviews: [infoLabel, likeButton])
-//        topInfoStack.axis = .horizontal
-//        topInfoStack.distribution = .equalSpacing
-//        topInfoStack.alignment = .center
-        
         let rightSideStack = UIStackView(arrangedSubviews: [infoLabel, locationLabel, mixTextView, feelingLabel])
         rightSideStack.axis = .vertical
         rightSideStack.spacing = 12
-//        rightSideStack.distribution = .fillProportionally
         rightSideStack.alignment = .fill
         
         
@@ -148,6 +147,11 @@ class LogCell: UICollectionViewCell {
     
     @objc func handleLikeButtonTapped(){
         delegate?.handleLikeButtonTapped(self)
+    }
+    
+    @objc func handleLocationLabelTapped(){
+        guard let shop = log?.shop else { return }
+        delegate?.handleLocationLabelTapped(shop: shop)
     }
     
     // MARK: - Helpers
