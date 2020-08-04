@@ -96,6 +96,7 @@ class UploadLogController: UIViewController {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
         button.setDimensions(width: 20, height: 20)
+        button.addTarget(self, action: #selector(handleSpotSearchButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -151,6 +152,11 @@ class UploadLogController: UIViewController {
     
     
     // MARK: - Selectors
+    
+    @objc func handleSpotSearchButtonTapped(){
+        let controller = ChoiceSpotController(user: user, option: .fromUploadLog)
+        navigationController?.pushViewController(controller, animated: true)
+    }
     
     @objc func handleUploadLog(){
         guard let location = spotTextView.text else { return }
