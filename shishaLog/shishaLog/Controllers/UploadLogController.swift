@@ -106,6 +106,7 @@ class UploadLogController: UIViewController {
         let tf = UITextField()
         tf.layer.borderColor = UIColor.darkGray.cgColor
         tf.layer.borderWidth = 0.75
+        tf.font = UIFont.systemFont(ofSize: 14)
         tf.placeholder = " spotを書き留める"
         tf.heightAnchor.constraint(equalToConstant: 40).isActive = true
         return tf
@@ -165,7 +166,7 @@ class UploadLogController: UIViewController {
         guard let mix = mixTextView.text else { return }
         guard let feeling = feelTextView.text else { return }
         
-        uploadLog(location: location, mix: mix, feeling: feeling, shopID: <#String?#>) { (error, ref) in
+        uploadLog(location: location, mix: mix, feeling: feeling, shopID: shop?.shopID) { (error, ref) in
             if let error = error {
                 print("DEBUG: error is \(error.localizedDescription)")
                 return

@@ -12,7 +12,8 @@ struct LogService {
 
     static let shared = LogService()
     
-    func uploadLog(location: String, mix: String, feeling: String, shopID: String? = nil, completion: @escaping(Error?, DatabaseReference) -> Void){
+    
+    func uploadLog(location: String, mix: String, feeling: String, completion: @escaping(Error?, DatabaseReference) -> Void){
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
         let values = [
@@ -21,7 +22,6 @@ struct LogService {
             "location": location,
             "mix": mix,
             "feeling": feeling,
-            "shopID": shopID ?? ""
         ] as [String: Any]
         
         REF_LOGS.childByAutoId().updateChildValues(values) { (error, ref) in
@@ -34,6 +34,31 @@ struct LogService {
             REF_USER_LOGS.child(uid).updateChildValues([logID: 1], withCompletionBlock: completion)
         }
     }
+    
+    // shopIDありバージョン
+    func uploadLog(withShopID shopID: String, location: String, mix: String, feeling: String, completion: @escaping(Error?, DatabaseReference) -> Void){
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        let values = [
+            "uid": uid,
+            "timestamp": Int(NSDate().timeIntervalSince1970),
+            "location": location,
+            "mix": mix,
+            "feeling": feeling,
+            "shopID": shopID
+        ] as [String: Any]
+        
+        REF_LOGS.childByAutoId().updateChildValues(values) { (error, ref) in
+            if let error = error{
+                print(error.localizedDescription)
+                return
+            }
+            
+            guard let logID = ref.key else { return }
+            REF_USER_LOGS.child(uid).updateChildValues([logID: 1], withCompletionBlock: completion)
+        }
+    }
+        
     
     
     // フォローしている人のみlogを全件取得
