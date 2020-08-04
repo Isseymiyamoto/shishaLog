@@ -13,7 +13,7 @@ struct Log {
     
     let logID: String
     let location: String
-    var shopID: String?
+    var shop: Shop?
     let mix: String
     let feeling: String
     var timestamp: Date!
@@ -21,7 +21,7 @@ struct Log {
     var likes: Int
     var didLike = false
     
-    init(user: User, logID: String, dictionary: [String: Any]) {
+    init(user: User, logID: String, dictionary: [String: Any], shop: Shop? = nil) {
         self.user = user
         self.logID = logID
         
@@ -34,8 +34,8 @@ struct Log {
             self.timestamp = Date(timeIntervalSince1970: timestamp)
         }
         
-        if let shopID = dictionary["shopID"] as? String{
-            self.shopID = shopID
+        if let shop = shop{
+            self.shop = shop
         }
     }
     

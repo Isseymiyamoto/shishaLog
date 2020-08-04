@@ -86,11 +86,20 @@ struct LogService {
         REF_LOGS.observe(.childAdded) { (snapshot) in
             guard let dictionary = snapshot.value as? [String: Any] else { return }
             guard let uid = dictionary["uid"] as? String else { return }
-            
-            UserService.shared.fetchUser(uid: uid) { (user) in
-                let log = Log(user: user, logID: snapshot.key, dictionary: dictionary)
-                logs.append(log)
-                completion(logs)
+            if let shopID = dictionary["shopID"] as? String{
+                UserService.shared.fetchUser(uid: uid) { (user) in
+                    ShopService.shared.fetchSomeShop(shopID: shopID) { (shop) in
+                        let log = Log(user: user, logID: snapshot.key, dictionary: dictionary, shop: shop)
+                        logs.append(log)
+                        completion(logs)
+                    }
+                }
+            }else{
+                UserService.shared.fetchUser(uid: uid) { (user) in
+                    let log = Log(user: user, logID: snapshot.key, dictionary: dictionary)
+                    logs.append(log)
+                    completion(logs)
+                }
             }
         }
     }
@@ -113,9 +122,18 @@ struct LogService {
             guard let dictionary = snapshot.value as? [String: Any] else { return }
             guard let uid = dictionary["uid"] as? String else { return }
             
-            UserService.shared.fetchUser(uid: uid) { (user) in
-                let log = Log(user: user, logID: logID, dictionary: dictionary)
-                completion(log)
+            if let shopID = dictionary["shopID"] as? String{
+                UserService.shared.fetchUser(uid: uid) { (user) in
+                    ShopService.shared.fetchSomeShop(shopID: shopID) { (shop) in
+                        let log = Log(user: user, logID: snapshot.key, dictionary: dictionary, shop: shop)
+                        completion(log)
+                    }
+                }
+            }else{
+                UserService.shared.fetchUser(uid: uid) { (user) in
+                    let log = Log(user: user, logID: snapshot.key, dictionary: dictionary)
+                    completion(log)
+                }
             }
         }
     }
