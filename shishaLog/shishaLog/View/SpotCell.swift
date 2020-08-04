@@ -10,6 +10,7 @@ import UIKit
 
 protocol SpotCellDelegate: class {
     func handleProfileImageTapped(user: User)
+    func handleLocationButtonTapped()
 }
 
 class SpotCell: UICollectionViewCell {
@@ -109,6 +110,7 @@ class SpotCell: UICollectionViewCell {
     
     @objc func handleLocationTapped(){
         // shop情報へ飛ばす
+        delegate?.handleLocationButtonTapped()
     }
     
     
