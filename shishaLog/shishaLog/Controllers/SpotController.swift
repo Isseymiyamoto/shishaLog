@@ -97,6 +97,11 @@ extension SpotController: UICollectionViewDelegateFlowLayout{
 // MARK: - SpotHeaderDelegate
 
 extension SpotController: SpotHeaderDelegate{
+    func handleLocationButtonTapped(shop: Shop) {
+        let controller = ShopController(shop: shop)
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
     func handleProfileImageTapped(user: User) {
         let controller = ProfileController(user: user)
         navigationController?.pushViewController(controller, animated: true)
@@ -113,8 +118,6 @@ extension SpotController: SpotHeaderDelegate{
             }
         }
     }
-    
-    
 }
 
 // MARK: - ActionSheetLauncherDelegate
