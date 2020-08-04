@@ -19,14 +19,14 @@ class ShopController: UIViewController {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
-        iv.backgroundColor = .systemGroupedBackground
+        iv.backgroundColor = .red
         return iv
     }()
     
     private let shopNameLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont.boldSystemFont(ofSize: 16)
         return label
     }()
     
@@ -35,6 +35,10 @@ class ShopController: UIViewController {
         return mv
     }()
     
+    private let infoEditButton: UIButton = {
+        let button = UIButton(type: .system)
+        return button
+    }()
     
     // MARK: - Lifecycle
     
@@ -54,18 +58,29 @@ class ShopController: UIViewController {
         configureNavigationBar()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.barStyle = .default
+        navigationController?.navigationBar.isHidden = false
+    }
     
     // MARK: - Helpers
     
     func configureUI(){
+        view.backgroundColor = .white
         
+        let frameWidth = view.frame.width
         view.addSubview(shopImageView)
-        view.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor)
+        shopImageView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, height: frameWidth / 2)
+        
+        view.addSubview(shopNameLabel)
+        shopNameLabel.anchor(top: shopImageView.bottomAnchor, left: view.leftAnchor, paddingTop: 16, paddingLeft: 8)
         
         view.addSubview(mapView)
-        mapView.anchor(top: shopImageView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 64)
+        mapView.anchor(top: shopImageView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 64, height: frameWidth / 3 * 2)
         
         shopImageView.sd_setImage(with: shop.shopImageUrl, completed: nil)
+        shopNameLabel.text = shop.shopName
         geoCording()
         
     }
@@ -109,11 +124,4 @@ class ShopController: UIViewController {
             }
         }
     }
-    
-    
-    
-    
-    
-    
-    
 }

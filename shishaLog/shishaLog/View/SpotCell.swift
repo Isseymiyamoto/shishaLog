@@ -10,7 +10,7 @@ import UIKit
 
 protocol SpotCellDelegate: class {
     func handleProfileImageTapped(user: User)
-    func handleLocationButtonTapped()
+    func handleLocationButtonTapped(shop: Shop)
 }
 
 class SpotCell: UICollectionViewCell {
@@ -50,11 +50,12 @@ class SpotCell: UICollectionViewCell {
         return title
     }()
     
-    private let locationButton: UIButton = {
+    private lazy var locationButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("@Soi61", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         button.addTarget(self, action: #selector(handleLocationTapped), for: .touchUpInside)
+        button.isUserInteractionEnabled = true
         return button
     }()
     
@@ -109,8 +110,8 @@ class SpotCell: UICollectionViewCell {
     }
     
     @objc func handleLocationTapped(){
-        // shop情報へ飛ばす
-        delegate?.handleLocationButtonTapped()
+        guard let shop = spot?.shop else { return }
+        delegate?.handleLocationButtonTapped(shop: shop)
     }
     
     

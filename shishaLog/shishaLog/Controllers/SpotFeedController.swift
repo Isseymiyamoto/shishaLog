@@ -115,6 +115,11 @@ extension SpotFeedController: UICollectionViewDelegateFlowLayout{
 }
 
 extension SpotFeedController: SpotCellDelegate{
+    func handleLocationButtonTapped(shop: Shop) {
+        let controller = ShopController(shop: shop)
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
     func handleProfileImageTapped(user: User) {
         let controller = ProfileController(user: user)
         navigationController?.pushViewController(controller, animated: true)
