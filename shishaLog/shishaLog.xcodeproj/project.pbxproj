@@ -38,6 +38,7 @@
 		8571AAF024BF43030000C2F6 /* ShopService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8571AAEF24BF43030000C2F6 /* ShopService.swift */; };
 		8571AAF224BF43F60000C2F6 /* ShopRegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8571AAF124BF43F60000C2F6 /* ShopRegistrationController.swift */; };
 		8571AAF424C02B270000C2F6 /* ShopRegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8571AAF324C02B270000C2F6 /* ShopRegistrationViewModel.swift */; };
+		8585BD6A24D92F190070941D /* ShopController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8585BD6924D92F190070941D /* ShopController.swift */; };
 		8591BD2B24BEC3280001BEA0 /* SpotService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8591BD2A24BEC3280001BEA0 /* SpotService.swift */; };
 		8591BD2D24BEC4510001BEA0 /* UploadSpotController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8591BD2C24BEC4510001BEA0 /* UploadSpotController.swift */; };
 		8591BD2F24BECBDC0001BEA0 /* Shop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8591BD2E24BECBDC0001BEA0 /* Shop.swift */; };
@@ -99,6 +100,7 @@
 		8571AAEF24BF43030000C2F6 /* ShopService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopService.swift; sourceTree = "<group>"; };
 		8571AAF124BF43F60000C2F6 /* ShopRegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopRegistrationController.swift; sourceTree = "<group>"; };
 		8571AAF324C02B270000C2F6 /* ShopRegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopRegistrationViewModel.swift; sourceTree = "<group>"; };
+		8585BD6924D92F190070941D /* ShopController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopController.swift; sourceTree = "<group>"; };
 		8591BD2A24BEC3280001BEA0 /* SpotService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotService.swift; sourceTree = "<group>"; };
 		8591BD2C24BEC4510001BEA0 /* UploadSpotController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadSpotController.swift; sourceTree = "<group>"; };
 		8591BD2E24BECBDC0001BEA0 /* Shop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shop.swift; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 				8571AAF124BF43F60000C2F6 /* ShopRegistrationController.swift */,
 				8555C38724D131DA00DE30DA /* SpotController.swift */,
 				8555C38B24D44FB200DE30DA /* UserListController.swift */,
+				8585BD6924D92F190070941D /* ShopController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -430,6 +433,7 @@
 				854ACFBC24A62C38000C880F /* EditProfileFooter.swift in Sources */,
 				851AAA87247E9E29006030D1 /* ExploreController.swift in Sources */,
 				8591BD3124BF09630001BEA0 /* ChoiceSpotController.swift in Sources */,
+				8585BD6A24D92F190070941D /* ShopController.swift in Sources */,
 				8571AAF024BF43030000C2F6 /* ShopService.swift in Sources */,
 				85E0F57B24A4D5A200FBFBF3 /* EditProfileViewModel.swift in Sources */,
 				8571AAF424C02B270000C2F6 /* ShopRegistrationViewModel.swift in Sources */,
