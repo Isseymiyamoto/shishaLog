@@ -24,8 +24,6 @@ class ProfileHeader: UICollectionViewCell{
     
     weak var delegate: ProfileHeaderDelegate?
     
-//    private let filterBar = ProfileFilterView()
-    
     private let profileImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFit
