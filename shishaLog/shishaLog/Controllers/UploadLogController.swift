@@ -14,6 +14,7 @@ class UploadLogController: UIViewController {
     // MARK: - Properties
     
     private let user: User
+    private var shop: Shop?
     
     private lazy var profileImageView: UIImageView = {
         let iv = UIImageView()
@@ -155,6 +156,7 @@ class UploadLogController: UIViewController {
     
     @objc func handleSpotSearchButtonTapped(){
         let controller = ChoiceSpotController(user: user, option: .fromUploadLog)
+        controller.delegate = self
         navigationController?.pushViewController(controller, animated: true)
     }
     
@@ -238,7 +240,14 @@ class UploadLogController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_: )), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_: )), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
+}
 
-    
+// MARK: - ChoiceSpotControllerDelegate
 
+extension UploadLogController: ChoiceSpotControllerDelegate{
+    func controller(_ controller: ChoiceSpotController, shop: Shop) {
+        controller.navigationController?.popViewController(animated: true)
+        self.shop = shop
+        spotTextField.text = shop.shopName
+    }
 }
