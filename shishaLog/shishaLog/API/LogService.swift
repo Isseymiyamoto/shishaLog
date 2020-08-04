@@ -12,7 +12,7 @@ struct LogService {
 
     static let shared = LogService()
     
-    func uploadLog(location: String, mix: String, feeling: String, completion: @escaping(Error?, DatabaseReference) -> Void){
+    func uploadLog(location: String, mix: String, feeling: String, shopID: String? = nil, completion: @escaping(Error?, DatabaseReference) -> Void){
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
         let values = [
@@ -20,7 +20,8 @@ struct LogService {
             "timestamp": Int(NSDate().timeIntervalSince1970),
             "location": location,
             "mix": mix,
-            "feeling": feeling
+            "feeling": feeling,
+            "shopID": shopID ?? ""
         ] as [String: Any]
         
         REF_LOGS.childByAutoId().updateChildValues(values) { (error, ref) in

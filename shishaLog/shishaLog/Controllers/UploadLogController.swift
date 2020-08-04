@@ -111,10 +111,10 @@ class UploadLogController: UIViewController {
         return tf
     }()
     
-    private let spotTextView: UITextView = {
-        let tv = CaptionTextView(withPlaceholder: "spotを書き留める")
-        return tv
-    }()
+//    private let spotTextView: UITextView = {
+//        let tv = CaptionTextView(withPlaceholder: "spotを書き留める")
+//        return tv
+//    }()
     
     private let mixTextView: UITextView = {
         let tv = CaptionTextView(withPlaceholder: "フレーバーを書き留める")
@@ -146,8 +146,8 @@ class UploadLogController: UIViewController {
     
     // MARK: - API
     
-    func uploadLog(location: String, mix: String, feeling: String, completion: @escaping((Error?, DatabaseReference) -> Void)){
-        LogService.shared.uploadLog(location: location, mix: mix, feeling: feeling, completion: completion)
+    func uploadLog(location: String, mix: String, feeling: String, shopID: String? = nil, completion: @escaping((Error?, DatabaseReference) -> Void)){
+        LogService.shared.uploadLog(location: location, mix: mix, feeling: feeling, shopID: shopID, completion: completion)
     }
     
     
@@ -161,11 +161,11 @@ class UploadLogController: UIViewController {
     }
     
     @objc func handleUploadLog(){
-        guard let location = spotTextView.text else { return }
+        guard let location = spotTextField.text else { return }
         guard let mix = mixTextView.text else { return }
         guard let feeling = feelTextView.text else { return }
         
-        uploadLog(location: location, mix: mix, feeling: feeling) { (error, ref) in
+        uploadLog(location: location, mix: mix, feeling: feeling, shopID: <#String?#>) { (error, ref) in
             if let error = error {
                 print("DEBUG: error is \(error.localizedDescription)")
                 return

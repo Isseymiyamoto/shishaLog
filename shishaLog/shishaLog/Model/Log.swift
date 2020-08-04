@@ -13,6 +13,7 @@ struct Log {
     
     let logID: String
     let location: String
+    var shopID: String?
     let mix: String
     let feeling: String
     var timestamp: Date!
@@ -31,6 +32,10 @@ struct Log {
         
         if let timestamp = dictionary["timestamp"] as? Double{
             self.timestamp = Date(timeIntervalSince1970: timestamp)
+        }
+        
+        if let shopID = dictionary["shopID"] as? String{
+            self.shopID = shopID
         }
     }
     
