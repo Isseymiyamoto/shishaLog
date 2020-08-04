@@ -11,6 +11,7 @@ import UIKit
 protocol SpotHeaderDelegate: class {
     func handleProfileImageTapped(user: User)
     func showActionSheet()
+    func handleLocationButtonTapped(shop: Shop)
 }
 
 class SpotHeaderSupplementaryView: UICollectionReusableView{
@@ -147,7 +148,8 @@ class SpotHeaderSupplementaryView: UICollectionReusableView{
     }
     
     @objc func handleLocationTapped(){
-        
+        guard let shop = spot?.shop else { return }
+        delegate?.handleLocationButtonTapped(shop: shop)
     }
     
     @objc func handleActionSheetShow(){
