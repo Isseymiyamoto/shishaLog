@@ -11,11 +11,17 @@ import UIKit
 private let choiseCellIdentifier = "spotCell"
 private let identifier = "addNewSpotCell"
 
+protocol ChoiceSpotControllerDelegate: class {
+    func controller(_ controller: ChoiceSpotController)
+}
+
 class ChoiceSpotController: UITableViewController {
     
     // MARK: - Properties
     
+    weak var delegate: ChoiceSpotControllerDelegate?
     private let user: User
+    private let option: ChoiceSpotControllerOptions
     
     private var shops = [Shop]() {
         didSet { tableView.reloadData() }
@@ -27,8 +33,9 @@ class ChoiceSpotController: UITableViewController {
     
     // MARK: - Lifecycle
     
-    init(user: User) {
+    init(user: User, option: ChoiceSpotControllerOptions) {
         self.user = user
+        self.option = option
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -72,7 +79,7 @@ class ChoiceSpotController: UITableViewController {
     }
     
     func configureNavigationBar(){
-        navigationItem.title = "今どこ？"
+        navigationItem.title = option.description
         navigationController?.navigationBar.barTintColor = .white
         navigationController?.navigationBar.isTranslucent = false
         

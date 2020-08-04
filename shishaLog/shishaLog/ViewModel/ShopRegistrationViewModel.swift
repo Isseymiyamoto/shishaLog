@@ -18,3 +18,17 @@ struct ShopRegistrationViewModel {
         return shopName?.isEmpty == false && shopAddress?.isEmpty == false && shopImage !== nil
     }
 }
+
+enum ChoiceSpotControllerOptions{
+    case fromUploadLog
+    case fromSpotFeed
+    
+    var description: String {
+        switch self {
+        case .fromUploadLog:
+            return "Spotを選択"
+        case .fromSpotFeed:
+            return "今どこ？"
+        }
+    }
+}
