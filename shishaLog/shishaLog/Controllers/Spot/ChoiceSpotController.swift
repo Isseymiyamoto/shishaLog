@@ -62,7 +62,12 @@ class ChoiceSpotController: UITableViewController {
     // MARK: - Selectors
     
     @objc func handleCancel(){
-        self.dismiss(animated: true, completion: nil)
+        switch option {
+        case .fromSpotFeed:
+            self.dismiss(animated: true, completion: nil)
+        case .fromUploadLog:
+            navigationController?.popViewController(animated: true)
+        }
     }
     
     @objc func handleShowSearchBar(){
