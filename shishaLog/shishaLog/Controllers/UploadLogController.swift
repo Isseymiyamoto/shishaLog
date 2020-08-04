@@ -92,11 +92,20 @@ class UploadLogController: UIViewController {
     
     
     // test
+    private lazy var spotSearchButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
+        button.setDimensions(width: 20, height: 20)
+        return button
+    }()
+    
+    
     private let spotTextField: UITextField = {
         let tf = UITextField()
         tf.layer.borderColor = UIColor.darkGray.cgColor
         tf.layer.borderWidth = 0.75
         tf.placeholder = " spotを書き留める"
+        tf.heightAnchor.constraint(equalToConstant: 40).isActive = true
         return tf
     }()
     
@@ -198,7 +207,7 @@ class UploadLogController: UIViewController {
         let stack = UIStackView(arrangedSubviews: [spotLabel, spotTextField, mixLabel, mixTextView, feelLabel, feelTextView])
         stack.spacing = 12
         stack.axis = .vertical
-        stack.distribution = .fillProportionally
+//        stack.distribution = .fillProportionally
         
         view.addSubview(stack)
         stack.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 32, paddingLeft: 16, paddingRight: 16)
@@ -206,6 +215,10 @@ class UploadLogController: UIViewController {
         view.addSubview(buttonStack)
         buttonStack.anchor(left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor,
                            paddingLeft: 16, paddingBottom: 12, paddingRight: 16, height: 32)
+        
+        view.addSubview(spotSearchButton)
+        spotSearchButton.centerY(inView: spotTextField)
+        spotSearchButton.anchor(right: spotTextField.rightAnchor, paddingRight: 16)
     }
     
     
