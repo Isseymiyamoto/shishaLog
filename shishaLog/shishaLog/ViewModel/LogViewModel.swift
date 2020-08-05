@@ -59,8 +59,8 @@ struct LogViewModel {
     }
     
     var likeButtonImage: UIImage {
-        let imageName = log.didLike ? "star.fill" : "star"
-        return UIImage(systemName: imageName)!
+        let imageName = log.didLike ? "bmpink" : "bm"
+        return UIImage(named: imageName)!
     }
     
     var likesAttributedString: NSAttributedString? {

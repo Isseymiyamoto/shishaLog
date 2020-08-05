@@ -120,7 +120,6 @@ extension FeedController{
         controller.indexValue = indexPath.item
         navigationController?.pushViewController(controller, animated: true)
     }
-    
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout

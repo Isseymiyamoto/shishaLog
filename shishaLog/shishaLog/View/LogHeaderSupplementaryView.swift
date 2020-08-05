@@ -110,7 +110,7 @@ class LogHeaderSupplementaryView: UICollectionReusableView {
     
     lazy var likeButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "star"), for: .normal)
+        button.setImage(UIImage(systemName: "bm"), for: .normal)
         button.addTarget(self, action: #selector(handleLikeButtonTapped), for: .touchUpInside)
         button.setDimensions(width: 20, height: 20)
         button.tintColor = UIColor.rgb(red: 232, green: 75, blue: 110)
