@@ -69,6 +69,8 @@ class ProfileController: UICollectionViewController {
         navigationController?.navigationBar.barStyle = .default
         navigationController?.navigationBar.isHidden = false
         navigationController?.navigationBar.tintColor = .systemBlue
+        
+        fetchUserStats()
     }
     
     
@@ -133,10 +135,13 @@ class ProfileController: UICollectionViewController {
         switch selectedFilter {
         case .logs:
             fetchLogs()
+            fetchUserStats()
         case .locations:
             fetchSpots()
+            fetchUserStats()
         case .likeLogs:
             fetchLikeLogs()
+            fetchUserStats()
         }
     }
     
@@ -320,6 +325,7 @@ extension ProfileController: ProfileHeaderDelegate{
                     return
                 }
                 self.user.isFollowed = false
+                self.fetchUserStats()
                 self.collectionView.reloadData()
             }
         }else{
@@ -329,6 +335,7 @@ extension ProfileController: ProfileHeaderDelegate{
                     return
                 }
                 self.user.isFollowed = true
+                self.fetchUserStats()
                 self.collectionView.reloadData()
             }
         }
