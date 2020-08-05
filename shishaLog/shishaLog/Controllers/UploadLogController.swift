@@ -103,7 +103,7 @@ class UploadLogController: UIViewController {
     
     
     private let spotTextField: UITextField = {
-        let tf = UITextField()
+        let tf = PaddingTextField()
         tf.layer.borderColor = UIColor.darkGray.cgColor
         tf.layer.borderWidth = 0.75
         tf.font = UIFont.systemFont(ofSize: 14)
