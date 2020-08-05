@@ -241,7 +241,9 @@ extension ProfileController{
         default:
             switch selectedFilter {
             case .locations:
-                return
+                guard let spot = spots[indexPath.item] as? Spot else { return }
+                let controller = SpotController(spot: spot)
+                navigationController?.pushViewController(controller, animated: true)
             default:
                 guard let log = currentDataSource[indexPath.item] as? Log else { return }
                 let controller = LogController(log: log)
