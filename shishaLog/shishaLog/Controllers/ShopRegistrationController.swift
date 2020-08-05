@@ -20,10 +20,11 @@ class ShopRegistrationController: UIViewController{
     private var viewModel = ShopRegistrationViewModel()
     
     private let titleImage: UIImageView = {
-        let iv = UIImageView(image: UIImage(systemName: "pencil.circle"))
+        let iv = UIImageView(image: UIImage(named: "shishaLog_theme"))
         iv.contentMode = .scaleAspectFit
         iv.clipsToBounds = true
         iv.setDimensions(width: 32, height: 32)
+        iv.layer.cornerRadius = 32 / 2
         return iv
     }()
     
