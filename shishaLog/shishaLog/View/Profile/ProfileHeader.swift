@@ -147,7 +147,7 @@ class ProfileHeader: UICollectionViewCell{
         bioLabel.anchor(top: fullnameLabel.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 4, paddingLeft: 16, paddingRight: 16)
         
         addSubview(editProfileFollowButton)
-        editProfileFollowButton.anchor(top: bioLabel.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 32, paddingLeft: 16, paddingRight: 16)
+        editProfileFollowButton.anchor(top: bioLabel.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 16, paddingLeft: 16, paddingRight: 16)
         editProfileFollowButton.setDimensions(width: self.frame.width - 32, height: 36)
         editProfileFollowButton.layer.cornerRadius = 6
         
@@ -200,7 +200,7 @@ class ProfileHeader: UICollectionViewCell{
         fullnameLabel.text = user.fullname
         followingCountButton.setTitle(viewModel.followingLabelText, for: .normal)
         followedCountButton.setTitle(viewModel.followersLabelText, for: .normal)
-        
+        bioLabel.text = viewModel.bioLabelText
     }
 }
 

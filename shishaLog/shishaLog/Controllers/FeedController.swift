@@ -129,6 +129,9 @@ extension FeedController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let height: CGFloat = 200
         return CGSize(width: view.frame.width, height: height)
+//        let viewModel = LogViewModel(log: logs[indexPath.item])
+//        let size = viewModel.size(withWidth: view.frame.width)
+//        return size
     }
  
     

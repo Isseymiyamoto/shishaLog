@@ -112,11 +112,6 @@ class UploadLogController: UIViewController {
         return tf
     }()
     
-//    private let spotTextView: UITextView = {
-//        let tv = CaptionTextView(withPlaceholder: "spotを書き留める")
-//        return tv
-//    }()
-    
     private let mixTextView: UITextView = {
         let tv = CaptionTextView(withPlaceholder: "フレーバーを書き留める")
         return tv
@@ -224,7 +219,6 @@ class UploadLogController: UIViewController {
         configureNavigationBar()
         
         profileImageView.sd_setImage(with: user.profileImageUrl, completed: nil)
-        
         
         let stack = UIStackView(arrangedSubviews: [spotLabel, spotTextField, mixLabel, mixTextView, feelLabel, feelTextView])
         stack.spacing = 12

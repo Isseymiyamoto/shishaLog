@@ -55,7 +55,7 @@ class LogCell: UICollectionViewCell {
     private lazy var locationLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 16)
-        label.textColor = .systemBlue
+        label.textColor = .black
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleLocationLabelTapped))
         label.addGestureRecognizer(tap)
@@ -167,6 +167,7 @@ class LogCell: UICollectionViewCell {
         infoLabel.attributedText = viewModel.userInfoText
         // location text
         locationLabel.text = viewModel.locationLabelText
+        locationLabel.textColor = viewModel.locationLabelTextColor
         // mix text
         mixTextView.text = log.mix
         // feeling text
@@ -174,6 +175,7 @@ class LogCell: UICollectionViewCell {
         
         likeButton.setImage(viewModel.likeButtonImage, for: .normal)
         likeButton.tintColor = viewModel.likeButtonTintColor
+        
     }
     
     private func configureAttributedText(fullname: String, username: String, timestamp: Date) -> NSAttributedString{

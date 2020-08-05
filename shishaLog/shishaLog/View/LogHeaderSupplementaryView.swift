@@ -239,6 +239,8 @@ class LogHeaderSupplementaryView: UICollectionReusableView {
         usernameLabel.text = viewModel.usernameText
         
         locationLabel.text = viewModel.locationLabelText
+        locationLabel.textColor = viewModel.locationLabelTextColor
+        
         mixTextView.text = log.mix
         feelingLabel.text = log.feeling
         

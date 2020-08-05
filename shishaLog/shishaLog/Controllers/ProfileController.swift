@@ -273,7 +273,8 @@ extension ProfileController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch indexPath.section {
         case 0:
-            return CGSize(width: view.frame.width, height: 280)
+            let height:CGFloat = user.bio != nil ? 260 : 220
+            return CGSize(width: view.frame.width, height: height)
         default:
             var height: CGFloat = 200
             if selectedFilter == .locations{

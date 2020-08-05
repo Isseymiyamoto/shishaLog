@@ -48,6 +48,10 @@ struct ProfileHeaderViewModel {
         return "\(user.stats?.followers ?? 0)" 
     }
     
+    var bioLabelText: String?{
+        return user.bio ?? ""
+    }
+    
     
     
     init(user: User) {

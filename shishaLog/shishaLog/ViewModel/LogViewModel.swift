@@ -37,6 +37,10 @@ struct LogViewModel {
         return "@\(log.location)"
     }
     
+    var locationLabelTextColor: UIColor{
+        return log.shop != nil ? .systemBlue : .black
+    }
+    
     var headerTimeStamp: String {
         let formatter = DateFormatter()
         formatter.dateFormat = "h:mm a ・ MM/dd/yyyy"
@@ -84,5 +88,14 @@ struct LogViewModel {
             attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14),
                          NSAttributedString.Key.foregroundColor: UIColor.lightGray]))
         return attributedTitle
+    }
+    
+    func size(withWidth width: CGFloat) -> CGSize{
+        let cell = LogCell()
+        cell.log = log
+        cell.translatesAutoresizingMaskIntoConstraints = false
+        cell.widthAnchor.constraint(equalToConstant: width).isActive = true
+        cell.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+        return CGSize(width: width, height: cell.bounds.height)
     }
 }
