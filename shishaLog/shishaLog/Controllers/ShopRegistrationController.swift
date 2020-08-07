@@ -78,9 +78,9 @@ class ShopRegistrationController: UIViewController{
         button.setTitleColor(.white, for: .normal)
 //        button.backgroundColor = .shishaColor
         button.backgroundColor = .systemGray
-        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        button.heightAnchor.constraint(equalToConstant: 48).isActive = true
         button.layer.cornerRadius = 5
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         button.addTarget(self, action: #selector(handleRegistration), for: .touchUpInside)
         button.isEnabled = false
         return button
@@ -209,7 +209,7 @@ extension ShopRegistrationController: ShopRegistrationProtocol{
         
         if viewModel.formIsValid{
             registrationButton.isEnabled = true
-            registrationButton.backgroundColor = .shishaColor
+            registrationButton.backgroundColor = .systemBlue
         }else{
             registrationButton.isEnabled = false
             registrationButton.backgroundColor = .systemGray
