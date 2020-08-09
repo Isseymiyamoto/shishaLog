@@ -144,7 +144,7 @@ extension SpotController: ActionSheetLauncherDelegate{
                 print("DEBUG: unfollow 成功")
             }
         case .delete:
-            guard let spotID = spot.spotID as? String else { return }
+            let spotID = spot.spotID 
             SpotService.shared.deleteSpot(withSpotID: spotID) { (error, ref) in
                 if let error = error {
                     print("DEBUG: error is \(error.localizedDescription)")
@@ -153,7 +153,8 @@ extension SpotController: ActionSheetLauncherDelegate{
                 self.delegate?.controller(self)
             }
         case .report:
-            print("DEBUG: report spot here")
+            let spotID = spot.spotID
+            SpotService.shared.reportSpot(spotID: spotID)
         }
     }
 }
