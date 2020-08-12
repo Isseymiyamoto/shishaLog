@@ -12,8 +12,8 @@ pod 'Firebase/Database'
 pod 'Firebase/Storage'
 pod 'Firebase/Auth'
 pod 'SDWebImage', '~> 5.0'
-pod 'ActiveLabel'
 pod 'IQKeyboardManagerSwift'
+pod 'JGProgressHUD','~>2.0.3'
 
 
 end

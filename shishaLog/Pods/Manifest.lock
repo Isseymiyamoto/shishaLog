@@ -1,5 +1,4 @@
 PODS:
-  - ActiveLabel (1.1.0)
   - Firebase/Auth (6.26.0):
     - Firebase/CoreOnly
     - FirebaseAuth (~> 6.5.3)
@@ -86,6 +85,7 @@ PODS:
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (1.4.0)
   - IQKeyboardManagerSwift (6.5.5)
+  - JGProgressHUD (2.0.4)
   - leveldb-library (1.22)
   - nanopb (1.30905.0):
     - nanopb/decode (= 1.30905.0)
@@ -98,17 +98,16 @@ PODS:
   - SDWebImage/Core (5.8.0)
 
 DEPENDENCIES:
-  - ActiveLabel
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
   - Firebase/Storage
   - IQKeyboardManagerSwift
+  - JGProgressHUD (~> 2.0.3)
   - SDWebImage (~> 5.0)
 
 SPEC REPOS:
   trunk:
-    - ActiveLabel
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -125,13 +124,13 @@ SPEC REPOS:
     - GoogleUtilities
     - GTMSessionFetcher
     - IQKeyboardManagerSwift
+    - JGProgressHUD
     - leveldb-library
     - nanopb
     - PromisesObjC
     - SDWebImage
 
 SPEC CHECKSUMS:
-  ActiveLabel: 5e3f4de79a1952d4604b845a0610d4776e4b82b3
   Firebase: 7cf5f9c67f03cb3b606d1d6535286e1080e57eb6
   FirebaseAnalytics: 96634d356482d4f3af8fe459a0ebf19a99c71b75
   FirebaseAuth: 7047aec89c0b17ecd924a550c853f0c27ac6015e
@@ -148,11 +147,12 @@ SPEC CHECKSUMS:
   GoogleUtilities: 39530bc0ad980530298e9c4af8549e991fd033b1
   GTMSessionFetcher: 6f5c8abbab8a9bce4bb3f057e317728ec6182b10
   IQKeyboardManagerSwift: 0fb93310284665245591f50f7a5e38de615960b7
+  JGProgressHUD: 62658b14e72cccf179efc7a13bcb54d30b92fc22
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   SDWebImage: 84000f962cbfa70c07f19d2234cbfcf5d779b5dc
 
-PODFILE CHECKSUM: ab3038cc4ba5aed1fb7285ea4a92e6aef4284886
+PODFILE CHECKSUM: 03bd54429811b30e1bd83210a61c9c2c14e9157a
 
 COCOAPODS: 1.8.4
