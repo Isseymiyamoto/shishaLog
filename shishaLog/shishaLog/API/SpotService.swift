@@ -41,7 +41,7 @@ struct SpotService {
             guard let dictionary = snapshot.value as? [String: Any] else { return }
             guard let uid = dictionary["uid"] as? String else { return }
             guard let shopID = dictionary["shopID"] as? String else { return }
-            guard let spotID = snapshot.key as? String else { return }
+            let spotID = snapshot.key 
             
             UserService.shared.fetchUser(uid: uid) { (user) in
                 ShopService.shared.fetchSomeShop(shopID: shopID) { (shop) in
@@ -74,7 +74,7 @@ struct SpotService {
             guard let dictionary = snapshot.value as? [String: Any] else { return }
             guard let uid = dictionary["uid"] as? String else { return }
             guard let shopID = dictionary["shopID"] as? String else { return }
-            guard let spotID = snapshot.key as? String else { return }
+            let spotID = snapshot.key
             
             UserService.shared.fetchUser(uid: uid) { (user) in
                 ShopService.shared.fetchSomeShop(shopID: shopID) { (shop) in
