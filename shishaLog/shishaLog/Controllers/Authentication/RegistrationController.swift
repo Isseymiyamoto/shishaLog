@@ -97,9 +97,7 @@ class RegistrationController: UIViewController{
         
         configureUI()
     }
-    
-    
-    
+
     
     // MARK: - API
     
@@ -125,11 +123,16 @@ class RegistrationController: UIViewController{
         
         let credentials = AuthCredentials(email: email, password: password, fullname: fullname, username: username, profileImage: profileImage)
         
+        showLoader(true, withText: "登録中")
+        
         AuthService.shared.registerUser(credentials: credentials) { (error, ref) in
             if let error = error{
+                self.showLoader(false)
                 print("DEBUG: error is \(error.localizedDescription)")
                 return
             }
+            
+            self.showLoader(false)
             
             guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else { return }
             guard let tab = window.rootViewController as? MainTabController else { return }

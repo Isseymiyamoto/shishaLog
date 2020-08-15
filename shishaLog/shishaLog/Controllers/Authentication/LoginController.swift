@@ -81,11 +81,16 @@ class LoginController: UIViewController {
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
         
+        showLoader(true, withText: "ログイン中")
+        
         AuthService.shared.loginUser(withEmail: email, password: password) { (result, error) in
             if let error = error{
+                self.showLoader(false)
                 print("DEBUG: Fail to loging \(error.localizedDescription)")
                 return
             }
+            
+            self.showLoader(false)
             
             guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow}) else { return }
             guard let tab = window.rootViewController as? MainTabController else { return }
