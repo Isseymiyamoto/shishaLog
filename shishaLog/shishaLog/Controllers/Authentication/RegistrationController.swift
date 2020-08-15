@@ -128,7 +128,7 @@ class RegistrationController: UIViewController{
         AuthService.shared.registerUser(credentials: credentials) { (error, ref) in
             if let error = error{
                 self.showLoader(false)
-                print("DEBUG: error is \(error.localizedDescription)")
+                self.showError(error)
                 return
             }
             

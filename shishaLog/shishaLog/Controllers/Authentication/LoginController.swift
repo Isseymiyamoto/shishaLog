@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class LoginController: UIViewController {
     
@@ -86,7 +87,7 @@ class LoginController: UIViewController {
         AuthService.shared.loginUser(withEmail: email, password: password) { (result, error) in
             if let error = error{
                 self.showLoader(false)
-                print("DEBUG: Fail to loging \(error.localizedDescription)")
+                self.showError(error)
                 return
             }
             

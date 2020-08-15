@@ -8,6 +8,7 @@
 
 import UIKit
 import JGProgressHUD
+import Firebase
 
 extension UIView {
     func anchor(top: NSLayoutYAxisAnchor? = nil,
@@ -145,8 +146,21 @@ extension UIViewController{
     }
     
     // エラーメッセージの表示
-    func showError(_ errorMessage: String){
-        let alert = UIAlertController(title: "エラー", message: errorMessage, preferredStyle: .alert)
+    func showError(_ error: Error){
+        let alert = UIAlertController(title: "エラー", message: nil, preferredStyle: .alert)
+        
+        if let errCode = AuthErrorCode(rawValue: error._code){
+            switch errCode {
+            case .invalidEmail:
+                alert.message = "メールアドレスの形式が違います"
+            case .emailAlreadyInUse:
+                alert.message = "このメールアドレスは既に使用されています"
+            case .weakPassword:
+                alert.message = "パスワードは6文字以上で入力してください"
+            default:
+                alert.message = "エラーが起きました\nしばらくしてから再度お試しください"
+            }
+        }
         alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
         present(alert, animated: true)
     }
