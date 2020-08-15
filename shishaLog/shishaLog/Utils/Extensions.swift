@@ -151,6 +151,8 @@ extension UIViewController{
         
         if let errCode = AuthErrorCode(rawValue: error._code){
             switch errCode {
+            case .wrongPassword:
+                alert.message = "パスワードが違います"
             case .invalidEmail:
                 alert.message = "メールアドレスの形式が違います"
             case .emailAlreadyInUse:
