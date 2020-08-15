@@ -143,4 +143,11 @@ extension UIViewController{
             UIViewController.hud.dismiss()
         }
     }
+    
+    // エラーメッセージの表示
+    func showError(_ errorMessage: String){
+        let alert = UIAlertController(title: "エラー", message: errorMessage, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+        present(alert, animated: true)
+    }
 }
