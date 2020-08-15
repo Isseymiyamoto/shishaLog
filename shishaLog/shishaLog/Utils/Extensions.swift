@@ -131,7 +131,7 @@ extension UIViewController{
     
     // hudに関するメソッド
     
-    static let hud = JGProgressHUD()
+    static let hud = JGProgressHUD(style: .dark)
     
     func showLoader(_ show: Bool, withText text: String? = "Loading"){
         view.endEditing(true)

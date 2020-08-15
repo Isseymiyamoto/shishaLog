@@ -365,12 +365,19 @@ extension ProfileController: EditProfileControllerDelegate{
     }
     
     func handleLogout() {
+        showLoader(true, withText: "ログアウト中")
         do {
             try Auth.auth().signOut()
+            
+            self.showLoader(false)
+            
             let nav = UINavigationController(rootViewController: LoginController())
             nav.modalPresentationStyle = .fullScreen
             self.present(nav, animated: true, completion: nil)
         }catch let error{
+            
+            self.showLoader(false)
+            
             print("DEBUG: Failed to sign out with error \(error.localizedDescription)")
         }
     }
