@@ -165,22 +165,26 @@ class UploadLogController: UIViewController {
         guard let mix = mixTextView.text else { return }
         guard let feeling = feelTextView.text else { return }
         
+        showLoader(true, withText: "送信中")
+        
         if let shop = shop{
             uploadLog(withShopID: shop.shopID, location: location, mix: mix, feeling: feeling) { (error, ref) in
-                if let error = error {
-                    print("DEBUG: error is \(error.localizedDescription)")
+                if error != nil {
+                    self.showError(withMessage: "ログ")
                     return
                 }
-                print("DEBUG: successfully uploaded your log")
+                
+                self.showLoader(false)
                 self.dismiss(animated: true, completion: nil)
             }
         }else{
             uploadLog(location: location, mix: mix, feeling: feeling) { (error, ref) in
-                if let error = error {
-                    print("DEBUG: error is \(error.localizedDescription)")
+                if error != nil {
+                    self.showError(withMessage: "ログ")
                     return
                 }
-                print("DEBUG: successfully uploaded your log")
+                
+                self.showLoader(false)
                 self.dismiss(animated: true, completion: nil)
             }
         }

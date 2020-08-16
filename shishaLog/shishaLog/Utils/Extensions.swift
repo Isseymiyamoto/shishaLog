@@ -166,4 +166,10 @@ extension UIViewController{
         alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
         present(alert, animated: true)
     }
+    
+    func showError(withMessage message: String){
+        let alert = UIAlertController(title: "エラー", message: "\(message)が送信できませんでした", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+        present(alert, animated: true)
+    }
 }

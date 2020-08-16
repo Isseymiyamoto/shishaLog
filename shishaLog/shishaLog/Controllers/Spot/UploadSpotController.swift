@@ -94,13 +94,15 @@ class UploadSpotController: UIViewController {
     func uploadSpot(){
         guard let comment = commentTextView.text else { return }
         
+        showLoader(true)
+        
         SpotService.shared.uploadSpot(shopID: shop.shopID, comment: comment) { (error, ref) in
-            if let error = error {
-                print("DEBUG: error is \(error.localizedDescription)")
+            if error != nil {
+                self.showError(withMessage: "スポット")
                 return
             }
             
-            print("DEBUG: uploaded your spot")
+            self.showLoader(false)
             self.dismiss(animated: true, completion: nil)
         }
     }

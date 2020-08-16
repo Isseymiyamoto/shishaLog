@@ -109,7 +109,6 @@ class LoginController: UIViewController {
     // MARK: - Helpers
     
     func configureUI(){
-//        view.backgroundColor = .shishaColor
         configureGradientLayer()
         navigationController?.navigationBar.barStyle = .black
         navigationController?.navigationBar.isHidden = true
