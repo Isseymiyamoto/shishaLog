@@ -103,7 +103,7 @@ struct SpotService {
         REF_REPORT_SPOTS.child(spotID).setValue([uid: 1])
     }
     
-    // followしているユーザーのみ取得
+    // followしているユーザーと自分のspotのみ取得
     func fetchFollowingSpots(completion: @escaping([Spot]) -> Void){
         guard let uid = Auth.auth().currentUser?.uid else { return }
         var spots = [Spot]()
@@ -119,9 +119,18 @@ struct SpotService {
                     completion(spots)
                 }
             }
-            
         }
         
+        REF_USER_SPOTS.child(uid).observe(.childAdded) { (snapshot) in
+            let spotID = snapshot.key
+            
+            self.fetchSpot(withSpotID: spotID) { (spot) in
+                spots.append(spot)
+                completion(spots)
+            }
+        }
     }
+    
+    
     
 }

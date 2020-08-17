@@ -40,7 +40,7 @@ class SpotFeedController: UICollectionViewController {
     func fetchSpots(){
         collectionView.refreshControl?.beginRefreshing()
         
-        SpotService.shared.fetchSpots { (spots) in
+        SpotService.shared.fetchFollowingSpots { (spots) in
             self.spots = spots.sorted(by: { $0.timestamp > $1.timestamp })
             
             self.collectionView.refreshControl?.endRefreshing()

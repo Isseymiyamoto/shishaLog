@@ -77,6 +77,15 @@ struct LogService {
                 }
             }
         }
+        
+        REF_USER_LOGS.child(currentUid).observe(.childAdded) { (snapshot) in
+            let logID = snapshot.key
+            self.fetchLog(withLogID: logID) { (log) in
+                logs.append(log)
+                completion(logs)
+            }
+        }
+        
     }
     
     // logを全件取得
