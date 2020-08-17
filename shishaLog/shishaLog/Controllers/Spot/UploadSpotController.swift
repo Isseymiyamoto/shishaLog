@@ -94,7 +94,7 @@ class UploadSpotController: UIViewController {
     func uploadSpot(){
         guard let comment = commentTextView.text else { return }
         
-        showLoader(true)
+        showLoader(true, withText: "送信中")
         
         SpotService.shared.uploadSpot(shopID: shop.shopID, comment: comment) { (error, ref) in
             if error != nil {
