@@ -43,7 +43,7 @@ class FeedController: UICollectionViewController {
     func fetchLogs(){
         collectionView.refreshControl?.beginRefreshing()
         
-        LogService.shared.fetchLogs { (logs) in
+        LogService.shared.fetchFollowingLogs { (logs) in
             self.logs = logs.sorted(by: { $0.timestamp  > $1.timestamp })
             self.checkIfUserLikedLogs()
             
