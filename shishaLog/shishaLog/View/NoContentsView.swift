@@ -30,7 +30,7 @@ class NoContentsView: UIView {
         return label
     }()
     
-    private lazy var promotionButton: UIButton = {
+    private let promotionButton: UIButton = {
         let button = UIButton(type: .system)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         button.setTitleColor(.white, for: .normal)

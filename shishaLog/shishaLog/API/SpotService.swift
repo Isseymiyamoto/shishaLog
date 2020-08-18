@@ -129,8 +129,6 @@ struct SpotService {
                 completion(spots)
             }
         }
-        
-        completion(spots)
     }
     
     

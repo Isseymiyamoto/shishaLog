@@ -86,14 +86,16 @@ class SpotFeedController: UICollectionViewController {
         
         collectionView.addSubview(noContentsView)
         noContentsView.delegate = self
-        noContentsView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor)
+        noContentsView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, height: 200)
     }
     
     func configureBackGroundView(){
         if spots.isEmpty {
             noContentsView.isHidden = false
+            noContentsView.isUserInteractionEnabled = true
         }else{
             noContentsView.isHidden = true
+            noContentsView.isUserInteractionEnabled = false
         }
     }
     

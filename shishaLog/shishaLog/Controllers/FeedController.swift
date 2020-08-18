@@ -23,7 +23,7 @@ class FeedController: UICollectionViewController {
         }
     }
     
-    private let noContentsView: NoContentsView = {
+    private lazy var noContentsView: NoContentsView = {
         let nc = NoContentsView(option: .logs)
         nc.isHidden = true
         return nc
@@ -104,7 +104,7 @@ class FeedController: UICollectionViewController {
         
         collectionView.addSubview(noContentsView)
         noContentsView.delegate = self
-        noContentsView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor)
+        noContentsView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, height: 200)
     }
     
     // 表示するコンテンツがない場合、backgroundViewにNoContentsViewを表示

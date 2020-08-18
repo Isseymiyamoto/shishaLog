@@ -85,9 +85,6 @@ struct LogService {
                 completion(logs)
             }
         }
-        
-        completion(logs)
-        
     }
     
     // logを全件取得
