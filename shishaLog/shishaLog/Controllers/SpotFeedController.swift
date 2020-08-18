@@ -77,7 +77,7 @@ class SpotFeedController: UICollectionViewController {
     
     // 表示するコンテンツがない場合、backgroundViewにNoContentsViewを表示
     func configureBackGroundView(){
-        if spots.count == 0 {
+        if spots.isEmpty {
             collectionView.backgroundView = NoContentsView(option: .spots)
         }else{
             if collectionView.backgroundView != nil{
