@@ -48,7 +48,7 @@ class NoContentsView: UIView {
         stack.alignment = .leading
         
         addSubview(stack)
-        stack.anchor(top: topAnchor, left: leftAnchor, paddingTop: 32, paddingLeft: 16)
+        stack.anchor(top: safeAreaLayoutGuide.topAnchor, left: leftAnchor, paddingTop: 32, paddingLeft: 16)
         
         addSubview(promotionButton)
         promotionButton.anchor(top: stack.bottomAnchor, left: leftAnchor, paddingTop: 32, paddingLeft: 16)

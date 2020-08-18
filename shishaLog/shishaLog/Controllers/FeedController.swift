@@ -100,7 +100,13 @@ class FeedController: UICollectionViewController {
     
     // 表示するコンテンツがない場合、backgroundViewにNoContentsViewを表示
     func configureBackGroundView(){
-        collectionView.backgroundView = NoContentsView(option: .logs)
+        if logs.count == 0 {
+            collectionView.backgroundView = NoContentsView(option: .logs)
+        }else{
+            if collectionView.backgroundView != nil{
+                collectionView.backgroundView = UIView()
+            }
+        }
     }
     
 }
