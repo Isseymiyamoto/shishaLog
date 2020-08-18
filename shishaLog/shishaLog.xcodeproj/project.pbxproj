@@ -44,6 +44,7 @@
 		8591BD2D24BEC4510001BEA0 /* UploadSpotController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8591BD2C24BEC4510001BEA0 /* UploadSpotController.swift */; };
 		8591BD2F24BECBDC0001BEA0 /* Shop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8591BD2E24BECBDC0001BEA0 /* Shop.swift */; };
 		8591BD3124BF09630001BEA0 /* ChoiceSpotController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8591BD3024BF09630001BEA0 /* ChoiceSpotController.swift */; };
+		859D535124EBA5370087C3A9 /* NoContentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859D535024EBA5370087C3A9 /* NoContentsView.swift */; };
 		859DF69C24A8A94200D580C6 /* LogHeaderSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859DF69B24A8A94200D580C6 /* LogHeaderSupplementaryView.swift */; };
 		859DF69E24A908A900D580C6 /* Spot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859DF69D24A908A900D580C6 /* Spot.swift */; };
 		859DF6A024AA2BF800D580C6 /* SpotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859DF69F24AA2BF800D580C6 /* SpotCell.swift */; };
@@ -107,6 +108,7 @@
 		8591BD2C24BEC4510001BEA0 /* UploadSpotController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadSpotController.swift; sourceTree = "<group>"; };
 		8591BD2E24BECBDC0001BEA0 /* Shop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shop.swift; sourceTree = "<group>"; };
 		8591BD3024BF09630001BEA0 /* ChoiceSpotController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceSpotController.swift; sourceTree = "<group>"; };
+		859D535024EBA5370087C3A9 /* NoContentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoContentsView.swift; sourceTree = "<group>"; };
 		859DF69B24A8A94200D580C6 /* LogHeaderSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogHeaderSupplementaryView.swift; sourceTree = "<group>"; };
 		859DF69D24A908A900D580C6 /* Spot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spot.swift; sourceTree = "<group>"; };
 		859DF69F24AA2BF800D580C6 /* SpotCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotCell.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 				85BF5BCA24BF0D65001BFD0B /* ChoiceSpotCell.swift */,
 				85EA446124CC551A00FA5FEE /* ActionSheetCell.swift */,
 				8555C38924D1332D00DE30DA /* SpotHeaderSupplementaryView.swift */,
+				859D535024EBA5370087C3A9 /* NoContentsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -481,6 +484,7 @@
 				85D8EA1A248E74CE002AFEC1 /* UploadLogController.swift in Sources */,
 				8591BD2B24BEC3280001BEA0 /* SpotService.swift in Sources */,
 				8563E2902499DCC9008F9103 /* UserCell.swift in Sources */,
+				859D535124EBA5370087C3A9 /* NoContentsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
