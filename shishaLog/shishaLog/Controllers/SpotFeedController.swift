@@ -10,10 +10,14 @@ import UIKit
 
 private let reuseIdentifier = "SpotCell"
 
+protocol SpotFeedControllerDelegate: class {
+    func handlePromotionButtonTapped()
+}
+
 class SpotFeedController: UICollectionViewController {
     
     // MARK: - Properties
-    
+    weak var delegate: SpotFeedControllerDelegate?
     private var spots = [Spot](){
         didSet{
             collectionView.reloadData()
@@ -81,6 +85,7 @@ class SpotFeedController: UICollectionViewController {
         collectionView.refreshControl = refreshControl
         
         collectionView.addSubview(noContentsView)
+        noContentsView.delegate = self
         noContentsView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor)
     }
     
@@ -152,5 +157,13 @@ extension SpotFeedController: SpotControllerDelegate{
         spots.remove(at: controller.indexValue!)
         controller.navigationController?.popViewController(animated: true)
         self.collectionView.reloadData()
+    }
+}
+
+// MARK: - NoContentsViewDelegate
+
+extension SpotFeedController: NoContentsViewDelegate{
+    func handlePromotionButtonTapped() {
+        delegate?.handlePromotionButtonTapped()
     }
 }

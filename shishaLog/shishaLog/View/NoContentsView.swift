@@ -30,11 +30,12 @@ class NoContentsView: UIView {
         return label
     }()
     
-    private let promotionButton: UIButton = {
+    private lazy var promotionButton: UIButton = {
         let button = UIButton(type: .system)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .systemBlue
+        button.isUserInteractionEnabled = true
         button.setDimensions(width: 200, height: 36)
         button.addTarget(self, action: #selector(handlePromotionButtonTapped), for: .touchUpInside)
         return button

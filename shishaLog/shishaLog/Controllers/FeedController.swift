@@ -103,6 +103,7 @@ class FeedController: UICollectionViewController {
         collectionView.refreshControl = refreshControl
         
         collectionView.addSubview(noContentsView)
+        noContentsView.delegate = self
         noContentsView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor)
     }
     
@@ -110,8 +111,10 @@ class FeedController: UICollectionViewController {
     func configureBackGroundView(){
         if logs.isEmpty {
             noContentsView.isHidden = false
+            noContentsView.isUserInteractionEnabled = true
         }else{
             noContentsView.isHidden = true
+            noContentsView.isUserInteractionEnabled = false
         }
     }
     
@@ -194,3 +197,17 @@ extension FeedController: LogControllerDelegate{
     }
 }
 
+
+// MARK: - NoContentsViewDelegate
+
+extension FeedController: NoContentsViewDelegate{
+    func handlePromotionButtonTapped() {
+        print("DEBUG: きてるで")
+        
+        guard let user = user else { return }
+        let controller = UploadLogController(user: user)
+        let nav = UINavigationController(rootViewController: controller)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true)
+    }
+}

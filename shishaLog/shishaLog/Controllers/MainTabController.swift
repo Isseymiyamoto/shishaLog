@@ -116,6 +116,7 @@ class MainTabController: UITabBarController{
         let nav2 = templateNavigationController(image: UIImage(systemName: "magnifyingglass"), rootViewController: explore)
         
         let spot = SpotFeedController(collectionViewLayout: UICollectionViewFlowLayout())
+        spot.delegate = self
         let nav3 = templateNavigationController(image: UIImage(systemName: "location"), rootViewController: spot)
         
         let profile = ProfileController(user: user!)
@@ -141,5 +142,15 @@ extension MainTabController: UITabBarControllerDelegate{
         let image = index == 2 ? UIImage(systemName: "location") : UIImage(systemName: "square.and.pencil")
         actionButton.setImage(image, for: .normal)
         buttonConfig = index == 2 ? .spot : .log
+    }
+}
+
+extension MainTabController: SpotFeedControllerDelegate{
+    func handlePromotionButtonTapped() {
+        guard let user = user else { return }
+        let controller = ChoiceSpotController(user: user, option: .fromSpotFeed)
+        let nav = UINavigationController(rootViewController: controller)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true)
     }
 }
