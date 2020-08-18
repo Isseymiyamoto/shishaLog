@@ -23,6 +23,11 @@ class FeedController: UICollectionViewController {
         }
     }
     
+    private let noContentsView: NoContentsView = {
+        let nc = NoContentsView(option: .logs)
+        nc.isHidden = true
+        return nc
+    }()
     
     // MARK: - Lifecycle
 
@@ -96,16 +101,17 @@ class FeedController: UICollectionViewController {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
         collectionView.refreshControl = refreshControl
+        
+        collectionView.addSubview(noContentsView)
+        noContentsView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor)
     }
     
     // 表示するコンテンツがない場合、backgroundViewにNoContentsViewを表示
     func configureBackGroundView(){
         if logs.isEmpty {
-            collectionView.backgroundView = NoContentsView(option: .logs)
+            noContentsView.isHidden = false
         }else{
-            if collectionView.backgroundView != nil{
-                collectionView.backgroundView = UIView()
-            }
+            noContentsView.isHidden = true
         }
     }
     

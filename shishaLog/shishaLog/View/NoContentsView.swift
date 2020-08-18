@@ -8,10 +8,14 @@
 
 import UIKit
 
+protocol NoContentsViewDelegate: class {
+    func handlePromotionButtonTapped()
+}
+
 class NoContentsView: UIView {
     
     // MARK: - Properties
-    
+    weak var delegate: NoContentsViewDelegate?
     private var option: NoContentsOptions
     
     private let titleLabel: UILabel = {
@@ -32,6 +36,7 @@ class NoContentsView: UIView {
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .systemBlue
         button.setDimensions(width: 200, height: 36)
+        button.addTarget(self, action: #selector(handlePromotionButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -61,8 +66,11 @@ class NoContentsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Selectors
     
-    
+    @objc func handlePromotionButtonTapped(){
+        delegate?.handlePromotionButtonTapped()
+    }
     
     // MARK: - Helpers
     

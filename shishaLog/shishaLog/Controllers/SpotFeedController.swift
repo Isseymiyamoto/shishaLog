@@ -21,6 +21,12 @@ class SpotFeedController: UICollectionViewController {
         }
     }
     
+    private let noContentsView: NoContentsView = {
+        let nc = NoContentsView(option: .spots)
+        nc.isHidden = true
+        return nc
+    }()
+    
     // MARK: - Lifecycle
     
     
@@ -73,16 +79,16 @@ class SpotFeedController: UICollectionViewController {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
         collectionView.refreshControl = refreshControl
+        
+        collectionView.addSubview(noContentsView)
+        noContentsView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor)
     }
     
-    // 表示するコンテンツがない場合、backgroundViewにNoContentsViewを表示
     func configureBackGroundView(){
         if spots.isEmpty {
-            collectionView.backgroundView = NoContentsView(option: .spots)
+            noContentsView.isHidden = false
         }else{
-            if collectionView.backgroundView != nil{
-                collectionView.backgroundView = UIView()
-            }
+            noContentsView.isHidden = true
         }
     }
     
