@@ -31,7 +31,7 @@ class NoContentsView: UIView {
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .systemBlue
-        button.setDimensions(width: 360, height: 48)
+        button.setDimensions(width: 200, height: 36)
         return button
     }()
     
@@ -52,6 +52,7 @@ class NoContentsView: UIView {
         
         addSubview(promotionButton)
         promotionButton.anchor(top: stack.bottomAnchor, left: leftAnchor, paddingTop: 32, paddingLeft: 16)
+        promotionButton.layer.cornerRadius = 4
         
         configure()
     }

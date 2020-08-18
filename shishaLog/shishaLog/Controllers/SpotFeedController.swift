@@ -15,7 +15,10 @@ class SpotFeedController: UICollectionViewController {
     // MARK: - Properties
     
     private var spots = [Spot](){
-        didSet{ collectionView.reloadData() }
+        didSet{
+            collectionView.reloadData()
+            configureBackGroundView()
+        }
     }
     
     // MARK: - Lifecycle
@@ -70,6 +73,11 @@ class SpotFeedController: UICollectionViewController {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
         collectionView.refreshControl = refreshControl
+    }
+    
+    // 表示するコンテンツがない場合、backgroundViewにNoContentsViewを表示
+    func configureBackGroundView(){
+        collectionView.backgroundView = NoContentsView(option: .spots)
     }
     
     
