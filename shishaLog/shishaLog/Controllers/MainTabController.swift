@@ -33,7 +33,6 @@ class MainTabController: UITabBarController{
     
     let actionButton: UIButton = {
         let button = UIButton(type: .system)
-//        button.tintColor = .black
         button.tintColor = .white
         button.backgroundColor = .systemBlue
         button.setImage(UIImage(systemName: "square.and.pencil"), for: .normal)
@@ -47,7 +46,6 @@ class MainTabController: UITabBarController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         authenticateUserAndConfigureUI()
     }
@@ -123,6 +121,9 @@ class MainTabController: UITabBarController{
         let nav4 = templateNavigationController(image: UIImage(systemName: "person"), rootViewController: profile)
         
         viewControllers = [nav1, nav2, nav3, nav4]
+        
+        // feedControllerを表示するように設定
+        selectedIndex = 0
     }
     
     func templateNavigationController(image: UIImage?, rootViewController: UIViewController) -> UINavigationController{
