@@ -65,6 +65,7 @@
 		85EA486E248A7EC10086A140 /* LogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EA486D248A7EC10086A140 /* LogCell.swift */; };
 		85EB9A51249BBADA00C03E49 /* ProfileFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EB9A50249BBADA00C03E49 /* ProfileFilterView.swift */; };
 		85EB9A54249BBCBF00C03E49 /* ProfileFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EB9A53249BBCBF00C03E49 /* ProfileFilterCell.swift */; };
+		85FDDDD524EE8804008A4E59 /* UserPolicyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FDDDD424EE8804008A4E59 /* UserPolicyController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -129,6 +130,7 @@
 		85EA486D248A7EC10086A140 /* LogCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogCell.swift; sourceTree = "<group>"; };
 		85EB9A50249BBADA00C03E49 /* ProfileFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFilterView.swift; sourceTree = "<group>"; };
 		85EB9A53249BBCBF00C03E49 /* ProfileFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFilterCell.swift; sourceTree = "<group>"; };
+		85FDDDD424EE8804008A4E59 /* UserPolicyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPolicyController.swift; sourceTree = "<group>"; };
 		FCACC46B811F6668310475C2 /* Pods_shishaLog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_shishaLog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -249,6 +251,7 @@
 				8555C38724D131DA00DE30DA /* SpotController.swift */,
 				8555C38B24D44FB200DE30DA /* UserListController.swift */,
 				8585BD6924D92F190070941D /* ShopController.swift */,
+				85FDDDD424EE8804008A4E59 /* UserPolicyController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -458,6 +461,7 @@
 				85EA445E24CC3AF300FA5FEE /* LogViewModel.swift in Sources */,
 				8563E2922499FFC4008F9103 /* ProfileHeader.swift in Sources */,
 				851AAA89247E9E80006030D1 /* ProfileController.swift in Sources */,
+				85FDDDD524EE8804008A4E59 /* UserPolicyController.swift in Sources */,
 				851AAA60247E92AC006030D1 /* AppDelegate.swift in Sources */,
 				8563E28C2497AD56008F9103 /* CaptionTextView.swift in Sources */,
 				8555C38C24D44FB200DE30DA /* UserListController.swift in Sources */,
