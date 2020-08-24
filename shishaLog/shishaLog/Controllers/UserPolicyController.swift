@@ -65,7 +65,7 @@ class UserPolicyController: UIViewController{
     // MARK: - Helpers
     
     func configure(){
-        userPolicyTextView.text = ""
+        userPolicyTextView.text = "これはテストです"
         
         view.addSubview(userPolicyTextView)
         
