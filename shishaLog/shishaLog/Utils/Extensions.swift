@@ -173,3 +173,9 @@ extension UIViewController{
         present(alert, animated: true)
     }
 }
+
+// MARK: - UITextView
+
+extension UITextView {
+    
+}
