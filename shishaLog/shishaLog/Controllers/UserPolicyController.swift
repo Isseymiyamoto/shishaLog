@@ -8,9 +8,14 @@
 
 import UIKit
 
+protocol UserPolicyControllerDelegate: class {
+    func handleBackRegister(_ view: UserPolicyController)
+}
+
 class UserPolicyController: UIViewController{
     
     // MARK: - Properties
+    weak var delegate: UserPolicyControllerDelegate?
     
     private let userPolicyTextView: UITextView = {
         let tv = UITextView()
@@ -23,30 +28,20 @@ class UserPolicyController: UIViewController{
         return tv
     }()
     
-    private let agreeButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("同意する", for: .normal)
-        button.titleLabel?.textAlignment = .center
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .systemBlue
-        button.addTarget(self, action: #selector(handleAgreeUserPolicy), for: .touchUpInside)
-        button.layer.cornerRadius = 32 / 2
-        return button
-    }()
-    
-    
-    private let disagreeButton: UIButton = {
+    private lazy var disagreeButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("同意しない", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        button.backgroundColor = .red
+        button.addTarget(self, action: #selector(handleDisagree), for: .touchUpInside)
         return button
     }()
     
-    private let consensusButton: UIButton = {
+    private lazy var consensusButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("同意する", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        button.addTarget(self, action: #selector(handleAgreeUserPolicy), for: .touchUpInside)
         return button
     }()
     
@@ -69,9 +64,15 @@ class UserPolicyController: UIViewController{
     
     @objc func handleAgreeUserPolicy(){
         // delegate メソッド
+        delegate?.handleBackRegister(self)
     }
     
     @objc func handleCancel(){
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func handleDisagree(){
+        print("DEBUG: 反応はしてるんよ")
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -92,7 +93,7 @@ class UserPolicyController: UIViewController{
         stack.alignment = .center
         stack.distribution = .equalCentering
         
-        underButtonView.addSubview(stack)
+        view.addSubview(stack)
         stack.centerY(inView: underButtonView)
         stack.anchor(left: underButtonView.leftAnchor, right: underButtonView.rightAnchor, paddingLeft: 32, paddingRight: 32)
         
