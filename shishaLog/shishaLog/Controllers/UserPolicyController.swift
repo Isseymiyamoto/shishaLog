@@ -9,7 +9,7 @@
 import UIKit
 
 protocol UserPolicyControllerDelegate: class {
-    func handleBackRegister(_ view: UserPolicyController)
+    func handleBackRegister(_ UserPolicyView: UserPolicyController)
 }
 
 class UserPolicyController: UIViewController{
@@ -32,7 +32,6 @@ class UserPolicyController: UIViewController{
         let button = UIButton(type: .system)
         button.setTitle("同意しない", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        button.backgroundColor = .red
         button.addTarget(self, action: #selector(handleDisagree), for: .touchUpInside)
         return button
     }()
@@ -63,7 +62,7 @@ class UserPolicyController: UIViewController{
     // MARK: - Selectors
     
     @objc func handleAgreeUserPolicy(){
-        // delegate メソッド
+        print("DEBUG: 反応あり in UserPolicyController")
         delegate?.handleBackRegister(self)
     }
     

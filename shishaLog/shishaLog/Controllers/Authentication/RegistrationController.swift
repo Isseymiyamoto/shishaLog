@@ -117,7 +117,9 @@ class RegistrationController: UIViewController{
         guard let fullname = fullnameTextField.text else { showNeedInputError(); return }
         guard let username = usernameTextField.text else { showNeedInputError(); return }
         
-        let controller = UINavigationController(rootViewController: UserPolicyController())
+//        let controller = UINavigationController(rootViewController: UserPolicyController())
+        let controller = UserPolicyController()
+        controller.delegate = self
         present(controller, animated: true)
     }
     
@@ -200,5 +202,16 @@ extension RegistrationController: UIImagePickerControllerDelegate, UINavigationC
         
         self.plusPhotoButton.setImage(profileImage.withRenderingMode(.alwaysOriginal), for: .normal)
         dismiss(animated: true, completion: nil)
+    }
+}
+
+// MARK: - UserPolicyControllerDelegate
+
+extension RegistrationController: UserPolicyControllerDelegate{
+    func handleBackRegister(_ UserPolicyView: UserPolicyController) {
+        print("DEBUG: 反応あり in RegistrationController")
+        UserPolicyView.dismiss(animated: true) {
+            self.handleRegistration()
+        }
     }
 }
