@@ -83,7 +83,7 @@ class RegistrationController: UIViewController{
         button.heightAnchor.constraint(equalToConstant: 48).isActive = true
         button.layer.cornerRadius = 5
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        button.addTarget(self, action: #selector(handleRegistration), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleShowUserPolicy), for: .touchUpInside)
         return button
     }()
     
@@ -110,7 +110,52 @@ class RegistrationController: UIViewController{
         navigationController?.popViewController(animated: true)
     }
     
-    @objc func handleRegistration(){
+    @objc func handleShowUserPolicy(){
+        guard let profileImage = profileImage else { showNeedInputError(); return }
+        guard let email = emailTextField.text else { showNeedInputError(); return }
+        guard let password = passwordTextField.text else { showNeedInputError(); return }
+        guard let fullname = fullnameTextField.text else { showNeedInputError(); return }
+        guard let username = usernameTextField.text else { showNeedInputError(); return }
+        
+//        let controller = UINavigationController(rootViewController: UserPolicyController())
+        let controller = UserPolicyController()
+        controller.delegate = self
+        present(controller, animated: true)
+    }
+    
+    
+    
+    // MARK: - Helpers
+    func configureUI(){
+        configureGradientLayer()
+        
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = true
+        
+        // logoImageを画面中心に配置(w150h150)
+        view.addSubview(plusPhotoButton)
+        plusPhotoButton.centerX(inView: view, topAnchor: view.safeAreaLayoutGuide.topAnchor, paddingTop: 64)
+        plusPhotoButton.setDimensions(width: 120, height: 120)
+        plusPhotoButton.layer.cornerRadius = 120 / 2
+        plusPhotoButton.layer.borderColor = UIColor.white.cgColor
+        plusPhotoButton.layer.borderWidth = 2
+        
+        let stack = UIStackView(arrangedSubviews: [emailContainerView, passwordContainerView, fullnameContainerView, usernameContainerView, registrationButton])
+        stack.axis = .vertical
+        stack.spacing = 20
+        stack.distribution = .fillEqually
+        
+        view.addSubview(stack)
+        stack.anchor(top: plusPhotoButton.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 32, paddingLeft: 32, paddingRight: 32)
+        
+        view.addSubview(alreadyHaveAccountButton)
+        alreadyHaveAccountButton.anchor(left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingLeft: 32, paddingRight: 32)
+
+    }
+    
+    
+    // 登録処理
+    func handleRegistration(){
         guard let profileImage = profileImage else { return }
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
@@ -138,33 +183,10 @@ class RegistrationController: UIViewController{
         }
     }
     
-    // MARK: - Helpers
-    func configureUI(){
-//        view.backgroundColor = .shishaColor
-        configureGradientLayer()
-        
-        imagePicker.delegate = self
-        imagePicker.allowsEditing = true
-        
-        // logoImageを画面中心に配置(w150h150)
-        view.addSubview(plusPhotoButton)
-        plusPhotoButton.centerX(inView: view, topAnchor: view.safeAreaLayoutGuide.topAnchor, paddingTop: 64)
-        plusPhotoButton.setDimensions(width: 120, height: 120)
-        plusPhotoButton.layer.cornerRadius = 120 / 2
-        plusPhotoButton.layer.borderColor = UIColor.white.cgColor
-        plusPhotoButton.layer.borderWidth = 2
-        
-        let stack = UIStackView(arrangedSubviews: [emailContainerView, passwordContainerView, fullnameContainerView, usernameContainerView, registrationButton])
-        stack.axis = .vertical
-        stack.spacing = 20
-        stack.distribution = .fillEqually
-        
-        view.addSubview(stack)
-        stack.anchor(top: plusPhotoButton.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 32, paddingLeft: 32, paddingRight: 32)
-        
-        view.addSubview(alreadyHaveAccountButton)
-        alreadyHaveAccountButton.anchor(left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingLeft: 32, paddingRight: 32)
-
+    private func showNeedInputError(){
+        let alert = UIAlertController(title: "エラー", message: "全項目を入力してください", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+        present(alert, animated: true)
     }
 }
 
@@ -180,5 +202,16 @@ extension RegistrationController: UIImagePickerControllerDelegate, UINavigationC
         
         self.plusPhotoButton.setImage(profileImage.withRenderingMode(.alwaysOriginal), for: .normal)
         dismiss(animated: true, completion: nil)
+    }
+}
+
+// MARK: - UserPolicyControllerDelegate
+
+extension RegistrationController: UserPolicyControllerDelegate{
+    func handleBackRegister(_ UserPolicyView: UserPolicyController) {
+        print("DEBUG: 反応あり in RegistrationController")
+        UserPolicyView.dismiss(animated: true) {
+            self.handleRegistration()
+        }
     }
 }
