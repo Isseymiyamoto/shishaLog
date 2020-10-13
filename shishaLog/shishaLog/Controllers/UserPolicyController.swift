@@ -29,17 +29,24 @@ class UserPolicyController: UIViewController{
         return button
     }()
     
-    private let cancelButton: UIButton = {
+    
+    private let disagreeButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitleColor(.systemBlue, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
-        button.titleLabel?.textAlignment = .center
-        button.backgroundColor = .white
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.systemBlue.cgColor
-        button.layer.cornerRadius = 32 / 2
-        button.addTarget(self, action: #selector(handleCancel), for: .touchUpInside)
+        button.setTitle("同意しない", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         return button
+    }()
+    
+    private let consensusButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("同意する", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        return button
+    }()
+    
+    private lazy var underButtonView: UIView = {
+        let view = UIView()
+        return view
     }()
     
     
@@ -65,11 +72,31 @@ class UserPolicyController: UIViewController{
     // MARK: - Helpers
     
     func configure(){
-        userPolicyTextView.text = "これはテストです"
         
-        view.addSubview(userPolicyTextView)
+        configureNavigationBar()
+        
+        view.backgroundColor = .systemGroupedBackground
+        
+        view.addSubview(underButtonView)
+        underButtonView.anchor(left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, height: 48)
+        
+        let stack = UIStackView(arrangedSubviews: [disagreeButton, consensusButton])
+        stack.axis = .horizontal
+        stack.alignment = .center
+        stack.distribution = .equalCentering
+        
+        underButtonView.addSubview(stack)
+        stack.centerY(inView: underButtonView)
+        stack.anchor(left: underButtonView.leftAnchor, right: underButtonView.rightAnchor, paddingLeft: 32, paddingRight: 32)
+        
         
     }
+    
+    func configureNavigationBar(){
+        navigationItem.title = "利用規約"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "キャンセル", style: .plain, target: self, action: #selector(handleCancel))
+    }
+    
     
     
     
