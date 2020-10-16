@@ -12,6 +12,7 @@ import Firebase
 class RegistrationController: UIViewController{
     
     // MARK: - Properties
+    private var viewModel = RegistrationViewModel()
     private let imagePicker = UIImagePickerController()
     private var profileImage: UIImage?
     
@@ -79,7 +80,7 @@ class RegistrationController: UIViewController{
         let button = UIButton(type: .system)
         button.setTitle("登録する", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         button.heightAnchor.constraint(equalToConstant: 48).isActive = true
         button.layer.cornerRadius = 5
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
@@ -92,6 +93,7 @@ class RegistrationController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        configureNotificationObservers()
     }
 
     
@@ -111,16 +113,25 @@ class RegistrationController: UIViewController{
     }
     
     @objc func handleShowUserPolicy(){
-        guard let profileImage = profileImage else { showNeedInputError(); return }
-        guard let email = emailTextField.text else { showNeedInputError(); return }
-        guard let password = passwordTextField.text else { showNeedInputError(); return }
-        guard let fullname = fullnameTextField.text else { showNeedInputError(); return }
-        guard let username = usernameTextField.text else { showNeedInputError(); return }
-        
-//        let controller = UINavigationController(rootViewController: UserPolicyController())
+        guard profileImage != nil else { showNeedInputError(); return }
+       
         let controller = UserPolicyController()
         controller.delegate = self
         present(controller, animated: true)
+    }
+    
+    @objc func textDidChange(sender: UITextField){
+        if sender == emailTextField{
+            viewModel.email = sender.text
+        }else if sender == fullnameTextField{
+            viewModel.fullname = sender.text
+        }else if sender == usernameTextField{
+            viewModel.username = sender.text
+        }else {
+            viewModel.password = sender.text
+        }
+        
+        checkFormStatus()
     }
     
     
@@ -151,6 +162,13 @@ class RegistrationController: UIViewController{
         view.addSubview(alreadyHaveAccountButton)
         alreadyHaveAccountButton.anchor(left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingLeft: 32, paddingRight: 32)
 
+    }
+    
+    func configureNotificationObservers(){
+        emailTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        fullnameTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        usernameTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
     }
     
     
@@ -184,7 +202,7 @@ class RegistrationController: UIViewController{
     }
     
     private func showNeedInputError(){
-        let alert = UIAlertController(title: "エラー", message: "全項目を入力してください", preferredStyle: .alert)
+        let alert = UIAlertController(title: "エラー", message: "アイコンを登録してください", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
         present(alert, animated: true)
     }
@@ -212,6 +230,20 @@ extension RegistrationController: UserPolicyControllerDelegate{
         print("DEBUG: 反応あり in RegistrationController")
         UserPolicyView.dismiss(animated: true) {
             self.handleRegistration()
+        }
+    }
+}
+
+// MARK: - AuthenticationControllerProtocol
+
+extension RegistrationController: AuthenticationControllerProtocol{
+    func checkFormStatus(){
+        if viewModel.formIsValid {
+            registrationButton.isEnabled = true
+            registrationButton.backgroundColor = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)
+        }else{
+            registrationButton.isEnabled = false
+            registrationButton.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         }
     }
 }
