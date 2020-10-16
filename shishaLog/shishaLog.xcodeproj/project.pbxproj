@@ -65,6 +65,8 @@
 		85EA486E248A7EC10086A140 /* LogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EA486D248A7EC10086A140 /* LogCell.swift */; };
 		85EB9A51249BBADA00C03E49 /* ProfileFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EB9A50249BBADA00C03E49 /* ProfileFilterView.swift */; };
 		85EB9A54249BBCBF00C03E49 /* ProfileFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EB9A53249BBCBF00C03E49 /* ProfileFilterCell.swift */; };
+		85FD8EDD2539E64000E26D48 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FD8EDC2539E64000E26D48 /* RegistrationViewModel.swift */; };
+		85FD8EDF2539E69F00E26D48 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FD8EDE2539E69F00E26D48 /* LoginViewModel.swift */; };
 		85FDDDD524EE8804008A4E59 /* UserPolicyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FDDDD424EE8804008A4E59 /* UserPolicyController.swift */; };
 /* End PBXBuildFile section */
 
@@ -130,6 +132,8 @@
 		85EA486D248A7EC10086A140 /* LogCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogCell.swift; sourceTree = "<group>"; };
 		85EB9A50249BBADA00C03E49 /* ProfileFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFilterView.swift; sourceTree = "<group>"; };
 		85EB9A53249BBCBF00C03E49 /* ProfileFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFilterCell.swift; sourceTree = "<group>"; };
+		85FD8EDC2539E64000E26D48 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
+		85FD8EDE2539E69F00E26D48 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		85FDDDD424EE8804008A4E59 /* UserPolicyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPolicyController.swift; sourceTree = "<group>"; };
 		FCACC46B811F6668310475C2 /* Pods_shishaLog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_shishaLog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -213,6 +217,7 @@
 		851AAA74247E95D1006030D1 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				85FD8EDB2539E62800E26D48 /* Authentication */,
 				85417CA6249CBD0400FDFDC8 /* ProfileHeaderViewModel.swift */,
 				85E0F57A24A4D5A200FBFBF3 /* EditProfileViewModel.swift */,
 				8571AAF324C02B270000C2F6 /* ShopRegistrationViewModel.swift */,
@@ -309,6 +314,15 @@
 				854ACFBB24A62C38000C880F /* EditProfileFooter.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		85FD8EDB2539E62800E26D48 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				85FD8EDC2539E64000E26D48 /* RegistrationViewModel.swift */,
+				85FD8EDE2539E69F00E26D48 /* LoginViewModel.swift */,
+			);
+			path = Authentication;
 			sourceTree = "<group>";
 		};
 		9376A70418DD8EE762A34584 /* Frameworks */ = {
@@ -455,6 +469,7 @@
 				8591BD2D24BEC4510001BEA0 /* UploadSpotController.swift in Sources */,
 				8555C38A24D1332D00DE30DA /* SpotHeaderSupplementaryView.swift in Sources */,
 				851AAA80247E98DC006030D1 /* MainTabController.swift in Sources */,
+				85FD8EDF2539E69F00E26D48 /* LoginViewModel.swift in Sources */,
 				851AAA91247ED5AE006030D1 /* UserService.swift in Sources */,
 				85417CA7249CBD0400FDFDC8 /* ProfileHeaderViewModel.swift in Sources */,
 				85EA446224CC551A00FA5FEE /* ActionSheetCell.swift in Sources */,
@@ -480,6 +495,7 @@
 				851AAA7C247E9685006030D1 /* Extensions.swift in Sources */,
 				85D8EA1E248F363E002AFEC1 /* User.swift in Sources */,
 				85C1697E24A3277700BD2EE1 /* EditProfileController.swift in Sources */,
+				85FD8EDD2539E64000E26D48 /* RegistrationViewModel.swift in Sources */,
 				85EA102724A7BBB000397C46 /* LogController.swift in Sources */,
 				8555C38824D131DA00DE30DA /* SpotController.swift in Sources */,
 				85C1698224A33BD400BD2EE1 /* EditProfileCell.swift in Sources */,
@@ -634,7 +650,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.0;
+				CURRENT_PROJECT_VERSION = 1.0.1;
 				DEVELOPMENT_TEAM = HN3QP72JH2;
 				INFOPLIST_FILE = shishaLog/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -655,7 +671,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.0;
+				CURRENT_PROJECT_VERSION = 1.0.1;
 				DEVELOPMENT_TEAM = HN3QP72JH2;
 				INFOPLIST_FILE = shishaLog/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
