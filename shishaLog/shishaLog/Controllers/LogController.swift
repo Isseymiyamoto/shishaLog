@@ -75,6 +75,14 @@ class LogController: UICollectionViewController {
         actionSheetLauncher.delegate = self
         actionSheetLauncher.show()
     }
+    
+    fileprivate func showSuccessReportMessage(){
+        let alert = UIAlertController(title: "コンテンツの報告", message: "不快なコンテンツの報告を行いました。", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (_) in
+            self.delegate?.controller(self)
+        }))
+        present(alert, animated: true)
+    }
    
 
 }
@@ -190,7 +198,9 @@ extension LogController: ActionSheetLauncherDelegate{
             }
         case .report:
             let logID = log.logID
-            LogService.shared.reportLog(logID: logID)
+            LogService.shared.reportLog(logID: logID) { (err, ref) in
+                self.showSuccessReportMessage()
+            }
         case .delete:
             let logID = log.logID
             LogService.shared.deleteLog(withLogID: logID) { (error, ref) in

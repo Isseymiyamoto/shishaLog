@@ -189,9 +189,9 @@ struct LogService {
     }
     
     // userによるログに関するレポート送信
-    func reportLog(logID: String){
+    func reportLog(logID: String, completion: @escaping(Error?, DatabaseReference) -> Void){
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        REF_REPORT_LOGS.child(logID).setValue([uid: 1])
+        REF_REPORT_LOGS.child(logID).setValue([uid: 1], withCompletionBlock: completion)
     }
     
     // 指定したログの削除
