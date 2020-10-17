@@ -155,6 +155,7 @@ extension SpotController: ActionSheetLauncherDelegate{
         case .report:
             let spotID = spot.spotID
             SpotService.shared.reportSpot(spotID: spotID)
+            self.delegate?.controller(self)
         }
     }
 }
