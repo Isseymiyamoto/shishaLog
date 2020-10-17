@@ -98,9 +98,9 @@ struct SpotService {
     }
     
     // userによるログに関するレポート送信
-    func reportSpot(spotID: String){
+    func reportSpot(spotID: String, completion: @escaping(Error?, DatabaseReference) -> Void){
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        REF_REPORT_SPOTS.child(spotID).setValue([uid: 1])
+        REF_REPORT_SPOTS.child(spotID).setValue([uid: 1], withCompletionBlock: completion)
     }
     
     // followしているユーザーと自分のspotのみ取得

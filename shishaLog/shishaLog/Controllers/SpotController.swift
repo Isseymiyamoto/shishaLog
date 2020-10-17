@@ -65,6 +65,16 @@ class SpotController: UICollectionViewController {
         actionSheetLauncher.delegate = self
         actionSheetLauncher.show()
     }
+    
+    fileprivate func showSuccessReportMessage(){
+        let alert = UIAlertController(title: "コンテンツの報告", message: "不快なコンテンツの報告を行いました。", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (_) in
+            self.delegate?.controller(self)
+        }))
+        present(alert, animated: true)
+    }
+    
+    
 }
 
 
@@ -154,8 +164,9 @@ extension SpotController: ActionSheetLauncherDelegate{
             }
         case .report:
             let spotID = spot.spotID
-            SpotService.shared.reportSpot(spotID: spotID)
-            self.delegate?.controller(self)
+            SpotService.shared.reportSpot(spotID: spotID) { (err, ref) in
+                self.showSuccessReportMessage()
+            }
         }
     }
 }
