@@ -39,7 +39,7 @@ class ProfileController: UICollectionViewController {
         case .locations: return spots
         }
     }
-    
+
     
     // MARK: - Lifecycle
     
@@ -145,6 +145,10 @@ class ProfileController: UICollectionViewController {
         }
     }
     
+    @objc func handleActionSheetLaunch(){
+        
+    }
+    
     // MARK: - Helpers
     
     func configureCollectionView(){
@@ -176,9 +180,11 @@ class ProfileController: UICollectionViewController {
         navigationController?.navigationBar.shadowImage = UIImage()
         
         navigationItem.title = user.username
+        
+        if !user.isCurrentUser{
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "ellipsis.circle.fill"), style: .plain, target: self, action: #selector(handleActionSheetLaunch))
+        }
     }
-    
-
 }
 
 // MARK: UICollectionViewDataSource
