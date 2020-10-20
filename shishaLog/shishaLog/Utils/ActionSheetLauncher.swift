@@ -19,6 +19,7 @@ class ActionSheetLauncher: NSObject {
     // MARK: - Properties
     
     private let isLog: Bool
+    private let isProfile: Bool
     private let user: User
     private let tableView = UITableView()
     private var window: UIWindow?
@@ -61,9 +62,10 @@ class ActionSheetLauncher: NSObject {
     
     // MARK: - Lifecycle
     
-    init(user: User, isLog: Bool) {
+    init(user: User, isLog: Bool, isProfile: Bool) {
         self.user = user
         self.isLog = isLog
+        self.isProfile = isProfile
         super.init()
         
         configureTableView()
@@ -155,6 +157,7 @@ extension ActionSheetLauncher: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! ActionSheetCell
         cell.isLog = isLog
+        cell.isProfile = isProfile
         cell.option = viewModel.options[indexPath.row]
         return cell
     }

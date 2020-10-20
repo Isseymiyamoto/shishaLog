@@ -190,7 +190,9 @@ class ProfileController: UICollectionViewController {
     }
     
     fileprivate func showActionSheet(){
-        
+        actionSheetLauncher = ActionSheetLauncher(user: user, isLog: false, isProfile: true)
+        actionSheetLauncher.delegate = self
+        actionSheetLauncher.show()
     }
 }
 
@@ -422,5 +424,24 @@ extension ProfileController: LogCellDelegate{
         }
         let controller = ProfileController(user: user)
         navigationController?.pushViewController(controller, animated: true)
+    }
+}
+
+// MARK: - ActionSheetLaucherDelegate
+
+extension ProfileController: ActionSheetLauncherDelegate{
+    func didSelect(option: ActionSheetOptions) {
+        switch option {
+        case .follow(_):
+            print("成功")
+        case .unfollow(_):
+            print("成功")
+        case .report:
+            print("成功")
+        case .delete:
+            print("it is needless")
+        case .block(_):
+            print("成功")
+        }
     }
 }

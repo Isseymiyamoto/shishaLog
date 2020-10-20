@@ -61,7 +61,7 @@ class SpotController: UICollectionViewController {
     }
     
     fileprivate func showActionSheet(forUser user: User){
-        actionSheetLauncher = ActionSheetLauncher(user: user, isLog: false)
+        actionSheetLauncher = ActionSheetLauncher(user: user, isLog: false, isProfile: false)
         actionSheetLauncher.delegate = self
         actionSheetLauncher.show()
     }

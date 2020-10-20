@@ -71,7 +71,7 @@ class LogController: UICollectionViewController {
     }
     
     fileprivate func showActionSheet(forUser user: User){
-        actionSheetLauncher = ActionSheetLauncher(user: user, isLog: true)
+        actionSheetLauncher = ActionSheetLauncher(user: user, isLog: true, isProfile: false)
         actionSheetLauncher.delegate = self
         actionSheetLauncher.show()
     }

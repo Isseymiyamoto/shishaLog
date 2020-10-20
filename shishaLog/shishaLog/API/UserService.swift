@@ -143,5 +143,4 @@ struct UserService {
             REF_USER_BLOCKED.child(blockUid).setValue([currentUserUid: 1], withCompletionBlock: completion)
         }
     }
-    
 }

@@ -13,6 +13,7 @@ class ActionSheetCell: UITableViewCell{
     // MARK: - Properties
     
     var isLog: Bool?
+    var isProfile: Bool?
     
     var option: ActionSheetOptions? {
         didSet{ configure() }
@@ -56,10 +57,15 @@ class ActionSheetCell: UITableViewCell{
     
     func configure(){
         guard let isLog = isLog else { return }
+        guard let isProfile = isProfile else { return }
         if isLog{
             titleLabel.text = option?.descriptionForLog
         }else{
-            titleLabel.text = option?.descriptionforSpot
+            if isProfile{
+                
+            }else{
+                titleLabel.text = option?.descriptionforSpot
+            }
         }
         
     }
