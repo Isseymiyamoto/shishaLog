@@ -134,8 +134,14 @@ struct UserService {
     
     // ユーザーをブロックする
     func blockUser(blockUid: String, completion: @escaping(Error?, DatabaseReference) -> Void){
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        REF_USER_BLOCKS.child(uid).setValue([blockUid: 1], withCompletionBlock: completion)
+        guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
+        REF_USER_BLOCKING.child(currentUserUid).setValue([blockUid: 1]) { (err, ref) in
+            if let error = err {
+                print("DEBUG: error is \(error.localizedDescription)")
+                return
+            }
+            REF_USER_BLOCKED.child(blockUid).setValue([currentUserUid: 1], withCompletionBlock: completion)
+        }
     }
     
 }
