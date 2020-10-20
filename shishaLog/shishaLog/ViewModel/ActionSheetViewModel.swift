@@ -33,7 +33,6 @@ struct ActionSheetViewModel {
     
     init(user: User){
         self.user = user
-        
     }
     
     
@@ -41,7 +40,7 @@ struct ActionSheetViewModel {
     
 }
 
-enum ActionSheetOptions {
+enum ActionSheetOptions{
     case follow(User)
     case unfollow(User)
     case report

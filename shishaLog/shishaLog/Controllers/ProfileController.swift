@@ -149,7 +149,7 @@ class ProfileController: UICollectionViewController {
     
     @objc func handleActionSheetLaunch(){
         // rightBarButtonは(!isCurrentUser)のみ追加されるので分岐の必要性なし
-        
+        showActionSheet()
     }
     
     // MARK: - Helpers

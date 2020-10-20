@@ -52,7 +52,7 @@ class ActionSheetLauncher: NSObject {
     private lazy var cancelButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("キャンセル", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = .systemGroupedBackground
         button.addTarget(self, action: #selector(handleDismissal), for: .touchUpInside)
@@ -98,7 +98,7 @@ class ActionSheetLauncher: NSObject {
         blackView.frame = window.frame
         
         window.addSubview(tableView)
-        let height = CGFloat(viewModel.options.count * 60) + 100
+        let height = CGFloat(viewModel.options.count * 54) + 100
         self.tableViewHeight = height
         tableView.frame = CGRect(x: 0, y: window.frame.height, width: window.frame.width, height: height)
         
@@ -112,7 +112,7 @@ class ActionSheetLauncher: NSObject {
         tableView.backgroundColor = .white
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.rowHeight = 60
+        tableView.rowHeight = 54
         tableView.separatorStyle = .none
         tableView.layer.cornerRadius = 5
         tableView.isScrollEnabled = false

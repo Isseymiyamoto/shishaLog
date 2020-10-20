@@ -23,13 +23,14 @@ class ActionSheetCell: UITableViewCell{
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFit
         iv.clipsToBounds = true
+        iv.tintColor = .gray
         iv.image = UIImage(named: "shsihaLog")
         return iv
     }()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 18)
+        label.font = UIFont.systemFont(ofSize: 16)
         label.text = "test option"
         return label
     }()
@@ -56,18 +57,27 @@ class ActionSheetCell: UITableViewCell{
     // MARK: - Helpers
     
     func configure(){
+        
         guard let isLog = isLog else { return }
         guard let isProfile = isProfile else { return }
         if isLog{
             titleLabel.text = option?.descriptionForLog
         }else{
             if isProfile{
-                
+                titleLabel.text = option?.descriptionForProfile
             }else{
                 titleLabel.text = option?.descriptionforSpot
             }
         }
         
+        switch option {
+        case .some(.follow(_)): optionImageView.image = UIImage(systemName: "person.badge.plus")
+        case .some(.unfollow(_)): optionImageView.image = UIImage(systemName: "person.badge.minus")
+        case .some(.report): return
+        case .some(.delete): optionImageView.image = UIImage(systemName: "trash")
+        case .some(.block(_)): optionImageView.image = UIImage(systemName: "hand.raised.slash")
+        case .none: return
+        }
     }
     
 }
