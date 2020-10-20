@@ -211,6 +211,9 @@ extension LogController: ActionSheetLauncherDelegate{
                 LogService.shared.deleteSomeUserLikes(withLogID: logID)
                 self.delegate?.controller(self)
             }
+        case .block(_):
+            // block時の挙動を追加する
+            print("DEBUG: block some user")
         }
     }
 }

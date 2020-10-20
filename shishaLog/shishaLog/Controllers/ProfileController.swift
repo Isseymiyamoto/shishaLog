@@ -39,6 +39,8 @@ class ProfileController: UICollectionViewController {
         case .locations: return spots
         }
     }
+    
+    private var actionSheetLauncher: ActionSheetLauncher!
 
     
     // MARK: - Lifecycle
@@ -146,6 +148,7 @@ class ProfileController: UICollectionViewController {
     }
     
     @objc func handleActionSheetLaunch(){
+        // rightBarButtonは(!isCurrentUser)のみ追加されるので分岐の必要性なし
         
     }
     
@@ -184,6 +187,10 @@ class ProfileController: UICollectionViewController {
         if !user.isCurrentUser{
             navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "ellipsis.circle.fill"), style: .plain, target: self, action: #selector(handleActionSheetLaunch))
         }
+    }
+    
+    fileprivate func showActionSheet(){
+        
     }
 }
 

@@ -167,6 +167,9 @@ extension SpotController: ActionSheetLauncherDelegate{
             SpotService.shared.reportSpot(spotID: spotID) { (err, ref) in
                 self.showSuccessReportMessage()
             }
+        case .block:
+            // ブロック時の挙動を追加する
+            print("block some user")
         }
     }
 }
