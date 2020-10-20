@@ -24,6 +24,7 @@ class ActionSheetCell: UITableViewCell{
         iv.contentMode = .scaleAspectFit
         iv.clipsToBounds = true
         iv.tintColor = .gray
+        iv.setDimensions(width: 24, height: 24)
         iv.image = UIImage(named: "shsihaLog")
         return iv
     }()
@@ -42,12 +43,12 @@ class ActionSheetCell: UITableViewCell{
         
         addSubview(optionImageView)
         optionImageView.centerY(inView: self)
-        optionImageView.anchor(left: leftAnchor, paddingLeft: 8)
+        optionImageView.anchor(left: leftAnchor, paddingLeft: 16)
         optionImageView.setDimensions(width: 36, height: 36)
         
         addSubview(titleLabel)
         titleLabel.centerY(inView: self)
-        titleLabel.anchor(left: optionImageView.rightAnchor, right: rightAnchor, paddingLeft: 12)
+        titleLabel.anchor(left: optionImageView.rightAnchor, right: rightAnchor, paddingLeft: 16)
     }
     
     required init?(coder: NSCoder) {
