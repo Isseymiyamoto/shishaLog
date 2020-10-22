@@ -115,7 +115,7 @@ class ProfileController: UICollectionViewController {
     // フォローしているか確認
     func checkIfUserIsFollowed(){
         UserService.shared.checkIfUserIsFollowed(uid: user.uid) { (result) in
-            self.user.isFollowed = result
+            self.user.isFollowing = result
             self.collectionView.reloadData()
         }
     }
@@ -336,13 +336,13 @@ extension ProfileController: ProfileHeaderDelegate{
         }
         
         // 相手をフォローしている時
-        if user.isFollowed{
+        if user.isFollowing{
             UserService.shared.unfollowUser(uid: user.uid) { (err, ref) in
                 if let err = err {
                     print("DEBUG: error is \(err.localizedDescription)")
                     return
                 }
-                self.user.isFollowed = false
+                self.user.isFollowing = false
                 self.fetchUserStats()
                 self.collectionView.reloadData()
             }
@@ -352,7 +352,7 @@ extension ProfileController: ProfileHeaderDelegate{
                     print("DEBUG: error is \(err.localizedDescription)")
                     return
                 }
-                self.user.isFollowed = true
+                self.user.isFollowing = true
                 self.fetchUserStats()
                 self.collectionView.reloadData()
             }

@@ -147,7 +147,7 @@ extension LogController: LogHeaderDelegate{
         }else{
             UserService.shared.checkIfUserIsFollowed(uid: log.user.uid) { (isFollowed) in
                 var user = self.log.user
-                user.isFollowed = isFollowed
+                user.isFollowing = isFollowed
                 self.showActionSheet(forUser: user)
             }
         }
