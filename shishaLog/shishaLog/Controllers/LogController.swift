@@ -71,7 +71,7 @@ class LogController: UICollectionViewController {
     }
     
     fileprivate func showActionSheet(forUser user: User){
-        actionSheetLauncher = ActionSheetLauncher(user: user, isLog: true)
+        actionSheetLauncher = ActionSheetLauncher(user: user, isLog: true, isProfile: false)
         actionSheetLauncher.delegate = self
         actionSheetLauncher.show()
     }
@@ -147,7 +147,7 @@ extension LogController: LogHeaderDelegate{
         }else{
             UserService.shared.checkIfUserIsFollowed(uid: log.user.uid) { (isFollowed) in
                 var user = self.log.user
-                user.isFollowed = isFollowed
+                user.isFollowing = isFollowed
                 self.showActionSheet(forUser: user)
             }
         }
@@ -211,6 +211,9 @@ extension LogController: ActionSheetLauncherDelegate{
                 LogService.shared.deleteSomeUserLikes(withLogID: logID)
                 self.delegate?.controller(self)
             }
+        case .block(_):
+            // block時の挙動を追加する
+            print("DEBUG: block some user")
         }
     }
 }

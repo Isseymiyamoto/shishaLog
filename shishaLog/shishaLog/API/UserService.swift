@@ -109,8 +109,7 @@ struct UserService {
         }
     }
     
-    // フォローしているうユーザーを取得
-    
+    // フォローしているユーザーを取得
     func fetchFollowingUsers(currentUserUid: String, completion: @escaping([User]) -> Void){
         var users = [User]()
         REF_USER_FOLLOWING.child(currentUserUid).observe(.childAdded) { (snapshot) in
@@ -133,4 +132,15 @@ struct UserService {
         }
     }
     
+    // ユーザーをブロックする
+    func blockUser(blockUid: String, completion: @escaping(Error?, DatabaseReference) -> Void){
+        guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
+        REF_USER_BLOCKING.child(currentUserUid).setValue([blockUid: 1]) { (err, ref) in
+            if let error = err {
+                print("DEBUG: error is \(error.localizedDescription)")
+                return
+            }
+            REF_USER_BLOCKED.child(blockUid).setValue([currentUserUid: 1], withCompletionBlock: completion)
+        }
+    }
 }

@@ -13,6 +13,7 @@ class ActionSheetCell: UITableViewCell{
     // MARK: - Properties
     
     var isLog: Bool?
+    var isProfile: Bool?
     
     var option: ActionSheetOptions? {
         didSet{ configure() }
@@ -22,13 +23,15 @@ class ActionSheetCell: UITableViewCell{
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFit
         iv.clipsToBounds = true
+        iv.tintColor = .gray
+        iv.setDimensions(width: 24, height: 24)
         iv.image = UIImage(named: "shsihaLog")
         return iv
     }()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 18)
+        label.font = UIFont.systemFont(ofSize: 16)
         label.text = "test option"
         return label
     }()
@@ -40,12 +43,12 @@ class ActionSheetCell: UITableViewCell{
         
         addSubview(optionImageView)
         optionImageView.centerY(inView: self)
-        optionImageView.anchor(left: leftAnchor, paddingLeft: 8)
+        optionImageView.anchor(left: leftAnchor, paddingLeft: 16)
         optionImageView.setDimensions(width: 36, height: 36)
         
         addSubview(titleLabel)
         titleLabel.centerY(inView: self)
-        titleLabel.anchor(left: optionImageView.rightAnchor, right: rightAnchor, paddingLeft: 12)
+        titleLabel.anchor(left: optionImageView.rightAnchor, right: rightAnchor, paddingLeft: 16)
     }
     
     required init?(coder: NSCoder) {
@@ -55,13 +58,27 @@ class ActionSheetCell: UITableViewCell{
     // MARK: - Helpers
     
     func configure(){
+        
         guard let isLog = isLog else { return }
+        guard let isProfile = isProfile else { return }
         if isLog{
             titleLabel.text = option?.descriptionForLog
         }else{
-            titleLabel.text = option?.descriptionforSpot
+            if isProfile{
+                titleLabel.text = option?.descriptionForProfile
+            }else{
+                titleLabel.text = option?.descriptionforSpot
+            }
         }
         
+        switch option {
+        case .some(.follow(_)): optionImageView.image = UIImage(systemName: "person.badge.plus")
+        case .some(.unfollow(_)): optionImageView.image = UIImage(systemName: "person.badge.minus")
+        case .some(.report): return
+        case .some(.delete): optionImageView.image = UIImage(systemName: "trash")
+        case .some(.block(_)): optionImageView.image = UIImage(systemName: "hand.raised.slash")
+        case .none: return
+        }
     }
     
 }

@@ -61,7 +61,7 @@ class SpotController: UICollectionViewController {
     }
     
     fileprivate func showActionSheet(forUser user: User){
-        actionSheetLauncher = ActionSheetLauncher(user: user, isLog: false)
+        actionSheetLauncher = ActionSheetLauncher(user: user, isLog: false, isProfile: false)
         actionSheetLauncher.delegate = self
         actionSheetLauncher.show()
     }
@@ -123,7 +123,7 @@ extension SpotController: SpotHeaderDelegate{
         }else{
             UserService.shared.checkIfUserIsFollowed(uid: spot.user.uid) { (isFollowed) in
                 var user = self.spot.user
-                user.isFollowed = isFollowed
+                user.isFollowing = isFollowed
                 self.showActionSheet(forUser: user)
             }
         }
@@ -167,6 +167,9 @@ extension SpotController: ActionSheetLauncherDelegate{
             SpotService.shared.reportSpot(spotID: spotID) { (err, ref) in
                 self.showSuccessReportMessage()
             }
+        case .block:
+            // ブロック時の挙動を追加する
+            print("block some user")
         }
     }
 }

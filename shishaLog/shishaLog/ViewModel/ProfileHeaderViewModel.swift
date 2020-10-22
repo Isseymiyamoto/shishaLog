@@ -31,9 +31,9 @@ struct ProfileHeaderViewModel {
             return "プロフィールを編集する"
         }
         
-        if user.isFollowed {
+        if user.isFollowing {
             return "フォロー中"
-        }else if !user.isFollowed{
+        }else if !user.isFollowing{
             return "フォローする"
         }
         
