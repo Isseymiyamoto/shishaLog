@@ -212,8 +212,23 @@ extension LogController: ActionSheetLauncherDelegate{
                 self.delegate?.controller(self)
             }
         case .block(_):
-            // block時の挙動を追加する
-            print("DEBUG: block some user")
+            let blockUid = log.user.uid
+            print("DEBUG: この相手はfollowしているか否か \(log.user.isFollowing)")
+//            UserService.shared.blockUser(blockUid: blockUid) { (err, ref) in
+//                if let err = err{
+//                    print("DEBUG: error is \(err.localizedDescription)")
+//                    return
+//                }
+//
+//                // 当該ユーザーをfollowしていた際の処理
+//                if self.log.user.isFollowing{
+//
+//                }
+//
+//
+//
+//                // followしていなかった際の処理
+//            }
         }
     }
 }

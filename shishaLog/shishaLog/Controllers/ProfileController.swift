@@ -62,7 +62,7 @@ class ProfileController: UICollectionViewController {
         fetchLogs()
         fetchLikeLogs()
         fetchSpots()
-        checkIfUserIsFollowed()
+        checkIfUserIsFollowing()
         fetchUserStats()
     }
     
@@ -113,7 +113,7 @@ class ProfileController: UICollectionViewController {
     }
     
     // フォローしているか確認
-    func checkIfUserIsFollowed(){
+    func checkIfUserIsFollowing(){
         UserService.shared.checkIfUserIsFollowed(uid: user.uid) { (result) in
             self.user.isFollowing = result
             self.collectionView.reloadData()
