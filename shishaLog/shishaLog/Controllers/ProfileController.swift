@@ -13,6 +13,7 @@ private let reuseIdentifier = "LogCell"
 private let headerIdentifier = "ProfileHeader"
 private let fileterViewIdentifier = "ProfileFilterView"
 private let spotCellIdentifier = "SpotCell"
+private let blockUserViewIdentifier = "UserBlockView"
 
 
 class ProfileController: UICollectionViewController {
@@ -41,7 +42,6 @@ class ProfileController: UICollectionViewController {
     }
     
     private var actionSheetLauncher: ActionSheetLauncher!
-
     
     // MARK: - Lifecycle
     
@@ -167,6 +167,7 @@ class ProfileController: UICollectionViewController {
         self.collectionView.register(ProfileHeader.self, forCellWithReuseIdentifier: headerIdentifier)
         self.collectionView.register(ProfileFilterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: fileterViewIdentifier)
         self.collectionView.register(SpotCell.self, forCellWithReuseIdentifier: spotCellIdentifier)
+        self.collectionView.register(UserBlockView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: blockUserViewIdentifier)
         
         
         guard let tabHeight = tabBarController?.tabBar.frame.height else { return }
@@ -433,15 +434,47 @@ extension ProfileController: ActionSheetLauncherDelegate{
     func didSelect(option: ActionSheetOptions) {
         switch option {
         case .follow(_):
-            print("成功")
+            let uid = user.uid
+            UserService.shared.followUser(uid: uid) { (error, ref) in
+                if let error = error {
+                    print("DEBUG: error is \(error.localizedDescription)")
+                    return
+                }
+                print("DEBUG: follow 成功")
+            }
         case .unfollow(_):
-            print("成功")
+            let uid = user.uid
+            UserService.shared.unfollowUser(uid: uid) { (error, ref) in
+                if let error = error {
+                    print("DEBUG: error is \(error.localizedDescription)")
+                    return
+                }
+                print("DEBUG: unfollow 成功")
+            }
         case .report:
             print("成功")
         case .delete:
             print("it is needless")
         case .block(_):
-            print("成功")
+            let blockUid = user.uid
+            
+            UserService.shared.blockUser(blockUid: blockUid) { (err, ref) in
+                if let err = err{
+                    print("DEBUG: error is \(err.localizedDescription)")
+                    return
+                }
+
+                // 当該ユーザーをfollowしていた際の処理
+                if self.user.isFollowing{
+                    UserService.shared.unfollowUser(uid: blockUid) { (error, ref) in
+                        if let error = error {
+                            print("DEBUG: error is \(error.localizedDescription)")
+                            return
+                        }
+                        print("DEBUG: unfollow 成功")
+                    }
+                }
+            }
         }
     }
 }

@@ -143,4 +143,9 @@ struct UserService {
             REF_USER_BLOCKED.child(blockUid).setValue([currentUserUid: 1], withCompletionBlock: completion)
         }
     }
+    
+    func reportUser(reportUid: String, completion: @escaping(Error?, DatabaseReference) -> Void){
+        guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
+        REF_REPORT_USERS.child(currentUserUid).setValue([reportUid: 1], withCompletionBlock: completion)
+    }
 }
