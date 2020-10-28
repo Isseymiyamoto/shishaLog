@@ -440,7 +440,9 @@ extension ProfileController: ActionSheetLauncherDelegate{
                     print("DEBUG: error is \(error.localizedDescription)")
                     return
                 }
-                print("DEBUG: follow 成功")
+                self.user.isFollowing = true
+                self.fetchUserStats()
+                self.collectionView.reloadData()
             }
         case .unfollow(_):
             let uid = user.uid
@@ -449,7 +451,9 @@ extension ProfileController: ActionSheetLauncherDelegate{
                     print("DEBUG: error is \(error.localizedDescription)")
                     return
                 }
-                print("DEBUG: unfollow 成功")
+                self.user.isFollowing = false
+                self.fetchUserStats()
+                self.collectionView.reloadData()
             }
         case .report:
             let uid = user.uid
@@ -481,6 +485,11 @@ extension ProfileController: ActionSheetLauncherDelegate{
                         print("DEBUG: unfollow 成功")
                     }
                 }
+                
+                // ユーザー情報の変化により画面の再描画?
+                self.user.isBlocking = true
+                self.fetchUserStats()
+                self.collectionView.reloadData()
             }
         }
     }
