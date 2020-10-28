@@ -452,9 +452,16 @@ extension ProfileController: ActionSheetLauncherDelegate{
                 print("DEBUG: unfollow 成功")
             }
         case .report:
-            print("成功")
+            let uid = user.uid
+            UserService.shared.reportUser(reportUid: uid) { (err, ref) in
+                if let err = err{
+                    print("DEBUG: error is \(err.localizedDescription)")
+                    return
+                }
+                print("DEBUG: report successfully")
+            }
         case .delete:
-            print("it is needless")
+            return
         case .block(_):
             let blockUid = user.uid
             
