@@ -14,6 +14,8 @@ class ExploreController: UITableViewController {
     
     // MARK: - Properties
     
+    private var blockUsers = [String]()
+    
     private var users = [User](){
         didSet{ tableView.reloadData() }
     }
@@ -53,6 +55,10 @@ class ExploreController: UITableViewController {
         UserService.shared.fetchUsers { (users) in
             self.users = users
         }
+    }
+    
+    func fetchBlockUser(){
+        
     }
     
     
