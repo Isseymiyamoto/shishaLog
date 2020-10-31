@@ -65,7 +65,6 @@ class FeedController: UICollectionViewController {
                 guard didLike == true else { return }
                 
                 if let index = self.logs.firstIndex(where: { $0.logID == log.logID }) {
-                    print("DEBUG: index is \(index) in feed controller")
                     self.logs[index].didLike = true
                 }
             }
