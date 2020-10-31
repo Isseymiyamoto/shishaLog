@@ -14,6 +14,8 @@ class ExploreController: UITableViewController {
     
     // MARK: - Properties
     
+    private var blockUsers: [String]?
+    
     private var users = [User](){
         didSet{ tableView.reloadData() }
     }
@@ -35,6 +37,7 @@ class ExploreController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        fetchBlockUser()
         fetchUsers()
         configureSearchController()
     }
@@ -52,6 +55,12 @@ class ExploreController: UITableViewController {
     func fetchUsers(){
         UserService.shared.fetchUsers { (users) in
             self.users = users
+        }
+    }
+    
+    func fetchBlockUser(){
+        UserService.shared.fetchMyBlockingUser { (blockingUsersUid) in
+            self.blockUsers = blockingUsersUid
         }
     }
     
@@ -76,6 +85,12 @@ class ExploreController: UITableViewController {
         definesPresentationContext = false
     }
     
+    // usersからblockしているユーザーを覗く
+    func filterUsers(){
+        guard (blockUsers) != nil else { tableView.reloadData(); return }
+        users = users.filter({ !blockUsers!.contains($0.uid) })
+        tableView.reloadData()
+    }
 
 
 }

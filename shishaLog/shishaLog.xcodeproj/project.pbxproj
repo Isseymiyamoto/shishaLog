@@ -65,6 +65,7 @@
 		85EA486E248A7EC10086A140 /* LogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EA486D248A7EC10086A140 /* LogCell.swift */; };
 		85EB9A51249BBADA00C03E49 /* ProfileFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EB9A50249BBADA00C03E49 /* ProfileFilterView.swift */; };
 		85EB9A54249BBCBF00C03E49 /* ProfileFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EB9A53249BBCBF00C03E49 /* ProfileFilterCell.swift */; };
+		85EEDC0D254859A300F4B9BF /* UserBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EEDC0C254859A300F4B9BF /* UserBlockView.swift */; };
 		85FD8EDD2539E64000E26D48 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FD8EDC2539E64000E26D48 /* RegistrationViewModel.swift */; };
 		85FD8EDF2539E69F00E26D48 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FD8EDE2539E69F00E26D48 /* LoginViewModel.swift */; };
 		85FDDDD524EE8804008A4E59 /* UserPolicyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FDDDD424EE8804008A4E59 /* UserPolicyController.swift */; };
@@ -132,6 +133,7 @@
 		85EA486D248A7EC10086A140 /* LogCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogCell.swift; sourceTree = "<group>"; };
 		85EB9A50249BBADA00C03E49 /* ProfileFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFilterView.swift; sourceTree = "<group>"; };
 		85EB9A53249BBCBF00C03E49 /* ProfileFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFilterCell.swift; sourceTree = "<group>"; };
+		85EEDC0C254859A300F4B9BF /* UserBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBlockView.swift; sourceTree = "<group>"; };
 		85FD8EDC2539E64000E26D48 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		85FD8EDE2539E69F00E26D48 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		85FDDDD424EE8804008A4E59 /* UserPolicyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPolicyController.swift; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 				85EA446124CC551A00FA5FEE /* ActionSheetCell.swift */,
 				8555C38924D1332D00DE30DA /* SpotHeaderSupplementaryView.swift */,
 				859D535024EBA5370087C3A9 /* NoContentsView.swift */,
+				85EEDC0C254859A300F4B9BF /* UserBlockView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -460,6 +463,7 @@
 				8585BD6A24D92F190070941D /* ShopController.swift in Sources */,
 				8571AAF024BF43030000C2F6 /* ShopService.swift in Sources */,
 				85E0F57B24A4D5A200FBFBF3 /* EditProfileViewModel.swift in Sources */,
+				85EEDC0D254859A300F4B9BF /* UserBlockView.swift in Sources */,
 				8571AAF424C02B270000C2F6 /* ShopRegistrationViewModel.swift in Sources */,
 				851AAA7A247E965E006030D1 /* Utilities.swift in Sources */,
 				85D8EA1C248E81D5002AFEC1 /* LogService.swift in Sources */,

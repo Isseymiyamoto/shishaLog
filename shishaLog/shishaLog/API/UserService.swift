@@ -143,4 +143,20 @@ struct UserService {
             REF_USER_BLOCKED.child(blockUid).setValue([currentUserUid: 1], withCompletionBlock: completion)
         }
     }
+    
+    // 自身がブロックしているユーザーのuidを取得する
+    func fetchMyBlockingUser(completion: @escaping([String]) -> Void){
+        guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
+        var blockingUsersUid = [String]()
+        REF_USER_BLOCKING.child(currentUserUid).observeSingleEvent(of: .value) { (snapshot) in
+            guard let blockingUserUid = snapshot.key as? String else { return }
+            blockingUsersUid.append(blockingUserUid)
+            completion(blockingUsersUid)
+        }
+    }
+    
+    func reportUser(reportUid: String, completion: @escaping(Error?, DatabaseReference) -> Void){
+        guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
+        REF_REPORT_USERS.child(currentUserUid).setValue([reportUid: 1], withCompletionBlock: completion)
+    }
 }

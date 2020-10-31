@@ -53,8 +53,6 @@ class FeedController: UICollectionViewController {
         
         LogService.shared.fetchFollowingLogs { (logs) in
             self.logs = logs.sorted(by: { $0.timestamp  > $1.timestamp })
-            print("DEBUG: self logs count is \(logs.count)")
-            print("DEBUG: self logs are \(self.logs)")
             self.checkIfUserLikedLogs()
             
             self.collectionView.refreshControl?.endRefreshing()
@@ -67,7 +65,6 @@ class FeedController: UICollectionViewController {
                 guard didLike == true else { return }
                 
                 if let index = self.logs.firstIndex(where: { $0.logID == log.logID }) {
-                    print("DEBUG: index is \(index) in feed controller")
                     self.logs[index].didLike = true
                 }
             }
