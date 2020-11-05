@@ -19,6 +19,7 @@ struct User {
     var bio: String?
     var isFollowing: Bool = false
     var isBlocking: Bool = false
+    var userStatus: UserStatus = .notFollowing
     var stats: UserRelationStats?
     
     var isCurrentUser: Bool { return Auth.auth().currentUser?.uid == uid }
@@ -44,4 +45,10 @@ struct User {
 struct UserRelationStats {
     var followers: Int
     var following: Int
+}
+
+enum UserStatus: CaseIterable{
+    case notFollowing
+    case following
+    case blocking
 }

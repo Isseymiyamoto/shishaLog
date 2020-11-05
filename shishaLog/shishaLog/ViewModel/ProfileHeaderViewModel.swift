@@ -31,11 +31,20 @@ struct ProfileHeaderViewModel {
             return "プロフィールを編集する"
         }
         
-        if user.isFollowing {
-            return "フォロー中"
-        }else if !user.isFollowing{
+        switch user.userStatus {
+        case .notFollowing:
             return "フォローする"
+        case .following:
+            return "フォロー中"
+        case .blocking:
+            return "ブロック中"
         }
+        
+//        if user.isFollowing {
+//            return "フォロー中"
+//        }else if !user.isFollowing{
+//            return "フォローする"
+//        }
         
         return "Loading now"
     }
