@@ -465,7 +465,7 @@ extension ProfileController: ActionSheetLauncherDelegate{
                     print("DEBUG: error is \(error.localizedDescription)")
                     return
                 }
-                self.user.isFollowing = true
+                self.user.userStatus = .following
                 self.fetchUserStats()
 //                self.collectionView.reloadData()
             }
@@ -476,7 +476,7 @@ extension ProfileController: ActionSheetLauncherDelegate{
                     print("DEBUG: error is \(error.localizedDescription)")
                     return
                 }
-                self.user.isFollowing = false
+                self.user.userStatus = .notFollowing
                 self.fetchUserStats()
 //                self.collectionView.reloadData()
             }
@@ -503,13 +503,13 @@ extension ProfileController: ActionSheetLauncherDelegate{
                 self.user.isBlocking = true
 
                 // 当該ユーザーをfollowしていた際の処理
-                if self.user.isFollowing{
+                if self.user.userStatus == .following{
                     UserService.shared.unfollowUser(uid: blockUid) { (error, ref) in
                         if let error = error {
                             print("DEBUG: error is \(error.localizedDescription)")
                             return
                         }
-                        self.user.isFollowing = false
+                        self.user.userStatus = .blocking
                         self.fetchUserStats()
                     }
                 }
