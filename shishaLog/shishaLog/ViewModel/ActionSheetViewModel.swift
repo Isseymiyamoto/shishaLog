@@ -19,8 +19,17 @@ struct ActionSheetViewModel {
         if user.isCurrentUser {
             results.append(.delete)
         }else{
-            let followOption: ActionSheetOptions = user.isFollowing ? .unfollow(user) : .follow(user)
-            results.append(followOption)
+            let followOption: ActionSheetOptions?
+            switch user.userStatus{
+            case .notFollowing:
+                followOption = .follow(user)
+            case .following:
+                followOption = .unfollow(user)
+            case .blocking:
+                followOption = .follow(user)
+            }
+//            let followOption: ActionSheetOptions = user.isFollowing ? .unfollow(user) : .follow(user)
+            results.append(followOption!)
             results.append(.block(user))
         }
         results.append(.report)
