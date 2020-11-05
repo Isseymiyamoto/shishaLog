@@ -123,7 +123,7 @@ extension SpotController: SpotHeaderDelegate{
         }else{
             UserService.shared.checkIfUserIsFollowed(uid: spot.user.uid) { (isFollowed) in
                 var user = self.spot.user
-                user.isFollowing = isFollowed
+                user.userStatus = isFollowed ? .following : .notFollowing
                 self.showActionSheet(forUser: user)
             }
         }

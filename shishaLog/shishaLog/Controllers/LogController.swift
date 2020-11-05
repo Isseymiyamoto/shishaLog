@@ -146,11 +146,7 @@ extension LogController: LogHeaderDelegate{
             showActionSheet(forUser: log.user)
         }else{
             UserService.shared.checkIfUserIsFollowed(uid: log.user.uid) { (isFollowed) in
-//                var user = self.log.user
-//                user.isFollowing = isFollowed
-//                self.showActionSheet(forUser: user)
-                
-                self.log.user.isFollowing = isFollowed
+                self.log.user.userStatus = isFollowed ? .following : .notFollowing
                 self.showActionSheet(forUser: self.log.user)
             }
         }
@@ -224,7 +220,7 @@ extension LogController: ActionSheetLauncherDelegate{
                 }
 
                 // 当該ユーザーをfollowしていた際の処理
-                if self.log.user.isFollowing{
+                if self.log.user.userStatus == .following{
                     UserService.shared.unfollowUser(uid: blockUid) { (error, ref) in
                         if let error = error {
                             print("DEBUG: error is \(error.localizedDescription)")
@@ -234,6 +230,7 @@ extension LogController: ActionSheetLauncherDelegate{
                     }
                 }
                 
+                self.log.user.userStatus = .blocking
                 self.delegate?.controller(self)
             }
         }
