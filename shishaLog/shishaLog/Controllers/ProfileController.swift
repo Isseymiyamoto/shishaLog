@@ -115,7 +115,8 @@ class ProfileController: UICollectionViewController {
     // フォローしているか確認
     func checkIfUserIsFollowing(){
         UserService.shared.checkIfUserIsFollowed(uid: user.uid) { (result) in
-            self.user.isFollowing = result
+//            self.user.isFollowing = result
+            self.user.userStatus = result ? .following : .notFollowing
             self.collectionView.reloadData()
         }
     }
@@ -337,27 +338,51 @@ extension ProfileController: ProfileHeaderDelegate{
         }
         
         // 相手をフォローしている時
-        if user.isFollowing{
+        if user.userStatus == .following{
             UserService.shared.unfollowUser(uid: user.uid) { (err, ref) in
                 if let err = err {
                     print("DEBUG: error is \(err.localizedDescription)")
                     return
                 }
-                self.user.isFollowing = false
+                self.user.userStatus = .notFollowing
                 self.fetchUserStats()
                 self.collectionView.reloadData()
             }
-        }else{
+        }else if user.userStatus == .notFollowing{
             UserService.shared.followUser(uid: user.uid) { (err, ref) in
                 if let err = err {
                     print("DEBUG: error is \(err.localizedDescription)")
                     return
                 }
-                self.user.isFollowing = true
+                self.user.userStatus = .following
                 self.fetchUserStats()
                 self.collectionView.reloadData()
             }
+        }else{
+            return
         }
+        
+//        if user.isFollowing{
+//            UserService.shared.unfollowUser(uid: user.uid) { (err, ref) in
+//                if let err = err {
+//                    print("DEBUG: error is \(err.localizedDescription)")
+//                    return
+//                }
+//                self.user.isFollowing = false
+//                self.fetchUserStats()
+//                self.collectionView.reloadData()
+//            }
+//        }else{
+//            UserService.shared.followUser(uid: user.uid) { (err, ref) in
+//                if let err = err {
+//                    print("DEBUG: error is \(err.localizedDescription)")
+//                    return
+//                }
+//                self.user.isFollowing = true
+//                self.fetchUserStats()
+//                self.collectionView.reloadData()
+//            }
+//        }
     }
 }
 
