@@ -144,6 +144,16 @@ struct UserService {
         }
     }
     
+    // ブロック判定
+    func checkIfUserIsBlocked(uid: String, completion: @escaping(Bool) -> Void){
+        guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
+        
+        REF_USER_BLOCKING.child(currentUserUid).child(uid).observeSingleEvent(of: .value) { (snapshot) in
+            completion(snapshot.exists())
+        }
+        
+    }
+    
     // 自身がブロックしているユーザーのuidを取得する
     func fetchMyBlockingUser(completion: @escaping([String]) -> Void){
         guard let currentUserUid = Auth.auth().currentUser?.uid else { return }

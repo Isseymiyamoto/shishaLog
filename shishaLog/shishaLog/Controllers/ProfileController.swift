@@ -114,10 +114,17 @@ class ProfileController: UICollectionViewController {
     
     // フォローしているか確認
     func checkIfUserIsFollowing(){
-        UserService.shared.checkIfUserIsFollowed(uid: user.uid) { (result) in
-//            self.user.isFollowing = result
-            self.user.userStatus = result ? .following : .notFollowing
-            self.collectionView.reloadData()
+        UserService.shared.checkIfUserIsFollowed(uid: user.uid) { (followResult) in
+            if followResult{
+                self.user.userStatus = .following
+                self.collectionView.reloadData()
+            }else{
+                // ブロックしているか確認する
+                UserService.shared.checkIfUserIsBlocked(uid: self.user.uid) { (blockResult) in
+                    self.user.userStatus = blockResult ? .blocking : .notFollowing
+                    self.collectionView.reloadData()
+                }
+            }
         }
     }
     
