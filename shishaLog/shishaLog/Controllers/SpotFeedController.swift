@@ -91,8 +91,12 @@ class SpotFeedController: UICollectionViewController {
     
     func configureBackGroundView(){
         if spots.isEmpty {
-            noContentsView.isHidden = false
-            noContentsView.isUserInteractionEnabled = true
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+                if self.spots.isEmpty{
+                    self.noContentsView.isHidden = false
+                    self.noContentsView.isUserInteractionEnabled = true
+                }
+            }
         }else{
             noContentsView.isHidden = true
             noContentsView.isUserInteractionEnabled = false
