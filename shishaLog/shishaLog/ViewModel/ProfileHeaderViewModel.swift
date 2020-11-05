@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum ProfileFilterOptions: Int, CaseIterable {
     case logs
@@ -39,14 +40,14 @@ struct ProfileHeaderViewModel {
         case .blocking:
             return "ブロック中"
         }
-        
-//        if user.isFollowing {
-//            return "フォロー中"
-//        }else if !user.isFollowing{
-//            return "フォローする"
-//        }
-        
-        return "Loading now"
+    }
+    
+    var actionButtonBackGroundColor: UIColor{
+        if user.userStatus == .blocking{
+            return UIColor.rgb(red: 224, green: 36, blue: 94)
+        }else{
+            return .shishaColor
+        }
     }
     
     var followingLabelText: String?{

@@ -196,6 +196,8 @@ class ProfileHeader: UICollectionViewCell{
         let viewModel = ProfileHeaderViewModel(user: user)
         
         editProfileFollowButton.setTitle(viewModel.actionButtonTitle, for: .normal)
+        editProfileFollowButton.backgroundColor = viewModel.actionButtonBackGroundColor
+        editProfileFollowButton.layer.borderColor = viewModel.actionButtonBackGroundColor.cgColor
         profileImageView.sd_setImage(with: user.profileImageUrl, completed: nil)
         fullnameLabel.text = user.fullname
         followingCountButton.setTitle(viewModel.followingLabelText, for: .normal)

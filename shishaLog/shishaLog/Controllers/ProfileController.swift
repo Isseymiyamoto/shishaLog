@@ -356,10 +356,10 @@ extension ProfileController: ProfileHeaderDelegate{
                 }
                 self.user.userStatus = .following
                 self.fetchUserStats()
-                self.collectionView.reloadData()
             }
-        }else{
-            return
+        }else if user.userStatus == .blocking{
+            // ブロックを解除する処理を追加する
+            print("DEBUG: handle stop blocking the user..")
         }
         
 //        if user.isFollowing{
