@@ -144,6 +144,19 @@ struct UserService {
         }
     }
     
+    // ブロックを解除する
+    func unblockUser(blockUid: String, completion: @escaping(Error?, DatabaseReference) -> Void){
+        guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
+        REF_USER_BLOCKING.child(currentUserUid).child(blockUid).removeValue { (error, ref) in
+            if let error = error {
+                print("DEBUG: error is \(error.localizedDescription)")
+                return
+            }
+            
+            REF_USER_BLOCKED.child(blockUid).child(currentUserUid).removeValue(completionBlock: completion)
+        }
+    }
+    
     // ブロック判定
     func checkIfUserIsBlocked(uid: String, completion: @escaping(Bool) -> Void){
         guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
