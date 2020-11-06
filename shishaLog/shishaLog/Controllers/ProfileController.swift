@@ -366,7 +366,15 @@ extension ProfileController: ProfileHeaderDelegate{
             }
         }else if user.userStatus == .blocking{
             // ブロックを解除する処理を追加する
-            print("DEBUG: handle stop blocking the user..")
+            UserService.shared.unblockUser(blockUid: user.uid) { (error, ref) in
+                if let error = error {
+                    print("DEBUG: error is \(error.localizedDescription)")
+                    return
+                }
+                
+                self.user.userStatus = .notFollowing
+                self.collectionView.reloadData()
+            }
         }
         
 //        if user.isFollowing{
