@@ -125,9 +125,8 @@ extension SpotController: SpotHeaderDelegate{
             showActionSheet(forUser: spot.user)
         }else{
             UserService.shared.checkIfUserIsFollowed(uid: spot.user.uid) { (isFollowed) in
-                var user = self.spot.user
-                user.userStatus = isFollowed ? .following : .notFollowing
-                self.showActionSheet(forUser: user)
+                self.spot.user.userStatus = isFollowed ? .following : .notFollowing
+                self.showActionSheet(forUser: self.spot.user)
             }
         }
     }
@@ -170,31 +169,29 @@ extension SpotController: ActionSheetLauncherDelegate{
             SpotService.shared.reportSpot(spotID: spotID) { (err, ref) in
                 self.showSuccessReportMessage()
             }
-        case .block(let _):
-            print("DEBUG: blockうまくいきまてん")
-            
-//            let blockUid = user.uid
-//
-//            UserService.shared.blockUser(blockUid: blockUid) { (err, ref) in
-//                if let err = err{
-//                    print("DEBUG: error is \(err.localizedDescription)")
-//                    return
-//                }
-//
-//                // 当該ユーザーをfollowしていた際の処理
-//                if self.spot.user.userStatus == .following{
-//                    UserService.shared.unfollowUser(uid: blockUid) { (err, ref) in
-//                        if let err = err{
-//                            print("DEBUG: error is \(err.localizedDescription)")
-//                            return
-//                        }
-//                    }
-//                }
-//
-//                self.spot.user.userStatus = .blocking
-//                self.delegate?.controller(self)
-//            }
-//
+        case .block(let user):
+            let blockUid = user.uid
+
+            UserService.shared.blockUser(blockUid: blockUid) { (err, ref) in
+                if let err = err{
+                    print("DEBUG: error is \(err.localizedDescription)")
+                    return
+                }
+
+                // 当該ユーザーをfollowしていた際の処理
+                if self.spot.user.userStatus == .following{
+                    UserService.shared.unfollowUser(uid: blockUid) { (err, ref) in
+                        if let err = err{
+                            print("DEBUG: error is \(err.localizedDescription)")
+                            return
+                        }
+                    }
+                }
+
+                self.spot.user.userStatus = .blocking
+                self.delegate?.controller(self)
+            }
+
         case .unblock(_):
             print("今後追加しますよ")
         }

@@ -211,8 +211,8 @@ extension LogController: ActionSheetLauncherDelegate{
                 LogService.shared.deleteSomeUserLikes(withLogID: logID)
                 self.delegate?.controller(self)
             }
-        case .block(_):
-            let blockUid = log.user.uid
+        case .block(let user):
+            let blockUid = user.uid
             
             UserService.shared.blockUser(blockUid: blockUid) { (err, ref) in
                 if let err = err{
