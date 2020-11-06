@@ -57,14 +57,18 @@ class ProfileController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureCollectionView()
-        configureNavigationBar()
-        fetchLogs()
-        fetchLikeLogs()
-        fetchSpots()
-//        checkIfUserIsFollowing()
-        fetchUserStats()
-        
+        if user.userStatus == .blocking{
+            configureCollectionView()
+            configureNavigationBar()
+            fetchUserStats()
+        }else{
+            configureCollectionView()
+            configureNavigationBar()
+            fetchLogs()
+            fetchLikeLogs()
+            fetchSpots()
+            fetchUserStats()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -160,16 +164,20 @@ class ProfileController: UICollectionViewController {
     // MARK: - Selectors
     
     @objc func handleRefresh(){
-        switch selectedFilter {
-        case .logs:
-            fetchLogs()
-            fetchUserStats()
-        case .locations:
-            fetchSpots()
-            fetchUserStats()
-        case .likeLogs:
-            fetchLikeLogs()
-            fetchUserStats()
+        if user.userStatus == .blocking{
+            return
+        }else{
+            switch selectedFilter {
+            case .logs:
+                fetchLogs()
+                fetchUserStats()
+            case .locations:
+                fetchSpots()
+                fetchUserStats()
+            case .likeLogs:
+                fetchLikeLogs()
+                fetchUserStats()
+            }
         }
     }
     

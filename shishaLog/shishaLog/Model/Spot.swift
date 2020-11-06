@@ -12,7 +12,7 @@ struct Spot {
 
     let spotID: String
     var timestamp: Date!
-    let user: User
+    var user: User
     var shop: Shop
     var comment: String?
     
