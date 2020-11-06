@@ -114,7 +114,10 @@ extension SpotController: SpotHeaderDelegate{
     
     func handleProfileImageTapped(user: User) {
         let controller = ProfileController(user: user)
-        navigationController?.pushViewController(controller, animated: true)
+        controller.checkUserStatus { (status) in
+            controller.user.userStatus = status!
+            self.navigationController?.pushViewController(controller, animated: true)
+        }
     }
     
     func showActionSheet() {
