@@ -62,8 +62,9 @@ class ProfileController: UICollectionViewController {
         fetchLogs()
         fetchLikeLogs()
         fetchSpots()
-        checkIfUserIsFollowing()
+//        checkIfUserIsFollowing()
         fetchUserStats()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -123,6 +124,23 @@ class ProfileController: UICollectionViewController {
                 UserService.shared.checkIfUserIsBlocked(uid: self.user.uid) { (blockResult) in
                     self.user.userStatus = blockResult ? .blocking : .notFollowing
                     self.collectionView.reloadData()
+                }
+            }
+        }
+    }
+    
+    // profileControllerに遷移する前にテスト的にcheckUserStatusをする
+    func checkUserStatus(completion: @escaping(UserStatus?) -> Void){
+        var userStatus: UserStatus?
+        UserService.shared.checkIfUserIsFollowed(uid: user.uid) { (followResult) in
+            if followResult{
+                userStatus = .following
+                completion(userStatus)
+            }else{
+                // ブロックしているか確認する
+                UserService.shared.checkIfUserIsBlocked(uid: self.user.uid) { (blockResult) in
+                    userStatus = blockResult ? .blocking : .notFollowing
+                    completion(userStatus)
                 }
             }
         }
@@ -376,28 +394,6 @@ extension ProfileController: ProfileHeaderDelegate{
                 self.collectionView.reloadData()
             }
         }
-        
-//        if user.isFollowing{
-//            UserService.shared.unfollowUser(uid: user.uid) { (err, ref) in
-//                if let err = err {
-//                    print("DEBUG: error is \(err.localizedDescription)")
-//                    return
-//                }
-//                self.user.isFollowing = false
-//                self.fetchUserStats()
-//                self.collectionView.reloadData()
-//            }
-//        }else{
-//            UserService.shared.followUser(uid: user.uid) { (err, ref) in
-//                if let err = err {
-//                    print("DEBUG: error is \(err.localizedDescription)")
-//                    return
-//                }
-//                self.user.isFollowing = true
-//                self.fetchUserStats()
-//                self.collectionView.reloadData()
-//            }
-//        }
     }
 }
 
@@ -482,7 +478,6 @@ extension ProfileController: ActionSheetLauncherDelegate{
                 }
                 self.user.userStatus = .following
                 self.fetchUserStats()
-//                self.collectionView.reloadData()
             }
         case .unfollow(_):
             let uid = user.uid
@@ -493,7 +488,6 @@ extension ProfileController: ActionSheetLauncherDelegate{
                 }
                 self.user.userStatus = .notFollowing
                 self.fetchUserStats()
-//                self.collectionView.reloadData()
             }
         case .report:
             let uid = user.uid

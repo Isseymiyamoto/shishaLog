@@ -186,6 +186,7 @@ extension FeedController: LogCellDelegate{
     func handleProfileImageTapped(_ cell: LogCell) {
         guard let user = cell.log?.user else { return }
         let controller = ProfileController(user: user)
+        
         navigationController?.pushViewController(controller, animated: true)
     }
 }

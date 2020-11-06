@@ -115,7 +115,7 @@ class EditProfileController: UITableViewController {
         navigationItem.title = "プロフィールを編集"
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "キャンセル", style: .plain, target: self, action: #selector(handleCancel))
         navigationItem.leftBarButtonItem?.tintColor = .black
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "完了", style: .done, target: self, action: #selector(handleUploadProfileInfo))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "保存", style: .done, target: self, action: #selector(handleUploadProfileInfo))
     }
     
     func configureImagePicker(){

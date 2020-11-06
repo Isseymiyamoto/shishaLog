@@ -47,7 +47,7 @@ struct UserRelationStats {
     var following: Int
 }
 
-enum UserStatus: CaseIterable{
+enum UserStatus{
     case notFollowing
     case following
     case blocking
