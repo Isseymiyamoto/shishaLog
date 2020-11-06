@@ -170,11 +170,11 @@ extension SpotController: ActionSheetLauncherDelegate{
             SpotService.shared.reportSpot(spotID: spotID) { (err, ref) in
                 self.showSuccessReportMessage()
             }
-        case .block(let user):
+        case .block(let _):
             print("DEBUG: blockうまくいきまてん")
             
 //            let blockUid = user.uid
-            
+//
 //            UserService.shared.blockUser(blockUid: blockUid) { (err, ref) in
 //                if let err = err{
 //                    print("DEBUG: error is \(err.localizedDescription)")
@@ -195,6 +195,8 @@ extension SpotController: ActionSheetLauncherDelegate{
 //                self.delegate?.controller(self)
 //            }
 //
+        case .unblock(_):
+            print("今後追加しますよ")
         }
     }
 }

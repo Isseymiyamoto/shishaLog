@@ -234,6 +234,8 @@ extension LogController: ActionSheetLauncherDelegate{
                 self.log.user.userStatus = .blocking
                 self.delegate?.controller(self)
             }
+        case .unblock(_):
+            print("DEBUG: 今後追加しますよ")
         }
     }
 }

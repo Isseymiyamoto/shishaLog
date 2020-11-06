@@ -534,6 +534,8 @@ extension ProfileController: ActionSheetLauncherDelegate{
                     }
                 }
             }
+        case .unblock(_):
+            print("後で追加しますよ")
         }
     }
 }
