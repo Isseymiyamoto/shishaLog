@@ -20,7 +20,7 @@ class ProfileController: UICollectionViewController {
     
     // MARK: - Properties
     
-    private var user: User
+    var user: User
     
     private var selectedFilter: ProfileFilterOptions = .logs{
         didSet{ collectionView.reloadData() }
