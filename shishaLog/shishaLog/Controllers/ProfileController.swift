@@ -117,6 +117,13 @@ class ProfileController: UICollectionViewController {
         self.collectionView.refreshControl?.endRefreshing()
     }
     
+    // ブロック時に何もしない際
+    func whenBlockRefresh(){
+        collectionView.refreshControl?.beginRefreshing()
+        collectionView.refreshControl?.endRefreshing()
+    }
+    
+    
     // フォローしているか確認
     func checkIfUserIsFollowing(){
         UserService.shared.checkIfUserIsFollowed(uid: user.uid) { (followResult) in
@@ -158,6 +165,14 @@ class ProfileController: UICollectionViewController {
         }
     }
     
+    // unblock時の処理をまとめたもの
+    func afterUnblockProcess(){
+        fetchLogs()
+        fetchLikeLogs()
+        fetchSpots()
+        fetchUserStats()
+    }
+    
     
     
     
@@ -165,7 +180,7 @@ class ProfileController: UICollectionViewController {
     
     @objc func handleRefresh(){
         if user.userStatus == .blocking{
-            return
+            whenBlockRefresh()
         }else{
             switch selectedFilter {
             case .logs:
@@ -399,6 +414,8 @@ extension ProfileController: ProfileHeaderDelegate{
                 }
                 
                 self.user.userStatus = .notFollowing
+                // 諸々のデータをfetchする
+                self.afterUnblockProcess()
                 self.collectionView.reloadData()
             }
         }
