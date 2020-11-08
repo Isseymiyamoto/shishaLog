@@ -26,11 +26,14 @@ struct ActionSheetViewModel {
             case .following:
                 followOption = .unfollow(user)
             case .blocking:
-                followOption = .follow(user)
+                followOption = .unblock(user)
             }
 //            let followOption: ActionSheetOptions = user.isFollowing ? .unfollow(user) : .follow(user)
             results.append(followOption!)
-            results.append(.block(user))
+            
+            if user.userStatus != .blocking{
+                results.append(.block(user))
+            }
         }
         results.append(.report)
         
@@ -55,12 +58,14 @@ enum ActionSheetOptions{
     case report
     case delete
     case block(User)
+    case unblock(User)
     
     var descriptionForLog: String{
         switch self {
         case .follow(let user): return "フォロー @\(user.username)"
         case .unfollow(let user): return "アンフォロー @\(user.username)"
         case .block(let user): return "ブロック @\(user.username)"
+        case .unblock(let user): return "アンブロック @\(user.username)"
         case .report: return "ログを報告"
         case .delete: return "ログを削除"
         }
@@ -71,6 +76,7 @@ enum ActionSheetOptions{
         case .follow(let user): return "フォロー @\(user.username)"
         case .unfollow(let user): return "アンフォロー @\(user.username)"
         case .block(let user): return "ブロック @\(user.username)"
+        case .unblock(let user): return "アンブロック @\(user.username)"
         case .report: return "スポットを報告"
         case .delete: return "スポットを削除"
         }
@@ -81,6 +87,7 @@ enum ActionSheetOptions{
         case .follow(let user): return "フォロー @\(user.username)"
         case .unfollow(let user): return "アンフォロー @\(user.username)"
         case .block(let user): return "ブロック @\(user.username)"
+        case .unblock(let user): return "アンブロック @\(user.username)"
         case .report: return "ユーザーを報告"
         case .delete: return "ユーザーを削除"
         }

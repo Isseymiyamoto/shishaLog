@@ -78,6 +78,7 @@ class ActionSheetCell: UITableViewCell{
         case .some(.delete): optionImageView.image = UIImage(systemName: "trash")
         case .some(.block(_)): optionImageView.image = UIImage(systemName: "hand.raised.slash")
         case .none: return
+        case .some(.unblock(_)): optionImageView.image = UIImage(systemName: "hand.raised")
         }
     }
     

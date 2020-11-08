@@ -20,7 +20,7 @@ class ProfileController: UICollectionViewController {
     
     // MARK: - Properties
     
-    private var user: User
+    var user: User
     
     private var selectedFilter: ProfileFilterOptions = .logs{
         didSet{ collectionView.reloadData() }
@@ -57,13 +57,18 @@ class ProfileController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureCollectionView()
-        configureNavigationBar()
-        fetchLogs()
-        fetchLikeLogs()
-        fetchSpots()
-        checkIfUserIsFollowing()
-        fetchUserStats()
+        if user.userStatus == .blocking{
+            configureCollectionView()
+            configureNavigationBar()
+            fetchUserStats()
+        }else{
+            configureCollectionView()
+            configureNavigationBar()
+            fetchLogs()
+            fetchLikeLogs()
+            fetchSpots()
+            fetchUserStats()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -112,6 +117,13 @@ class ProfileController: UICollectionViewController {
         self.collectionView.refreshControl?.endRefreshing()
     }
     
+    // ブロック時に何もしない際
+    func whenBlockRefresh(){
+        collectionView.refreshControl?.beginRefreshing()
+        collectionView.refreshControl?.endRefreshing()
+    }
+    
+    
     // フォローしているか確認
     func checkIfUserIsFollowing(){
         UserService.shared.checkIfUserIsFollowed(uid: user.uid) { (followResult) in
@@ -128,6 +140,23 @@ class ProfileController: UICollectionViewController {
         }
     }
     
+    // profileControllerに遷移する前にテスト的にcheckUserStatusをする
+    func checkUserStatus(completion: @escaping(UserStatus?) -> Void){
+        var userStatus: UserStatus?
+        UserService.shared.checkIfUserIsFollowed(uid: user.uid) { (followResult) in
+            if followResult{
+                userStatus = .following
+                completion(userStatus)
+            }else{
+                // ブロックしているか確認する
+                UserService.shared.checkIfUserIsBlocked(uid: self.user.uid) { (blockResult) in
+                    userStatus = blockResult ? .blocking : .notFollowing
+                    completion(userStatus)
+                }
+            }
+        }
+    }
+    
     // フォローフォロワーステータスをfetch
     func fetchUserStats(){
         UserService.shared.fetchUserStats(uid: user.uid) { (stats) in
@@ -136,22 +165,34 @@ class ProfileController: UICollectionViewController {
         }
     }
     
+    // unblock時の処理をまとめたもの
+    func afterUnblockProcess(){
+        fetchLogs()
+        fetchLikeLogs()
+        fetchSpots()
+        fetchUserStats()
+    }
+    
     
     
     
     // MARK: - Selectors
     
     @objc func handleRefresh(){
-        switch selectedFilter {
-        case .logs:
-            fetchLogs()
-            fetchUserStats()
-        case .locations:
-            fetchSpots()
-            fetchUserStats()
-        case .likeLogs:
-            fetchLikeLogs()
-            fetchUserStats()
+        if user.userStatus == .blocking{
+            whenBlockRefresh()
+        }else{
+            switch selectedFilter {
+            case .logs:
+                fetchLogs()
+                fetchUserStats()
+            case .locations:
+                fetchSpots()
+                fetchUserStats()
+            case .likeLogs:
+                fetchLikeLogs()
+                fetchUserStats()
+            }
         }
     }
     
@@ -366,30 +407,18 @@ extension ProfileController: ProfileHeaderDelegate{
             }
         }else if user.userStatus == .blocking{
             // ブロックを解除する処理を追加する
-            print("DEBUG: handle stop blocking the user..")
+            UserService.shared.unblockUser(blockUid: user.uid) { (error, ref) in
+                if let error = error {
+                    print("DEBUG: error is \(error.localizedDescription)")
+                    return
+                }
+                
+                self.user.userStatus = .notFollowing
+                // 諸々のデータをfetchする
+                self.afterUnblockProcess()
+                self.collectionView.reloadData()
+            }
         }
-        
-//        if user.isFollowing{
-//            UserService.shared.unfollowUser(uid: user.uid) { (err, ref) in
-//                if let err = err {
-//                    print("DEBUG: error is \(err.localizedDescription)")
-//                    return
-//                }
-//                self.user.isFollowing = false
-//                self.fetchUserStats()
-//                self.collectionView.reloadData()
-//            }
-//        }else{
-//            UserService.shared.followUser(uid: user.uid) { (err, ref) in
-//                if let err = err {
-//                    print("DEBUG: error is \(err.localizedDescription)")
-//                    return
-//                }
-//                self.user.isFollowing = true
-//                self.fetchUserStats()
-//                self.collectionView.reloadData()
-//            }
-//        }
     }
 }
 
@@ -456,7 +485,10 @@ extension ProfileController: LogCellDelegate{
             return
         }
         let controller = ProfileController(user: user)
-        navigationController?.pushViewController(controller, animated: true)
+        controller.checkUserStatus { (status) in
+            controller.user.userStatus = status!
+            self.navigationController?.pushViewController(controller, animated: true)
+        }
     }
 }
 
@@ -474,7 +506,6 @@ extension ProfileController: ActionSheetLauncherDelegate{
                 }
                 self.user.userStatus = .following
                 self.fetchUserStats()
-//                self.collectionView.reloadData()
             }
         case .unfollow(_):
             let uid = user.uid
@@ -485,7 +516,6 @@ extension ProfileController: ActionSheetLauncherDelegate{
                 }
                 self.user.userStatus = .notFollowing
                 self.fetchUserStats()
-//                self.collectionView.reloadData()
             }
         case .report:
             let uid = user.uid
@@ -521,6 +551,8 @@ extension ProfileController: ActionSheetLauncherDelegate{
                     }
                 }
             }
+        case .unblock(_):
+            print("後で追加しますよ")
         }
     }
 }

@@ -165,10 +165,11 @@ extension LogController: LogHeaderDelegate{
     }
     
     func handleProfileImageTapped(_ jumpToUser: User) {
-        print("DEBUG: 処理は走っておりますよ")
         let controller = ProfileController(user: jumpToUser)
-        navigationController?.pushViewController(controller, animated: true)
-        
+        controller.checkUserStatus { (status) in
+            controller.user.userStatus = status!
+            self.navigationController?.pushViewController(controller, animated: true)
+        }
     }
 }
 
@@ -210,8 +211,8 @@ extension LogController: ActionSheetLauncherDelegate{
                 LogService.shared.deleteSomeUserLikes(withLogID: logID)
                 self.delegate?.controller(self)
             }
-        case .block(_):
-            let blockUid = log.user.uid
+        case .block(let user):
+            let blockUid = user.uid
             
             UserService.shared.blockUser(blockUid: blockUid) { (err, ref) in
                 if let err = err{
@@ -233,6 +234,8 @@ extension LogController: ActionSheetLauncherDelegate{
                 self.log.user.userStatus = .blocking
                 self.delegate?.controller(self)
             }
+        case .unblock(_):
+            print("DEBUG: 今後追加しますよ")
         }
     }
 }
