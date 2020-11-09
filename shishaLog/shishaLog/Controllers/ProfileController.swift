@@ -407,7 +407,7 @@ extension ProfileController: ProfileHeaderDelegate{
             }
         }else if user.userStatus == .blocking{
             // ブロックを解除する処理を追加する
-            UserService.shared.unblockUser(blockUid: user.uid) { (error, ref) in
+            UserService.shared.unblockUser(unblockUid: user.uid) { (error, ref) in
                 if let error = error {
                     print("DEBUG: error is \(error.localizedDescription)")
                     return
@@ -548,11 +548,27 @@ extension ProfileController: ActionSheetLauncherDelegate{
                         }
                         self.user.userStatus = .blocking
                         self.fetchUserStats()
+                        
+                        // 表示されていたlogs, likeLogs, spotsを消す
+                        self.logs.removeAll()
+                        self.likeLogs.removeAll()
+                        self.spots.removeAll()
                     }
                 }
             }
         case .unblock(_):
-            print("後で追加しますよ")
+            let unblockUid = user.uid
+            
+            UserService.shared.unblockUser(unblockUid: unblockUid) { (err, ref) in
+                if let err = err{
+                    print("DEBUG: error is \(err.localizedDescription)")
+                    return
+                }
+                
+                self.user.userStatus = .notFollowing
+                self.afterUnblockProcess()
+                self.collectionView.reloadData()
+            }
         }
     }
 }
