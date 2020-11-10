@@ -31,6 +31,9 @@ class ChoiceSpotController: UITableViewController {
         didSet{ tableView.reloadData() }
     }
     
+    // 検索バー
+    private let searchController = UISearchController(searchResultsController: nil)
+    
     // MARK: - Lifecycle
     
     init(user: User, option: ChoiceSpotControllerOptions) {
@@ -75,6 +78,16 @@ class ChoiceSpotController: UITableViewController {
     }
 
     // MARK: - Helpers
+    
+    func configureSearchController(){
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.searchBar.tintColor = .systemBlue
+        searchController.searchBar.placeholder = "今いるシーシャ屋を探そう"
+        navigationItem.searchController = searchController
+        definesPresentationContext = false
+    }
     
     func configureTableView(){
         tableView.backgroundColor = .white
@@ -157,5 +170,14 @@ extension ChoiceSpotController{
                 delegate?.controller(self, shop: shops[indexPath.row])
             }
         }
+    }
+}
+
+// MARK: - UISearchResultUpdating
+
+extension ChoiceSpotController: UISearchResultsUpdating{
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchText = searchController.searchBar.text?.lowercased() else { return }
+        filteredShops = shops.filter({ $0.shopName.contains(searchText) || $0.address.contains(searchText) })
     }
 }
