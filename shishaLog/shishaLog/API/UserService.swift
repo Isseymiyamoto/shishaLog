@@ -173,7 +173,9 @@ struct UserService {
         var blockingUsersUid = [String]()
         REF_USER_BLOCKING.child(currentUserUid).observeSingleEvent(of: .value) { (snapshot) in
             guard let blockingUserUid = snapshot.key as? String else { return }
-            blockingUsersUid.append(blockingUserUid)
+            if blockingUserUid != currentUserUid{
+                blockingUsersUid.append(blockingUserUid)
+            }
             completion(blockingUsersUid)
         }
     }
