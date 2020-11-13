@@ -31,6 +31,18 @@ class ChoiceSpotController: UITableViewController {
         didSet{ tableView.reloadData() }
     }
     
+    // 検索バー
+    private let searchController: UISearchController = {
+        let controller = UISearchController(searchResultsController: nil)
+        controller.obscuresBackgroundDuringPresentation = false
+        controller.hidesNavigationBarDuringPresentation = false
+        controller.searchBar.tintColor = .systemBlue
+        controller.searchBar.placeholder = "今いるシーシャ屋を探そう"
+        controller.searchBar.sizeToFit()
+        return controller
+    }()
+        
+    
     // MARK: - Lifecycle
     
     init(user: User, option: ChoiceSpotControllerOptions) {
@@ -48,6 +60,7 @@ class ChoiceSpotController: UITableViewController {
 
         configureTableView()
         fetchShops()
+//        configureSearchController()
     }
     
     // MARK: - API
@@ -76,6 +89,16 @@ class ChoiceSpotController: UITableViewController {
 
     // MARK: - Helpers
     
+    func configureSearchController(){
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.searchBar.tintColor = .systemBlue
+        searchController.searchBar.placeholder = "今いるシーシャ屋を探そう"
+        navigationItem.searchController = searchController
+        definesPresentationContext = false
+    }
+    
     func configureTableView(){
         tableView.backgroundColor = .white
         configureNavigationBar()
@@ -88,7 +111,7 @@ class ChoiceSpotController: UITableViewController {
         navigationController?.navigationBar.barTintColor = .white
         navigationController?.navigationBar.isTranslucent = false
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(handleShowSearchBar))
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(handleShowSearchBar))
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(handleCancel))
     }
 }
@@ -157,5 +180,14 @@ extension ChoiceSpotController{
                 delegate?.controller(self, shop: shops[indexPath.row])
             }
         }
+    }
+}
+
+// MARK: - UISearchResultUpdating
+
+extension ChoiceSpotController: UISearchResultsUpdating{
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchText = searchController.searchBar.text?.lowercased() else { return }
+        filteredShops = shops.filter({ $0.shopName.contains(searchText) || $0.address.contains(searchText) })
     }
 }

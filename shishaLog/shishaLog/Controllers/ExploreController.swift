@@ -79,7 +79,7 @@ class ExploreController: UITableViewController {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
-        searchController.searchBar.tintColor = .shishaColor
+        searchController.searchBar.tintColor = .systemBlue
         searchController.searchBar.placeholder = "友達を探してみましょう"
         navigationItem.searchController = searchController
         definesPresentationContext = false
