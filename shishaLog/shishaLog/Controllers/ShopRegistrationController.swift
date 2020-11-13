@@ -12,12 +12,19 @@ protocol ShopRegistrationProtocol {
     func checkFormStatus()
 }
 
+protocol ShopRegistrationControllerDelegate: class {
+    func controller(controller: ShopRegistrationController)
+}
+
 
 class ShopRegistrationController: UIViewController{
     
     // MARK: - Properties
     
     private var viewModel = ShopRegistrationViewModel()
+    weak var delegate: ShopRegistrationControllerDelegate?
+    
+    var isFromUploadLog: Bool
     
     private let titleImage: UIImageView = {
         let iv = UIImageView(image: UIImage(named: "shishaLog_theme"))
@@ -89,6 +96,15 @@ class ShopRegistrationController: UIViewController{
     
     // MARK: - Lifecycle
     
+    init(isFromUploadLog: Bool) {
+        self.isFromUploadLog = isFromUploadLog
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -110,7 +126,8 @@ class ShopRegistrationController: UIViewController{
                 return
             }
             // 後でprotocol設定して、choiceSpotControllerから操作も考える
-            self.dismiss(animated: true, completion: nil)
+//            self.dismiss(animated: true, completion: nil)
+            self.delegate?.controller(controller: self)
         }
     }
     

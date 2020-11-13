@@ -168,6 +168,7 @@ extension ChoiceSpotController{
         switch indexPath.section {
         case 0:
             let controller = ShopRegistrationController()
+            controller.delegate = self
             let nav = UINavigationController(rootViewController: controller)
             nav.modalPresentationStyle = .fullScreen
             present(nav, animated: true)
@@ -189,5 +190,17 @@ extension ChoiceSpotController: UISearchResultsUpdating{
     func updateSearchResults(for searchController: UISearchController) {
         guard let searchText = searchController.searchBar.text?.lowercased() else { return }
         filteredShops = shops.filter({ $0.shopName.contains(searchText) || $0.address.contains(searchText) })
+    }
+}
+
+// MARK: - ShopRegistratinoControllerDelegate
+
+extension ChoiceSpotController: ShopRegistrationControllerDelegate{
+    func controller(controller: ShopRegistrationController) {
+        controller.dismiss(animated: true) {
+            // 1. UploadLogControllerに遷移する場合
+            
+            // 2. UploadSpotControllerに遷移する場合
+        }
     }
 }
