@@ -167,7 +167,7 @@ extension ChoiceSpotController{
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
-            let controller = ShopRegistrationController()
+            let controller = option == .fromUploadLog ? ShopRegistrationController(isFromUploadLog: true) : ShopRegistrationController(isFromUploadLog: false)
             controller.delegate = self
             let nav = UINavigationController(rootViewController: controller)
             nav.modalPresentationStyle = .fullScreen
@@ -196,11 +196,17 @@ extension ChoiceSpotController: UISearchResultsUpdating{
 // MARK: - ShopRegistratinoControllerDelegate
 
 extension ChoiceSpotController: ShopRegistrationControllerDelegate{
-    func controller(controller: ShopRegistrationController) {
+    func controller(controller: ShopRegistrationController, isFromUploadLog: Bool) {
         controller.dismiss(animated: true) {
             // 1. UploadLogControllerに遷移する場合
-            
+            if isFromUploadLog{
+//                self.delegate?.controller(self, shop: shops[indexPath.row])
+            }else{
             // 2. UploadSpotControllerに遷移する場合
+//                let controller = UploadSpotController(user: user, shop: shops[indexPath.row])
+//                navigationController?.pushViewController(controller, animated: true)
+            }
+            
         }
     }
 }

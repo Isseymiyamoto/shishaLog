@@ -13,7 +13,7 @@ protocol ShopRegistrationProtocol {
 }
 
 protocol ShopRegistrationControllerDelegate: class {
-    func controller(controller: ShopRegistrationController)
+    func controller(controller: ShopRegistrationController, isFromUploadLog: Bool)
 }
 
 
@@ -125,9 +125,9 @@ class ShopRegistrationController: UIViewController{
                 print("DEBUG: failed to register shop with error \(error.localizedDescription)")
                 return
             }
-            // 後でprotocol設定して、choiceSpotControllerから操作も考える
-//            self.dismiss(animated: true, completion: nil)
-            self.delegate?.controller(controller: self)
+            // わたすためのshop作成　→ 以下でやる
+            
+            self.delegate?.controller(controller: self, isFromUploadLog: self.isFromUploadLog)
         }
     }
     
