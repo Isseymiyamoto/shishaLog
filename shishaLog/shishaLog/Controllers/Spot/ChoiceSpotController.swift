@@ -32,7 +32,16 @@ class ChoiceSpotController: UITableViewController {
     }
     
     // 検索バー
-    private let searchController = UISearchController(searchResultsController: nil)
+    private let searchController: UISearchController = {
+        let controller = UISearchController(searchResultsController: nil)
+        controller.obscuresBackgroundDuringPresentation = false
+        controller.hidesNavigationBarDuringPresentation = false
+        controller.searchBar.tintColor = .systemBlue
+        controller.searchBar.placeholder = "今いるシーシャ屋を探そう"
+        controller.searchBar.sizeToFit()
+        return controller
+    }()
+        
     
     // MARK: - Lifecycle
     
@@ -51,6 +60,7 @@ class ChoiceSpotController: UITableViewController {
 
         configureTableView()
         fetchShops()
+//        configureSearchController()
     }
     
     // MARK: - API
@@ -101,7 +111,7 @@ class ChoiceSpotController: UITableViewController {
         navigationController?.navigationBar.barTintColor = .white
         navigationController?.navigationBar.isTranslucent = false
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(handleShowSearchBar))
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(handleShowSearchBar))
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(handleCancel))
     }
 }
