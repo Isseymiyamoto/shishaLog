@@ -13,7 +13,7 @@ protocol ShopRegistrationProtocol {
 }
 
 protocol ShopRegistrationControllerDelegate: class {
-    func controller(controller: ShopRegistrationController, isFromUploadLog: Bool)
+    func controller(controller: ShopRegistrationController, isFromUploadLog: Bool, shop: Shop)
 }
 
 
@@ -120,14 +120,24 @@ class ShopRegistrationController: UIViewController{
         
         let credential = ShopCredentials(shopName: shopName, shopAddress: shopAddress, shopImage: shopImage!)
         
+        showLoader(true, withText: "登録中")
+        
         ShopService.shared.registerShop(credentials: credential) { (error, ref) in
             if let error = error {
+                self.showLoader(false)
+                self.showError(withMessage: "エラー")
+                
                 print("DEBUG: failed to register shop with error \(error.localizedDescription)")
                 return
             }
-            // わたすためのshop作成　→ 以下でやる
             
-            self.delegate?.controller(controller: self, isFromUploadLog: self.isFromUploadLog)
+            self.showLoader(false)
+            
+            guard let shopID = ref.key else { return }
+            ShopService.shared.fetchSomeShop(shopID: shopID) { (shop) in
+                // わたすためのshopをここで受けとる
+                self.delegate?.controller(controller: self, isFromUploadLog: self.isFromUploadLog, shop: shop)
+            }
         }
     }
     
