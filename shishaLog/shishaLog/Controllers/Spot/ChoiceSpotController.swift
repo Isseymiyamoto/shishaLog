@@ -196,17 +196,16 @@ extension ChoiceSpotController: UISearchResultsUpdating{
 // MARK: - ShopRegistratinoControllerDelegate
 
 extension ChoiceSpotController: ShopRegistrationControllerDelegate{
-    func controller(controller: ShopRegistrationController, isFromUploadLog: Bool) {
+    func controller(controller: ShopRegistrationController, isFromUploadLog: Bool, shop: Shop) {
         controller.dismiss(animated: true) {
             // 1. UploadLogControllerに遷移する場合
             if isFromUploadLog{
-//                self.delegate?.controller(self, shop: shops[indexPath.row])
+                self.delegate?.controller(self, shop: shop)
             }else{
-            // 2. UploadSpotControllerに遷移する場合
-//                let controller = UploadSpotController(user: user, shop: shops[indexPath.row])
-//                navigationController?.pushViewController(controller, animated: true)
+                // 2. UploadSpotControllerに遷移する場合
+                let controller = UploadSpotController(user: self.user, shop: shop)
+                self.navigationController?.pushViewController(controller, animated: true)
             }
-            
         }
     }
 }
