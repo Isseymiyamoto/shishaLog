@@ -31,6 +31,10 @@ class ChoiceSpotController: UITableViewController {
         didSet{ tableView.reloadData() }
     }
     
+    private var isSearchMode: Bool {
+        return searchController.isActive && !searchController.searchBar.text!.isEmpty
+    }
+    
     // 検索バー
     private let searchController = UISearchController(searchResultsController: nil)
     
@@ -101,7 +105,6 @@ class ChoiceSpotController: UITableViewController {
     func configureTableView(){
         tableView.backgroundColor = .white
         configureNavigationBar()
-        
         tableView.register(ChoiceSpotCell.self, forCellReuseIdentifier: choiseCellIdentifier)
     }
     
@@ -126,7 +129,8 @@ extension ChoiceSpotController{
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: choiseCellIdentifier, for: indexPath) as! ChoiceSpotCell
-            cell.shop = shops[indexPath.row]
+            let cellShop = isSearchMode ? filteredShops : shops
+            cell.shop = cellShop[indexPath.row]
             return cell
         }
     }
@@ -140,7 +144,7 @@ extension ChoiceSpotController{
         case 0:
             return 1
         default:
-            return shops.count
+            return isSearchMode ? filteredShops.count : shops.count
         }
     }
     
