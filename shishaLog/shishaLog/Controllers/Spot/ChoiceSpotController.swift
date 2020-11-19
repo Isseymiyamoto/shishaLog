@@ -32,16 +32,7 @@ class ChoiceSpotController: UITableViewController {
     }
     
     // 検索バー
-    private let searchController: UISearchController = {
-        let controller = UISearchController(searchResultsController: nil)
-        controller.obscuresBackgroundDuringPresentation = false
-        controller.hidesNavigationBarDuringPresentation = false
-        controller.searchBar.tintColor = .systemBlue
-        controller.searchBar.placeholder = "今いるシーシャ屋を探そう"
-        controller.searchBar.sizeToFit()
-        return controller
-    }()
-        
+    private let searchController = UISearchController(searchResultsController: nil)
     
     // MARK: - Lifecycle
     
@@ -68,6 +59,7 @@ class ChoiceSpotController: UITableViewController {
         
         navigationController?.navigationBar.isHidden = false
         navigationController?.navigationBar.barStyle = .default
+        navigationController?.navigationBar.barTintColor = .white
     }
     
     // MARK: - API
@@ -101,7 +93,7 @@ class ChoiceSpotController: UITableViewController {
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.searchBar.tintColor = .systemBlue
-        searchController.searchBar.placeholder = "今いるシーシャ屋を探そう"
+        searchController.searchBar.placeholder = "シーシャ屋を探す"
         navigationItem.searchController = searchController
         definesPresentationContext = false
     }

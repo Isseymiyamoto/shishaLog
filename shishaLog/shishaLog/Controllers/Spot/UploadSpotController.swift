@@ -144,7 +144,7 @@ class UploadSpotController: UIViewController {
     
     func configureNavigationBar(){
         navigationController?.navigationBar.barTintColor = .white
-        navigationController?.navigationBar.isTranslucent = false
+//        navigationController?.navigationBar.isTranslucent = false
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: profileImageView)
         
