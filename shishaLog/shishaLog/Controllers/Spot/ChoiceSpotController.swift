@@ -60,7 +60,14 @@ class ChoiceSpotController: UITableViewController {
 
         configureTableView()
         fetchShops()
-//        configureSearchController()
+        configureSearchController()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.navigationBar.isHidden = false
+        navigationController?.navigationBar.barStyle = .default
     }
     
     // MARK: - API
@@ -109,9 +116,6 @@ class ChoiceSpotController: UITableViewController {
     func configureNavigationBar(){
         navigationItem.title = option.description
         navigationController?.navigationBar.barTintColor = .white
-        navigationController?.navigationBar.isTranslucent = false
-        
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(handleShowSearchBar))
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(handleCancel))
     }
 }
