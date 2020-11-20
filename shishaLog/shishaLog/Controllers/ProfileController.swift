@@ -312,6 +312,8 @@ extension ProfileController{
             default:
                 guard let log = currentDataSource[indexPath.item] as? Log else { return }
                 let controller = LogController(log: log)
+                controller.delegate = self
+                controller.indexValue = indexPath.item
                 navigationController?.pushViewController(controller, animated: true)
             }
         }
@@ -570,5 +572,16 @@ extension ProfileController: ActionSheetLauncherDelegate{
                 self.collectionView.reloadData()
             }
         }
+    }
+}
+
+
+// MARK: - LogControllerDelegate
+
+extension ProfileController: LogControllerDelegate{
+    func controller(_ controller: LogController) {
+        logs.remove(at: controller.indexValue!)
+        controller.navigationController?.popViewController(animated: true)
+        self.collectionView.reloadData()
     }
 }
